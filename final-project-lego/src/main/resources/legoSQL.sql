@@ -29,7 +29,9 @@ CREATE TABLE board_comment
 	comment_content       CLOB not NULL ,
 	board_no              NUMBER not NULL ,
 	id                    VARCHAR2(100) not NULL,
-	CONSTRAINT fk_board_comment_id FOREIGN KEY(id) REFERENCES member(id)
+	CONSTRAINT fk_board_comment_id FOREIGN KEY(id) REFERENCES member(id),
+	CONSTRAINT fk_board_comment_board_no FOREIGN KEY(board_no) REFERENCES board(board_no)
+	on delete cascade
 );
 
 
@@ -93,7 +95,7 @@ CREATE TABLE master
 	career                VARCHAR2(100) not NULL ,
 	category_no           NUMBER not NULL ,
 	CONSTRAINT pk_master_share PRIMARY KEY(id),
-	CONSTRAINT fk_master_id FOREIGN KEY(id) REFERENCES member(id),
+	CONSTRAINT fk_master_id FOREIGN KEY(id) REFERENCES member(id) on delete cascade,
 	CONSTRAINT fk_master_categroy_no FOREIGN KEY(category_no) REFERENCES category(category_no)
 	
 );
@@ -108,7 +110,7 @@ CREATE TABLE master_detail
 	days_id               NUMBER ,
 	id                    VARCHAR2(100),
 	CONSTRAINT pk_master_detail_share PRIMARY KEY(id,skills_id,times_id,days_id),	
-	CONSTRAINT fk_master_detail_id FOREIGN KEY(id) REFERENCES master(id),
+	CONSTRAINT fk_master_detail_id FOREIGN KEY(id) REFERENCES master(id) on delete cascade,
 	CONSTRAINT fk_master_detail_skills_id FOREIGN KEY(skills_id) REFERENCES skills(skills_id),
 	CONSTRAINT fk_master_detail_times_id FOREIGN KEY(times_id) REFERENCES times(times_id),
 	CONSTRAINT fk_master_detail_days_id FOREIGN KEY(days_id) REFERENCES days(days_id)
@@ -155,7 +157,9 @@ CREATE TABLE qna_comment
 	qna_comment_content   CLOB not NULL ,
 	qna_no                NUMBER not NULL ,
 	id                    VARCHAR2(100) not NULL,
-	CONSTRAINT fk_qna_comment_id FOREIGN KEY(id) REFERENCES member(id)
+	CONSTRAINT fk_qna_comment_id FOREIGN KEY(id) REFERENCES member(id),
+	CONSTRAINT fk_qna_comment_qna_no FOREIGN KEY(qna_no) REFERENCES qna(qna_no)
+	on delete cascade
 );
 
 
@@ -166,7 +170,9 @@ CREATE TABLE review
 	score                 NUMBER not NULL ,
 	reivew_content        CLOB not NULL ,
 	id                    VARCHAR2(100) not null,
-	CONSTRAINT fk_review_id FOREIGN KEY(id) REFERENCES member(id)
+	master_id			  varchar2(100) not null,
+	CONSTRAINT fk_review_id FOREIGN KEY(id) REFERENCES member(id),
+	CONSTRAINT fk_review_master_id FOREIGN KEY(master_id) REFERENCES master(id)
 );
 
 
@@ -207,5 +213,20 @@ CREATE TABLE times
 	times_id              NUMBER primary key ,
 	times                 VARCHAR2(100) not NULL 
 );
-
+drop table cart;
+drop table qna;
+drop table images;
+drop table message;
+drop table member;
+drop table board_comment;
+drop table board;
+drop table qna_comment;
+drop table master;
+drop table master_detail;
+drop table review;
+drop table survey_detail;
+drop table booking;
+drop table
+drop table member;
+drop table category
 
