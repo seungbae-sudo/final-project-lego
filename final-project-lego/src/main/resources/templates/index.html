@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko"
+xmlns:th="http://www.thymeleaf.org"
+>
 <head>
 
 <!-- Basic Page Needs
@@ -57,8 +59,12 @@
 				<div class="col-md-4 col-xs-12 col-sm-4 header-setting">
 					<!-- Cart -->
 					<button> QnA</button>
-					<button>회원가입</button>
+					<form action="" th:action="@{/register}">
+					<button type="submit">회원가입</button>
+					</form>
+					<form action="" th:action="@{/login}">
 					<button>로그인</button>
+					</form>
 					<!-- / .nav .navbar-nav .navbar-right -->
 				</div>
 			</div>
