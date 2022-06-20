@@ -7,4 +7,8 @@
 	<insert id="memberRegisterRole" parameterType="org.kosta.finalproject.lego.vo.Authority">
 		insert into authority(id,authority) values(#{id},#{authority})
 	</insert>
+	
+	<select id="getCategory" resultType="org.kosta.finalproject.lego.vo.CategoryVO">
+      select category_no,lesson_sort from CATEGORY
+   </select>
 </mapper>

@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CategoryVO {
 	private int categoryNo;
-	private String categoryName;
+	private String lessonSort;
 }
