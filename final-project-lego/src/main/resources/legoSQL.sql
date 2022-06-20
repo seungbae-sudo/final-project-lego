@@ -100,7 +100,16 @@ CREATE TABLE master
 	
 );
 
+alter table master add (specifications1 clob not null)
+update master set specifications1 = specifications
+alter table master drop column specifications;
+alter table master rename column specifications1 to specifications
 
+select * from member
+select * from master
+delete member 
+delete * from master
+alter table master modify specifications CLOB
 
 drop table master_detail
 CREATE TABLE master_detail
@@ -125,8 +134,15 @@ CREATE TABLE member
 	password              VARCHAR2(100) not NULL ,
 	tel                   VARCHAR2(100) not NULL ,
 	member_type                  NUMBER not NULL 
-);
+); 
+alter table member drop column member_type;
 
+create table authority(
+	id varchar2(100) not null,
+	authority varchar2(100) not null,
+	constraint pk_authority_share primary key(id,authority),
+	constraint fk_authority_id foreign key(id) references member(id)
+)
 
 CREATE TABLE message
 (
@@ -229,4 +245,6 @@ drop table booking;
 drop table
 drop table member;
 drop table category
+
+
 
