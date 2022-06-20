@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.kosta.finalproject.lego.mapper.MemberMapper">
-	<select id="getCategory" resultType="org.kosta.finalproject.lego.vo.CategoryVO">
-		select * from CATEGORY
-	</select>
+
+	<insert id="registerMember" parameterType="org.kosta.finalproject.lego.vo.MemberVO">
+		insert into MEMBER(id,password,name,address,tel) values (#{id},#{password},#{name},#{address},#{tel})
+	</insert>
+	<insert id="memberRegisterRole" parameterType="org.kosta.finalproject.lego.vo.Authority">
+		insert into authority(id,authority) values(#{id},#{authority})
+	</insert>
+
 </mapper>

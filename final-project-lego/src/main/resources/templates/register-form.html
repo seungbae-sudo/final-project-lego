@@ -14,7 +14,8 @@ FACEBOOK: https://www.facebook.com/themefisher
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+xmlns:th="http://www.thymeleaf.org">
 <head>
 
   <!-- Basic Page Needs
@@ -60,27 +61,35 @@ FACEBOOK: https://www.facebook.com/themefisher
             <img src="images/logo.png" alt="">
           </a>
           <h2 class="text-center">Create Your Account</h2>
-          <form class="text-left clearfix" action="index.html">
+          <form class="text-left clearfix" action="index.html" th:action="@{/register}" method="post">
+          <div class="form-group">
+              <input type="email" name="id" class="form-control"  placeholder="lego@lego.com" required="required">
+              <input type="button"  class="form-control" id="idOverlay" onclick="idCheck()" value="중복 체크"/>
+            </div>
+
             <div class="form-group">
-              <input type="text" class="form-control"  placeholder="First Name">
+              <input type="password" name="password" class="form-control"  placeholder="패스워드 8자이상" required="required">
             </div>
             <div class="form-group">
-              <input type="text" class="form-control"  placeholder="Last Name">
+              <input type="password" class="form-control"  placeholder="패스워드 확인" required="required">
+            </div>
+            
+             <div class="form-group">
+              <input type="text" name="name" class="form-control"  placeholder="이름" required="required">
             </div>
             <div class="form-group">
-              <input type="text" class="form-control"  placeholder="Username">
+              <input type="text" name="address" class="form-control"  placeholder="주소" required="required">
             </div>
-            <div class="form-group">
-              <input type="email" class="form-control"  placeholder="Email">
-            </div>
-            <div class="form-group">
-              <input type="password" class="form-control"  placeholder="Password">
+             <div class="form-group">
+              <input type="tel" name="tel" class="form-control"  placeholder="전화번호" required="required">
             </div>
             <div class="text-center">
-              <button type="submit" class="btn btn-main text-center">Sign In</button>
+            
+              <button type="submit" class="btn btn-main text-center" name = "member" value="1"> 일반고객 회원가입</button>
+              <button type="submit" class="btn btn-main text-center"  name = "master" value="2"> 고수로 회원가입</button>
             </div>
+            
           </form>
-          <p class="mt-20">Already hava an account ?<a href="login.html"> Login</a></p>
           <p><a href="forget-password.html"> Forgot your password?</a></p>
         </div>
       </div>
