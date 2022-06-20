@@ -1,6 +1,7 @@
 package org.kosta.finalproject.lego.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -11,7 +12,8 @@ public class HomeController {
 	}
 	
 	@RequestMapping("/registerForm")
-	public String registerForm() {
+	public String registerForm(Model model) {
+		model.addAttribute("asdf", "1234");
 		return "register-form";
 	}
 }
