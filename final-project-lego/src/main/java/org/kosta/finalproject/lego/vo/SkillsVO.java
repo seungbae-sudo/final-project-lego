@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SkillsVO {
-	private int skillsNo;
+	private int skillsId;
 	private String skills;
 }

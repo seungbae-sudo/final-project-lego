@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DaysVO {
-	private int DaysNo;
+	private int daysId;
 	private String days;
 }

@@ -11,4 +11,20 @@
 	<select id="getCategory" resultType="org.kosta.finalproject.lego.vo.CategoryVO">
       select category_no,lesson_sort from CATEGORY
    </select>
+	<select id="getDays" resultType="org.kosta.finalproject.lego.vo.DaysVO">
+      select * from days
+   </select>
+	<select id="getSkills" resultType="org.kosta.finalproject.lego.vo.SkillsVO">
+      select * from skills
+   </select>
+	<select id="getTimes" resultType="org.kosta.finalproject.lego.vo.TimesVO">
+      select * from times
+   </select>
+   
+ <!--   <insert id="masterRegister" parameterType="org.kosta.finalproject.lego.vo.masterDetailVO">
+   <foreach collection="list" item="list" index="index" separator=", " open="INSERT ALL" close="SELECT * FROM DUAL">
+   	into master_detail(id,skills_id,days_id,times_id)
+   	values(#{list.Id},#{list.SkillsId},#{list.DaysId},#{list.TimesId})
+   </foreach>
+   </insert> -->
 </mapper>
