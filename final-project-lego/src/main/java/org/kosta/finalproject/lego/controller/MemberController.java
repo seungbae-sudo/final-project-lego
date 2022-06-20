@@ -14,8 +14,9 @@ public class MemberController {
 	
 	@PostMapping("/register")
 	public String register(MemberVO memberVO,String member) {
+		memberService.registerMember(memberVO);
 		if(member.equals("1") ) {
-			memberService.registerMember(memberVO);
+			
 			return "redirect:/";
 		}else{
 			return "";
