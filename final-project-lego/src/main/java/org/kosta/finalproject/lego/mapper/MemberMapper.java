@@ -1,11 +1,14 @@
 package org.kosta.finalproject.lego.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.kosta.finalproject.lego.vo.Authority;
 import org.kosta.finalproject.lego.vo.MemberVO;
 
 @Mapper
 public interface MemberMapper {
 
-	MemberVO findMemberById(String id);
+	void registerMember(MemberVO memberVO);
+
+	void memberRegisterRole(Authority aurhority);
 
 }
