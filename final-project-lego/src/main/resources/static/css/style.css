@@ -19,6 +19,17 @@
 	margin-top: 40px;
 }
 
+
+/* 마이페이지 */
+.profile{
+	width: 190px;
+	height: 180px;
+}
+
+.user-img{
+	width: 150px;
+	border-radius: 50%;
+}
 /* 부트스트랩 */
 body {
   line-height: 1.5;

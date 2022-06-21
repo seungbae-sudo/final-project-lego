@@ -17,4 +17,10 @@ public class HomeController {
 	public String registerForm() {
 		return "register-form";
 	}
+	
+	
+	@RequestMapping("/mypage")
+	public String mypage() {
+		return "mypage";
+	}
 }
