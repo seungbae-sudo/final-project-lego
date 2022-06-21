@@ -26,5 +26,9 @@ public interface MemberMapper {
 
 	List<TimesVO> getTimes();
 	
-	void masterRegister(masterDetailVO masterDetailVO);
+	void registerSkills(masterDetailVO masterDetailVO);
+	
+	void registerDays(masterDetailVO masterDetailVO);
+	
+	void registerTimes(masterDetailVO masterDetailVO);
 }

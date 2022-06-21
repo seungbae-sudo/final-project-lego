@@ -21,10 +21,13 @@
       select * from times
    </select>
    
- <!--   <insert id="masterRegister" parameterType="org.kosta.finalproject.lego.vo.masterDetailVO">
-   <foreach collection="list" item="list" index="index" separator=", " open="INSERT ALL" close="SELECT * FROM DUAL">
-   	into master_detail(id,skills_id,days_id,times_id)
-   	values(#{list.Id},#{list.SkillsId},#{list.DaysId},#{list.TimesId})
-   </foreach>
-   </insert> -->
+   <insert id="registerSkills" parameterType="org.kosta.finalproject.lego.vo.masterDetailVO">
+		insert into master_detail(id,skills_id) values(#{id},#{skillsId})
+   </insert>
+   <insert id="registerDays" parameterType="org.kosta.finalproject.lego.vo.masterDetailVO">
+		insert into master_detail(id,days_id) values(#{id},#{daysId})
+   </insert>
+   <insert id="registerTimes" parameterType="org.kosta.finalproject.lego.vo.masterDetailVO">
+		insert into master_detail(id,times_id) values(#{id},#{timesId})
+   </insert>
 </mapper>

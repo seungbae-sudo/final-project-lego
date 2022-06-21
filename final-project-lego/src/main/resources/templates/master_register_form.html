@@ -32,28 +32,31 @@
 
 		<div class="">	
 		
-			<form action="" method="post" th:action="@{/masterRegisterGo}">
+			<form id="masterForm" action="" method="post" th:action="@{/masterRegisterGo}">
 				<p>1. 어떤 서비스를 제공할 수 있나요?</p>
 				<!--/* <span th:text="${category}">뭐야</span> */-->
-				<input type="hidden" th:name="id" th:value="${id}">
+				<input type="hidden" name="id" th:value="${id}">
+				<input type="hidden" name="skills" id="hiddenValue">
+				<input type="hidden" name="days" id="hiddenValue2">
+				<input type="hidden" name="times" id="hiddenValue3">
 				 <div th:each="cate: ${category}" th:if="${cate.categoryNo}">				
-					<input  type="checkbox"  th:name="categoryNo" th:text="${cate.lessonSort}" th:value="${cate.categoryNo}"> 
+					<input  type="checkbox"  name="categoryNo" th:text="${cate.lessonSort}" th:value="${cate.categoryNo}"> 
 				</div> 
 				<hr>
-				 <div th:each="sk: ${skills}" >				
-					<input  type="checkbox" th:name="skillsId" th:text="${sk.skills}" th:value="${sk.skillsId}"> 
+				 <div th:each="sk: ${skills}" th:if="${sk.skillsId>0}">				
+					<input  type="checkbox" name="skillsId" th:text="${sk.skills}" value="${sk.skillsId}" th:value="${sk.skillsId}"> 
 				</div>
 				<hr> 
 				 
 				<hr>
-				 <div th:each="ti: ${times}" >				
-					<input  type="checkbox"  th:name="timesId" th:text="${ti.times}" th:value="${ti.timesId}"> 
+				 <div th:each="ti: ${times}" th:if="${ti.timesId>0}">				
+					<input  type="checkbox"  name="timesId" th:text="${ti.times}" th:value="${ti.timesId}"> 
 				</div> 
 				<hr>
-				<div th:each="d: ${day}" >				
-					<input  type="checkbox"  th:name="daysId" th:text="${d.days}" th:value="${d.daysId}"> 
+				<div th:each="d: ${day}" th:if="${d.daysId>0}">				
+					<input  type="checkbox"  name="daysId" th:text="${d.days}" th:value="${d.daysId}"> 
 				</div> 
-				<button type="submit">다음</button>
+				<button type="button" id="btn">다음</button>
 			</form>
 		</div>
 	
@@ -62,5 +65,31 @@
 
 
 	</div>
+	<script type="text/javascript">
+	$(function(){
+		var obj = $("[name=skillsId]");        
+		var chkArray = new Array(); // 배열 선언    
+		var chkArray2 = new Array(); // 배열 선언    
+		var chkArray3 = new Array(); // 배열 선언    
+		$("#btn").click(function(){
+			$('input:checkbox[name=skillsId]:checked').each(function() { // 체크된 체크박스의 value 값을 가지고 온다.           
+				 chkArray.push(this.value);     
+				   });       
+			$('input:checkbox[name=daysId]:checked').each(function() { // 체크된 체크박스의 value 값을 가지고 온다.           
+				 chkArray2.push(this.value);     
+				   });       
+			$('input:checkbox[name=timesId]:checked').each(function() { // 체크된 체크박스의 value 값을 가지고 온다.           
+				 chkArray3.push(this.value);     
+				   });       
+				 $('#hiddenValue').val(chkArray);  
+				 $('#hiddenValue2').val(chkArray2);  
+				 $('#hiddenValue3').val(chkArray3);  
+				 $('#masterForm').submit();       
+		});     
+		  
+	});
+	
+
+	</script>
 </body>
 </html>
