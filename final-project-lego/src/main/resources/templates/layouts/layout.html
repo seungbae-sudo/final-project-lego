@@ -37,9 +37,9 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">		<!--/* layout 선언�
 
 <body id="body">
 	
-
+	<div th:replace="fragments/header :: headerFragment"></div>
 	<div layout:fragment="main"></div>
-
+	<div th:replace="fragments/footer :: footerFragment"></div>
 	
 	
 
