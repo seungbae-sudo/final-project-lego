@@ -28,9 +28,6 @@ public class MemberController {
 	public String masterRegister(Model model, String id) {
 		model.addAttribute("id", id);
 		model.addAttribute("category", memberService.getCategory());
-		model.addAttribute("skills", memberService.getSkills());
-		model.addAttribute("day", memberService.getDays());
-		model.addAttribute("times", memberService.getTimes());
 		return "master_register_form";
 	}
 }
