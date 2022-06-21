@@ -1,11 +1,6 @@
 package org.kosta.finalproject.lego.controller;
 
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
 import org.kosta.finalproject.lego.serivce.MemberService;
-import org.kosta.finalproject.lego.vo.CategoryVO;
 import org.kosta.finalproject.lego.vo.MemberVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
