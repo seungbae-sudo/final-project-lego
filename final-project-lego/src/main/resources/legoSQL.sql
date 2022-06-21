@@ -4,6 +4,83 @@ select * from times;
 CONSTRAINT fk_mem_id FOREIGN KEY(id) REFERENCES mem(id),
 	CONSTRAINT pk_sharess PRIMARY KEY(id,skill_id)
 drop table board_comment
+
+CREATE TABLE member
+(
+	id                    VARCHAR2(100) primary key ,
+	name                  VARCHAR2(100) not NULL ,
+	address               VARCHAR2(100) not NULL ,
+	password              VARCHAR2(100) not NULL ,
+	tel                   VARCHAR2(100) not NULL ,
+	member_type                  NUMBER not NULL 
+); 
+
+create table authority(
+	id varchar2(100) not null,
+	authority varchar2(100) not null,
+	constraint pk_authority_share primary key(id,authority),
+	constraint fk_authority_id foreign key(id) references member(id)
+);
+
+CREATE TABLE message
+(
+	message_no            number primary key  ,
+	message_content       clob not NULL ,
+	receive_id            VARCHAR2(100) not null ,
+	id                    VARCHAR2(100) not NULL ,
+	receive_date          DATE not NULL ,
+	CONSTRAINT fk_message_id FOREIGN KEY(id) REFERENCES member(id),
+	CONSTRAINT fk_message_receive_id FOREIGN KEY(receive_id) REFERENCES member(id)
+);
+
+CREATE TABLE category
+(
+	category_no           NUMBER  primary key ,
+	lesson_sort           VARCHAR2(100) not NULL	
+);
+
+
+CREATE TABLE cart
+(
+	cart_no               NUMBER  primary key,
+	id                    VARCHAR2(100) not null ,
+	CONSTRAINT fk_cart_id FOREIGN KEY(id) REFERENCES member(id)
+);
+
+
+CREATE TABLE days
+(
+	days_id               NUMBER  primary key ,
+	days                  VARCHAR2(100) not NULL 
+);
+
+CREATE TABLE images
+(
+	image_no              NUMBER  primary key ,
+	image_name            VARCHAR2(100) not NULL ,
+	id                    VARCHAR2(100) not NULL ,
+	CONSTRAINT fk_images_id FOREIGN KEY(id) REFERENCES member(id)
+);
+
+CREATE TABLE times
+(
+	times_id              NUMBER primary key ,
+	times                 VARCHAR2(100) not NULL 
+);
+
+CREATE TABLE skills
+(
+	skills_id             NUMBER  primary key ,
+	skills                VARCHAR2(100) not NULL 
+);
+
+create table board_category(
+	category_no number primary key,
+	category_name varchar2(100) not null
+);
+
+
+
 CREATE TABLE board
 (
 	board_no              NUMBER  primary key ,
@@ -18,10 +95,7 @@ CREATE TABLE board
 	CONSTRAINT fk_board_category_no FOREIGN KEY(category_no) REFERENCES board_category(category_no)
 );
 
-create table board_category(
-	category_no number primary key,
-	category_name varchar2(100) not null
-)
+
 
 CREATE TABLE board_comment
 (
@@ -33,6 +107,32 @@ CREATE TABLE board_comment
 	CONSTRAINT fk_board_comment_board_no FOREIGN KEY(board_no) REFERENCES board(board_no)
 	on delete cascade
 );
+
+CREATE TABLE master
+(
+	id                    VARCHAR2(100),
+	specifications        clob not NULL ,
+	career                VARCHAR2(100) not NULL ,
+	category_no           NUMBER not NULL ,
+	CONSTRAINT pk_master_share PRIMARY KEY(id),
+	CONSTRAINT fk_master_id FOREIGN KEY(id) REFERENCES member(id) on delete cascade,
+	CONSTRAINT fk_master_categroy_no FOREIGN KEY(category_no) REFERENCES category(category_no)
+	
+);
+
+CREATE TABLE master_detail
+(
+	skills_id             NUMBER ,
+	times_id              NUMBER ,
+	days_id               NUMBER ,
+	id                    VARCHAR2(100),
+	CONSTRAINT pk_master_detail_share PRIMARY KEY(id,skills_id,times_id,days_id),	
+	CONSTRAINT fk_master_detail_id FOREIGN KEY(id) REFERENCES master(id) on delete cascade,
+	CONSTRAINT fk_master_detail_skills_id FOREIGN KEY(skills_id) REFERENCES skills(skills_id),
+	CONSTRAINT fk_master_detail_times_id FOREIGN KEY(times_id) REFERENCES times(times_id),
+	CONSTRAINT fk_master_detail_days_id FOREIGN KEY(days_id) REFERENCES days(days_id)
+);
+
 
 
 CREATE TABLE booking
@@ -51,108 +151,6 @@ CREATE TABLE booking
 	CONSTRAINT fk_booking_skills_id FOREIGN KEY(skills_id) REFERENCES skills(skills_id),
 	CONSTRAINT fk_booking_times_id FOREIGN KEY(times_id) REFERENCES times(times_id),
 	CONSTRAINT fk_booking_days_id FOREIGN KEY(days_id) REFERENCES days(days_id)
-);
-
-
-
-CREATE TABLE cart
-(
-	cart_no               NUMBER  primary key,
-	id                    VARCHAR2(100) not null ,
-	CONSTRAINT fk_cart_id FOREIGN KEY(id) REFERENCES member(id)
-);
-
-
-
-CREATE TABLE category
-(
-	category_no           NUMBER  primary key ,
-	lesson_sort           VARCHAR2(100) not NULL	
-);
-
-
-
-CREATE TABLE days
-(
-	days_id               NUMBER  primary key ,
-	days                  VARCHAR2(100) not NULL 
-);
-
-CREATE TABLE images
-(
-	image_no              NUMBER  primary key ,
-	image_name            VARCHAR2(100) not NULL ,
-	id                    VARCHAR2(100) not NULL ,
-	CONSTRAINT fk_images_id FOREIGN KEY(id) REFERENCES member(id)
-);
-
-
-
-CREATE TABLE master
-(
-	id                    VARCHAR2(100),
-	specifications        VARCHAR2(100) not NULL ,
-	career                VARCHAR2(100) not NULL ,
-	category_no           NUMBER not NULL ,
-	CONSTRAINT pk_master_share PRIMARY KEY(id),
-	CONSTRAINT fk_master_id FOREIGN KEY(id) REFERENCES member(id) on delete cascade,
-	CONSTRAINT fk_master_categroy_no FOREIGN KEY(category_no) REFERENCES category(category_no)
-	
-);
-
-alter table master add (specifications1 clob not null)
-update master set specifications1 = specifications
-alter table master drop column specifications;
-alter table master rename column specifications1 to specifications
-
-select * from member
-select * from master
-delete member 
-delete * from master
-alter table master modify specifications CLOB
-
-drop table master_detail
-CREATE TABLE master_detail
-(
-	skills_id             NUMBER ,
-	times_id              NUMBER ,
-	days_id               NUMBER ,
-	id                    VARCHAR2(100),
-	CONSTRAINT pk_master_detail_share PRIMARY KEY(id,skills_id,times_id,days_id),	
-	CONSTRAINT fk_master_detail_id FOREIGN KEY(id) REFERENCES master(id) on delete cascade,
-	CONSTRAINT fk_master_detail_skills_id FOREIGN KEY(skills_id) REFERENCES skills(skills_id),
-	CONSTRAINT fk_master_detail_times_id FOREIGN KEY(times_id) REFERENCES times(times_id),
-	CONSTRAINT fk_master_detail_days_id FOREIGN KEY(days_id) REFERENCES days(days_id)
-);
-
-
-CREATE TABLE member
-(
-	id                    VARCHAR2(100) primary key ,
-	name                  VARCHAR2(100) not NULL ,
-	address               VARCHAR2(100) not NULL ,
-	password              VARCHAR2(100) not NULL ,
-	tel                   VARCHAR2(100) not NULL ,
-	member_type                  NUMBER not NULL 
-); 
-alter table member drop column member_type;
-
-create table authority(
-	id varchar2(100) not null,
-	authority varchar2(100) not null,
-	constraint pk_authority_share primary key(id,authority),
-	constraint fk_authority_id foreign key(id) references member(id)
-)
-
-CREATE TABLE message
-(
-	message_no            number primary key  ,
-	message_content       clob not NULL ,
-	receive_id            VARCHAR2(100) not null ,
-	id                    VARCHAR2(100) not NULL ,
-	receive_date          DATE not NULL ,
-	CONSTRAINT fk_message_id FOREIGN KEY(id) REFERENCES member(id),
-	CONSTRAINT fk_message_receive_id FOREIGN KEY(receive_id) REFERENCES member(id)
 );
 
 
@@ -192,11 +190,6 @@ CREATE TABLE review
 );
 
 
-CREATE TABLE skills
-(
-	skills_id             NUMBER  primary key ,
-	skills                VARCHAR2(100) not NULL 
-);
 
 
 CREATE TABLE survey
@@ -224,11 +217,7 @@ CREATE TABLE survey_detail
 
 
 
-CREATE TABLE times
-(
-	times_id              NUMBER primary key ,
-	times                 VARCHAR2(100) not NULL 
-);
+
 drop table cart;
 drop table qna;
 drop table images;
@@ -247,4 +236,18 @@ drop table member;
 drop table category
 
 
+select * from member
+select * from master
+delete member 
+delete * from master
+alter table master modify specifications CLOB
+
+drop table master_detail
+
+alter table member drop column member_type;
+
+alter table master add (specifications1 clob not null)
+update master set specifications1 = specifications
+alter table master drop column specifications;
+alter table master rename column specifications1 to specifications
 
