@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class timesVO {
-	private int timesNo;
+public class TimesVO {
+	private int timesId;
 	private String times;
 }

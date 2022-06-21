@@ -1,9 +1,6 @@
 package org.kosta.finalproject.lego.controller;
 
-import java.util.List;
-
 import org.kosta.finalproject.lego.serivce.MemberService;
-import org.kosta.finalproject.lego.vo.CategoryVO;
 import org.kosta.finalproject.lego.vo.MemberVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,22 +15,22 @@ public class MemberController {
 	private final MemberService memberService;
 	
 	@PostMapping("/register")
-	public String register(Model model,MemberVO memberVO,String member) {
-		memberService.registerMember(memberVO);
-		List<CategoryVO> list = memberService.getCategory();
-		model.addAttribute("category",list);
-		model.addAttribute("category1","asdfasdf");
-		
+	public String register(MemberVO memberVO,String member) {
+		memberService.registerMember(memberVO);		
 		if(member.equals("1") ) {
-		
+			
 			return "redirect:/";
 		}else{		
-			return "redirect:masterRegister";
+			return "redirect:masterRegister?id="+memberVO.getId();
 		}
 	}
 	@RequestMapping("masterRegister")
-	public String masterRegister(Model model) {
-		
+	public String masterRegister(Model model, String id) {
+		model.addAttribute("id", id);
+		model.addAttribute("category", memberService.getCategory());
+		model.addAttribute("skills", memberService.getSkills());
+		model.addAttribute("day", memberService.getDays());
+		model.addAttribute("times", memberService.getTimes());
 		return "master_register_form";
 	}
 }
