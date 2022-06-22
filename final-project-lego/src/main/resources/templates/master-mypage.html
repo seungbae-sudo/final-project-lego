@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+<!--/* layout 선언부 추가 */-->
+
+<div layout:fragment="main">
+	<section class="page-header">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="content">
+						<h1 class="page-name">Dashboard</h1>
+						<ol class="breadcrumb">
+							<li><a href="index.html">Home</a></li>
+							<li class="active">my account</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+<section class="user-dashboard page-wrapper">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="media">
+							<div class="pull-left profile">
+								<img class="media-object user-img" src="./images/고수.jpg" alt="Image">
+							</div>
+							<div class="media-body">
+								<h2 class="media-heading">고수</h2>
+								<p>Hi im Gosu</p>
+							</div>
+						</div>
+						<ul class="list-inline dashboard-menu text-center">
+							<li><a class="" href="">고수정보</a></li>
+							<li><a href="">리뷰</a></li>
+							<li><a href="">내가 쓴 글</a></li>
+							<li><a href="">상담신청내역</a></li>
+							<li><a href="">메세지함</a></li>
+						</ul>
+<!-- 						<div class="dashboard-wrapper user-dashboard">
+
+							<div class="total-order mt-20">
+								<h4>Total Orders</h4>
+								<div class="table-responsive">
+									<table class="table">
+										<thead>
+											<tr>
+												<th>Order ID</th>
+												<th>Date</th>
+												<th>Items</th>
+												<th>Total Price</th>
+												<th></th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td><a href="#!">#252125</a></td>
+												<td>111</td>
+												<td>222</td>
+												<td>333</td>
+											</tr>
+											<tr>
+												<td><a href="#!">#252125</a></td>
+												<td>444</td>
+												<td>555</td>
+												<td>666</td>
+											</tr>
+											<tr>
+												<td><a href="#!">#252125</a></td>
+												<td>777</td>
+												<td>888</td>
+												<td>999</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div> -->
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
