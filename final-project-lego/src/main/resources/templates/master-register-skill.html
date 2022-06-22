@@ -24,11 +24,35 @@
 				<p>2. 어떤 서비스를 제공할 수 있나요?</p>
 
 				<input type="hidden" th:name="id" th:value="${id}">
-
-				<div th:each="sk: ${skills}">
-					<input type="checkbox" th:name="skills" th:text="${sk.skills} "
-						th:value="${sk.skillsId}" th:if="${sk.skillsId>0}">
-				</div>
+				
+				<th:block th:switch="${categoryNo}">
+	<th:block th:case="1">
+		<div th:each="sk: ${skills}" >
+					<input type="checkbox" th:name="skills" th:text="${sk.skills}"
+					th:value="${sk.skillsId}" th:if="${sk.skillsId>0&&sk.skillsId<5}">
+		</div>
+	</th:block>
+	<th:block th:case="2">
+		<div th:each="sk: ${skills}" >
+					<input type="checkbox" th:name="skills" th:text="${sk.skills}"
+					th:value="${sk.skillsId}" th:if="${sk.skillsId>4&&sk.skillsId<9}">
+		</div>
+	</th:block>
+	<th:block th:case="3">
+		<div th:each="sk: ${skills}" >
+					<input type="checkbox" th:name="skills" th:text="${sk.skills}"
+					th:value="${sk.skillsId}" th:if="${sk.skillsId>8&&sk.skillsId<13}">
+		</div>
+	</th:block>
+	<th:block th:case="4">
+		<div th:each="sk: ${skills}" >
+					<input type="checkbox" th:name="skills" th:text="${sk.skills}"
+					th:value="${sk.skillsId}" th:if="${sk.skillsId>12&&sk.skillsId<17}">
+		</div>
+	</th:block>
+</th:block>
+						
+			
 
 				<hr>
 				<p>3. 어떤 서비스를 제공할 수 있나요?</p>

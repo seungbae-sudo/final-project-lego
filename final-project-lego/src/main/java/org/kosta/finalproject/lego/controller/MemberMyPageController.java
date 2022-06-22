@@ -1,7 +1,6 @@
 package org.kosta.finalproject.lego.controller;
 
 import org.kosta.finalproject.lego.mapper.MemberMyPageMapper;
-import org.kosta.finalproject.lego.serivce.MemberService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 

@@ -2,7 +2,6 @@ package org.kosta.finalproject.lego.serivce;
 
 import java.util.List;
 
-import org.kosta.finalproject.lego.vo.Authority;
 import org.kosta.finalproject.lego.vo.CategoryVO;
 import org.kosta.finalproject.lego.vo.DaysVO;
 import org.kosta.finalproject.lego.vo.MemberVO;
