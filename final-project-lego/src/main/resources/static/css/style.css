@@ -30,6 +30,15 @@
 	width: 150px;
 	border-radius: 50%;
 }
+
+.profile-detail{
+	border: 1px solid #dedede;
+    margin-top: 30px;
+    padding: 20px;
+    width: 890px;
+    height: 400px;
+    margin-left: 190px;
+}
 /* 부트스트랩 */
 body {
   line-height: 1.5;
