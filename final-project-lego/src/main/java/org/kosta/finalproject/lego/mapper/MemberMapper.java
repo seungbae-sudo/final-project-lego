@@ -9,7 +9,6 @@ import org.kosta.finalproject.lego.vo.DaysVO;
 import org.kosta.finalproject.lego.vo.MemberVO;
 import org.kosta.finalproject.lego.vo.SkillsVO;
 import org.kosta.finalproject.lego.vo.TimesVO;
-import org.kosta.finalproject.lego.vo.masterDetailVO;
 
 @Mapper
 public interface MemberMapper {
@@ -26,5 +25,5 @@ public interface MemberMapper {
 
 	List<TimesVO> getTimes();
 	
-	void masterRegister(masterDetailVO masterDetailVO);
+	
 }

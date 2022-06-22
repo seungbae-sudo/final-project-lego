@@ -2,10 +2,12 @@ package org.kosta.finalproject.lego.serivce;
 
 import java.util.List;
 
-import org.kosta.finalproject.lego.mapper.MemberMapper;
+import org.kosta.finalproject.lego.mapper.MasterMapper;
 import org.kosta.finalproject.lego.vo.Authority;
 import org.kosta.finalproject.lego.vo.CategoryVO;
 import org.kosta.finalproject.lego.vo.DaysVO;
+import org.kosta.finalproject.lego.vo.MasterDetailVO;
+import org.kosta.finalproject.lego.vo.MasterVO;
 import org.kosta.finalproject.lego.vo.MemberVO;
 import org.kosta.finalproject.lego.vo.SkillsVO;
 import org.kosta.finalproject.lego.vo.TimesVO;
@@ -16,39 +18,62 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class MemberServiceImpl implements MemberService {
-	private final MemberMapper memberMapper;
+public class MasterServiceImpl implements MasterService {
+	private final MasterMapper masterMapper;
 
 	@Override
 	@Transactional
 	public void registerMember(MemberVO memberVO) {
-		memberMapper.registerMember(memberVO);
+		masterMapper.registerMember(memberVO);
 		Authority aurhority = new Authority(memberVO.getId(), "member");
-		memberMapper.memberRegisterRole(aurhority);
+		masterMapper.masterRegisterRole(aurhority);
+		
 	}
-
+	
 	@Override
 	public List<CategoryVO> getCategory() {
-		return memberMapper.getCategory();
+		return masterMapper.getCategory();
 	}
 
 	@Override
 	public List<SkillsVO> getSkills() {
 		
-		return memberMapper.getSkills();
+		return masterMapper.getSkills();
 	}
 
 	@Override
 	public List<DaysVO> getDays() {
 		// TODO Auto-generated method stub
-		return memberMapper.getDays();
+		return masterMapper.getDays();
 	}
 
 	@Override
 	public List<TimesVO> getTimes() {
 		// TODO Auto-generated method stub
-		return memberMapper.getTimes();
+		return masterMapper.getTimes();
 	}
 
-	
+	@Override
+	public void registerMaster(MasterVO masterVO) {
+		masterMapper.registerMaster(masterVO);		
+	}
+
+	@Override
+	public void registerSkills(MasterDetailVO masterDetailVO) {
+		masterMapper.registerSkills(masterDetailVO);
+		
+	}
+
+	@Override
+	public void registerDays(MasterDetailVO masterDetailVO) {
+		masterMapper.registerDays(masterDetailVO);
+		
+	}
+
+	@Override
+	public void registerTimes(MasterDetailVO masterDetailVO) {
+		masterMapper.registerTimes(masterDetailVO);
+		
+	}
+
 }
