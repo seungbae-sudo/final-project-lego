@@ -25,7 +25,7 @@ public class MasterServiceImpl implements MasterService {
 	@Transactional
 	public void registerMember(MemberVO memberVO) {
 		masterMapper.registerMember(memberVO);
-		Authority aurhority = new Authority(memberVO.getId(), "member");
+		Authority aurhority = new Authority(memberVO.getId(), "master");
 		masterMapper.masterRegisterRole(aurhority);
 		
 	}

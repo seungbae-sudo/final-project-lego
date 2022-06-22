@@ -25,4 +25,14 @@
       select * from times
    </select>
    
+      
+   <insert id="registerSkills" parameterType="org.kosta.finalproject.lego.vo.MasterDetailVO">
+		insert into master_detail(id,skills_id) values(#{id},#{skillsId})
+   </insert>
+   <insert id="registerDays" parameterType="org.kosta.finalproject.lego.vo.MasterDetailVO">
+		insert into master_detail(id,days_id) values(#{id},#{daysId})
+   </insert>
+   <insert id="registerTimes" parameterType="org.kosta.finalproject.lego.vo.MasterDetailVO">
+		insert into master_detail(id,times_id) values(#{id},#{timesId})
+   </insert>
 </mapper>

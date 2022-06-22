@@ -35,6 +35,7 @@ public class MasterController {
 	
 	@RequestMapping("masterRegisterSkill")
 	public String masterRegisterSkill(Model model, String id) {	
+		model.addAttribute("id", id);
 		model.addAttribute("skills", masterService.getSkills());
 		model.addAttribute("day", masterService.getDays());
 		model.addAttribute("times", masterService.getTimes());
