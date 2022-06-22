@@ -2,17 +2,17 @@ package org.kosta.finalproject.lego.serivce;
 
 import java.util.List;
 
-import org.kosta.finalproject.lego.vo.Authority;
 import org.kosta.finalproject.lego.vo.CategoryVO;
 import org.kosta.finalproject.lego.vo.DaysVO;
+import org.kosta.finalproject.lego.vo.MasterDetailVO;
+import org.kosta.finalproject.lego.vo.MasterVO;
 import org.kosta.finalproject.lego.vo.MemberVO;
 import org.kosta.finalproject.lego.vo.SkillsVO;
 import org.kosta.finalproject.lego.vo.TimesVO;
 
-public interface MemberService {
+public interface MasterService {
 
 	void registerMember(MemberVO memberVO);
-
 	
 	List<CategoryVO> getCategory();
 	
@@ -22,5 +22,12 @@ public interface MemberService {
 	
 	List<TimesVO> getTimes();
 	
+	void registerMaster(MasterVO masterVO);
+	
+	void registerSkills(MasterDetailVO masterDetailVO);
+	
+	void registerDays(MasterDetailVO masterDetailVO);
+	
+	void registerTimes(MasterDetailVO masterDetailVO);
 	
 }

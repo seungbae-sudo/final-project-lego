@@ -7,9 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class masterDetailVO {
-	private int skillsId;
-	private int timesId;
-	private int daysId;
+public class MasterVO {
+	private CategoryVO category;
 	private String id;
+	private String career;
+	private String specifications;
 }
