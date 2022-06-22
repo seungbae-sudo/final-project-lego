@@ -5,6 +5,7 @@ import org.kosta.finalproject.lego.serivce.MemberService;
 import org.kosta.finalproject.lego.vo.MemberVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.RequiredArgsConstructor;
 
@@ -25,5 +26,8 @@ public class MemberController {
 			return "redirect:masterRegister?id="+memberVO.getId();
 		}
 	}
-
+	@RequestMapping("/loginFail")
+	public String loginFail() {
+		return "login_fail";
+	}
 }

@@ -9,7 +9,7 @@
 		insert into master(id,specifications,career,category_no) values (#{id},#{specifications},#{career},#{category.categoryNo})
 	</insert>
 	<insert id="masterRegisterRole" parameterType="org.kosta.finalproject.lego.vo.Authority">
-		insert into authority(id,authority) values(#{id},#{authority})
+		insert into authorities(username,authority) values(#{username},#{authority})
 	</insert>
 	
 	<select id="getCategory" resultType="org.kosta.finalproject.lego.vo.CategoryVO">

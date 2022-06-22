@@ -5,7 +5,7 @@
 		insert into MEMBER(id,password,name,address,tel) values (#{id},#{password},#{name},#{address},#{tel})
 	</insert>
 	<insert id="memberRegisterRole" parameterType="org.kosta.finalproject.lego.vo.Authority">
-		insert into authority(id,authority) values(#{id},#{authority})
+		insert into authorities(username,authority) values(#{username},#{authority})
 	</insert>
 	
 	<select id="getCategory" resultType="org.kosta.finalproject.lego.vo.CategoryVO">
@@ -21,10 +21,15 @@
       select * from times
    </select>
    
- <!--   <insert id="masterRegister" parameterType="org.kosta.finalproject.lego.vo.masterDetailVO">
-   <foreach collection="list" item="list" index="index" separator=", " open="INSERT ALL" close="SELECT * FROM DUAL">
-   	into master_detail(id,skills_id,days_id,times_id)
-   	values(#{list.Id},#{list.SkillsId},#{list.DaysId},#{list.TimesId})
-   </foreach>
-   </insert> -->
+   <select id="findMemberById" resultType="org.kosta.finalproject.lego.vo.MemberVO">
+   		select id,password, name, address, tel
+   		from member
+   		where id=#{value}
+   </select>
+   <select id="findAuthorityByUsername" resultType="org.kosta.finalproject.lego.vo.Authority">
+   		SELECT	username,authority
+		FROM	authorities
+		WHERE	username=#{username}
+   </select>
+   
 </mapper>

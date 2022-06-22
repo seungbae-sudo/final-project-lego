@@ -1,7 +1,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layouts/layout-non}"
-	
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 	>
 
 
@@ -15,12 +15,12 @@
             <img src="images/lego_logo.png" alt="" class="login-logo">
           </a>
           <h2 class="text-center">Welcome Back</h2>
-          <form class="text-left clearfix" action="index.html" >
+          <form class="text-left clearfix" action="index.html" th:action="@{/login}" method="post" >
             <div class="form-group">
-              <input type="email" class="form-control"  placeholder="이메일">
+              <input type="email" name="email" class="form-control"  placeholder="이메일">
             </div>
             <div class="form-group">
-              <input type="password" class="form-control" placeholder="패스워드">
+              <input type="password" name="password" class="form-control" placeholder="패스워드">
             </div>
             <div class="text-center">
               <button type="submit" class="btn btn-main text-center" >로그인</button>

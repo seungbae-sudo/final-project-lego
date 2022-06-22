@@ -11,6 +11,7 @@ import org.kosta.finalproject.lego.vo.MasterVO;
 import org.kosta.finalproject.lego.vo.MemberVO;
 import org.kosta.finalproject.lego.vo.SkillsVO;
 import org.kosta.finalproject.lego.vo.TimesVO;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,12 +21,15 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MasterServiceImpl implements MasterService {
 	private final MasterMapper masterMapper;
-
+	private final BCryptPasswordEncoder passwordEncoder;
 	@Override
 	@Transactional
 	public void registerMember(MemberVO memberVO) {
+		String encodedPwd = passwordEncoder.encode(memberVO.getPassword());
+		memberVO.setPassword(encodedPwd);
+		
 		masterMapper.registerMember(memberVO);
-		Authority aurhority = new Authority(memberVO.getId(), "master");
+		Authority aurhority = new Authority(memberVO.getId(), "ROLE_MASTER");
 		masterMapper.masterRegisterRole(aurhority);
 		
 	}

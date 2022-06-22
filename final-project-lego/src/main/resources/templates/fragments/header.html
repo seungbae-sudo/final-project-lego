@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" 
-xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 
 <!-- Start Top Header Bar -->
@@ -25,24 +24,25 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 				<div class="col-md-4 col-xs-12 col-sm-4 header-setting">
 					<!-- Cart -->
 					<button> QnA</button>
-					<form action="" th:action="@{/mypage}">
+					<form action="" th:action="@{/mypage}" sec:authorize="hasRole('ROLE_MEMBER')">
 						<button>마이페이지</button>
 					</form>
-					<form action="" th:action="@{/mastermypage}">
+					<form action="" th:action="@{/mastermypage}" sec:authorize="hasRole('ROLE_MASTER')">
 						<button>고수 마이페이지</button>
 					</form>
-					<form action="" th:action="@{/registerForm}">
-					<button type="submit">회원가입</button>
+					<form action="" th:action="@{/registerForm}" sec:authorize="!isAuthenticated()">
+					<button type="submit" >회원가입</button>
 					</form>
-					<form action="" th:action="@{/loginForm}">
-					<button>로그인</button>
+					<form action="" th:action="@{/loginForm}" sec:authorize="!isAuthenticated()">
+					<button type="submit" >로그인</button >
 					</form>
-					<form action="" th:action="@{/logout}">
-					<button>로그아웃</button>
+					<form action="" th:action="@{/logout}" method="post" sec:authorize="isAuthenticated()">
+					<button type="submit">로그아웃</button>
 					</form>
 					<!-- / .nav .navbar-nav .navbar-right -->
 				</div>
 			</div>
 		</div>
 	</section>
+</html>
 	<!-- End Top Header Bar -->

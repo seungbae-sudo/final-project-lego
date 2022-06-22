@@ -137,12 +137,14 @@ CREATE TABLE member
 ); 
 alter table member drop column member_type;
 
-create table authority(
-	id varchar2(100) not null,
+create table authorities(
+	username varchar2(100) not null,
 	authority varchar2(100) not null,
-	constraint pk_authority_share primary key(id,authority),
-	constraint fk_authority_id foreign key(id) references member(id)
+	constraint pk_authority_share primary key(username,authority),
+	constraint fk_authority_username foreign key(username) references member(id)
 )
+
+drop table authority 
 
 CREATE TABLE message
 (

@@ -24,6 +24,10 @@ public interface MemberMapper {
 	List<DaysVO> getDays();
 
 	List<TimesVO> getTimes();
+
+	MemberVO findMemberById(String id);
+
+	List<Authority> findAuthorityByUsername(String id);
 	
 	
 }
