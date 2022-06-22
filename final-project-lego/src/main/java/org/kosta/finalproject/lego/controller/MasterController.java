@@ -62,7 +62,7 @@ public class MasterController {
 			 masterService.registerTimes(mdv); 
 		  }
 		 
-		return "redirect:/";	
+		return "redirect:/loginForm";	
 	}
 	
 }
