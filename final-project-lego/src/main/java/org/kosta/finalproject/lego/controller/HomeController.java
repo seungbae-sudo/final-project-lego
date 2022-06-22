@@ -26,5 +26,12 @@ public class HomeController {
 	@RequestMapping("/mypage")
 	public String mypage() {
 		return "mypage";
+		
 	}
+	
+	@RequestMapping("/mastermypage")
+	public String mastermypage() {
+		return "master-mypage";
+	}
+	
 }
