@@ -21,12 +21,12 @@ public class HomeController {
 	
 	@RequestMapping("/loginForm")
 	public String loginForm() {
-		return "register-form";
+		return "loginForm";
 	}
+	
 	@RequestMapping("/mypage")
 	public String mypage() {
 		return "mypage";
-		
 	}
 	
 	@RequestMapping("/mastermypage")
