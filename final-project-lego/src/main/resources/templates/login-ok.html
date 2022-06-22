@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout-non}"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	>
+<!--/* layout 선언부 추가 */-->
+
+
+<div layout:fragment="main">
+<section class="signin-page account" >
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <div class="block text-center">
+          <a class="logo" href="index.html">
+            <img src="./images/lego_logo.png" alt="">
+          </a>
+          <h2 class="text-center"> 로그인이 완료되었습니다.</h2>
+          <form class="text-left clearfix" action="index.html" >
+         
+            <div class="text-center">
+              <a th:href="@{/}">홈으로</a></li>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
