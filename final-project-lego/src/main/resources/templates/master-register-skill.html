@@ -20,27 +20,27 @@
 		<!--/*   thymeleaf comment    */-->
 		<div class="">
 
-			<form action="" method="post" th:action="@{/}">
+			<form action="" method="post" th:action="@{/masterRegisterSkillGo}">
 				<p>2. 어떤 서비스를 제공할 수 있나요?</p>
 
 				<input type="hidden" th:name="id" th:value="${id}">
 
 				<div th:each="sk: ${skills}">
-					<input type="checkbox" th:name="skillsId" th:text="${sk.skills}"
-						th:value="${sk.skillsId}">
+					<input type="checkbox" th:name="skills" th:text="${sk.skills} "
+						th:value="${sk.skillsId}" th:if="${sk.skillsId>0}">
 				</div>
 
 				<hr>
 				<p>3. 어떤 서비스를 제공할 수 있나요?</p>
 				<div th:each="ti: ${times}">
-					<input type="checkbox" th:name="timesId" th:text="${ti.times}"
-						th:value="${ti.timesId}">
+					<input type="checkbox" th:name="times" th:text="${ti.times}"
+						th:value="${ti.timesId}" th:if="${ti.timesId>0}">
 				</div>
 				<hr>
 				<p>4. 어떤 서비스를 제공할 수 있나요?</p>
 				<div th:each="d: ${day}">
-					<input type="checkbox" th:name="daysId" th:text="${d.days}"
-						th:value="${d.daysId}">
+					<input type="checkbox" th:name="days" th:text="${d.days}"
+						th:value="${d.daysId}" th:if="${d.daysId>0}">
 				</div>
 				<button type="submit">다음</button>
 			</form>

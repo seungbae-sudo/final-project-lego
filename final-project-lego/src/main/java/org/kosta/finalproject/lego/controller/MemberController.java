@@ -1,11 +1,10 @@
 package org.kosta.finalproject.lego.controller;
 
+import org.kosta.finalproject.lego.serivce.MasterService;
 import org.kosta.finalproject.lego.serivce.MemberService;
 import org.kosta.finalproject.lego.vo.MemberVO;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.RequiredArgsConstructor;
 
@@ -13,21 +12,18 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MemberController {
 	private final MemberService memberService;
+	private final MasterService masterService;
 	
 	@PostMapping("/register")
 	public String register(MemberVO memberVO,String member) {
-		memberService.registerMember(memberVO);		
-		if(member.equals("1") ) {
 			
+		if(member.equals("1") ) {
+			memberService.registerMember(memberVO);	
 			return "redirect:/";
 		}else{		
+			masterService.registerMember(memberVO);
 			return "redirect:masterRegister?id="+memberVO.getId();
 		}
 	}
-	@RequestMapping("masterRegister")
-	public String masterRegister(Model model, String id) {
-		model.addAttribute("id", id);
-		model.addAttribute("category", memberService.getCategory());
-		return "master_register_form";
-	}
+
 }

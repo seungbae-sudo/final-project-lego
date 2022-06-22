@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.kosta.finalproject.lego.mapper.MasterMapper">
+	<insert id="registerMember" parameterType="org.kosta.finalproject.lego.vo.MemberVO">
+		insert into MEMBER(id,password,name,address,tel) values (#{id},#{password},#{name},#{address},#{tel})
+	</insert>
+	
+	<insert id="registerMaster" parameterType="org.kosta.finalproject.lego.vo.MasterVO">
+		insert into master(id,specifications,career,category_no) values (#{id},#{specifications},#{career},#{category.categoryNo})
+	</insert>
+	<insert id="masterRegisterRole" parameterType="org.kosta.finalproject.lego.vo.Authority">
+		insert into authority(id,authority) values(#{id},#{authority})
+	</insert>
+	
+	<select id="getCategory" resultType="org.kosta.finalproject.lego.vo.CategoryVO">
+      select category_no,lesson_sort from CATEGORY
+   </select>
+	<select id="getDays" resultType="org.kosta.finalproject.lego.vo.DaysVO">
+      select * from days
+   </select>
+	<select id="getSkills" resultType="org.kosta.finalproject.lego.vo.SkillsVO">
+      select * from skills
+   </select>
+	<select id="getTimes" resultType="org.kosta.finalproject.lego.vo.TimesVO">
+      select * from times
+   </select>
+   
+      
+   <insert id="registerSkills" parameterType="org.kosta.finalproject.lego.vo.MasterDetailVO">
+		insert into master_detail(id,skills_id) values(#{id},#{skillsId})
+   </insert>
+   <insert id="registerDays" parameterType="org.kosta.finalproject.lego.vo.MasterDetailVO">
+		insert into master_detail(id,days_id) values(#{id},#{daysId})
+   </insert>
+   <insert id="registerTimes" parameterType="org.kosta.finalproject.lego.vo.MasterDetailVO">
+		insert into master_detail(id,times_id) values(#{id},#{timesId})
+   </insert>
+</mapper>
