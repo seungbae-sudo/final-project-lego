@@ -1,0 +1,51 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+<!--/* layout 선언부 추가 */-->
+
+<div layout:fragment="main">
+
+<section class="user-dashboard page-wrapper">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <ul class="list-inline dashboard-menu text-center">
+          <li><a href="order.html">꿀팁</a></li>
+          <li><a class="active" href="address.html">추천</a></li>
+          <li><a href="profile-details.html">나눔</li>
+        </ul>
+        <div class="dashboard-wrapper user-dashboard">
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th class="col-sm-2">NO</th>
+                  <th class="col-sm-8">Name</th>
+                  <th class="col-sm-2">조회수</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>보컬트레이너 추천드려요</td>
+                  <td>3</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>아이유같은 선생님 없나요? 추천받아요 </td>
+                  <td>345</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>추천추천</td>
+                  <td>44</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
