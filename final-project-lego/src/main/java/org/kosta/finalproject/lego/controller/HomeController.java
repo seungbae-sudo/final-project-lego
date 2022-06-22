@@ -19,6 +19,10 @@ public class HomeController {
 	}
 	
 	
+	@RequestMapping("/loginForm")
+	public String loginForm() {
+		return "register-form";
+	}
 	@RequestMapping("/mypage")
 	public String mypage() {
 		return "mypage";
