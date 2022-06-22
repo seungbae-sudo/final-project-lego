@@ -30,11 +30,12 @@ public class MasterController {
 		categoryVO.setCategoryNo(categoryNo);
 		masterVO.setCategory(categoryVO);
 		masterService.registerMaster(masterVO);
-		return "redirect:masterRegisterSkill?id="+masterVO.getId();	
+		return "redirect:masterRegisterSkill?id="+masterVO.getId()+"&categoryNo="+categoryNo;	
 	}
 	
 	@RequestMapping("masterRegisterSkill")
-	public String masterRegisterSkill(Model model, String id) {	
+	public String masterRegisterSkill(Model model, String id, int categoryNo) {	
+		model.addAttribute("categoryNo",categoryNo);
 		model.addAttribute("id", id);
 		model.addAttribute("skills", masterService.getSkills());
 		model.addAttribute("day", masterService.getDays());
@@ -62,7 +63,7 @@ public class MasterController {
 			 masterService.registerTimes(mdv); 
 		  }
 		 
-		return "redirect:/";	
+		return "redirect:/loginForm";	
 	}
 	
 }
