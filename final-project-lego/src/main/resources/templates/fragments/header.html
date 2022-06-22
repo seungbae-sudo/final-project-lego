@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" 
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 
 <!-- Start Top Header Bar -->
@@ -8,7 +9,9 @@
 			<div class="row">
 				<div class="col-md-3 col-xs-12 col-sm-4">
 					<div class="header-logo">
-						<img alt="" src="./images/lego_logo.png">
+						<a th:href="@{/}">
+							<img alt="" src="./images/lego_logo.png">
+						</a>
 					</div>
 				</div>
 				<div class="col-md-5 col-xs-12 col-sm-4 header-setting">
@@ -25,13 +28,16 @@
 					<form action="" th:action="@{/mypage}">
 						<button>마이페이지</button>
 					</form>
+					<form action="" th:action="@{/mastermypage}">
+						<button>고수 마이페이지</button>
+					</form>
 					<form action="" th:action="@{/registerForm}">
 					<button type="submit">회원가입</button>
 					</form>
-					<form action="" th:action="@{/login}">
+					<form action="" th:action="@{/loginForm}">
 					<button>로그인</button>
 					</form>
-					<form action="" th:action="@{/login}">
+					<form action="" th:action="@{/logout}">
 					<button>로그아웃</button>
 					</form>
 					<!-- / .nav .navbar-nav .navbar-right -->
