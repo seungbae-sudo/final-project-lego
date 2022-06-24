@@ -8,6 +8,7 @@ import org.kosta.finalproject.lego.mapper.CommunityBoardMapper;
 import org.kosta.finalproject.lego.serivce.MemberService;
 import org.kosta.finalproject.lego.vo.BoardCategoryVO;
 import org.kosta.finalproject.lego.vo.BoardVO;
+import org.kosta.finalproject.lego.vo.CategoryVO;
 import org.kosta.finalproject.lego.vo.MemberVO;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -37,6 +38,7 @@ public class CommunityBoardController {
 		boardVO.setMvo(memberVO);
 		
 		communityBoardMapper.posting(boardVO);
+
 		
 		return "redirect:board-posting-result";
 	}
@@ -44,8 +46,6 @@ public class CommunityBoardController {
 	//이 메서드는 커뮤니티 리스트로 돌아가는 모든 return을 처리한다.
 	@RequestMapping(value={"/board-posting-result"})
 	public String boardPostingResult() {
-		
-		
 		return "community-list";
 	}
 	
@@ -55,18 +55,18 @@ public class CommunityBoardController {
 	public String goCommunity(Model model,int categoryNo) {
 		
 		List<BoardVO>list=communityBoardMapper.findAllCommunityList(categoryNo);
-		System.out.println(list);
 		model.addAttribute("CategoryList",list);
 		
 		return "community-list";
 	}
 
-	@RequestMapping("/board-update")
+	@RequestMapping("/updateForm")
 	public String boardUpdate() {
-		return "board-update";
+		
+		return "board-update-form";
 	}
 	
-	@RequestMapping("/board-detail")
+	@RequestMapping("/deleteForm")
 	public String boradDetail(int boardNo,Model model) {
 		BoardVO bvo=communityBoardMapper.findBoardDetailByBoardNo(boardNo);
 		model.addAttribute("bvo",bvo);

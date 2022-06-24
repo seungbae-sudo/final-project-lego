@@ -16,6 +16,7 @@ select*from board where category_no=2
 select*from board where category_no=1
 
 
+--categoryNo으로 list 가져오기
 select b .board_no,b.board_title,b.hits, 
 			m.name,
 			bc.category_no
@@ -44,3 +45,10 @@ from board b, member m
 where b.id=m.id
 and m.id='lsj@naver.com'
 and b.board_no=7
+
+
+--delete 
+DELETE FROM board WHERE board_no = 3;
+
+--update 
+UPDATE board SET board_title='으아아',board_content='수정 test', category_no='1' WHERE board_no = 4;

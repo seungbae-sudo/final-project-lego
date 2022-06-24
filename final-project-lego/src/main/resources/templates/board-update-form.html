@@ -20,34 +20,24 @@
 		</div>
 	</section>
 	
-	<section class="user-dashboard page-wrapper">
+		<section class="user-dashboard page-wrapper">
 		  <div class="container">
-			<form method="post" th:action="@{board-update}" id="Update">
-			<input type="hidden" name = "pageNo" value="${pageNo }">
-				<table class="table">
-					<tr>
-						<td>
-							<select class="col-sm-2"  id="categoryNo" name="categoryNo" >
-									<option value="1"> 꿀팁</option>
-								    <option value="2">추천</option>
-								    <option value="3">나눔</option>			
-							</select>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<input class="col-sm-8" type="text" name="title" placeholder="글제목" required="required">
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<textarea rows="10" class="form-control" name="content"
-								placeholder="본문내용" required="required">
-							</textarea>
-						</td>
-					</tr>
-				</table>
-			</form>
+			
+				<h3 class="title-detail" th:text="${bvo.boardTitle}">제목</h3>
+				<hr>
+				<ul class="info">
+					<li>작성자 <span th:text="${bvo.mvo.name}"></span></li>
+					<li>작성일 <span th:text="${bvo.boardDate}"></span></li>
+					<li>조회수<span th:text="${bvo.hits}"></span> </li>
+					<li>
+						 <!--*/<a href="?categoryNo=${carNo}&pageNo=${pageNo}"><i
+							class='fas fa-list'></i>목록</a>/*-->
+					</li>
+				</ul>
+				<div class="content">
+					<pre th:text="${bvo.boardContent}">본문내용</pre>
+				</div>
+		
 		
 			<div class="text-center">
 				<button type="button" class="btn btn-success" onclick="check()">확인</button>
