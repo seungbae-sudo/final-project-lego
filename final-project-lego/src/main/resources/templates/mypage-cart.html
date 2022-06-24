@@ -34,18 +34,15 @@
 								alt="Image">
 						</div>
 						<div class="media-body">
-							<h2 class="media-heading">손석구</h2>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-								Unde, iure, est. Sit mollitia est maxime! Eos cupiditate
-								tempore, tempora omnis. Lorem ipsum dolor sit amet, consectetur
-								adipisicing elit. Enim, nihil.</p>
+							<h2 class="media-heading" pd-t30>손석구</h2>
+							
 						</div>
 					</div>
 					<ul class="list-inline dashboard-menu text-center">
 						<li><a href="dashboard.html"  th:href="@{/mypage}">회원정보</a></li>
 						<li><a class="active" href="order.html" th:href="@{/mypage-cart}">찜목록</a></li>
-						<li><a href="address.html">내가 쓴 글</a></li>
-						<li><a href="profile-details.html">내 상담목록</a></li>
+						<li><a th:href="@{/mypage-wrote}">내가 쓴 글</a></li>
+						<li><a th:href="@{/mypage-booking}">내 상담목록</a></li>
 						<li><a href="profile-details.html">메세지함</a></li>
 					</ul>
 					<div class="dashboard-wrapper user-dashboard profile-detail">
@@ -54,66 +51,46 @@
 							<table class="table">
 								<thead>
 									<tr>
-										<th>Company</th>
-										<th>Name</th>
-										<th>Address</th>
-										<th>Country</th>
-										<th class="col-md-2 col-sm-3">Phone</th>
-										<th></th>
+										<th class="col-md-3 " ></th>
+										<th class="col-md-7 "></th>
+										<th class="col-md-2 "></th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr>
-										<td>Nokia</td>
-										<td>Adam Smith</td>
-										<td>9/4 C Babor Road, Mohammad Pur, Dhaka</td>
-										<td>Bangladesh</td>
-										<td>+884 5452 6452</td>
-										<td>
-											<div class="btn-group" role="group">
-												<button type="button" class="btn btn-default">
-													<i class="tf-pencil2" aria-hidden="true"></i>
-												</button>
-												<button type="button" class="btn btn-default">
-													<i class="tf-ion-close" aria-hidden="true"></i>
-												</button>
+										
+										<td >이미지</td>
+										<td > 
+											<div>
+											<span>고수 이름</span> <span>고수 평점</span>
 											</div>
+											<div>
+												고수 상세 정보 들이 여기 잔뜩 나와야함 고수 상세 정보 들이 여기 잔뜩 나와야함 고수 상세 정보 들이 여기 잔뜩 나와야함
+											</div>
+										
+										</td>
+										<td class="text-center">
+												<a href=""><i class="bi bi-bookmark"></i></a>
 										</td>
 									</tr>
+									
 									<tr>
-										<td>Samsung</td>
-										<td>Adam Smith</td>
-										<td>9/4 C Babor Road, Mohammad Pur, Dhaka</td>
-										<td>Bangladesh</td>
-										<td>+884 5452 6452</td>
-										<td>
-											<div class="btn-group" role="group">
-												<button type="button" class="btn btn-default">
-													<i class="tf-pencil2" aria-hidden="true"></i>
-												</button>
-												<button type="button" class="btn btn-default">
-													<i class="tf-ion-close" aria-hidden="true"></i>
-												</button>
+										<td>이미지</td>
+										<td> 
+											<div>
+												<span>고수 이름</span> <span>고수 평점</span>
+											</div>
+											<div>
+												고수 상세 정보 들이 여기 잔뜩 나와야함 고수 상세 정보 들이 여기 잔뜩 나와야함 고수 상세 정보 들이 여기 잔뜩 나와야함
 											</div>
 										</td>
-									</tr>
-									<tr>
-										<td>Motorola</td>
-										<td>Adam Smith</td>
-										<td>9/4 C Babor Road, Mohammad Pur, Dhaka</td>
-										<td>Bangladesh</td>
-										<td>+884 5452 6452</td>
-										<td>
-											<div class="btn-group" role="group">
-												<button type="button" class="btn btn-default">
-													<i class="tf-pencil2" aria-hidden="true"></i>
-												</button>
-												<button type="button" class="btn btn-default">
-													<i class="tf-ion-close" aria-hidden="true"></i>
-												</button>
-											</div>
+										<td class="text-center">
+												<a href="">
+													<i class="bi bi-bookmark-fill"></i>
+												</a>
 										</td>
 									</tr>
+									
 								</tbody>
 							</table>
 						</div>

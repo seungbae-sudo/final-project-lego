@@ -4,46 +4,58 @@
 <!--/* layout 선언부 추가 */-->
 
 <div layout:fragment="main">
-
+	<section class="page-header">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="content">
+						<h1 class="page-name">커뮤니티 게시판</h1>
+						<ol class="breadcrumb">
+							<li><a href="index.html">Home</a></li>
+						</ol>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
 <section class="user-dashboard page-wrapper">
   <div class="container">
     <div class="row">
       <div class="col-md-12">
         <ul class="list-inline dashboard-menu text-center">
-          <li><a href="order.html">꿀팁</a></li>
-          <li><a class="active" href="address.html">추천</a></li>
-          <li><a href="profile-details.html">나눔</li>
+          <li><a  th:href="@{/goCommunity}" name="categoryNo" value="1">꿀팁</a></li>
+          <li><a  th:href="@{/goCommunity}" name="categoryNo" value="2">추천</a></li>
+          <li><a th:href="@{/goCommunity}" name="categoryNo" value="3">나눔</li>
         </ul>
+        <form th:action="@{/writeForm}" method="get">
+					<button type="submit">글쓰기</button>
+		</form>
+		
         <div class="dashboard-wrapper user-dashboard">
           <div class="table-responsive">
             <table class="table">
               <thead>
                 <tr>
-                  <th class="col-sm-2">NO</th>
-                  <th class="col-sm-8">Name</th>
-                  <th class="col-sm-2">조회수</th>
+                  <th class="col-md-2 text-center">No.</th>
+                  <th class="col-md-6 text-center">제목</th>
+                  <th class="col-md-2 text-center">작성자</th>
+                  <th class="col-md-2 text-right">조회수</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>보컬트레이너 추천드려요</td>
-                  <td>3</td>
+              <tbody >
+                <tr th:each="list:${CategoryList}">
+                  <td> <a href="" th:text=${list.boardNo}>나오는지?</a></td>
+                  <td> <a th:href="@{/board-detail(boardNo=${list.boardNo})}" th:text=${list.boardTitle} >나오는지?</a></td>
+                  <td> <a href="" th:text=${list.mvo.name}>나오는지?</a></td>
+                  <td> <a href="" th:text=${list.hits}>나오는지?</a></td>
                 </tr>
-                <tr>
-                  <td>2</td>
-                  <td>아이유같은 선생님 없나요? 추천받아요 </td>
-                  <td>345</td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>추천추천</td>
-                  <td>44</td>
-                </tr>
+               
               </tbody>
             </table>
           </div>
         </div>
+        
       </div>
     </div>
   </div>

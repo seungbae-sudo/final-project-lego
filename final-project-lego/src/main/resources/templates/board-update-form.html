@@ -1,0 +1,69 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+<!--/* layout 선언부 추가 */-->
+
+<div layout:fragment="main">
+
+	<section class="page-header">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="content">
+						<h1 class="page-name">글수정</h1>
+						<ol class="breadcrumb">
+							<li><a href="index.html">Home</a></li>
+						</ol>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<section class="user-dashboard page-wrapper">
+		  <div class="container">
+			<form method="post" th:action="@{board-update}" id="Update">
+			<input type="hidden" name = "pageNo" value="${pageNo }">
+				<table class="table">
+					<tr>
+						<td>
+							<select class="col-sm-2"  id="categoryNo" name="categoryNo" >
+									<option value="1"> 꿀팁</option>
+								    <option value="2">추천</option>
+								    <option value="3">나눔</option>			
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input class="col-sm-8" type="text" name="title" placeholder="글제목" required="required">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<textarea rows="10" class="form-control" name="content"
+								placeholder="본문내용" required="required">
+							</textarea>
+						</td>
+					</tr>
+				</table>
+			</form>
+		
+			<div class="text-center">
+				<button type="button" class="btn btn-success" onclick="check()">확인</button>
+				<button type="reset" class="btn btn-success">취소</button>
+			</div>
+		</div>
+	</section>
+	
+	<script type="text/javascript">
+	function check() {
+		if (document.getElementById("categoryNo").value == "") {
+			alert("게시판을 선택해 주세요");
+			return;
+		} else {
+			document.getElementById("Update").submit();
+		}
+	}
+</script>
+</html>

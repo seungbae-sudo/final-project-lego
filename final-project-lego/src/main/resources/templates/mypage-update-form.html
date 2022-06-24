@@ -35,7 +35,7 @@
 								alt="Image">
 						</div>
 						<div class="media-body">
-							<h2 class="media-heading" sec:authentication="principal.name">손석구</h2>
+							<h2 class="media-heading " sec:authentication="principal.name">손석구</h2>
 							
 						</div>
 					</div>
@@ -52,15 +52,13 @@
 							<h4>Total Orders</h4>
 							<div class="table-responsive">
 								<div class="media-body">
-									<ul class="user-profile-list">
-										<li><span	>아이디 :</span><span sec:authentication="principal.id"></span></li>
-										<li><span>비밀번호  :</span><span>*************</span></li>
-										<li><span>이름 :</span><span sec:authentication="principal.name"></span></li>
-										<li><span>주소 :</span> <span sec:authentication="principal.address"></span></li>
-										<li><span>핸드폰 번호:</span><span sec:authentication="principal.tel"></span></li>
-									</ul>
-									<form method="get" th:action="@{/memberUpdateForm}">
-										<input type="submit"value="회원정보 수정하기" >
+									<form method="post" th:action="@{UpdateMember}">
+										이메일 : <input type="email" name="id" placeholder="이메일" th:value="${member.id}" readonly><br>
+										비밀번호 : <input type="text" name="password" placeholder="패스워드" required="required"><br>
+										이름 : <input type="text" name="name" 	th:value="${member.name}" placeholder="이름" required="required"> <br>
+										주소 : <input type="text" 	name="address" 	th:value="${member.address}" placeholder="주소" required="required"><br>
+										핸드폰 번호 : <input type="text"  name="tel"  th:value="${member.tel}" placeholder="핸드폰 번호" required="required"><br>
+										<input type="submit" value="회원정보수정">
 									</form>
 								</div>
 							</div>
