@@ -4,6 +4,8 @@
 	layout:decorate="~{layouts/layout}">
 <!--/* layout 선언부 추가 */-->
 
+
+
 <div layout:fragment="main">
 	<section class="page-header">
 		<div class="container">
@@ -12,7 +14,7 @@
 					<div class="content">
 						<h1 class="page-name">고수 마이페이지</h1>
 						<ol class="breadcrumb">
-							<li><a th:href="@{/}">Home</a></li>
+						<li><a th:href="@{/}">Home</a></li>
 							<li class="active">my account</li>
 						</ol>
 					</div>
@@ -20,6 +22,7 @@
 			</div>
 		</div>
 	</section>
+
 
 	<section class="user-dashboard page-wrapper">
 		<div class="container">
@@ -36,34 +39,41 @@
 						</div>
 					</div>
 					<ul class="list-inline dashboard-menu text-center">
-						<li><a class="active" th:href="@{/mastermypage}">고수정보</a></li>
+						<li><a th:href="@{/mastermypage}">고수정보</a></li>
 						<li><a th:href="@{/mastermypage-review}">리뷰</a></li>
 						<li><a th:href="@{/mastermypage-cart}">내가 쓴 글</a></li>
-						<li><a th:href="@{/mastermypage-consult}">상담신청내역</a></li>
+						<li><a class="active" th:href="@{/mastermypage-consult}">상담신청내역</a></li>
 						<li><a href="">메세지함</a></li>
 					</ul>
 					<div class="dashboard-wrapper user-dashboard profile-detail">
 
-						<div class="total-order mt-20">
-							<h4>고수 상세정보</h4>
-							<div class="table-responsive">
-								<div class="media-body">
-									<ul class="user-profile-list">
-										<li><span>아이디 : </span><span sec:authentication="principal.id"></span></li>
-										<li><span>비밀번호 : </span><span sec:authentication="principal.password"></li>
-										<li><span>이름 : </span><span sec:authentication="principal.name"></span></li>
-										<li><span>주소 : </span><span sec:authentication="principal.address"></span></li>
-										<li><span>핸드폰 번호 : </span><span sec:authentication="principal.tel"></span></li>
-									</ul>
-									<form method="get" th:action="@{/masterUpdateForm}">
-                             			 <input type="submit"value="회원정보 수정하기" >
-                           			</form>
-								</div>
-							</div>
+						<div class="table-responsive">
+							<table class="table">
+								<thead>
+									<tr>
+										<th>고객 이름</th>
+										<th>상담 날짜</th>
+									</tr>
+								</thead>
+								
+								<tbody>
+									<tr>
+										<td>수지</td>
+										<td>2022-06-23</td>
+									</tr>
+									
+									<tr>
+										<td>태연</td>
+										<td>2022-06-23</td>
+									</tr>
+								
+								</tbody>
+							</table>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
+
 </div>

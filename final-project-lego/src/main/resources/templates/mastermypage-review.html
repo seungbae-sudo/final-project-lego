@@ -4,6 +4,8 @@
 	layout:decorate="~{layouts/layout}">
 <!--/* layout 선언부 추가 */-->
 
+
+
 <div layout:fragment="main">
 	<section class="page-header">
 		<div class="container">
@@ -21,6 +23,7 @@
 		</div>
 	</section>
 
+
 	<section class="user-dashboard page-wrapper">
 		<div class="container">
 			<div class="row">
@@ -36,34 +39,53 @@
 						</div>
 					</div>
 					<ul class="list-inline dashboard-menu text-center">
-						<li><a class="active" th:href="@{/mastermypage}">고수정보</a></li>
-						<li><a th:href="@{/mastermypage-review}">리뷰</a></li>
+						<li><a th:href="@{/mastermypage}">고수정보</a></li>
+						<li><a class="active" th:href="@{/mastermypage-review}">리뷰</a></li>
 						<li><a th:href="@{/mastermypage-cart}">내가 쓴 글</a></li>
 						<li><a th:href="@{/mastermypage-consult}">상담신청내역</a></li>
 						<li><a href="">메세지함</a></li>
 					</ul>
 					<div class="dashboard-wrapper user-dashboard profile-detail">
 
-						<div class="total-order mt-20">
-							<h4>고수 상세정보</h4>
-							<div class="table-responsive">
-								<div class="media-body">
-									<ul class="user-profile-list">
-										<li><span>아이디 : </span><span sec:authentication="principal.id"></span></li>
-										<li><span>비밀번호 : </span><span sec:authentication="principal.password"></li>
-										<li><span>이름 : </span><span sec:authentication="principal.name"></span></li>
-										<li><span>주소 : </span><span sec:authentication="principal.address"></span></li>
-										<li><span>핸드폰 번호 : </span><span sec:authentication="principal.tel"></span></li>
-									</ul>
-									<form method="get" th:action="@{/masterUpdateForm}">
-                             			 <input type="submit"value="회원정보 수정하기" >
-                           			</form>
-								</div>
-							</div>
+						<div class="table-responsive">
+							<table class="table">
+								<thead>
+									<tr>
+										<th>고객 아이디</th>
+										<th>평점</th>
+										<th>고객 리뷰</th>
+										<th></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>손석구</td>
+										<td>5</td>
+										<td>아이유님 노래 잘하시네요</td>
+										<td>
+										</td>
+									</tr>
+									<tr>
+										<td>박보검</td>
+										<td>3</td>
+										<td>코딩 넘므 어려운것</td>
+										<td>
+										</td>
+									</tr>
+									<tr>
+										<td>강승규</td>
+										<td>5</td>
+										<td>화이팅</td>
+										<td>
+										</td>
+									</tr>
+								</tbody>
+							</table>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
+
 </div>
