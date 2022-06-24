@@ -11,7 +11,7 @@
 					<div class="content">
 						<h1 class="page-name">커뮤니티 게시판</h1>
 						<ol class="breadcrumb">
-							<li><a href="index.html">Home</a></li>
+							<li><a th:href="@{/}">Home</a></li>
 						</ol>
 					</div>
 				</div>
@@ -24,9 +24,9 @@
     <div class="row">
       <div class="col-md-12">
         <ul class="list-inline dashboard-menu text-center">
-          <li><a  th:href="@{/goCommunity}" name="categoryNo" value="1">꿀팁</a></li>
-          <li><a  th:href="@{/goCommunity}" name="categoryNo" value="2">추천</a></li>
-          <li><a th:href="@{/goCommunity}" name="categoryNo" value="3">나눔</li>
+          <li><a  th:href="@{/goCommunity(categoryNo=1)}"  >꿀팁</a></li>
+          <li><a  th:href="@{/goCommunity(categoryNo=2)}">추천</a></li>
+          <li><a th:href="@{/goCommunity(categoryNo=3)}" >나눔</li>
         </ul>
         <form th:action="@{/writeForm}" method="get">
 					<button type="submit">글쓰기</button>
@@ -45,10 +45,10 @@
               </thead>
               <tbody >
                 <tr th:each="list:${CategoryList}">
-                  <td> <a href="" th:text=${list.boardNo}>나오는지?</a></td>
-                  <td> <a th:href="@{/board-detail(boardNo=${list.boardNo})}" th:text=${list.boardTitle} >나오는지?</a></td>
-                  <td> <a href="" th:text=${list.mvo.name}>나오는지?</a></td>
-                  <td> <a href="" th:text=${list.hits}>나오는지?</a></td>
+                  <td class="text-center"> <a href="" th:text=${list.boardNo}>나오는지?</a></td>
+                  <td class="text-center"> <a th:href="@{/board-detail(boardNo=${list.boardNo})}" th:text=${list.boardTitle} >나오는지?</a></td>
+                  <td class="text-center"> <a href="" th:text=${list.mvo.name}>나오는지?</a></td>
+                  <td class="text-center"> <a href="" th:text=${list.hits}>나오는지?</a></td>
                 </tr>
                
               </tbody>

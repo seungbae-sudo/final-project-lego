@@ -44,3 +44,14 @@ from board b, member m
 where b.id=m.id
 and m.id='lsj@naver.com'
 and b.board_no=7
+
+--detail2 (category no 까지 가져옴)
+select b.board_no, b.board_title,b.board_content,b.board_date,b.hits, m.name, m.id ,bc.category_no
+from board b, member m, board_category bc
+where b.id=m.id
+and bc.category_no=b.category_no
+and b.board_no=33
+		
+
+--update
+UPDATE board SET board_title='우와',board_content='재미따', category_no='1' WHERE board_no = 33;

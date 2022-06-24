@@ -18,5 +18,7 @@ public interface CommunityBoardMapper {
 
 	BoardVO findBoardDetailByBoardNo(int boardNo);
 
+	BoardVO updateByBoardNo(int boardNo);
+
 	
 }
