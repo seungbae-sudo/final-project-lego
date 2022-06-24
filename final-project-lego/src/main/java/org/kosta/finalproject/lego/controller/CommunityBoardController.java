@@ -14,7 +14,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import lombok.RequiredArgsConstructor;
 
@@ -30,41 +31,48 @@ public class CommunityBoardController {
 	}
 	
 	@PostMapping("/posting")
-	public String boardPosting(@AuthenticationPrincipal MemberVO memberVO,BoardVO boardVO,int categoryNo,Model model) {
+	public String boardPosting(@AuthenticationPrincipal MemberVO memberVO,BoardVO boardVO,int categoryNo,Model model,RedirectAttributes redirect) {
 		
 		BoardCategoryVO bcvo= communityBoardMapper.findBCVO(categoryNo);
 		boardVO.setBcvo(bcvo);
 		boardVO.setMvo(memberVO);
 		
 		communityBoardMapper.posting(boardVO);
+
+		redirect.addAttribute("categoryNo", categoryNo);
 		
 		return "redirect:board-posting-result";
 	}
 	
-	//이 메서드는 커뮤니티 리스트로 돌아가는 모든 return을 처리한다.
+/*
 	@RequestMapping(value={"/board-posting-result"})
-	public String boardPostingResult() {
-		
-		
+	public String boardPostingResult(@RequestParam("categoryNo") int categoryNo, Model model) {
+		List<BoardVO>list=communityBoardMapper.findAllCommunityList(categoryNo);
+		model.addAttribute("CategoryList",list);
 		return "community-list";
 	}
+*/	
+	
 	
 	//이건 나중에 위에 있는 community-list와 view가 같으므로 합쳐야함 (요구하는 파라미터값이 다름)
-	//하지만 현재는 역량이 매우부족하여 스미마셍 ;; 
-	@RequestMapping(value={"/goCommunity"})
-	public String goCommunity(Model model,int categoryNo) {
-		
+	//하지만 현재는 역량이 매우부족하여 스미마셍 ;;  => 역량 스킬 업! 드디어! 해냄 ! 내가해냄! 소지! 섭!
+	@RequestMapping(value={"/goCommunity","/board-posting-result"})
+	public String goCommunity(Model model,@RequestParam("categoryNo") int categoryNo) {
+		System.out.println(categoryNo);
 		List<BoardVO>list=communityBoardMapper.findAllCommunityList(categoryNo);
-		System.out.println(list);
 		model.addAttribute("CategoryList",list);
 		
 		return "community-list";
 	}
 
-	@RequestMapping("/board-update")
-	public String boardUpdate() {
-		return "board-update";
+	@RequestMapping("/updateForm")
+	public String boardUpdateFrom(@AuthenticationPrincipal MemberVO memberVO,Model model,int boardNo) {
+		
+		model.addAttribute("boardNo",boardNo);
+		return "board-update-form";
 	}
+
+	
 	
 	@RequestMapping("/board-detail")
 	public String boradDetail(int boardNo,Model model) {
