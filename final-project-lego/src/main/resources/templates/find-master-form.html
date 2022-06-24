@@ -1,0 +1,58 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+<!--/* layout 선언부 추가 */-->
+
+<div layout:fragment="main">
+
+<section class="user-dashboard page-wrapper">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="col-md-5">
+					<div class="category-box category-box-2">
+						<a th:href="@{/findMaster(categoryNo=1)}" > <img src="./images/music.png" alt="" />
+							<div class="content">
+								<h3>음악</h3>
+							</div>
+						</a>
+					</div>
+				</div>
+				<div class="col-md-2"></div>
+				<div class="col-md-5">
+					<div class="category-box category-box-2">
+						<a th:href="@{/findMaster(categoryNo=2)}"> <img src="./images/sport.png" alt="" />
+							<div class="content">
+								<h3>운동</h3>
+							</div>
+						</a>
+					</div>
+				</div>
+      </div>
+    </div>
+     <div class="row">
+      <div class="col-md-12">
+        <div class="col-md-5">
+					<div class="category-box category-box-2">
+						<a th:href="@{/findMaster(categoryNo=3)}"> <img src="./images/art.png" alt="" />
+							<div class="content">
+								<h3>미술</h3>
+							</div>
+						</a>
+					</div>
+				</div>
+				<div class="col-md-2"></div>
+				<div class="col-md-5">
+					<div class="category-box category-box-2">
+						<a th:href="@{/findMaster(categoryNo=4)}"> <img src="./images/languages.png" alt="" />
+							<div class="content">
+								<h3>외국어</h3>
+							</div>
+						</a>
+					</div>
+				</div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>

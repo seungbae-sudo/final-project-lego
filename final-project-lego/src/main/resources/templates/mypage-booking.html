@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 	layout:decorate="~{layouts/layout}">
 <!--/* layout 선언부 추가 */-->
 
@@ -35,35 +34,38 @@
 								alt="Image">
 						</div>
 						<div class="media-body">
-							<h2 class="media-heading" sec:authentication="principal.name">손석구</h2>
-							
+							<h2 class="media-heading">손석구</h2>
+						
 						</div>
 					</div>
 					<ul class="list-inline dashboard-menu text-center">
-						<li><a class="active" th:href="@{/mypage}">회원정보</a></li>
-						<li><a th:href="@{/mypage-cart}">찜목록</a></li>
+						<li><a href="dashboard.html"  th:href="@{/mypage}">회원정보</a></li>
+						<li><a  href="order.html" th:href="@{/mypage-cart}">찜목록</a></li>
 						<li><a th:href="@{/mypage-wrote}">내가 쓴 글</a></li>
-						<li><a th:href="@{/mypage-booking}">내 상담목록</a></li>
+						<li><a  class="active"  th:href="@{/mypage-booking}">내 상담목록</a></li>
 						<li><a href="profile-details.html">메세지함</a></li>
 					</ul>
 					<div class="dashboard-wrapper user-dashboard profile-detail">
 
-						<div class="total-order mt-20">
-							<h4>Total Orders</h4>
-							<div class="table-responsive">
-								<div class="media-body">
-									<ul class="user-profile-list">
-										<li><span	>아이디 :</span><span sec:authentication="principal.id"></span></li>
-										<li><span>비밀번호  :</span><span>*************</span></li>
-										<li><span>이름 :</span><span sec:authentication="principal.name"></span></li>
-										<li><span>주소 :</span> <span sec:authentication="principal.address"></span></li>
-										<li><span>핸드폰 번호:</span><span sec:authentication="principal.tel"></span></li>
-									</ul>
-									<form method="get" th:action="@{/memberUpdateForm}">
-										<input type="submit"value="회원정보 수정하기" >
-									</form>
-								</div>
-							</div>
+						<div class="table-responsive">
+							<table class="table">
+								<thead>
+									<tr>
+										<th class="col-md-2 text-center" >고수 이름</th>
+										<th class="col-md-6 text-center">분야</th>
+										<th class="col-md-3 text-center">상담 예약 날짜</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td class="text-center">아이유</td>
+										<td class="text-center"><a href="">보컬</a></td>
+										<td class="text-center">2022.06.22</td>
+										
+									</tr>
+									
+								</tbody>
+							</table>
 						</div>
 					</div>
 				</div>

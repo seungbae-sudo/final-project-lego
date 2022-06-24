@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="org.kosta.finalproject.lego.mapper.MasterMyPageMapper">
+	<update id="updateMaster" parameterType="org.kosta.finalproject.lego.vo.MemberVO">
+		update member set password=#{password},name=#{name},address=#{address},tel=#{tel} where id=#{id}
+	</update>
+	<select id="findMasterDetailList" resultType="org.kosta.finalproject.lego.vo.MasterVO">
+   		select id,career,category_no,specifications from master where id =#{value}
+   </select>
+</mapper>

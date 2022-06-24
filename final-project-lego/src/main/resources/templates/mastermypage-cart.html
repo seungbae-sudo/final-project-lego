@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+<!--/* layout 선언부 추가 */-->
+
+
+
+<div layout:fragment="main">
+	<section class="page-header">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="content">
+						<h1 class="page-name">고수 마이페이지</h1>
+						<ol class="breadcrumb">
+							<li><a th:href="@{/}">Home</a></li>
+							<li class="active">my account</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+	<section class="user-dashboard page-wrapper">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="media">
+						<div class="pull-left profile">
+							<img class="media-object user-img" src="./images/고수.jpg"
+								alt="Image">
+						</div>
+						<div class="media-body">
+							<h2 class="media-heading">고수</h2>
+							<p>Hi im Gosu</p>
+						</div>
+					</div>
+					<ul class="list-inline dashboard-menu text-center">
+						<li><a href=""  th:href="@{/mastermypage}">고수정보</a></li>
+						<li><a th:href="@{/mastermypage-review}">리뷰</a></li>
+						<li><a class="active" th:href="@{/mastermypage-cart}">내가 쓴 글</a></li>
+						<li><a th:href="@{/mastermypage-consult}">상담신청내역</a></li>
+						<li><a href="">메세지함</a></li>
+					</ul>
+					<div class="dashboard-wrapper user-dashboard profile-detail">
+
+						<div class="table-responsive">
+							<table class="table">
+								<thead>
+									<tr>
+										<th>No.</th>
+										<th>제목</th>
+										<th>카테고리</th>
+										<th></th>
+									</tr>
+								</thead>
+								
+								<tbody>
+									<tr>
+										<td>1</td>
+										<td>너무 더울땐?</td>
+										<td>꿀팁</td>
+										<td>
+											<div class="btn-group" role="group">
+												<button type="button" class="btn btn-default">
+													<i class="tf-pencil2" aria-hidden="true"></i>
+												</button>
+												<button type="button" class="btn btn-default">
+													<i class="tf-ion-close" aria-hidden="true"></i>
+												</button>
+											</div>
+										</td>
+									</tr>
+									
+									<tr>
+										<td>2</td>
+										<td>노래 잘하고 싶으면?</td>
+										<td>꿀팁</td>
+										<td>
+											<div class="btn-group" role="group">
+												<button type="button" class="btn btn-default">
+													<i class="tf-pencil2" aria-hidden="true"></i>
+												</button>
+												<button type="button" class="btn btn-default">
+													<i class="tf-ion-close" aria-hidden="true"></i>
+												</button>
+											</div>
+											</td>
+									</tr>
+									<tr>
+										<td>3</td>
+										<td>무료나눔 갑니다</td>
+										<td>나눔</td>
+										<td>
+											<div class="btn-group" role="group">
+												<button type="button" class="btn btn-default">
+													<i class="tf-pencil2" aria-hidden="true"></i>
+												</button>
+												<button type="button" class="btn btn-default">
+													<i class="tf-ion-close" aria-hidden="true"></i>
+												</button>
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+</div>
