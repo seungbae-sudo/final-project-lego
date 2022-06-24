@@ -45,16 +45,18 @@ CREATE TABLE booking
 	skills_id             NUMBER  ,
 	times_id              NUMBER ,
 	days_id               NUMBER ,
-	id                    VARCHAR2(100),
-	CONSTRAINT fk_booking_id FOREIGN KEY(id) REFERENCES member(id),
-	CONSTRAINT pk_booking_share PRIMARY KEY(id,skills_id,times_id,days_id,booking_no),
+	master_id                    VARCHAR2(100) not null,
+	member_id                  varchar2(100) not null,
+	CONSTRAINT fk_booking_member_id FOREIGN KEY(member_id) REFERENCES member(id),
+	CONSTRAINT fk_booking_master_id FOREIGN KEY(master_id) REFERENCES master(id),
+	CONSTRAINT pk_booking_share PRIMARY KEY(master_id,skills_id,times_id,days_id,booking_no),
 	CONSTRAINT fk_booking_skills_id FOREIGN KEY(skills_id) REFERENCES skills(skills_id),
 	CONSTRAINT fk_booking_times_id FOREIGN KEY(times_id) REFERENCES times(times_id),
 	CONSTRAINT fk_booking_days_id FOREIGN KEY(days_id) REFERENCES days(days_id)
 );
 
 
-
+drop table booking
 CREATE TABLE cart
 (
 	cart_no               NUMBER  primary key,
