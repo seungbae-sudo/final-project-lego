@@ -57,10 +57,10 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr th:each="list:${myList}">
-										<td class="text-center" th:text="${list}">Nokia</td>
-										<td class="text-center"><a href="">Adam Smith</a></td>
-										<td class="text-center">9/4 C Babor Road, Mohammad Pur, Dhaka</td>
+									<tr th:each="list:${wroteList}">
+										<td class="text-center" th:text="${list.boardNo}">Nokia</td>
+										<td class="text-center"  ><a th:href="@{/board-detail(boardNo=${list.boardNo})}" th:text="${list.boardTitle}">Adam Smith</a></td>
+										<td class="text-center" th:text="${list.bcvo.categoryName}">9/4 C Babor Road, Mohammad Pur, Dhaka</td>
 										
 									</tr>
 									
