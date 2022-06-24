@@ -3,6 +3,7 @@ package org.kosta.finalproject.lego.serivce;
 import java.util.List;
 
 import org.kosta.finalproject.lego.mapper.MasterMapper;
+import org.kosta.finalproject.lego.mapper.MasterMyPageMapper;
 import org.kosta.finalproject.lego.vo.Authority;
 import org.kosta.finalproject.lego.vo.CategoryVO;
 import org.kosta.finalproject.lego.vo.DaysVO;
@@ -21,6 +22,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MasterServiceImpl implements MasterService {
 	private final MasterMapper masterMapper;
+	private final MasterMyPageMapper masterMyPageMapper;
 	private final BCryptPasswordEncoder passwordEncoder;
 	@Override
 	@Transactional
@@ -80,4 +82,11 @@ public class MasterServiceImpl implements MasterService {
 		
 	}
 
+	@Override
+	public void updateMaster(MemberVO memberVO) {
+		// 변경할 비밀번호를 암호화한다
+		String encodePassword = passwordEncoder.encode(memberVO.getPassword());
+		memberVO.setPassword(encodePassword);
+		masterMyPageMapper.updateMaster(memberVO);
+	}
 }

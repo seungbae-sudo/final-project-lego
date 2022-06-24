@@ -12,4 +12,5 @@ public class MasterVO {
 	private String id;
 	private String career;
 	private String specifications;
+	private String name;
 }

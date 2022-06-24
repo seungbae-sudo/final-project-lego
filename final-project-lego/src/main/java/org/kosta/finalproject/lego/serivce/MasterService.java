@@ -30,4 +30,5 @@ public interface MasterService {
 	
 	void registerTimes(MasterDetailVO masterDetailVO);
 	
+	void updateMaster(MemberVO memberVO);
 }
