@@ -46,11 +46,6 @@ public class HomeController {
 		return "master-mypage";
 	}
 	
-	@RequestMapping("/goCommunity")
-	public String communityList() {
-		return "community-list";
-	}
-	
 	@RequestMapping("/findMasterForm")
 	public String findMaster() {
 		return "find-master-form";
