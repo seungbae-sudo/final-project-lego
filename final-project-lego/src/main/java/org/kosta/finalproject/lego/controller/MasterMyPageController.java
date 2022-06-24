@@ -1,6 +1,7 @@
 package org.kosta.finalproject.lego.controller;
 
 import org.kosta.finalproject.lego.mapper.MasterMyPageMapper;
+import org.kosta.finalproject.lego.serivce.MasterService;
 import org.kosta.finalproject.lego.vo.MemberVO;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -15,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MasterMyPageController {
 	private final MasterMyPageMapper masterMyPageMapper;
+	private final MasterService masterService;
 
 	@RequestMapping("/mastermypage-cart")
 	public String mastermypageCart() {
@@ -35,6 +37,7 @@ public class MasterMyPageController {
 	//@AuthenticationPrincipal : Spring Security를 통해 로그인한 인증정보를 받아오는 어노테이션 
 	public String updateForm(@AuthenticationPrincipal MemberVO memberVO,Model model) {
 		model.addAttribute("member", memberVO);
+		model.addAttribute("masterDetail", masterMyPageMapper.findMasterDetailList(memberVO.getId()));
 		return "masterUpdateForm";
 	}
 
@@ -42,7 +45,7 @@ public class MasterMyPageController {
 	//첫번째 매개변수 Authentication : Spring Security 인증 정보 , 두번째 매개변수 memberVO : 수정폼에서 전달받는 데이터 
 	public String updateMemberAction(Authentication authentication, MemberVO memberVO) {
 		MemberVO vo = (MemberVO)authentication.getPrincipal();			
-		masterMyPageMapper.updateMaster(memberVO);//service에서 변경될 비밀번호를 암호화한다 
+		masterService.updateMaster(memberVO);//service에서 변경될 비밀번호를 암호화한다 
 		// 수정한 회원정보로 Spring Security 회원정보를 업데이트한다
 		vo.setPassword(memberVO.getPassword());
 		vo.setName(memberVO.getName());
