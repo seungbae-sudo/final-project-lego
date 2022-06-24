@@ -45,9 +45,5 @@ public class HomeController {
 	public String mastermypage() {
 		return "master-mypage";
 	}
-	
-	@RequestMapping("/goCommunity")
-	public String communityList() {
-		return "community-list";
-	}
+
 }
