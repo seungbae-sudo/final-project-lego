@@ -1,0 +1,68 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+<!--/* layout 선언부 추가 */-->
+
+<div layout:fragment="main">
+
+<section class="user-dashboard page-wrapper">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="dashboard-wrapper user-dashboard">
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th class="col-sm-2">이름</th>
+                  <th class="col-sm-8">스펙</th>
+                  <th class="col-sm-2">경력</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr th:each="list:${masterList}">
+                  <td th:text="${list.name}"></td>
+                  <td th:text="${list.specifications}"></td>
+                  <td th:text="${list.career}"></td>
+                </tr>           
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="table-responsive">
+                     <table class="table">
+                        <thead>
+                           <tr>
+                              <th class="col-md-3 " ></th>
+                              <th class="col-md-7 "></th>
+                              <th class="col-md-2 "></th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           <tr th:each="list:${masterList}">
+                              
+                              <td >이미지</td>
+                              <td > 
+                                 <div>
+                                 <span th:text="${list.name}" class="col-md-3" >고수 이름</span> <span> 4.5점</span>
+                                 </div>
+                                 <div>
+                                    <span th:text="${list.specifications}"></span>
+                                 </div>
+                              
+                              </td>
+                              <td class="text-center">
+                                    <a href=""><i class="bi bi-bookmark"></i></a>
+                              </td>
+                           </tr>
+                           
+                        </tbody>
+                     </table>
+                  </div>
+  </div>
+  
+  
+</section>
+</div>
