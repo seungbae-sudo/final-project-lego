@@ -42,10 +42,11 @@ select b.board_no, b.board_title,b. hits
 
 
 --내가 쓴 글 리스트
-select b.boardno, b.boardtitle, bc.categoryname
-from  board b, boardcategory bc
-where b.categoryno=bc.categoryno(+)
+select b.board_no, b.board_title, bc.category_name
+from  board b, board_category bc
+where b.category_no=bc.category_no
 and b.id='lsj@naver.com'
+order by b.board_no
 
 
 select*from member where id='java@naver.com'
@@ -53,10 +54,27 @@ select*from member where id='java@naver.com'
 select*from master_detail
 select*from booking;
 --master_detail에 skill, times, days, 고수 id가 입력되어있다.  id빼고 number
-
+select*from master
 CREATE SEQUENCE booking_seq;
-insert into booking(booking_no,condition,booking_day,booking_content,booking_times,skills_id,times_id,days_id,id)
-values(booking_seq.nextval,'예약날짜가능한지',to_date('9-6-2022','dd-mm-yyyy'),'예약 가능할까요?','12시',1,2,3,'kosta@naver.com') 
+
+--임의로 예약정보 넣어두기
+insert into booking(booking_no,condition,booking_day,booking_content,booking_times,skills_id,times_id,days_id,master_id,member_id)
+values(booking_seq.nextval,'예약날짜가능한지',to_date('9-6-2022','dd-mm-yyyy'),'예약 가능할까요?','12시',1,2,3,'asdf@asd','lsj@naver.com') 
+
+insert into booking(booking_no,condition,booking_day,booking_content,booking_times,skills_id,times_id,days_id,master_id,member_id)
+values(booking_seq.nextval,'예약날짜가능한지22',to_date('9-6-2022','dd-mm-yyyy'),'예약 가능할까요?','12시',1,2,3,'lego@lego.com','lsj@naver.com'); 
+
+insert into booking(booking_no,condition,booking_day,booking_content,booking_times,skills_id,times_id,days_id,master_id,member_id)
+values(booking_seq.nextval,'예약날짜가능한지333',to_date('9-6-2022','dd-mm-yyyy'),'예약 가능할까요?','12시',1,2,3,'12@12','lsj@naver.com');
+
+insert into booking(booking_no,condition,booking_day,booking_content,booking_times,skills_id,times_id,days_id,master_id,member_id)
+values(booking_seq.nextval,'예약날짜가능한지444',to_date('9-6-2022','dd-mm-yyyy'),'예약 가능할까요?','12시',1,2,3,'33@33','lsj@naver.com'); 
+
+
+-- 내가 예약한 상담 리스트 불러오기 
+select*from booking ;
+
+
 CREATE TABLE booking
 (
 	booking_no            NUMBER ,

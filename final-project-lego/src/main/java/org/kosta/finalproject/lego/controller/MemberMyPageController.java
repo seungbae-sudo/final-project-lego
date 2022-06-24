@@ -5,6 +5,7 @@ import java.util.List;
 import org.kosta.finalproject.lego.mapper.MemberMyPageMapper;
 import org.kosta.finalproject.lego.serivce.MemberMypageService;
 import org.kosta.finalproject.lego.serivce.MemberService;
+import org.kosta.finalproject.lego.vo.BoardVO;
 import org.kosta.finalproject.lego.vo.MemberVO;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -29,11 +30,13 @@ public class MemberMyPageController {
 	public String mypageCart() {
 		return "mypage-cart";
 	}
-	
+	//모델넣어야함
 	@RequestMapping("mypage-wrote")
-	public String mypageWrote(@AuthenticationPrincipal MemberVO memberVO) {
+	public String mypageWrote(@AuthenticationPrincipal MemberVO memberVO,Model model) {
 		String id =memberVO.getId();
-		//List<boardVO> list= memberMypageService.findWroteList(id);
+		List<BoardVO> wroteList= memberMyPageMapper.findWroteList(id);
+		model.addAttribute("wroteList",wroteList);
+		System.out.println(wroteList);
 		return "mypage-wrote";
 	}
 	

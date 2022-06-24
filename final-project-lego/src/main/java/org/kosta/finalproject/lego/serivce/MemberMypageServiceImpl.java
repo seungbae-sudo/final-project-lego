@@ -23,10 +23,5 @@ public class MemberMypageServiceImpl implements MemberMypageService{
 		
 	}
 
-	/*	@Override
-	public List<BoardVO> findWroteList(String id) {
-		memberMyPageMapper.findWroteList(id);
-		return null;
-	}*/
 	
 }
