@@ -18,10 +18,12 @@ CREATE TABLE board
 	CONSTRAINT fk_board_category_no FOREIGN KEY(category_no) REFERENCES board_category(category_no)
 );
 
+
 create table board_category(
 	category_no number primary key,
 	category_name varchar2(100) not null
 )
+
 
 CREATE TABLE board_comment
 (

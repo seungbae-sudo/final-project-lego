@@ -1,0 +1,64 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+<!--/* layout 선언부 추가 */-->
+
+<div layout:fragment="main">
+
+	<section class="page-header">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="content">
+						<h1 class="page-name">글상세보기</h1>
+						<ol class="breadcrumb">
+							<li><a href="index.html">Home</a></li>
+						</ol>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<section class="user-dashboard page-wrapper">
+		  <div class="container">
+			
+				<h3 class="title-detail" th:text="${bvo.boardTitle}">제목</h3>
+				<hr>
+				<ul class="info">
+					<li>작성자 <span th:text="${bvo.mvo.name}"></span></li>  <!--*/ ${bvo.mvo.name} /*-->
+					<li>작성일 <span th:text="${bvo.boardDate}"></span></li>
+					<li>조회수<span th:text="${bvo.hits}"></span> </li>
+					<li>
+						 <!--*/<a href="?categoryNo=${carNo}&pageNo=${pageNo}"><i
+							class='fas fa-list'></i>목록</a>/*-->
+					</li>
+				</ul>
+				<div class="content">
+					<pre th:text="${bvo.boardContent}">본문내용</pre>
+				</div>
+		
+			<div class="text-center">
+				<button th:action="@{boarder-update}" type="button" class="btn btn-success" onclick="check()">수정</button>
+				<button type="reset" class="btn btn-success">삭제</button>
+			</div>
+		</div>
+	</section>
+	
+	
+	<script type="text/javascript">
+	function deletepost() {
+		if (confirm("삭제 하시겠습니까?")) {
+			document.getElementById("@{board-delete}").submit();
+		}
+
+	}
+	function updatepost() {
+		if (confirm("수정 하시겠습니까?")) {
+			document.getElementById("@{board-update}").submit();
+		}
+
+	}
+</script>
+	
+</html>

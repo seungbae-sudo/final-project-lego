@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="org.kosta.finalproject.lego.mapper.CommunityBoardMapper">
+	<insert id="posting" parameterType="org.kosta.finalproject.lego.vo.BoardVO">
+		insert into board(board_no,board_title,board_content,category_no,hits,board_date,likes,id) values(board_seq.nextval,#{boardTitle},#{boardContent},#{bcvo.categoryNo},#{hits},sysdate,#{likes},#{mvo.id})
+	</insert> 
+	<select id="findBCVO" parameterType="int" resultType="org.kosta.finalproject.lego.vo.BoardCategoryVO">
+		select category_name, category_no from board_category where category_no=#{value}
+	</select>
+	
+	
+	
+	
+	<resultMap type="BoardVO" id="memberAndCategoryResultMap">
+		<result column="name" property="mvo.name"/>
+		<result column="id" property="mvo.id"/>
+		<result column="category_no" property="bcvo.categroyNo"/>
+		<result column="category_name" property="bcvo.categoryName"/>
+	</resultMap>
+	
+	<select id="findAllCommunityList"  resultMap="memberAndCategoryResultMap" resultType="org.kosta.finalproject.lego.vo.BoardVO">
+			select b.board_no, b.board_title ,b.hits , m.name
+			from board b, member m
+			where b.category_no=#{bcvo.categoryNo}
+			and b.id=m.id
+	</select>
+	
+	<select id="findBoardDetailByBoardNo" parameterType="int" resultMap="memberAndCategoryResultMap" resultType="org.kosta.finalproject.lego.vo.BoardVO">
+		select b.board_title,b.board_content,b.board_date,b.hits, m.name, m.id 
+		from board b, member m
+		where b.id=m.id
+		and b.board_no=#{value}
+	</select>
+	
+
+</mapper>
