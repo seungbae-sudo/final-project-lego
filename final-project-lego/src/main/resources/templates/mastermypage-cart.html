@@ -59,52 +59,13 @@
 								</thead>
 								
 								<tbody>
-									<tr>
-										<td>1</td>
-										<td>너무 더울땐?</td>
-										<td>꿀팁</td>
-										<td>
-											<div class="btn-group" role="group">
-												<button type="button" class="btn btn-default">
-													<i class="tf-pencil2" aria-hidden="true"></i>
-												</button>
-												<button type="button" class="btn btn-default">
-													<i class="tf-ion-close" aria-hidden="true"></i>
-												</button>
-											</div>
-										</td>
+								
+									<tr th:each="List:${BoardList}" >
+										<td><span th:text="${List.boardNo}"></span></td>
+										<td><span th:text="${List.boardTitle}"></span></td>
+										<td><span th:text="${List.bcvo.categoryName}"></span></td>
 									</tr>
 									
-									<tr>
-										<td>2</td>
-										<td>노래 잘하고 싶으면?</td>
-										<td>꿀팁</td>
-										<td>
-											<div class="btn-group" role="group">
-												<button type="button" class="btn btn-default">
-													<i class="tf-pencil2" aria-hidden="true"></i>
-												</button>
-												<button type="button" class="btn btn-default">
-													<i class="tf-ion-close" aria-hidden="true"></i>
-												</button>
-											</div>
-											</td>
-									</tr>
-									<tr>
-										<td>3</td>
-										<td>무료나눔 갑니다</td>
-										<td>나눔</td>
-										<td>
-											<div class="btn-group" role="group">
-												<button type="button" class="btn btn-default">
-													<i class="tf-pencil2" aria-hidden="true"></i>
-												</button>
-												<button type="button" class="btn btn-default">
-													<i class="tf-ion-close" aria-hidden="true"></i>
-												</button>
-											</div>
-										</td>
-									</tr>
 								</tbody>
 							</table>
 						</div>

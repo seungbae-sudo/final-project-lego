@@ -7,5 +7,19 @@
 			update member set password=#{password},name=#{name},address=#{address}, tel=#{tel}
 			where id=#{id}		
 		</update>
+		
+		
+			<resultMap type="BoardVO" id="CategoryResultMap">
+				<result column="category_no" property="bcvo.categroyNo"/>
+				<result column="category_name" property="bcvo.categoryName"/>
+			</resultMap>
+		
+		<select id="findWroteList" resultMap="CategoryResultMap" resultType="org.kosta.finalproject.lego.vo.BoardVO">
+			select b.board_no, b.board_title, bc.category_name
+			from  board b, board_category bc
+			where b.category_no=bc.category_no
+			and b.id=#{value}
+			order by b.board_no
+		</select>
 	
 </mapper>

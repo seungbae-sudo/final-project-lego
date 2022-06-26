@@ -83,10 +83,16 @@ public class MasterServiceImpl implements MasterService {
 	}
 
 	@Override
-	public void updateMaster(MemberVO memberVO) {
+	public void updateMember(MemberVO memberVO) {
 		// 변경할 비밀번호를 암호화한다
 		String encodePassword = passwordEncoder.encode(memberVO.getPassword());
 		memberVO.setPassword(encodePassword);
-		masterMyPageMapper.updateMaster(memberVO);
+		masterMyPageMapper.updateMember(memberVO);
+	}
+
+	@Override
+	public void updateMaster(MasterVO mvo) {
+		// TODO Auto-generated method stub
+		masterMyPageMapper.updateMaster(mvo);
 	}
 }

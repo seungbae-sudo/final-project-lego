@@ -41,11 +41,6 @@ public class HomeController {
 		return "mypage";
 	}
 	
-	@RequestMapping("/mastermypage")
-	public String mastermypage() {
-		return "master-mypage";
-	}
-	
 	@RequestMapping("/findMasterForm")
 	public String findMaster() {
 		return "find-master-form";

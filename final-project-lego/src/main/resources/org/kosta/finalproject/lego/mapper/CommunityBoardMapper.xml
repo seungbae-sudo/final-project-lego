@@ -27,11 +27,14 @@
 	</select>
 	
 	<select id="findBoardDetailByBoardNo" parameterType="int" resultMap="memberAndCategoryResultMap" resultType="org.kosta.finalproject.lego.vo.BoardVO">
-		select b.board_title,b.board_content,b.board_date,b.hits, m.name, m.id 
+		select b.board_no, b.board_title,b.board_content,b.board_date,b.hits, m.name, m.id 
 		from board b, member m
 		where b.id=m.id
 		and b.board_no=#{value}
 	</select>
 	
+	<insert id="updateByBoardNo" parameterType="org.kosta.finalproject.lego.vo.BoardVO">
+		UPDATE board SET board_title=#{boardTitle},board_content=#{boardContent}, category_no=#{categoryNo} WHERE board_no =#{boardNo}
+	</insert>
 
 </mapper>

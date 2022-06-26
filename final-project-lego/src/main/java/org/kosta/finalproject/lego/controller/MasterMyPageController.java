@@ -1,7 +1,11 @@
 package org.kosta.finalproject.lego.controller;
 
+import java.util.List;
+
 import org.kosta.finalproject.lego.mapper.MasterMyPageMapper;
 import org.kosta.finalproject.lego.serivce.MasterService;
+import org.kosta.finalproject.lego.vo.BoardVO;
+import org.kosta.finalproject.lego.vo.MasterVO;
 import org.kosta.finalproject.lego.vo.MemberVO;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -17,9 +21,23 @@ import lombok.RequiredArgsConstructor;
 public class MasterMyPageController {
 	private final MasterMyPageMapper masterMyPageMapper;
 	private final MasterService masterService;
+	
+	
 
+	@RequestMapping("/mastermypage")
+	public String mastermypage(@AuthenticationPrincipal MemberVO memberVO,Model model) {
+		model.addAttribute("member", memberVO);
+		model.addAttribute("masterDetail", masterMyPageMapper.findMasterDetailList(memberVO.getId()));
+		return "master-mypage";
+	}
+	
 	@RequestMapping("/mastermypage-cart")
-	public String mastermypageCart() {
+	public String mastermypageCart(@AuthenticationPrincipal MemberVO memberVO,Model model) {
+
+		String id=memberVO.getId();
+		List<BoardVO> list= masterMyPageMapper.findMyBoard(id);
+		System.out.println(list);
+		model.addAttribute("BoardList", list);
 		return "mastermypage-cart";
 	}
 
@@ -43,9 +61,17 @@ public class MasterMyPageController {
 
 	@PostMapping("updateMaster")
 	//첫번째 매개변수 Authentication : Spring Security 인증 정보 , 두번째 매개변수 memberVO : 수정폼에서 전달받는 데이터 
-	public String updateMemberAction(Authentication authentication, MemberVO memberVO) {
-		MemberVO vo = (MemberVO)authentication.getPrincipal();			
-		masterService.updateMaster(memberVO);//service에서 변경될 비밀번호를 암호화한다 
+	public String updateMemberAction(Authentication authentication,String specifications, String career, MemberVO memberVO) {
+		System.out.println(specifications+career);
+		System.out.println(memberVO);
+		
+		MemberVO vo = (MemberVO)authentication.getPrincipal();	
+		MasterVO mvo = new MasterVO();
+		mvo.setId(vo.getId());
+		mvo.setCareer(career);
+		mvo.setSpecifications(specifications);
+		masterService.updateMember(memberVO);
+		masterService.updateMaster(mvo);//service에서 변경될 비밀번호를 암호화한다 
 		// 수정한 회원정보로 Spring Security 회원정보를 업데이트한다
 		vo.setPassword(memberVO.getPassword());
 		vo.setName(memberVO.getName());
@@ -53,4 +79,9 @@ public class MasterMyPageController {
 		vo.setTel(memberVO.getTel());	
 		return "redirect:mastermypage";
 	}
+		
+	
+	
+	
+	
 	}

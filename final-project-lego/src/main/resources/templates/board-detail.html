@@ -12,7 +12,7 @@
 					<div class="content">
 						<h1 class="page-name">글상세보기</h1>
 						<ol class="breadcrumb">
-							<li><a href="index.html">Home</a></li>
+							<li><a th:href="@{/}">Home</a></li>
 						</ol>
 					</div>
 				</div>
@@ -37,10 +37,17 @@
 				<div class="content">
 					<pre th:text="${bvo.boardContent}">본문내용</pre>
 				</div>
-		
+				
+			<!--/* 수정하려고 TEST 중 -> bcvo 값이 나오지 않아아아아요...*/-->
+			<span th:text="${bvo}"> </span> 
+			
 			<div class="text-center">
-				<button th:action="@{boarder-update}" type="button" class="btn btn-success" onclick="check()">수정</button>
-				<button type="reset" class="btn btn-success">삭제</button>
+				<form th:action="@{/updateForm(boardNo=${bvo.boardNo})}" method="get">
+					<button type="submit" class="btn btn-success" onclick="check()">수정</button>
+				</form>
+				<form th:action="@{/deleteForm}" method="get">
+					<button type="submit" class="btn btn-success">삭제</button>
+				</form>
 			</div>
 		</div>
 	</section>

@@ -2,10 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper
 	namespace="org.kosta.finalproject.lego.mapper.MasterMyPageMapper">
-	<update id="updateMaster" parameterType="org.kosta.finalproject.lego.vo.MemberVO">
+	<update id="updateMember" parameterType="org.kosta.finalproject.lego.vo.MemberVO">
 		update member set password=#{password},name=#{name},address=#{address},tel=#{tel} where id=#{id}
+	</update>
+	<update id="updateMaster" parameterType="org.kosta.finalproject.lego.vo.MasterVO">
+		update master set specifications=#{specifications},career=#{career} where id=#{id}
 	</update>
 	<select id="findMasterDetailList" resultType="org.kosta.finalproject.lego.vo.MasterVO">
    		select id,career,category_no,specifications from master where id =#{value}
    </select>
+   
+
+   
+   
+   <resultMap type="BoardVO" id="BoardCategoryResultMap">
+   		<result column="category_name" property="bcvo.categoryName" />
+   	</resultMap>
+   	
+   <select id ="findMyBoard" resultType="org.kosta.finalproject.lego.vo.BoardVO" resultMap="BoardCategoryResultMap">
+   		select b.board_no,b.board_title,c.category_name
+		from board b, board_category c
+		where b.id =#{value}
+		and c.category_no = b.category_no
+   	</select>
 </mapper>

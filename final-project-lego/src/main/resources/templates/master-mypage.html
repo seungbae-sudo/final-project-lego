@@ -49,11 +49,15 @@
 							<div class="table-responsive">
 								<div class="media-body">
 									<ul class="user-profile-list">
-										<li><span>아이디 : </span><span sec:authentication="principal.id"></span></li>
+<!-- 									<li><span>아이디 : </span><span sec:authentication="principal.id"></span></li>
 										<li><span>비밀번호 : </span><span sec:authentication="principal.password"></li>
 										<li><span>이름 : </span><span sec:authentication="principal.name"></span></li>
 										<li><span>주소 : </span><span sec:authentication="principal.address"></span></li>
 										<li><span>핸드폰 번호 : </span><span sec:authentication="principal.tel"></span></li>
+ -->									
+ 										<pre th:text="${masterDetail.specifications}">
+ 										</pre>
+									
 									</ul>
 									<form method="get" th:action="@{/masterUpdateForm}">
                              			 <input type="submit"value="회원정보 수정하기" >
