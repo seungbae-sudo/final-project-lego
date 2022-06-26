@@ -36,7 +36,7 @@
 		insert into master_detail(id,times_id) values(#{id},#{timesId})
    </insert>
    
-   <select id="findMasterById" parameterType="org.kosta.finalproject.lego.vo.MasterVO">
-   		select * from master where = id=#{value}
+   <select id="findMasterById" resultType="org.kosta.finalproject.lego.vo.MasterVO" >
+   		select * from master where id= #{id}
    </select>
 </mapper>

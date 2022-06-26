@@ -33,7 +33,7 @@
    </select>
    
    <select id="findMasterList2" resultType="org.kosta.finalproject.lego.vo.MasterVO">
-   		select msd.id, m.name , ms.career, ms.specifications
+   		select msd.id, m.name , ms.career, ms.specifications,category_no
 		from(
 			select  distinct id 
 		from master

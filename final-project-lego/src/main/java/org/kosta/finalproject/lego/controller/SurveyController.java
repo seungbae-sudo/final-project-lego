@@ -42,8 +42,9 @@ public class SurveyController {
 	}
 	
 	@RequestMapping("/addCart")
-	public String findMasterList2(String [] id , String categoryNo,Model model, String masterId,Authentication authentication) {
+	public String findMasterList2(String [] id , int categoryNo,Model model, String masterId,Authentication authentication) {
 		System.out.println(masterId);
+		System.out.println(id[1]);
 		MemberVO memberVO = (MemberVO)authentication.getPrincipal();
 		MasterVO masterVO = masterMapper.findMasterById(masterId);
 		cartMapper.addCart(memberVO.getId(), masterVO.getId());

@@ -19,6 +19,6 @@ public interface SurveyMapper {
 	
 	List<MasterVO> findMasterList(int[] skills, int[] days, int[] times,String categoryNo);
 
-	List<MasterVO> findMasterList2(String [] id,String categoryNo);
+	List<MasterVO> findMasterList2(String [] id,int categoryNo);
 	
 }
