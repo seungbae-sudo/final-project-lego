@@ -37,4 +37,6 @@ public interface MasterMapper {
 	void registerDays(MasterDetailVO masterDetailVO);
 	
 	void registerTimes(MasterDetailVO masterDetailVO);
+	
+	MasterVO findMasterById(String id);
 }

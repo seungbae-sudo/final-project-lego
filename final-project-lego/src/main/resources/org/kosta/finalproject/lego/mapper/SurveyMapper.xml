@@ -31,4 +31,18 @@
 		  ) msd , member m, master ms
 		where m.id = ms.id and m.id=msd.id and ms.category_no =#{categoryNo}
    </select>
+   
+   <select id="findMasterList2" resultType="org.kosta.finalproject.lego.vo.MasterVO">
+   		select msd.id, m.name , ms.career, ms.specifications,category_no
+		from(
+			select  distinct id 
+		from master
+		group by id
+		having 
+		<foreach collection="id" item="id" open=" " close=" " separator=" or ">
+			id =#{id}
+		</foreach>
+		) msd, member m, master ms
+		where m.id = ms.id and m.id = msd.id and category_no = #{categoryNo}
+   </select>
 </mapper>
