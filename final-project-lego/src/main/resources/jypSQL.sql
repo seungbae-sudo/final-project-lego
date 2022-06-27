@@ -72,7 +72,68 @@ values(booking_seq.nextval,'예약날짜가능한지444',to_date('9-6-2022','dd-
 
 
 -- 내가 예약한 상담 리스트 불러오기 
-select*from booking ;
+--master_id로 고수 이름을 찾아야함 master 랑 member
+-- 해당 고수의 카테고리도 찾아야함 
+select m.name as 고수이름, go.category_no , go.id as 고수 아이디 ,b.booking_day
+from master g, member m, booking b
+where go.id=m.id
+and b.master_id=go.id
+and go.id='66@66'
+
+
+
+
+select r.id as 고수아이디,r.lesson_sort as 레슨종류 ,m.name as 고수이름,b.booking_day
+from (
+		select ms.id, ms.category_no,c.lesson_sort
+		from master ms, category c
+		where ms.category_no=c.category_no
+		and ms.id='asdf@asd') r, member m, booking b
+where m.id=r.id
+
+--booking에 member_id가 지금 로그인한 사람의 id와 같아야함
+--where b.member_id='lsj@naver.com'
+
+-- 내 예약 
+select r.lesson_sort,r.name as 고수이름, b.booking_day
+from(
+		select ms.id, ms.category_no,c.lesson_sort,m.name
+		from master ms, category c, member m
+		where ms.category_no=c.category_no
+		and m.id=ms.id) r,booking b
+where r.id=b.master_id
+and b.member_id='lsj@naver.com'
+
+--고객 이름과 예약 날짜 
+-- 예약 member_id => member테이블에 name
+-- booking 에 있는 master_id가 현재 로그인한 고수의 id와 같은지  #{value}
+
+-- 고객의 이름가져오기
+select name, id
+from member
+where id='lsj@naver.com'
+
+--고수 마이 페이지 예약 목록
+select g.name as 고객이름, b.booking_day
+from (
+	select name, id
+	from member
+) g, booking b
+where b.member_id=g.id
+and b.master_id='33@33'
+
+
+select ms.id, ms.category_no,c.lesson_sort,m.name
+from master ms, category c, member m
+where ms.category_no=c.category_no
+and m.id=ms.id
+
+
+select*
+from master 
+
+select*from category
+
 
 
 CREATE TABLE booking
