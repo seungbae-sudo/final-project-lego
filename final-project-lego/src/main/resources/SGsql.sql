@@ -62,3 +62,4 @@ select g.name, b.booking_day
 	where g.id = b.member_id
 	and b.master_id = '33@33'
 
+	select * from skills

@@ -25,7 +25,8 @@
 		where b.id =#{value}
 		and c.category_no = b.category_no
    	</select>
-   	<select id="findMyBooking" resultType="">
+   	
+   	<select id="findMyBooking" resultType="org.kosta.finalproject.lego.vo.BookingVO">
 	select g.name, b.booking_day
 	from(
 	select name, id

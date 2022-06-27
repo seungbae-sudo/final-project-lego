@@ -5,6 +5,7 @@ import java.util.List;
 import org.kosta.finalproject.lego.mapper.MasterMyPageMapper;
 import org.kosta.finalproject.lego.serivce.MasterService;
 import org.kosta.finalproject.lego.vo.BoardVO;
+import org.kosta.finalproject.lego.vo.BookingVO;
 import org.kosta.finalproject.lego.vo.MasterVO;
 import org.kosta.finalproject.lego.vo.MemberVO;
 import org.springframework.security.core.Authentication;
@@ -50,9 +51,10 @@ public class MasterMyPageController {
 	}
 
 	@RequestMapping("/mastermypage-consult")
-	public String mastermypageConsult(@AuthenticationPrincipal MemberVO memberVO,Model model) {
+	public String mastermypageConsult(@AuthenticationPrincipal MemberVO memberVO,Model model, BookingVO bookingVO) {
 		model.addAttribute("member", memberVO);
 		model.addAttribute("masterDetail", masterMyPageMapper.findMasterDetailList(memberVO.getId()));
+		model.addAttribute("Booking", bookingVO);
 		return "mastermypage-consult";
 	}
 	
