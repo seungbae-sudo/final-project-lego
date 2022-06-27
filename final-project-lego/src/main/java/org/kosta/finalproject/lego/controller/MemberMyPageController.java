@@ -31,7 +31,7 @@ public class MemberMyPageController {
 	public String mypageCart() {
 		return "mypage-cart";
 	}
-	//모델넣어야함
+
 	@RequestMapping("mypage-wrote")
 	public String mypageWrote(@AuthenticationPrincipal MemberVO memberVO,Model model) {
 		String id =memberVO.getId();
@@ -44,7 +44,12 @@ public class MemberMyPageController {
 	//내 상담 목록
 	@RequestMapping("mypage-booking")
 	public String mypageBooking(@AuthenticationPrincipal MemberVO memberVO, Model model) {
-		List<BookingVO> list =  memberMyPageMapper.findMyBookingList(memberVO.getId());
+		List<BookingVO> CartList =  memberMyPageMapper.findMyBookingList(memberVO.getId());
+		System.out.println(CartList);
+		
+		model.addAttribute("CartList", CartList);
+		
+		
 		return "mypage-booking";
 	}
 	

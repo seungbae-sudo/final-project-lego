@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class MasterDetailVO {
 	private int skillsId;
+	private String skills;
 	private int timesId;
 	private int daysId;
 	private String id;
