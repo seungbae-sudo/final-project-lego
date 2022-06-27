@@ -95,7 +95,7 @@ where m.id=r.id
 --where b.member_id='lsj@naver.com'
 
 -- 내 예약 
-select r.lesson_sort,r.name as 고수이름, b.booking_day
+select r.lesson_sort,r.name, b.booking_day
 from(
 		select ms.id, ms.category_no,c.lesson_sort,m.name
 		from master ms, category c, member m
@@ -103,6 +103,18 @@ from(
 		and m.id=ms.id) r,booking b
 where r.id=b.master_id
 and b.member_id='lsj@naver.com'
+
+-- 자 이제 시작이야~~ (내꿈을~~) 내 꿈을 위한 여행~ 피카츄~~
+select  r.skills_id,r.name,b.booking_day
+from(
+select md.skills_id, m.name, m.id
+from master_detail md,master ms, member m
+where ms.id=md.id
+and ms.id=m.id) r, booking b
+where r.id=b.master_id
+and b.member_id='lsj@naver.com'
+
+select *from skills
 
 --고객 이름과 예약 날짜 
 -- 예약 member_id => member테이블에 name
