@@ -85,10 +85,9 @@ and go.id='66@66'
 
 select r.id as 고수아이디,r.lesson_sort as 레슨종류 ,m.name as 고수이름,b.booking_day
 from (
-		select ms.id, ms.category_no,c.lesson_sort
+		select ms.id,c.lesson_sort
 		from master ms, category c
-		where ms.category_no=c.category_no
-		and ms.id='asdf@asd') r, member m, booking b
+		where ms.category_no=c.category_no) r, member m, booking b
 where m.id=r.id
 
 --booking에 member_id가 지금 로그인한 사람의 id와 같아야함
@@ -107,18 +106,26 @@ from(
 where r.id=b.master_id
 and b.member_id='lsj@naver.com'
 
--- 스킬 아이디로 스킬 이름 찾기
 
-select  s.skills,r.name,b.booking_day
+
+select name,skills,booking_day
+from master ms,
+
+-- categroy,booking, master 고수 이름 분야 상담날짜 
+select r.name, r.lesson_sort, b.booking_day
 from(
-	select md.skills_id, m.name, m.id
-	from master_detail md,master ms, member m
-	where ms.id=md.id
-	and ms.id=m.id) r, booking b, skills s
+		select ms.id, m.name, c.lesson_sort
+		from master ms, category c,member m
+		where ms.category_no=c.category_no
+		and m.id=ms.id) r, booking b
 where r.id=b.master_id
-and r.skills_id=s.skills_id
 and b.member_id='lsj@naver.com'
 
+
+
+select*from master
+select*from category
+select*from cart
 
 
 ---
