@@ -40,8 +40,10 @@ public class MemberMyPageController {
 		return "mypage-wrote";
 	}
 	
+	//내 상담 목록
 	@RequestMapping("mypage-booking")
-	public String mypageBooking() {
+	public String mypageBooking(@AuthenticationPrincipal MemberVO memberVO, Model model) {
+		//List<>memberMyPageMapper.findMyBookingList(memberVO.getId())
 		return "mypage-booking";
 	}
 	
