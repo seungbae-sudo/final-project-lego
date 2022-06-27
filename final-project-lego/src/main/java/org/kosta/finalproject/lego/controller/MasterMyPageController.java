@@ -51,10 +51,10 @@ public class MasterMyPageController {
 	}
 
 	@RequestMapping("/mastermypage-consult")
-	public String mastermypageConsult(@AuthenticationPrincipal MemberVO memberVO,Model model, BookingVO bookingVO) {
+	public String mastermypageConsult(@AuthenticationPrincipal MemberVO memberVO,Model model) {
 		model.addAttribute("member", memberVO);
 		model.addAttribute("masterDetail", masterMyPageMapper.findMasterDetailList(memberVO.getId()));
-		model.addAttribute("Booking", bookingVO);
+		//model.addAttribute("Booking", bookingVO);
 		return "mastermypage-consult";
 	}
 	

@@ -19,7 +19,7 @@ public interface MasterMyPageMapper {
 
 	List<BoardVO> findMyBoard(String id);
 	
-	BookingVO findMyBooking(String id);
+	//BookingVO findMyBooking(String id);
 	
 
 
