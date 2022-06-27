@@ -21,4 +21,23 @@
 			order by b.board_no
 		</select>
 
+		
+		
+		<resultMap type="org.kosta.finalproject.lego.vo.BookingVO" id="skillAndMemberResult">
+				<result column="name" property="mvo.name"/>
+				<result column="lesson_sort" property="cvo.lessonSort"/>
+			</resultMap>
+
+		<select id="findMyBookingList" resultMap="skillAndMemberResult" resultType="org.kosta.finalproject.lego.vo.BookingVO">
+			select r.name, r.lesson_sort, b.booking_day
+			from(
+					select ms.id, m.name, c.lesson_sort
+					from master ms, category c,member m
+					where ms.category_no=c.category_no
+					and m.id=ms.id) r, booking b
+			where r.id=b.master_id
+			and b.member_id=#{value}
+		</select>
+		
+		
 </mapper>

@@ -1,0 +1,62 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+<!--/* layout 선언부 추가 */-->
+
+<div layout:fragment="main">
+
+	<section class="page-header">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="content">
+						<h1 class="page-name">메세지 작성</h1>
+						<ol class="breadcrumb">
+							<li><a th:href="@{/}">Home</a></li>
+						</ol>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<section class="user-dashboard page-wrapper">
+		  <div class="container">
+			<form method="post" id="Write" th:action="@{message}">
+			<input type="hidden" name = "pageNo">
+			<input type="hidden" name = "masterId" th:value="${masterId}">
+				<table class="table">
+					<tr>
+						<td>
+							<input class="col-sm-8" type="text" name="receiveId"  th:value="${receiveId}"  th:placeholder="${receiveId}" readonly="readonly">
+							<input type="hidden" name="sendId" th:value="${mvo.id}">
+						</td>
+					</tr>
+					<tr>
+						<td >
+							<textarea rows="10" class="form-control" name="messageContent" id="messageContent"
+								placeholder="본문내용" required="required">
+							</textarea>
+						</td>
+					</tr>
+				</table>
+			</form>
+		
+			<div class="text-center">
+				<button type="button" class="btn btn-success" onclick="check()">확인</button>
+				<button type="reset" class="btn btn-success">취소</button>
+			</div>
+		</div>
+	</section>
+	
+	<script type="text/javascript">
+	function check() {
+		if (document.getElementById("messageContent").value == "") {
+			alert("메세지를 입력하세요");
+			return;
+		} else {
+			document.getElementById("Write").submit();
+		}
+	}
+</script>
+</html>

@@ -15,5 +15,5 @@ public class BookingVO {
 	private String bookingTimes;
 	private MasterDetailVO mdVO;
 	private MemberVO mvo;
-
+	private CategoryVO cvo;
 }

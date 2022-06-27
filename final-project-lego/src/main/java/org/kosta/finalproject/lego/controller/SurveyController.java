@@ -52,4 +52,10 @@ public class SurveyController {
 		model.addAttribute("masterList", surveyMapper.findMasterList2(id, categoryNo));
 		return "find-master-list";
 	}
+	@RequestMapping("/surveyFindMasterById")
+	public String surveyFindMasterById(Model model, String masterId) {
+		model.addAttribute("masterList", surveyMapper.findMasterDetailList(masterId));
+
+		return "master-detail";
+	}
 }

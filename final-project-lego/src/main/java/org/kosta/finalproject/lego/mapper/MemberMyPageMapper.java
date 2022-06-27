@@ -16,4 +16,6 @@ public interface MemberMyPageMapper {
 
 	List<BookingVO> findMyBookingList(String id);
 
+	String findSkillNameBySkillId(int skillsId);
+
 }

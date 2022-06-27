@@ -7,10 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class MasterDetailVO {
-	private int skillsId;
-	private String skills;
-	private int timesId;
-	private int daysId;
-	private String id;
+public class MessageVO {
+	private int messageNo;
+	private String messageContent;
+	private MemberVO reMvo;
+	private MemberVO sendMvo;
+	private String receiveDate;
 }

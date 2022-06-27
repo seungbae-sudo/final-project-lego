@@ -12,7 +12,7 @@
 					<div class="content">
 						<h1 class="page-name">글수정</h1>
 						<ol class="breadcrumb">
-							<li><a th:href="@{/}"">Home</a></li>
+							<li><a th:href="@{/}">Home</a></li>
 						</ol>
 					</div>
 				</div>
@@ -22,28 +22,27 @@
 	
 	<section class="user-dashboard page-wrapper">
 		  <div class="container">
-			<form method="post" th:action="@{board-update}" id="Update">
-			<input type="hidden" name = "pageNo" value="${pageNo }">
+			<form method="post"  id="Update" th:action="@{board-update(boardNo=${bvo.boardNo})}">
+			<input type="hidden" name = "pageNo">
 				<table class="table">
 					<tr>
 						<td>
 							<select class="col-sm-2"  id="categoryNo" name="categoryNo" >
 									<option value="1"> 꿀팁</option>
-								    <option value="2">추천</option>
+								    <option  value="2">추천</option>
 								    <option value="3">나눔</option>			
 							</select>
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<input th:value="${boardNo}" class="col-sm-8" type="text" name="title" placeholder="글제목" required="required">
+							<input class="col-sm-12" type="text" name="boardTitle" placeholder="글제목" th:value="${bvo.boardTitle}" required="required">
 						</td>
 					</tr>
 					<tr>
-						<td>
-							<textarea rows="10" class="form-control" name="content"
-								placeholder="본문내용" required="required">
-							</textarea>
+						<td >
+								<textarea rows="10" name="boardContent" class="col-sm-12"
+								placeholder="본문내용" required="required" th:text="${bvo.boardContent}" ></textarea>
 						</td>
 					</tr>
 				</table>
@@ -59,7 +58,7 @@
 	<script type="text/javascript">
 	function check() {
 		if (document.getElementById("categoryNo").value == "") {
-			alert("게시판을 선택해 주세요");
+			alert("카테고리를 선택해 주세요");
 			return;
 		} else {
 			document.getElementById("Update").submit();

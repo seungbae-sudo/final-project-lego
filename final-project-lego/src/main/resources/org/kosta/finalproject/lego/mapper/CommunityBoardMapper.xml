@@ -12,29 +12,40 @@
 	
 	
 	
-	<resultMap type="BoardVO" id="memberAndCategoryResultMap">
+	<resultMap type="BoardVO" id="memberResultMap">
 		<result column="name" property="mvo.name"/>
 		<result column="id" property="mvo.id"/>
-		<result column="category_no" property="bcvo.categroyNo"/>
+		<result column="category_no" property="bcvo.categoryNo"/>
 		<result column="category_name" property="bcvo.categoryName"/>
 	</resultMap>
 	
-	<select id="findAllCommunityList"  resultMap="memberAndCategoryResultMap" resultType="org.kosta.finalproject.lego.vo.BoardVO">
-			select b.board_no, b.board_title ,b.hits , m.name
-			from board b, member m
+	<select id="findAllCommunityList"  resultMap="memberResultMap" resultType="org.kosta.finalproject.lego.vo.BoardVO">
+			select b.* , m.*,c.*
+			from board b, member m, board_category c
 			where b.category_no=#{bcvo.categoryNo}
-			and b.id=m.id
+			and c.category_no = b.category_no
+			and b.id=m.id order by board_no desc
 	</select>
 	
-	<select id="findBoardDetailByBoardNo" parameterType="int" resultMap="memberAndCategoryResultMap" resultType="org.kosta.finalproject.lego.vo.BoardVO">
-		select b.board_no, b.board_title,b.board_content,b.board_date,b.hits, m.name, m.id 
-		from board b, member m
+<!-- 	<resultMap type="org.kosta.finalproject.lego.vo.BoardVO" id="categoryResultMap" extends="memberResultMap">
+		<result column="category_no" property="bcvo.categroyNo"/>
+		<result column="category_name" property="bcvo.categoryName"/>
+	</resultMap> -->
+	
+	<select id="findBoardDetailByBoardNo" parameterType="int" resultMap="memberResultMap" resultType="org.kosta.finalproject.lego.vo.BoardVO">
+		select b.*,m.*,bc.*
+		from board b, member m, board_category bc
 		where b.id=m.id
+		and bc.category_no = b.category_no
 		and b.board_no=#{value}
 	</select>
 	
-	<insert id="updateByBoardNo" parameterType="org.kosta.finalproject.lego.vo.BoardVO">
-		UPDATE board SET board_title=#{boardTitle},board_content=#{boardContent}, category_no=#{categoryNo} WHERE board_no =#{boardNo}
-	</insert>
+	<update id="updateByBoardVO" parameterType="org.kosta.finalproject.lego.vo.BoardVO"  >
+		UPDATE board SET board_title=#{boardTitle},board_content=#{boardContent}, category_no=#{bcvo.categoryNo} WHERE board_no =#{boardNo}
+	</update>
+	
+	<delete id="deleteByBoardVO" parameterType="org.kosta.finalproject.lego.vo.BoardVO">
+		DELETE FROM board WHERE board_no = #{boardNo}
+	</delete>
 
 </mapper>

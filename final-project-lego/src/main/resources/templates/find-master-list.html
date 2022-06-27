@@ -51,7 +51,7 @@
                               <td >이미지</td>
                               <td > 
                                  <div>
-                                 <span th:text="${list.name}" class="col-md-3" >고수 이름</span> <span> 4.5점</span>
+                                 <a th:href="@{/surveyFindMasterById(masterId=${list.id})}" ><span th:text="${list.name}" class="col-md-3" >고수 이름</span></a> <span> 4.5점</span>
                                  </div>
                                  <div>
                                     <span th:text="${list.specifications}"></span>
