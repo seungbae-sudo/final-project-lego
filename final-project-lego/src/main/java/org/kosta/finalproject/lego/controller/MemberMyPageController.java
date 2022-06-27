@@ -6,6 +6,7 @@ import org.kosta.finalproject.lego.mapper.MemberMyPageMapper;
 import org.kosta.finalproject.lego.serivce.MemberMypageService;
 import org.kosta.finalproject.lego.serivce.MemberService;
 import org.kosta.finalproject.lego.vo.BoardVO;
+import org.kosta.finalproject.lego.vo.BookingVO;
 import org.kosta.finalproject.lego.vo.MemberVO;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -43,7 +44,7 @@ public class MemberMyPageController {
 	//내 상담 목록
 	@RequestMapping("mypage-booking")
 	public String mypageBooking(@AuthenticationPrincipal MemberVO memberVO, Model model) {
-		//List<>memberMyPageMapper.findMyBookingList(memberVO.getId())
+		List<BookingVO> list =  memberMyPageMapper.findMyBookingList(memberVO.getId());
 		return "mypage-booking";
 	}
 	

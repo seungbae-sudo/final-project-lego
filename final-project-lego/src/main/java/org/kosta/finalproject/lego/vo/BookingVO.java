@@ -13,9 +13,7 @@ public class BookingVO {
 	private String bookingDay;
 	private String bookingContent;
 	private String bookingTimes;
-	private SkillsVO skillVO;
-	private TimesVO timeVO;
-	private DaysVO dayVO;
+	private MasterDetailVO mdVO;
 	private MemberVO mvo;
 
 }
