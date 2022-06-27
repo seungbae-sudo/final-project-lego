@@ -35,3 +35,30 @@ from board b, board_category c
 where b.id = 'lsj@naver.com'
 and c.category_no = b.category_no
 
+select * from booking
+distinct(중복 제거)
+
+select m.name, b.booking_day
+from booking b, master ms, member m
+where ms.id = '33@33' and m.id = b.member_id
+
+
+부킹id = 로그인한 고수 아이디
+
+고객 이름 상담 날짜 
+
+멤버 아이디에 따른 멤버 이름 상담(부킹) 시간
+
+select name, id
+from member
+where id = 'lsj@naver.com'
+
+
+select g.name, b.booking_day
+	from(
+	select name, id
+	from member
+	) g, booking b
+	where g.id = b.member_id
+	and b.master_id = '33@33'
+

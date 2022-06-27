@@ -25,4 +25,13 @@
 		where b.id =#{value}
 		and c.category_no = b.category_no
    	</select>
+   	<select id="findMyBooking" resultType="">
+	select g.name, b.booking_day
+	from(
+	select name, id
+	from member
+	) g, booking b
+	where g.id = b.member_id
+	and b.master_id = #{value}
+	</select>
 </mapper>
