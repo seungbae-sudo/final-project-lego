@@ -21,4 +21,6 @@ public interface SurveyMapper {
 
 	List<MasterVO> findMasterList2(String [] id,int categoryNo);
 	
+	MasterVO findMasterDetailList(String id);
+	
 }

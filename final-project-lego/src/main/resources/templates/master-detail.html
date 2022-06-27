@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+<!--/* layout 선언부 추가 */-->
+
+<div layout:fragment="main">
+	<section class="page-header">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="content">
+						<h1 class="page-name">고수 정보</h1>
+						<ol class="breadcrumb">
+							<li><a th:href="@{/}">Home</a></li>
+						</ol>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="user-dashboard page-wrapper">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="media">
+						<div class="pull-left profile">
+							<img class="media-object user-img" src="./images/고수.jpg" alt="Image">
+						</div>
+						<div class="media-body">
+							<h2 class="media-heading" th:text="${masterList.name}">고수</h2>
+							
+							
+						</div>
+					</div>
+					<div class="dashboard-wrapper user-dashboard profile-detail">
+						<div class="total-order mt-20">
+							<div class="table-responsive">
+								<div class="media-body">
+									<ul class="user-profile-list">
+									</ul>
+									<p class="media-heading" th:text="|경력 : ${masterList.career} 년|"></p>
+									<pre th:text="${masterList.specifications}"style="background-color: white; border-color:white;"></pre>
+
+								</div>
+								</div>
+								</div>
+								</div>
+													
+				</div>
+			</div>
+					<form th:action="@{/messageForm}">
+					<input type="hidden" name="receiveId" th:value="${masterList.id}">
+					<input type="hidden" name="masterId" th:value="${masterList.id}">
+			<button type="submit">메세지 보내기</button>
+		</form>
+		</div>
+	</section>
+</div>
+</html>

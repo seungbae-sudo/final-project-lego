@@ -45,4 +45,9 @@
 		) msd, member m, master ms
 		where m.id = ms.id and m.id = msd.id and category_no = #{categoryNo}
    </select>
+   	<select id="findMasterDetailList" resultType="org.kosta.finalproject.lego.vo.MasterVO">
+   		select ms.id,ms.career,ms.category_no,ms.specifications, m.name 
+   		from master ms, member m
+   		where m.id=ms.id and ms.id =#{value}
+   </select>
 </mapper>
