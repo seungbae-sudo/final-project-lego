@@ -13,7 +13,15 @@
    </select>
    
 
-   
+   <resultMap type="org.kosta.finalproject.lego.vo.BookingVO" id="BookingResult">
+   		<result column="id" property="mvo.id"/>
+   		<result column="name" property="mvo.name" />	
+   </resultMap>
+
+	 <resultMap type="org.kosta.finalproject.lego.vo.ReviewVO" id="ReviewResult">
+   		<result column="id" property="mvo.id"/>
+   		<result column="name" property="mvo.name" />	
+   </resultMap>
    
    <resultMap type="BoardVO" id="BoardCategoryResultMap">
    		<result column="category_name" property="bcvo.categoryName" />
@@ -26,13 +34,17 @@
 		and c.category_no = b.category_no
    	</select>
    	
-   	<select id="findMyBooking" resultType="org.kosta.finalproject.lego.vo.BookingVO">
-	select g.name, b.booking_day
-	from(
-	select name, id
-	from member
-	) g, booking b
-	where g.id = b.member_id
+   	<select id="findMyBooking" resultType="org.kosta.finalproject.lego.vo.BookingVO" resultMap="BookingResult">
+	select m.*, b.*
+	from member m, booking b
+	where m.id = b.member_id
 	and b.master_id = #{value}
+	</select>
+	
+	<select id="findMyReview" resultType="org.kosta.finalproject.lego.vo.ReviewVO" resultMap="ReviewResult">
+	select r.id, r.score, r.review_content, m.name
+	from review r, member m
+	where r.id = m.id
+	and r.master_id = #{value}
 	</select>
 </mapper>

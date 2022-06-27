@@ -34,8 +34,7 @@
 								alt="Image">
 						</div>
 						<div class="media-body">
-							<h2 class="media-heading" th:text="${member.name}">고수</h2>
-							<p th:text="${masterDetail.specifications}"></p>
+							<h2 class="media-heading" th:text="${member.name}"></h2>
 						</div>
 					</div>
 					<ul class="list-inline dashboard-menu text-center">
@@ -58,25 +57,10 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>손석구</td>
-										<td>5</td>
-										<td>아이유님 노래 잘하시네요</td>
-										<td>
-										</td>
-									</tr>
-									<tr>
-										<td>박보검</td>
-										<td>3</td>
-										<td>코딩 넘므 어려운것</td>
-										<td>
-										</td>
-									</tr>
-									<tr>
-										<td>강승규</td>
-										<td>5</td>
-										<td>화이팅</td>
-										<td>
+									<tr th:each="rv:${review}">
+										<td th:text="${rv.mvo.name}"></td>
+										<td th:text="${rv.score}"></td>
+										<td th:text="${rv.reviewContent}">
 										</td>
 									</tr>
 								</tbody>

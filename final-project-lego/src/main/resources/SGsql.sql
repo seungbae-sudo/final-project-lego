@@ -2,7 +2,7 @@ select * from MEMBER
 select * from MEMBER where id = 'gosugosu@gosu'
 update member set name='1',address='1',password='1',tel='1' where id='ksg@ksg'
 
-
+select * from category
 update member set password=#{password},name=#{name},address=#{address},tel=#{tel} where id=#{id}
 
 update master set specifications=#{specifications},career=#{career} where id=#{id}
@@ -54,12 +54,28 @@ from member
 where id = 'lsj@naver.com'
 
 
-select g.name, b.booking_day
-	from(
-	select name, id
-	from member
-	) g, booking b
-	where g.id = b.member_id
-	and b.master_id = '33@33'
+select m.*, b.*
+	from member m, booking b
+	where m.id = b.member_id
+	and b.master_id = 'as@as'
 
 	select * from skills
+	
+	select * from booking
+	
+	
+	
+select b.booking_content
+from member m, booking b
+where m.id = b.member_id
+and b.master_id = 'as@as'
+
+insert into review(review_no,score,review_content,id,master_id)
+values(review_seq.nextval,5,'이 바보야','33@33','as@as'); 
+
+create sequence review_seq
+select * from review
+
+
+
+

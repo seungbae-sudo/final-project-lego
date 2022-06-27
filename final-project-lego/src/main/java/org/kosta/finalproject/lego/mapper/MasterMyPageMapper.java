@@ -7,6 +7,7 @@ import org.kosta.finalproject.lego.vo.BoardVO;
 import org.kosta.finalproject.lego.vo.BookingVO;
 import org.kosta.finalproject.lego.vo.MasterVO;
 import org.kosta.finalproject.lego.vo.MemberVO;
+import org.kosta.finalproject.lego.vo.ReviewVO;
 
 @Mapper
 public interface MasterMyPageMapper {
@@ -19,7 +20,9 @@ public interface MasterMyPageMapper {
 
 	List<BoardVO> findMyBoard(String id);
 	
-	//BookingVO findMyBooking(String id);
+	BookingVO findMyBooking(String id);
+
+	List<ReviewVO> findMyReview(String id);
 	
 
 
