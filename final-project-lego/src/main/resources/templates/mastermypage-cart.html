@@ -22,8 +22,6 @@
 			</div>
 		</div>
 	</section>
-
-
 	<section class="user-dashboard page-wrapper">
 		<div class="container">
 			<div class="row">
@@ -34,19 +32,18 @@
 								alt="Image">
 						</div>
 						<div class="media-body">
-							<h2 class="media-heading">고수</h2>
-							<p>Hi im Gosu</p>
+							<h2 class="media-heading" th:text="${member.name}">고수</h2>
+							<p th:text="${masterDetail.specifications}"></p>
 						</div>
 					</div>
 					<ul class="list-inline dashboard-menu text-center">
-						<li><a href=""  th:href="@{/mastermypage}">고수정보</a></li>
+						<li><a th:href="@{/mastermypage}">고수정보</a></li>
 						<li><a th:href="@{/mastermypage-review}">리뷰</a></li>
 						<li><a class="active" th:href="@{/mastermypage-cart}">내가 쓴 글</a></li>
 						<li><a th:href="@{/mastermypage-consult}">상담신청내역</a></li>
-						<li><a href="">메세지함</a></li>
+						<li><a th:href="@{/mastermypage-message}">메세지함</a></li>
 					</ul>
 					<div class="dashboard-wrapper user-dashboard profile-detail">
-
 						<div class="table-responsive">
 							<table class="table">
 								<thead>
@@ -57,15 +54,13 @@
 										<th></th>
 									</tr>
 								</thead>
-								
 								<tbody>
-								
-									<tr th:each="List:${BoardList}" >
+									<tr th:each="List:${BoardList}">
 										<td><span th:text="${List.boardNo}"></span></td>
-										<td><span th:text="${List.boardTitle}"></span></td>
+										<td><a th:href="@{/board-detail(boardNo=${List.boardNo})}">
+										<span th:text="${List.boardTitle}"></span></a></td>
 										<td><span th:text="${List.bcvo.categoryName}"></span></td>
 									</tr>
-									
 								</tbody>
 							</table>
 						</div>
@@ -74,5 +69,4 @@
 			</div>
 		</div>
 	</section>
-
 </div>
