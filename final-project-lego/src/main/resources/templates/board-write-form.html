@@ -27,7 +27,7 @@
 				<table class="table">
 					<tr>
 						<td>
-							<select  class="col-sm-2"  id="categoryNo" name="categoryNo" >
+							<select class="col-sm-2"  id="categoryNo" name="categoryNo" >
 									<option value="1"> 꿀팁</option>
 								    <option  value="2">추천</option>
 								    <option value="3">나눔</option>			
@@ -36,7 +36,7 @@
 					</tr>
 					<tr>
 						<td>
-							<input class="col-sm-8" type="text" name="boardTitle" placeholder="글제목" required="required">
+							<input class="col-sm-12" type="text" name="boardTitle" placeholder="글제목" required="required">
 						</td>
 					</tr>
 					<tr>
@@ -59,7 +59,7 @@
 	<script type="text/javascript">
 	function check() {
 		if (document.getElementById("categoryNo").value == "") {
-			alert("게시판을 선택해 주세요");
+			alert("카테고리를 선택해 주세요");
 			return;
 		} else {
 			document.getElementById("Write").submit();

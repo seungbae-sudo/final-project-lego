@@ -20,52 +20,57 @@
 		</div>
 	</section>
 	
+
 	<section class="user-dashboard page-wrapper">
-		  <div class="container">
-			
-				<h3 class="title-detail" th:text="${bvo.boardTitle}">제목</h3>
+	  <div class="container">
+			<h3 style='margin-left: 20px;' class="title-detail" th:text="${bvo.boardTitle}" >제목</h3>
 				<hr>
-				<ul class="info">
-					<li>작성자 <span th:text="${bvo.mvo.name}"></span></li>  <!--*/ ${bvo.mvo.name} /*-->
-					<li>작성일 <span th:text="${bvo.boardDate}"></span></li>
-					<li>조회수<span th:text="${bvo.hits}"></span> </li>
-					<li>
-						 <!--*/<a href="?categoryNo=${carNo}&pageNo=${pageNo}"><i
-							class='fas fa-list'></i>목록</a>/*-->
-					</li>
+				<ul class="info" style='display: flex; justify-content: flex-end;'>
+					<li style='margin-right: 20px;'>작성자 : <span th:text="${bvo.mvo.name}"></span></li>
+					<li style='margin-right: 20px;'>작성일 : <span th:text="${bvo.boardDate}"></span></li>
+					<li style='margin-right: 20px;'>조회수 : <span th:text="${bvo.hits}"></span></li>
+					<li>좋아요 : <span th:text="${bvo.likes}"></span></li>
+					<!-- <li><a href="ReviewPostListController.do?pageNo=${nowPage}"><i class='fas fa-list'></i>목록</a></li> -->
 				</ul>
-				<div class="content">
-					<pre th:text="${bvo.boardContent}">본문내용</pre>
-				</div>
 				
-			<!--/* 수정하려고 TEST 중 -> bcvo 값이 나오지 않아아아아요...*/-->
-			<span th:text="${bvo}"> </span> 
+				<div class="content">
+					<pre  style='height: 300px; background-color:#fff; border:1px solid lightgray;' th:text="${bvo.boardContent}">본문내용</pre>
+				</div>
 			
-			<div class="text-center">
-				<form th:action="@{/updateForm(boardNo=${bvo.boardNo})}" method="get">
-					<button type="submit" class="btn btn-success" onclick="check()">수정</button>
+				<!--/*  수정과 삭제를 위한 부분 */-->
+
+				<form id="updateForm" th:action="@{/updateForm}" method="get">			
+					<input type="hidden" name="boardNo" th:value="${bvo.boardNo}">
+					<input type="hidden" name="categoryNo" th:value="${bvo.bcvo.categoryNo}"> 
 				</form>
-				<form th:action="@{/deleteForm}" method="get">
-					<button type="submit" class="btn btn-success">삭제</button>
+				 <form id="deleteForm" th:action="@{/deleteForm}" method="post">			
+					<input type="hidden" name="boardNo" th:value="${bvo.boardNo}">
+					<input type="hidden" name="categoryNo" th:value="${bvo.bcvo.categoryNo}">
 				</form>
+				
+				<div class="text-center space-top">
+					<button type="button" class="btn btn-success" onclick="updatePost()">수정</button>
+					<button type="button"  class="btn btn-success" onclick="deletePost()">삭제</button>
+				</div>
+						 
 			</div>
-		</div>
-	</section>
-	
-	
-	<script type="text/javascript">
-	function deletepost() {
-		if (confirm("삭제 하시겠습니까?")) {
-			document.getElementById("@{board-delete}").submit();
-		}
+		</section>
 
-	}
-	function updatepost() {
-		if (confirm("수정 하시겠습니까?")) {
-			document.getElementById("@{board-update}").submit();
-		}
+		<script type="text/javascript">
 
-	}
-</script>
+		function updatePost(){
+			//confirm 함수는 확인 누를때 true를 반환 
+			if(confirm("수정하시겠습니까?")){
+				document.getElementById("updateForm").submit();
+			}
+		}
+		
+		function deletePost(){
+			//confirm 함수는 확인 누를때 true를 반환 
+			if(confirm("삭제하시겠습니까?")){
+				document.getElementById("deleteForm").submit();
+			}
+		}
+		</script>
 	
 </html>

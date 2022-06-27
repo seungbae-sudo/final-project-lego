@@ -1,7 +1,6 @@
 package org.kosta.finalproject.lego.mapper;
 
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -18,7 +17,12 @@ public interface CommunityBoardMapper {
 
 	BoardVO findBoardDetailByBoardNo(int boardNo);
 
-	BoardVO updateByBoardNo(int boardNo);
+	void updateByBoardVO(BoardVO bvo);
+
+	void deleteByBoardVO(BoardVO bvo);
+
+
+	
 
 	
 }
