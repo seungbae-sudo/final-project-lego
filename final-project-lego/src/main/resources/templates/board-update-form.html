@@ -28,9 +28,10 @@
 					<tr>
 						<td>
 							<select class="col-sm-2"  id="categoryNo" name="categoryNo" >
-									<option value="1"> 꿀팁</option>
-								    <option  value="2">추천</option>
-								    <option value="3">나눔</option>			
+									<option value="">게시판을 선택해주세요.</option>
+									<option value="1" th:selected="${bvo.bcvo.categoryNo}==1"> 꿀팁</option>
+								    <option  value="2" th:selected="${bvo.bcvo.categoryNo}==2">추천</option>
+								    <option value="3" th:selected="${bvo.bcvo.categoryNo}==3">나눔</option>			
 							</select>
 						</td>
 					</tr>
@@ -46,12 +47,14 @@
 						</td>
 					</tr>
 				</table>
-			</form>
+			
 		
 			<div class="text-center">
 				<button type="button" class="btn btn-success" onclick="check()">확인</button>
 				<button type="reset" class="btn btn-success">취소</button>
 			</div>
+			
+			</form>
 		</div>
 	</section>
 	
