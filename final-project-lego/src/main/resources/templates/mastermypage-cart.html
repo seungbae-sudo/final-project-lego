@@ -56,7 +56,7 @@
 								<tbody>
 									<tr th:each="List:${BoardList}">
 										<td><span th:text="${List.boardNo}"></span></td>
-										<td><a th:href="@{/board-detail(boardNo=${List.boardNo})}">
+										<td><a th:href="@{/board-detail(boardNo=${List.boardNo},categoryNo=${List.bcvo.categoryNo})}">
 										<span th:text="${List.boardTitle}"></span></a></td>
 										<td><span th:text="${List.bcvo.categoryName}"></span></td>
 									</tr>

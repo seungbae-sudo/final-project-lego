@@ -76,6 +76,9 @@ values(review_seq.nextval,5,'이 바보야','33@33','as@as');
 create sequence review_seq
 select * from review
 
-
+   		select b.*,bc.*
+		from board b, board_category bc
+		where b.id = 'as@as'
+		and b.category_no = bc.category_no
 
 

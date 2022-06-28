@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.kosta.finalproject.lego.mapper.MasterMyPageMapper;
 import org.kosta.finalproject.lego.serivce.MasterService;
+import org.kosta.finalproject.lego.vo.BoardCategoryVO;
 import org.kosta.finalproject.lego.vo.BoardVO;
 import org.kosta.finalproject.lego.vo.BookingVO;
 import org.kosta.finalproject.lego.vo.MasterVO;
@@ -35,9 +36,9 @@ public class MasterMyPageController {
 	
 	@RequestMapping("/mastermypage-cart")
 	public String mastermypageCart(@AuthenticationPrincipal MemberVO memberVO,Model model) {
-
 		String id=memberVO.getId();
 		List<BoardVO> list= masterMyPageMapper.findMyBoard(id);
+		System.out.println(list.get(0));
 		model.addAttribute("BoardList", list);
 		model.addAttribute("member", memberVO);
 		model.addAttribute("masterDetail", masterMyPageMapper.findMasterDetailList(memberVO.getId()));
