@@ -7,6 +7,7 @@ import org.kosta.finalproject.lego.vo.BoardVO;
 import org.kosta.finalproject.lego.vo.BookingVO;
 import org.kosta.finalproject.lego.vo.MasterVO;
 import org.kosta.finalproject.lego.vo.MemberVO;
+import org.kosta.finalproject.lego.vo.MessageVO;
 import org.kosta.finalproject.lego.vo.ReviewVO;
 
 @Mapper
@@ -23,7 +24,7 @@ public interface MasterMyPageMapper {
 	BookingVO findMyBooking(String id);
 
 	List<ReviewVO> findMyReview(String id);
+
+	List<MessageVO> findMyMessage(String id);
 	
-
-
 }

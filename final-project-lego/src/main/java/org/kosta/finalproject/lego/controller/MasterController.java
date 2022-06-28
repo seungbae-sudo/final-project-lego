@@ -65,5 +65,8 @@ public class MasterController {
 		 
 		return "redirect:/loginForm";	
 	}
-	
+	@RequestMapping("/findMasterByKeyword")
+	public String findMasterByKeyword() {
+		return "find-master-list";
+	}
 }
