@@ -9,12 +9,12 @@
 		</update>
 		
 			<resultMap type="BoardVO" id="CategoryResultMap">
-				<result column="category_no" property="bcvo.categroyNo"/>
+				<result column="category_no" property="bcvo.categoryNo"/>
 				<result column="category_name" property="bcvo.categoryName"/>
 			</resultMap>
 		
 		<select id="findWroteList" resultMap="CategoryResultMap" resultType="org.kosta.finalproject.lego.vo.BoardVO">
-			select b.board_no, b.board_title, bc.category_name
+			select b.board_no, b.board_title, bc.category_name,bc.category_no
 			from  board b, board_category bc
 			where b.category_no=bc.category_no
 			and b.id=#{value}
