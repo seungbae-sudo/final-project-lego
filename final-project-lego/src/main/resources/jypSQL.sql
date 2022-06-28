@@ -162,21 +162,82 @@ from skills
 select*from category
 
 
+---- 찜목록 cart cart_no id master_id
+--master아이디로 고수 이름 
+-- 이름 평점 스펙 
+select*from cart
 
-CREATE TABLE booking
+
+select*from review
+select*from member
+select*from master
+cart
+
+-- 해당 고수의 평균 평점
+select 
 (
-	booking_no            NUMBER ,
-	condition             VARCHAR2(100) not NULL ,
-	booking_day           date not NULL ,
-	booking_content       CLOB not NULL ,
-	booking_times         VARCHAR2(100) not NULL ,
-	skills_id             NUMBER  ,
-	times_id              NUMBER ,
-	days_id               NUMBER ,
-	id                    VARCHAR2(100),
-	CONSTRAINT fk_booking_id FOREIGN KEY(id) REFERENCES member(id),
-	CONSTRAINT pk_booking_share PRIMARY KEY(id,skills_id,times_id,days_id,booking_no),
-	CONSTRAINT fk_booking_skills_id FOREIGN KEY(skills_id) REFERENCES skills(skills_id),
-	CONSTRAINT fk_booking_times_id FOREIGN KEY(times_id) REFERENCES times(times_id),
-	CONSTRAINT fk_booking_days_id FOREIGN KEY(days_id) REFERENCES days(days_id)
-);
+select avg(score) from review where master_id='as@as'
+) r, cart
+
+
+select m.name, ms.specifications , round(avg(r.score) as score_arg)
+select round(avg(r.score))
+from review r, cart c, member m, master ms
+where c.id='lsj@naver.com'
+and r.master_id=ms.id
+group by m.name, ms.specifications
+
+select round(avg(r.score)),m.name
+from (select name, id from member) m,review r, cart c,master ms
+where c.id='lsj@naver.com'
+and r.id=c.id
+and m.id=r.master_id
+and r.master_id=ms.id
+group by m.name,ms.specifications
+
+select specifications,career
+from master
+
+select*from review
+select*from member
+select*from master
+select *from cart 
+      22 aa@aa         12@12
+
+select round(avg(r.score)), to_char(dbms_lob.substr(ms.specifications, 4000)),m.name
+from (select name, id from member) m,review r, cart c,master ms
+where c.id='aa@aa '
+and r.id=c.id
+and m.id=r.master_id
+and r.master_id=ms.id
+group by to_char(dbms_lob.substr(ms.specifications, 4000)),m.name
+
+-- cart에 있는 아이디가 지금 로그인한사람 아이디 
+-- cart에 있는 master_id를 통해 member name을 가져와야한다 
+-- cart 에 있는 master_id를 통해 master specifications를 가져와야한다 
+-- cart에 있는 master_id를 통해 review에 있는 score를 평균을 내서 가져와야한다 
+select round(avg(r.score)), to_char(dbms_lob.substr(ms.specifications, 4000)),m.name
+from (select name, id from member) m,review r, cart c,master ms
+where c.id='aa@aa '
+and c.master_id=m.id
+and c.master_id=ms.id
+and c.master_id=r.master_id
+group by to_char(dbms_lob.substr(ms.specifications, 4000)),m.name
+
+select round(avg(r.score)), to_char(dbms_lob.substr(ms.specifications, 4000)), m.name
+from cart c,member m,master ms,review r
+where c.id='aa@aa' 
+and c.master_id=m.id
+and c.master_id=ms.id
+group by to_char(dbms_lob.substr(ms.specifications, 4000)),m.name
+
+
+select*from review
+
+select to_char(dbms_lob.substr(ms.specifications, 4000)), m.name
+from cart c,member m,master ms,review r
+where c.id='aa@aa' 
+and c.master_id=m.id
+and c.master_id=ms.id
+and r.master_id
+group by to_char(dbms_lob.substr(ms.specifications, 4000)),m.name
