@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.kosta.finalproject.lego.mapper.QnAMapper">
+	<insert id="writeQnA" parameterType="org.kosta.finalproject.lego.vo.QnAVO">
+			insert into qna(qna_no,ask,id) values(qna_no_seq.nextval,#{ask},#{memberVO.id})
+	</insert>
+	<select id="findQnAList" resultType="org.kosta.finalproject.lego.vo.QnAVO" resultMap="QnAResult">
+		select q.qna_no,q.ask,q.id,m.name 
+		from qna q , member m 
+		where q.id = m.id
+	</select>
+	<resultMap type="org.kosta.finalproject.lego.vo.QnAVO" id="QnAResult">
+		<result column="id" property="memberVO.id" />
+		<result column="name" property="memberVO.name" />
+	</resultMap>
+	<select id="qnaDetail" resultType="org.kosta.finalproject.lego.vo.QnACommentVO" resultMap="QnAResult">
+		select q.qna_no,q.ask,q.id,m.name 
+		from qna q , member m 
+		where q.id = m.id
+		and q.qna_no=#{value}
+	</select>
+	<insert id="writeQnAComment" parameterType="org.kosta.finalproject.lego.vo.QnACommentVO">
+		insert into qna_comment(qna_comment_no,qna_comment_content,qna_no,id) values(qna_comment_no_seq.nextval,#{qnaCommentContent},#{qnaVO.qnaNo},#{memberVO.id})
+	</insert>
+	<resultMap type="org.kosta.finalproject.lego.vo.QnACommentVO" id="qnaCommnetResult">
+		<result column="qna_no"  property="qnaVO.qnaNo"/>
+	</resultMap>
+	<select id="findQnACommentList" resultType="org.kosta.finalproject.lego.vo.QnACommentVO" resultMap="qnaCommnetResult">
+		select qc.qna_comment_content,qc.qna_no,qc.qna_comment_no
+		from qna_comment qc , qna q
+		where qc.qna_no = q.qna_no
+		
+	</select>
+</mapper>

@@ -23,7 +23,9 @@
 				</div>
 				<div class="col-md-4 col-xs-12 col-sm-4 header-setting">
 					<!-- Cart -->
-					<button> QnA</button>
+					<form action="" th:action="@{/QnAList}">
+					<button type="submit"> QnA</button>
+					</form>
 					<form action="" th:action="@{/mypage}" sec:authorize="hasRole('ROLE_MEMBER')">
 						<button>마이페이지</button>
 					</form>

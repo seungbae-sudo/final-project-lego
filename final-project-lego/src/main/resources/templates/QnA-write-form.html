@@ -1,0 +1,58 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+<!--/* layout 선언부 추가 */-->
+
+<div layout:fragment="main">
+
+	<section class="page-header">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="content">
+						<h1 class="page-name">글작성</h1>
+						<ol class="breadcrumb">
+							<li><a th:href="@{/}">Home</a></li>
+						</ol>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<section class="user-dashboard page-wrapper">
+		  <div class="container">
+			<form method="post" id="write" th:action="@{/QnAWrite}">
+			<input type="hidden" name = "pageNo">
+				<table class="table">
+					<tr>
+						<td >
+							<textarea rows="10" class="form-control" name="ask" id = "ask"
+								placeholder="본문내용" required="required">
+							</textarea>
+						</td>
+					</tr>
+				</table>
+							<div class="text-center">
+				<button type="button" class="btn btn-success" id="posting"  onclick="checking()"> 확인</button>
+				<button type="reset" class="btn btn-success" onclick="reset()">취소</button>
+			</div>
+			</form>
+		
+
+		</div>
+		<script type="text/javascript">
+		function checking(){
+			if(document.getElementById("ask").value==""){
+				alert("질문을 입력하세요");
+				return;
+			}else{
+				document.getElementById("write").submit();
+			}
+		}
+		
+	</script>
+	</section>
+	</div>
+	
+</html>
