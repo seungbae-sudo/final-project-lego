@@ -20,7 +20,6 @@ public class QnAController {
 	public String QnAList(Model model) {
 		model.addAttribute("qnaList", qnaMapper.findQnAList());
 		model.addAttribute("qnaCommentList", qnaMapper.findQnACommentList());
-		System.out.println(qnaMapper.findQnACommentList());
 		return "QnA-list";
 	}
 	@RequestMapping("/QnAWriteFrom")
