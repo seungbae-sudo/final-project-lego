@@ -44,20 +44,12 @@
 						<li><a th:href="@{/mastermypage-consult}">상담신청내역</a></li>
 						<li><a class="active" th:href="@{/mastermypage-message}">메세지함</a></li>
 					</ul>
-					<div class="messge-list">
-						<div th:each="message:${message}">
-							<div >
-								<a th:href="@{/mastermypage-message-detail(mmpmd=${message.sendMvo.name})}">
-								<img class="media-object user-img" src="./images/message.png" alt="Image" align="bottom">
-								<span th:text="|(${message.sendMvo.name}님)|">바보</span></a>
-							</div>
-						</div>
+					<div class="dashboard-wrapper user-dashboard profile-detail">
+					<span th:text="|${mmpmd}님 메세지|"></span>
 					</div>
-					<br>
 				</div>
 			</div>
 		</div>
 	</section>
 
 </div>
-</html>
