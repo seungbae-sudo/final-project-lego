@@ -34,8 +34,7 @@
 								alt="Image">
 						</div>
 						<div class="media-body">
-							<h2 class="media-heading" th:text="${member.name}">고수</h2>
-							<p th:text="${masterDetail.specifications}"></p>
+							<h2 class="media-heading" th:text="${member.name}"></h2>
 						</div>
 					</div>
 					<ul class="list-inline dashboard-menu text-center">
@@ -45,26 +44,6 @@
 						<li><a th:href="@{/mastermypage-consult}">상담신청내역</a></li>
 						<li><a class="active" th:href="@{/mastermypage-message}">메세지함</a></li>
 					</ul>
-					<div class="dashboard-wrapper user-dashboard profile-detail">
-
-						<div class="table-responsive">
-							<table class="table">
-								<thead>
-									<tr>
-										<th>고객 이름</th>
-										<th>상담 날짜</th>
-									</tr>
-								</thead>
-								
-								<tbody>
-									<tr>
-										<td>수지</td>
-										<td>2022-06-23</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
 				</div>
 			</div>
 		</div>

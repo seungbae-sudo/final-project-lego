@@ -2,7 +2,7 @@ select * from MEMBER
 select * from MEMBER where id = 'gosugosu@gosu'
 update member set name='1',address='1',password='1',tel='1' where id='ksg@ksg'
 
-
+select * from category
 update member set password=#{password},name=#{name},address=#{address},tel=#{tel} where id=#{id}
 
 update master set specifications=#{specifications},career=#{career} where id=#{id}
@@ -34,4 +34,48 @@ select b.board_no,b.board_title,c.category_name
 from board b, board_category c
 where b.id = 'lsj@naver.com'
 and c.category_no = b.category_no
+
+select * from booking
+distinct(중복 제거)
+
+select m.name, b.booking_day
+from booking b, master ms, member m
+where ms.id = '33@33' and m.id = b.member_id
+
+
+부킹id = 로그인한 고수 아이디
+
+고객 이름 상담 날짜 
+
+멤버 아이디에 따른 멤버 이름 상담(부킹) 시간
+
+select name, id
+from member
+where id = 'lsj@naver.com'
+
+
+select m.*, b.*
+	from member m, booking b
+	where m.id = b.member_id
+	and b.master_id = 'as@as'
+
+	select * from skills
+	
+	select * from booking
+	
+	
+	
+select b.booking_content
+from member m, booking b
+where m.id = b.member_id
+and b.master_id = 'as@as'
+
+insert into review(review_no,score,review_content,id,master_id)
+values(review_seq.nextval,5,'이 바보야','33@33','as@as'); 
+
+create sequence review_seq
+select * from review
+
+
+
 
