@@ -4,11 +4,11 @@ import java.util.List;
 
 import org.kosta.finalproject.lego.mapper.MasterMyPageMapper;
 import org.kosta.finalproject.lego.serivce.MasterService;
-import org.kosta.finalproject.lego.vo.BoardCategoryVO;
 import org.kosta.finalproject.lego.vo.BoardVO;
 import org.kosta.finalproject.lego.vo.BookingVO;
 import org.kosta.finalproject.lego.vo.MasterVO;
 import org.kosta.finalproject.lego.vo.MemberVO;
+import org.kosta.finalproject.lego.vo.MessageVO;
 import org.kosta.finalproject.lego.vo.ReviewVO;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -58,7 +58,6 @@ public class MasterMyPageController {
 	public String mastermypageConsult(@AuthenticationPrincipal MemberVO memberVO,Model model,BookingVO bookingVO) {
 		model.addAttribute("member", memberVO);
 		BookingVO bkvo = masterMyPageMapper.findMyBooking(memberVO.getId());
-	
 		model.addAttribute("masterDetail", masterMyPageMapper.findMasterDetailList(memberVO.getId()));
 		model.addAttribute("Booking", bkvo);
 		return "mastermypage-consult";
@@ -78,7 +77,15 @@ public class MasterMyPageController {
 	public String mastermypageMessage(@AuthenticationPrincipal MemberVO memberVO,Model model) {
 		model.addAttribute("member", memberVO);
 		model.addAttribute("masterDetail", masterMyPageMapper.findMasterDetailList(memberVO.getId()));
+		model.addAttribute("message",masterMyPageMapper.findMyMessage(memberVO.getId()));
 		return "mastermypage-Message";
+	}
+	
+	@RequestMapping("/mastermypage-message-detail")
+	public String mastermypageMessageDetail(@AuthenticationPrincipal MemberVO memberVO,Model model) {
+		model.addAttribute("member", memberVO);
+		model.addAttribute("masterDetail", masterMyPageMapper.findMasterDetailList(memberVO.getId()));
+		return "mastermypage-message-detail";
 	}
 
 	@RequestMapping("masterUpdateForm")

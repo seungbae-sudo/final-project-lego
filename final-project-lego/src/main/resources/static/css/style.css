@@ -43,6 +43,21 @@
     height: 400px;
     margin-left: 190px;
 }
+/*마이페이지 메세지*/
+.messge-list{
+	display: flex;
+    width: 1050px;
+    height: 330px;
+    margin-left: 150px;
+    margin-top: 50px;
+    flex-wrap: wrap;
+}
+/* community */
+.board-list{
+   display: block;
+}
+
+
 /* 부트스트랩 */
 body {
   line-height: 1.5;

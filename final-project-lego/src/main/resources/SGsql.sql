@@ -81,4 +81,19 @@ select * from review
 		where b.id = 'as@as'
 		and b.category_no = bc.category_no
 
+select * from message
 
+select ms.message_content
+from message ms, member m, master ma
+where m.id=ms.id and ma.id='as@as' and ms.receive_id = ma.id
+
+insert into message(message_no,message_content,receive_id,id,receive_date)
+values(message_seq.nextval,'천재!','as@as','sg@sg',sysdate)
+
+create sequence message_seq
+
+select ms.*, m.name
+from message ms, member m, master ma
+where m.id=ms.id and ma.id='as@as' and ms.receive_id = ma.id
+
+select * from member

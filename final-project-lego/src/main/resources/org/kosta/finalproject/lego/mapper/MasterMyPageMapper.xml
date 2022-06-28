@@ -28,6 +28,11 @@
    		<result column="category_no" property="bcvo.categoryNo" />
    	</resultMap>
    	
+   	<resultMap type="org.kosta.finalproject.lego.vo.MessageVO" id="MessageResult">
+   		<result column="id" property="sendMvo.id"/>
+   		<result column="name" property="sendMvo.name"/>
+   	</resultMap>
+   	
    <select id ="findMyBoard" resultType="org.kosta.finalproject.lego.vo.BoardVO" resultMap="BoardCategoryResultMap">
    		select b.board_no,b.board_title,c.category_name, c.category_no
 		from board b, board_category c
@@ -48,4 +53,11 @@
 	where r.id = m.id
 	and r.master_id = #{value}
 	</select>
+	
+	<select id="findMyMessage" resultType="org.kosta.finalproject.lego.vo.MessageVO" resultMap="MessageResult">
+	select  m.name
+	from message ms, member m, master ma
+	where m.id=ms.id and ma.id=#{value} and ms.receive_id = ma.id
+	</select>
+	
 </mapper>
