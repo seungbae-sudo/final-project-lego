@@ -31,7 +31,8 @@ public class MemberMyPageController {
 	public String mypageCart() {
 		return "mypage-cart";
 	}
-
+	
+	//내가 쓴 글  
 	@RequestMapping("mypage-wrote")
 	public String mypageWrote(@AuthenticationPrincipal MemberVO memberVO,Model model) {
 		String id =memberVO.getId();

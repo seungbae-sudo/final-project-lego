@@ -98,6 +98,7 @@ public class CommunityBoardController {
 		BoardCategoryVO bcvo = new BoardCategoryVO();
 		bcvo.setCategoryNo(categoryNo);
 		System.out.println(categoryNo);
+		System.out.println("나와요?");
 		BoardVO bvo = communityBoardMapper.findBoardDetailByBoardNo(boardNo);
 		bvo.setBcvo(bcvo);
 		System.out.println(bvo.getBcvo());
