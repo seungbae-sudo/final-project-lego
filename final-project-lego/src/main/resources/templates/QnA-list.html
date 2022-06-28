@@ -1,0 +1,70 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+<!--/* layout 선언부 추가 */-->
+
+<div layout:fragment="main">
+	<section class="page-header">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="content">
+						<h1 class="page-name">Q&A 게시판</h1>
+						<ol class="breadcrumb">
+							<li><a th:href="@{/}">Home</a></li>
+						</ol>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+<section class="user-dashboard page-wrapper">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <form th:action="@{/QnAWriteFrom}" method="get">
+					<button type="submit">글쓰기</button>
+		</form>
+		<div >
+		
+		
+		
+		</div>
+		
+        <div class="dashboard-wrapper user-dashboard">
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th class="col-md-2 text-center">No.</th>
+                  <th class="col-md-6 text-center">질문</th>
+                  <th class="col-md-2 text-center">작성자</th>
+                  
+                </tr>
+              </thead>
+              <tbody >
+                <tr th:each="list:${qnaList}">
+                  <td class="text-center" th:text="${list.qnaNo}"> <a href="" >나오는지?</a></td>
+                 <td class="text-center"> <a th:href="@{/QnADetail(qnaNo=${list.qnaNo})}"><span th:text="${list.ask}"></span> </a><br>
+                 <div th:each="comList:${qnaCommentList}">
+                 	<span th:text="${comList.qnaCommentContent}" th:if="${comList.qnaVO.qnaNo}==${list.qnaNo}"></span>
+                 </div>
+                 </td>
+                  <td class="text-center" th:text="${list.memberVO.name}"> <a href="">나오는지?</a></td>             		
+                </tr>
+               	<tr >
+               		
+               	</tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+</html>
