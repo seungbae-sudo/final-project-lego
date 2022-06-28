@@ -8,6 +8,7 @@ import org.kosta.finalproject.lego.serivce.MemberService;
 import org.kosta.finalproject.lego.vo.BoardVO;
 import org.kosta.finalproject.lego.vo.BookingVO;
 import org.kosta.finalproject.lego.vo.MemberVO;
+import org.kosta.finalproject.lego.vo.ReviewVO;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -27,8 +28,12 @@ public class MemberMyPageController {
 	
 	
 	//탭 이동 컨트롤러***************
+	//내 찜목록
 	@RequestMapping("/mypage-cart")
-	public String mypageCart() {
+	public String mypageCart(@AuthenticationPrincipal MemberVO memberVO,Model model) {
+		String id =memberVO.getId();
+		List<ReviewVO> cartList=memberMyPageMapper.findCartList(id);
+		model.addAttribute("cartList", cartList);
 		return "mypage-cart";
 	}
 	

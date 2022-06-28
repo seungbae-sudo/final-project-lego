@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.kosta.finalproject.lego.vo.BoardVO;
 import org.kosta.finalproject.lego.vo.BookingVO;
 import org.kosta.finalproject.lego.vo.MemberVO;
+import org.kosta.finalproject.lego.vo.ReviewVO;
 
 @Mapper
 public interface MemberMyPageMapper {
@@ -17,5 +18,7 @@ public interface MemberMyPageMapper {
 	List<BookingVO> findMyBookingList(String id);
 
 	String findSkillNameBySkillId(int skillsId);
+
+	List<ReviewVO> findCartList(String id);
 
 }
