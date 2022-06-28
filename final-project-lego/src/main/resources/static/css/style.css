@@ -43,6 +43,13 @@
     height: 400px;
     margin-left: 190px;
 }
+
+/* community */
+.board-list{
+	display: block;
+}
+
+
 /* 부트스트랩 */
 body {
   line-height: 1.5;

@@ -23,10 +23,10 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <ul class="list-inline dashboard-menu text-center">
-          <li><a  th:href="@{/goCommunity(categoryNo=1)}"  >꿀팁</a></li>
-          <li><a  th:href="@{/goCommunity(categoryNo=2)}">추천</a></li>
-          <li><a th:href="@{/goCommunity(categoryNo=3)}" >나눔</li>
+        <ul id="cateBtn" class="list-inline dashboard-menu text-center">
+          <li ><a class="active" th:href="@{/goCommunity(categoryNo=1)}" >꿀팁</a></li>
+          <li  ><a th:href="@{/goCommunity(categoryNo=2)}">추천</a></li>
+          <li  ><a th:href="@{/goCommunity(categoryNo=3)}" >나눔</a></li>
         </ul>
         <form th:action="@{/writeForm}" method="get">
 					<button type="submit">글쓰기</button>
@@ -45,10 +45,10 @@
               </thead>
               <tbody >
                 <tr th:each="list:${CategoryList}">
-                  <td class="text-center"> <a href="" th:text=${list.boardNo}>나오는지?</a></td>
-                  <td class="text-center"> <a th:href="@{/board-detail(boardNo=${list.boardNo},categoryNo=${list.bcvo.categoryNo})}" th:text=${list.boardTitle} >나오는지?</a></td>
-                  <td class="text-center"> <a href="" th:text=${list.mvo.name}>나오는지?</a></td>
-                  <td class="text-center"> <a href="" th:text=${list.hits}>나오는지?</a></td>
+                  <td class="text-center"> <a href="" th:text=${list.boardNo}>No부분</a></td>
+                  <td class="text-center"> <a class="board-list" th:href="@{/board-detail(boardNo=${list.boardNo},categoryNo=${list.bcvo.categoryNo})}" th:text=${list.boardTitle} >제목부분</a></td>
+                  <td class="text-center"> <a href="" th:text=${list.mvo.name}>작성자부분</a></td>
+                  <td class="text-center"> <a href="" th:text=${list.hits}>조회수부분</a></td>
                 </tr>
                
               </tbody>
@@ -59,5 +59,18 @@
       </div>
     </div>
   </div>
+  
+  <!--/* active test 중 */-->
+  <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+  <script >
+$("#cateBtn li").click(function(){
+    $("#cateBtn li").removeClass("active");
+    $(this).addClass("active");
+});
+</script>
 </section>
+
+
+
+
 </div>
