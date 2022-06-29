@@ -55,9 +55,28 @@
 	</select>
 	
 	<select id="findMyMessage" resultType="org.kosta.finalproject.lego.vo.MessageVO" resultMap="MessageResult">
-	select  m.name
+	select ms.id, m.name
 	from message ms, member m, master ma
 	where m.id=ms.id and ma.id=#{value} and ms.receive_id = ma.id
+	group by ms.id, m.name
+	</select>
+	
+	<select id="findMyMessageDetail">
+	select ms.message_no,ms.message_content, ms.receive_id, ms.receive_date,m.name
+         from message ms, member m 
+         where ms.id=#{sendMvo.id}
+         and ms.receive_id=#{reMvo.id}
+         and ms.receive_id=m.id
+         
+         union all
+         
+         select ms.message_no,ms.message_content, ms.receive_id, ms.receive_date,m.name
+         from message ms, member m 
+         where ms.id=#{reMvo.id}
+         and ms.receive_id=#{sendMvo.id}
+         and ms.receive_id=m.id
+         
+         order by receive_date asc
 	</select>
 	
 </mapper>

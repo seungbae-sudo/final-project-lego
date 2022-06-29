@@ -88,12 +88,31 @@ from message ms, member m, master ma
 where m.id=ms.id and ma.id='as@as' and ms.receive_id = ma.id
 
 insert into message(message_no,message_content,receive_id,id,receive_date)
-values(message_seq.nextval,'천재!','as@as','sg@sg',sysdate)
+values(message_seq.nextval,'바보야!','sg@sg','as@as',sysdate)
 
 create sequence message_seq
 
-select ms.*, m.name
+select ms.id, m.name
 from message ms, member m, master ma
 where m.id=ms.id and ma.id='as@as' and ms.receive_id = ma.id
+group by ms.id, m.name
 
-select * from member
+select ms.id, m.name, ms.message_content, ms.receive_date
+from message ms, member m
+where m.id = ms.receive_id and m.id = 'as@as'
+
+select m.name, ms.*
+from member m, message ms
+where ms.id = 'as@as' and ms.receive_id = m.id and ms.receive_id = 'lsj@naver.com'
+
+select * from message where id = 'as@as'
+
+receive_id = 받는사람
+id = 보내는 사람
+member id
+
+select ms.id, ms.receive_id, ms.message_content
+from member m, message ms
+where m.id = ms.id and ms.id = 'as@as'
+
+

@@ -85,6 +85,7 @@ public class MasterMyPageController {
 	public String mastermypageMessageDetail(@AuthenticationPrincipal MemberVO memberVO,Model model) {
 		model.addAttribute("member", memberVO);
 		model.addAttribute("masterDetail", masterMyPageMapper.findMasterDetailList(memberVO.getId()));
+		
 		return "mastermypage-message-detail";
 	}
 
