@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 public class CommentVO {
 	private int commentNo;
 	private String commentContent;
-	private int boardNo;
-	private String id;
+	private String commentDate;
+	private BoardVO bvo;
+	private MemberVO mvo;
 }

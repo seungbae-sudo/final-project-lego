@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.kosta.finalproject.lego.vo.BoardCategoryVO;
 import org.kosta.finalproject.lego.vo.BoardVO;
+import org.kosta.finalproject.lego.vo.CommentVO;
 
 @Mapper
 public interface CommunityBoardMapper {
@@ -21,8 +22,12 @@ public interface CommunityBoardMapper {
 
 	void deleteByBoardVO(BoardVO bvo);
 
+	void writeComment(CommentVO commentVO);
 
-	
+	List<CommentVO> findCommentList(int boardNo);
 
-	
+	/* BoardVO findBVO(int boardNo); */
+
+
+
 }

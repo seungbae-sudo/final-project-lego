@@ -46,7 +46,7 @@
               <tbody >
                 <tr th:each="list:${CategoryList}">
                   <td class="text-center"> <a href="" th:text=${list.boardNo}>No부분</a></td>
-                  <td class="text-center"> <a class="board-list" th:href="@{/board-detail(boardNo=${list.boardNo},categoryNo=${list.bcvo.categoryNo})}" th:text=${list.boardTitle} >제목부분</a></td>
+                  <td class="text-center"> <a class="board-list" th:href="@{/boardDetail(boardNo=${list.boardNo},categoryNo=${list.bcvo.categoryNo})}" th:text=${list.boardTitle} >제목부분</a></td>
                   <td class="text-center"> <a href="" th:text=${list.mvo.name}>작성자부분</a></td>
                   <td class="text-center"> <a href="" th:text=${list.hits}>조회수부분</a></td>
                 </tr>
