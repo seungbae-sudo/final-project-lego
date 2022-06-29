@@ -28,4 +28,6 @@ public interface CommunityBoardMapper {
 
 	void updateHits(int boardNo);
 
+	void deleteComment(int commentNo);
+
 }
