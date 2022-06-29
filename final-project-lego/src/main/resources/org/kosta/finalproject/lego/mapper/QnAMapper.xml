@@ -13,7 +13,7 @@
 		<result column="id" property="memberVO.id" />
 		<result column="name" property="memberVO.name" />
 	</resultMap>
-	<select id="qnaDetail" resultType="org.kosta.finalproject.lego.vo.QnACommentVO" resultMap="QnAResult">
+	<select id="qnaDetail" resultType="org.kosta.finalproject.lego.vo.QnAVO" resultMap="QnAResult">
 		select q.qna_no,q.ask,q.id,m.name 
 		from qna q , member m 
 		where q.id = m.id
@@ -31,4 +31,10 @@
 		where qc.qna_no = q.qna_no
 		
 	</select>
+	<delete id="deleteQna">
+		delete from qna where qna_no = #{value}
+	</delete>
+	<update id="updateQnA" parameterType="org.kosta.finalproject.lego.vo.QnAVO">
+		UPDATE qna SET ask=#{ask} where qna_no = #{qnaNo}
+	</update>
 </mapper>

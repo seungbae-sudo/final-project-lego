@@ -1,6 +1,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{layouts/layout}">
+	layout:decorate="~{layouts/layout}"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <!--/* layout 선언부 추가 */-->
 
 <div layout:fragment="main">
@@ -33,20 +34,21 @@
 			<form id="updateForm" th:action="@{/QnAupdateForm}" method="get">
 				<input type="hidden" name="qnaNo" th:value="${qnaDetail.qnaNo}">
 			</form>
-			<form id="deleteForm" th:action="@{/QnAdeleteForm}" method="post">
-				<input type="hidden" name="boardNo" th:value="${qnaDetail.qnaNo}">
+			<form id="deleteForm" th:action="@{/QnAdelete}" method="post">
+				<input type="hidden" name="qnaNo" th:value="${qnaNo}">
 			</form>
 
 			<div class="text-center space-top">
 				<button type="button" class="btn btn-success" onclick="updatePost()">수정</button>
 				<button type="button" class="btn btn-success" onclick="deletePost()">삭제</button>
 			</div>
+		
+			<div class="content" sec:authorize="hasRole('ROLE_ADMIN')">
 			<div>
 				<h3 >댓글</h3>
 			</div>
 			<hr>
-			<div class="content">
-			<form action="" th:action="@{/QnACommentWrite}" method="post">
+			<form action="" th:action="@{/QnACommentWrite}" method="post" >
 				<input type="hidden" name="qnaNo" th:value="${qnaNo}">
 				<input class="col-md-10" type="text" name="qnaCommentContent">
 				<button class="col-md-2 btn" type="submit">작성</button>

@@ -61,7 +61,7 @@ xmlns:th="http://www.thymeleaf.org">
             <img src="images/logo.png" alt="">
           </a>
           <h2 class="text-center">Create Your Account</h2>
-          <form class="text-left clearfix" action="index.html" th:action="@{/register}" method="post">
+          <form class="text-left clearfix" action="index.html" th:action="@{/register}" method="post" enctype="multipart/form-data">
           <div class="form-group">
               <input type="email" name="id" class="form-control"  placeholder="lego@lego.com" required="required">
               <input type="button"  class="form-control" id="idOverlay" onclick="idCheck()" value="중복 체크"/>
@@ -82,6 +82,9 @@ xmlns:th="http://www.thymeleaf.org">
             </div>
              <div class="form-group">
               <input type="tel" name="tel" class="form-control"  placeholder="전화번호" required="required">
+            </div>
+            <div>
+            	<input multiple="multiple" type="file" value="파일 선택" name="file"/>
             </div>
             <div class="text-center">
             
