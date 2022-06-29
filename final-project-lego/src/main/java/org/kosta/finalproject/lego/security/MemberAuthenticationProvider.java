@@ -101,7 +101,7 @@ public class MemberAuthenticationProvider implements AuthenticationProvider{
 		log.debug("MemberAuthenticationProvider 인증처리완료:{}",auth);
 		return auth;		
 	}
-
+	
 	@Override
 	public boolean supports(Class<?> authentication) {
 		//현재 MemberAuthenticationProvider가  지정된 Authentication 객체가 id(username),password 인증방식이면 true를 반환한다 

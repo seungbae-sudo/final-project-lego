@@ -89,3 +89,31 @@ select b.*,m.*,bc.*
 		where b.id=m.id
 		and bc.category_no = b.category_no
 		and b.board_no=66
+		
+
+--comment
+select*from board_comment;
+CREATE SEQUENCE  board_comment_seq;
+
+--comment insert
+insert into board_comment(comment_no,comment_content,board_no,comment_date,id) values(board_comment_seq.nextval,'nct가 머야~','81', sysdate,'lsj@naver.com')
+insert into board_comment(comment_no,comment_content,board_no,id) values(board_comment_seq.nextval,#{commentContent},#{bvo.boardNo},#{sysdate},#{mvo.id})
+
+--findBVO
+select b.board_no,cm.comment_content, cm.comment_no,cm.comment_date , m.name
+from  board b, member m, board_comment cm
+where b.board_no=cm.board_no
+and m.id=cm.id
+and b.board_no='81';
+
+--wrtieCommentList
+select cm.board_no, m.name, cm.comment_no, cm.comment_content, cm.comment_date
+from board b, member m, board_comment cm
+where b.board_no=cm.board_no
+and m.id=cm.id
+
+--commentDelete
+DELETE FROM board_comment WHERE comment_no =' 74'
+
+--hits
+UPDATE board SET hits = hits+1 WHERE board_no = 81

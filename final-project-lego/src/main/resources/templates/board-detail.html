@@ -48,10 +48,35 @@
 					<input type="hidden" name="categoryNo" th:value="${bvo.bcvo.categoryNo}">
 				</form>
 				
-				<div class="text-center space-top">
+				<div class="text-center space-top" th:if="${mvo.id}==${bvo.mvo.id}">
 					<button type="button" class="btn btn-success" onclick="updatePost()">수정</button>
 					<button type="button"  class="btn btn-success" onclick="deletePost()">삭제</button>
 				</div>
+				
+			<div>
+				<h3 >댓글</h3>
+			</div>
+			<hr>
+			<div class="content">
+			<form id="compostForm" action="" th:action="@{/CommentWrite}" method="post">
+				<input type="hidden" name="categoryNo" th:value="${categoryNo}">
+				<input type="hidden" name="boardNo" th:value="${bvo.boardNo}">
+				<input class="col-md-10" type="text" id="commentContent" name="commentContent" placeholder="댓글을 입력하세요">
+				<button class="col-md-1 btn" type="submit" onclick="compost()">작성</button>
+			</form> 
+			
+			<form action="">
+			<table class="table table-comment">
+				<tbody class="up-space">
+					 <tr th:each="comList:${commentList}">
+	                 	<td class="col-md-8"  th:text="${comList.commentContent}"></td>
+	                 	<td class="col-md-2"  th:text="${comList.commentDate} "></td>
+	                 	<td class="col-md-2"  th:text="${comList.mvo.name} "></td>
+	                 	 <!--/*  <button type="button" onclick="comdeletepost()">삭제</button> */-->
+		            </tr>
+	             </tbody>
+		</table>
+		
 						 
 			</div>
 		</section>
@@ -69,6 +94,15 @@
 			//confirm 함수는 확인 누를때 true를 반환 
 			if(confirm("삭제하시겠습니까?")){
 				document.getElementById("deleteForm").submit();
+			}
+		}
+		
+		function compost() {
+			if (document.getElementById("commentContent").value == "") {
+				alert("댓글을 입력하세요");
+				return;
+			} else {
+				document.getElementById("compostForm").submit();
 			}
 		}
 		</script>
