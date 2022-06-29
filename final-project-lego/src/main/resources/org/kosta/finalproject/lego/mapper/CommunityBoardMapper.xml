@@ -5,12 +5,10 @@
 	<insert id="posting" parameterType="org.kosta.finalproject.lego.vo.BoardVO">
 		insert into board(board_no,board_title,board_content,category_no,hits,board_date,likes,id) values(board_seq.nextval,#{boardTitle},#{boardContent},#{bcvo.categoryNo},#{hits},sysdate,#{likes},#{mvo.id})
 	</insert> 
+	
 	<select id="findBCVO" parameterType="int" resultType="org.kosta.finalproject.lego.vo.BoardCategoryVO">
 		select category_name, category_no from board_category where category_no=#{value}
 	</select>
-	
-	
-	
 	
 	<resultMap type="BoardVO" id="memberResultMap">
 		<result column="name" property="mvo.name"/>
@@ -47,5 +45,29 @@
 	<delete id="deleteByBoardVO" parameterType="org.kosta.finalproject.lego.vo.BoardVO">
 		DELETE FROM board WHERE board_no = #{boardNo}
 	</delete>
+	
+	<insert id="writeComment" parameterType="org.kosta.finalproject.lego.vo.CommentVO">
+		insert into board_comment(comment_no,comment_content,comment_date,board_no,id) values(board_comment_seq.nextval,#{commentContent},sysdate,#{bvo.boardNo},#{mvo.id})
+	</insert>
+	
+		<resultMap type="org.kosta.finalproject.lego.vo.CommentVO" id="memberAndBoardResultMap">
+		<result column="board_no" property="bvo.boardNo"/>
+		<result column="name" property="mvo.name"/>
+	</resultMap>
+	
+<!-- 	<select id="findBVO" resultType="int" resultMap="memberAndBoardResultMap">
+		select comment_content, comment_no,comment_date , m.name
+		from board_comment cm, member m
+		where cm.id=m.id
+		and  board_no=#{value}
+	</select> -->
+	
+	<select id="findCommentList" resultType="org.kosta.finalproject.lego.vo.CommentVO" resultMap="memberAndBoardResultMap">
+		select cm.comment_content, cm.comment_no,cm.comment_date , m.name
+		from  board b, member m, board_comment cm
+		where b.board_no=cm.board_no
+		and m.id=cm.id
+		and b. board_no=#{value}
+	</select>
 
 </mapper>

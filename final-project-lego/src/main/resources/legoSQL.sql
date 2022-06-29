@@ -29,6 +29,7 @@ CREATE TABLE board_comment
 (
 	comment_no            NUMBER  primary key ,
 	comment_content       CLOB not NULL ,
+	comment_date                  DATE not NULL ,
 	board_no              NUMBER not NULL ,
 	id                    VARCHAR2(100) not NULL,
 	CONSTRAINT fk_board_comment_id FOREIGN KEY(id) REFERENCES member(id),
