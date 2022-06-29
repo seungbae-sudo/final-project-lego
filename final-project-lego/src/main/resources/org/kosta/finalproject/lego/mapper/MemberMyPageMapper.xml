@@ -54,4 +54,36 @@
 			group by to_char(dbms_lob.substr(ms.specifications, 4000)),m.name
 		</select>
 		
+		
+		<resultMap type="org.kosta.finalproject.lego.vo.MessageVO" id="MemberResult">
+				<result column="name" property="reMvo.name"/>
+				<result column="id" property="reMvo.id"/>
+		</resultMap>
+		
+		<select id="findMessageList" resultType="org.kosta.finalproject.lego.vo.MessageVO" resultMap="MemberResult">
+			select ms.receive_id as id,m.name
+			from message ms, member m
+			where ms.id=#{value}
+			and ms.receive_id=m.id
+			group by ms.receive_id,m.name
+		</select>
+		
+		<select id="findMyMessageDetailByMessageVO" parameterType="org.kosta.finalproject.lego.vo.MessageVO" resultMap="MemberResult" resultType="org.kosta.finalproject.lego.vo.MessageVO">
+			select ms.message_no,ms.message_content, ms.receive_id, ms.receive_date,m.name
+			from message ms, member m 
+			where ms.id=#{sendMvo.id}
+			and ms.receive_id=#{reMvo.id}
+			and ms.receive_id=m.id
+			
+			union all
+			
+			select ms.message_no,ms.message_content, ms.receive_id, ms.receive_date,m.name
+			from message ms, member m 
+			where ms.id=#{reMvo.id}
+			and ms.receive_id=#{sendMvo.id}
+			and ms.receive_id=m.id
+			
+			order by receive_date asc
+		</select>
+		
 </mapper>

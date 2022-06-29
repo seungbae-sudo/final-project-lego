@@ -8,6 +8,7 @@ import org.kosta.finalproject.lego.serivce.MemberService;
 import org.kosta.finalproject.lego.vo.BoardVO;
 import org.kosta.finalproject.lego.vo.BookingVO;
 import org.kosta.finalproject.lego.vo.MemberVO;
+import org.kosta.finalproject.lego.vo.MessageVO;
 import org.kosta.finalproject.lego.vo.ReviewVO;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -81,6 +82,31 @@ public class MemberMyPageController {
 	@RequestMapping("updateResult")
 	public String UpdateResult() {
 		return "mypage";
+	}
+	
+	@RequestMapping("mypage-message")
+	public String mypageMessage(@AuthenticationPrincipal MemberVO memberVO,Model model) {
+		List<MessageVO> list =memberMyPageMapper.findMessageList( memberVO.getId());
+		model.addAttribute("messageList", list);
+		return "mypage-message";
+	}
+	
+	@RequestMapping("message-detail")
+	public String mypageMessageDetail(@AuthenticationPrincipal MemberVO memberVO,String receiveId,String receiveName,Model model) {
+		MessageVO messageVO=new MessageVO();
+		MemberVO reMvo= new MemberVO();
+		reMvo.setId(receiveId);
+		MemberVO sendMvo= new MemberVO();
+		sendMvo.setId(memberVO.getId());
+		messageVO.setReMvo(reMvo);
+		messageVO.setSendMvo(sendMvo); //보내는 사람 
+
+		
+		List<MessageVO> message = memberMyPageMapper.findMyMessageDetailByMessageVO(messageVO);
+		System.out.println(message);
+		model.addAttribute("receiveName",receiveName);
+		model.addAttribute("messageDetail",message);
+		return "mypage-message-detail";
 	}
 }
 

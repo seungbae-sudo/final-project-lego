@@ -194,47 +194,46 @@ and c.master_id=ms.id
 group by to_char(dbms_lob.substr(ms.specifications, 4000)),m.name
 
 
--- 메세지 
--- 받은 메세지 
-select me.message_no,me.message_content,r.name,me.receive_date
-from (
-	select m.name, m.id
-	from member m, master ms
-	where ms.id=m.id
-)r, message me
-where me.id='lsj@naver.com'
-and me.receive_id=r.id
+-- 메세지 리스트
 
+-- id => 보낸사람 : 나
+-- 받은사람 receive_id : 고수 
+-- 해당 받은 사람의 이름이 나와야함 member name을 receiv_id 와 비교 =>m.name은 고수의 이름 
+-- 최신순으로 정렬 // 나중에! => order by me.receive_date desc 를 할경우 중복이 안돼
+
+
+select ms.receive_id,m.name
+from message ms, member m
+where ms.id='aa@aa'
+and ms.receive_id=m.id
+group by ms.receive_id,m.name
+
+-- 메세지 상세보기
 
 select*from message
---보낸 메세지 
-select message_no,message_content,receive_date
-from message
-where id='aa@aa'
 
-select  me.message_no,me.message_content,me.receive_id,m.name,me.receive_date
-from message me,member m
-where me.id='aa@aa'
-and m.id=me.receive_id
-order by me.receive_date desc 
-
---왜 중복 제거가 
-select distinct me.receive_id,me.message_no,m.name,me.receive_date
-from message me,member m
-where me.id='aa@aa'
-and m.id=me.receive_id
-order by me.receive_date desc 
-
---
-select r.receive_id,me.message_no,m.name,me.receive_date
-from (
-	select distinct receive_id
-	from message) r, message me,member m
-where me.id='aa@aa'
-and r.receive_id=me.receive_id
-and m.id=me.receive_id
-order by me.receive_date desc
+select ms.message_no,ms.message_content, ms.receive_id, ms.receive_date,m.name
+from message ms, member m 
+where ms.id='sg@sg'
+and ms.receive_id='as@as'
+and ms.receive_id=m.id
+order by ms.receive_date desc
 
 
 
--- 근데 문제가 있는거같다...! 고수
+
+select ms.message_no,ms.message_content, ms.receive_id, ms.receive_date,m.name
+from message ms, member m 
+where ms.id='sg@sg'
+and ms.receive_id='as@as'
+and ms.receive_id=m.id
+
+union all
+
+select ms.message_no,ms.message_content, ms.receive_id, ms.receive_date,m.name
+from message ms, member m 
+where ms.id='as@as'
+and ms.receive_id='sg@sg'
+and ms.receive_id=m.id
+
+order by receive_date asc
