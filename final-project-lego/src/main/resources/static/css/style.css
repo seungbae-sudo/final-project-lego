@@ -52,16 +52,17 @@
     margin-top: 50px;
     flex-wrap: wrap;
 }
-/*마이페이지 상세보기 */
+/*마이페이지 메세지 상세보기 */
 .message-detail-wrap{
 	height: 710px;
 }
 .message-bg{
-	 width: 550px;
-    background-color: lightgray;
+    padding: 20px 20px;
+    width: 433px;
+    background-color: #e49a6a;
     height: 500px;
-    overflow: scroll;
-    border-radius: 30px;
+    overflow: inherit;
+    border-radius: 20px;
 }
 
 .message-content{
@@ -69,12 +70,24 @@
 }
 
 .message-textarea{
-    width: 460px;
+    width: 370px;
     margin-top: 10px;
     padding: 10px;
     border-radius: 10px;
 }
 
+.mypage-message{
+	width: 200px;
+    white-space: normal;
+}
+.my-message{
+	float: right;
+}
+
+
+.plz{
+	display: block;
+}
 /* community */
 .board-list{
    display: block;

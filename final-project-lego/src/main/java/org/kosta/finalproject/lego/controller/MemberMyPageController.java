@@ -3,6 +3,7 @@ package org.kosta.finalproject.lego.controller;
 import java.util.List;
 
 import org.kosta.finalproject.lego.mapper.MemberMyPageMapper;
+import org.kosta.finalproject.lego.mapper.MessageMapper;
 import org.kosta.finalproject.lego.serivce.MemberMypageService;
 import org.kosta.finalproject.lego.serivce.MemberService;
 import org.kosta.finalproject.lego.vo.BoardVO;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import lombok.RequiredArgsConstructor;
 
@@ -24,7 +26,7 @@ import lombok.RequiredArgsConstructor;
 public class MemberMyPageController {
 	private final MemberMyPageMapper memberMyPageMapper;
 	private final MemberMypageService  memberMypageService;
-	
+	private final MessageMapper messageMapper;
 	//mypage로 가는 건 homeController에서 !
 	
 	
@@ -91,7 +93,7 @@ public class MemberMyPageController {
 		return "mypage-message";
 	}
 	
-	@RequestMapping("message-detail")
+	@RequestMapping(value={"message-detail","sendMessageResult"})
 	public String mypageMessageDetail(@AuthenticationPrincipal MemberVO memberVO,String receiveId,String receiveName,Model model) {
 		MessageVO messageVO=new MessageVO();
 		MemberVO reMvo= new MemberVO();
@@ -106,7 +108,28 @@ public class MemberMyPageController {
 		System.out.println(message);
 		model.addAttribute("receiveName",receiveName);
 		model.addAttribute("messageDetail",message);
+		
+		model.addAttribute("receiveId", receiveId);
+		model.addAttribute("sendId", memberVO.getId());
 		return "mypage-message-detail";
 	}
+	
+	
+	@PostMapping("sendMessage")
+	public String sendMessage(Model model,MessageVO messageVO,String receiveId,String sendId, String receiveName,RedirectAttributes redirect) {
+		MemberVO reVO = new MemberVO();
+		MemberVO seVO = new MemberVO();
+		reVO.setId(receiveId);
+		seVO.setId(sendId);
+		messageVO.setReMvo(reVO);
+		messageVO.setSendMvo(seVO);
+		messageMapper.message(messageVO);
+		
+		redirect.addAttribute("receiveId", receiveId);
+		redirect.addAttribute("receiveName", receiveName);
+		return "redirect:sendMessageResult";
+	}
+	
+	
 }
 

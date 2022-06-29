@@ -69,7 +69,7 @@
 		</select>
 		
 		<select id="findMyMessageDetailByMessageVO" parameterType="org.kosta.finalproject.lego.vo.MessageVO" resultMap="MemberResult" resultType="org.kosta.finalproject.lego.vo.MessageVO">
-			select ms.message_no,ms.message_content, ms.receive_id, ms.receive_date,m.name
+			select ms.message_no,ms.message_content, ms.receive_id as id, ms.receive_date,m.name
 			from message ms, member m 
 			where ms.id=#{sendMvo.id}
 			and ms.receive_id=#{reMvo.id}
