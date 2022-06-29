@@ -31,8 +31,10 @@
 				<div class="col-md-12">
 					<div class="media">
 						<div class="pull-left profile">
-							<img class="media-object user-img" src="./images/일반회원.jpg"
-								alt="Image">
+							<img class="media-object user-img" src="./images/일반회원.jpg" alt="Image">
+							<!-- <img class="media-object user-img" th:src="@{./images/}+${images.memberVO.id,/,images.imageName}" alt="Image"> -->
+							<!-- th:src="@{/webapp/file/} + ${이미지파일명()}"  "|location.href='@{/basic/items/add}'|"-->
+							<!-- <img class="media-object user-img" th:src="@{./images/sooyoung@a/}+${images.imageName()}" alt="Image"> -->
 						</div>
 						<div class="media-body">
 							<h2 class="media-heading" sec:authentication="principal.name">손석구</h2>

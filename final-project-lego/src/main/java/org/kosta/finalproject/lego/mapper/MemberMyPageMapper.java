@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.kosta.finalproject.lego.vo.BoardVO;
 import org.kosta.finalproject.lego.vo.BookingVO;
+import org.kosta.finalproject.lego.vo.ImageVO;
 import org.kosta.finalproject.lego.vo.MemberVO;
 import org.kosta.finalproject.lego.vo.MessageVO;
 import org.kosta.finalproject.lego.vo.ReviewVO;
@@ -25,5 +26,7 @@ public interface MemberMyPageMapper {
 	List<MessageVO> findMessageList(String id);
 
 	List<MessageVO> findMyMessageDetailByMessageVO(MessageVO messageVO);
+
+	ImageVO getImageById(String id);
 
 }
