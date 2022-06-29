@@ -86,8 +86,8 @@ public class CommunityBoardController {
 
 	
 
-	@RequestMapping("/boardDetail")
-	public String boradDetail(int boardNo, Model model, int categoryNo,CommentVO commentVO,@AuthenticationPrincipal MemberVO memberVO,HttpServletRequest request) {
+	@RequestMapping("/board-detail")
+	public String boradDetail(int boardNo, Model model, int categoryNo,@AuthenticationPrincipal MemberVO memberVO,HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
 		BoardCategoryVO bcvo = new BoardCategoryVO();
 		bcvo.setCategoryNo(categoryNo);
