@@ -113,7 +113,10 @@ where b.board_no=cm.board_no
 and m.id=cm.id
 
 --commentDelete
-DELETE FROM board_comment WHERE comment_no =' 74'
+DELETE FROM board_comment WHERE comment_no =46
+select *from board_comment WHERE comment_no =46
 
+WHERE bc.
+select
 --hits
 UPDATE board SET hits = hits+1 WHERE board_no = 81

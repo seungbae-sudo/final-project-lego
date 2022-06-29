@@ -53,6 +53,7 @@
 		<resultMap type="org.kosta.finalproject.lego.vo.CommentVO" id="memberAndBoardResultMap">
 		<result column="board_no" property="bvo.boardNo"/>
 		<result column="name" property="mvo.name"/>
+		<result column="id" property="mvo.id"/>
 	</resultMap>
 	
 <!-- 	<select id="findBVO" resultType="int" resultMap="memberAndBoardResultMap">
@@ -63,7 +64,7 @@
 	</select> -->
 	
 	<select id="findCommentList" resultType="org.kosta.finalproject.lego.vo.CommentVO" resultMap="memberAndBoardResultMap">
-		select cm.comment_content, cm.comment_no,cm.comment_date , m.name
+		select cm.comment_content, cm.comment_no,cm.comment_date , m.name, m.id
 		from  board b, member m, board_comment cm
 		where b.board_no=cm.board_no
 		and m.id=cm.id
@@ -74,4 +75,8 @@
 	<update id="updateHits" parameterType="int">
 		UPDATE board SET hits = hits+1 WHERE board_no =#{value}
 	</update>
+	
+	<delete id="deleteComment" parameterType="int">
+		DELETE FROM board_comment WHERE comment_no =#{value}
+	</delete>
 </mapper>
