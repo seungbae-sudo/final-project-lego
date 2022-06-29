@@ -35,3 +35,7 @@ from board b, board_category c
 where b.id = 'lsj@naver.com'
 and c.category_no = b.category_no
 
+select m.name from member m, master ms
+where m.id = ms.id
+and ms.id = 'as@as'
+

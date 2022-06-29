@@ -34,8 +34,8 @@
 								alt="Image">
 						</div>
 						<div class="media-body">
-							<h2 class="media-heading">고수</h2>
-							<p>Hi im Gosu</p>
+							<h2 class="media-heading" th:text="${member.name}">고수</h2>
+							<p th:text="${masterDetail.specifications}"></p>
 						</div>
 					</div>
 					<ul class="list-inline dashboard-menu text-center">
@@ -43,7 +43,7 @@
 						<li><a class="active" th:href="@{/mastermypage-review}">리뷰</a></li>
 						<li><a th:href="@{/mastermypage-cart}">내가 쓴 글</a></li>
 						<li><a th:href="@{/mastermypage-consult}">상담신청내역</a></li>
-						<li><a href="">메세지함</a></li>
+						<li><a th:href="@{/mastermypage-message}">메세지함</a></li>
 					</ul>
 					<div class="dashboard-wrapper user-dashboard profile-detail">
 

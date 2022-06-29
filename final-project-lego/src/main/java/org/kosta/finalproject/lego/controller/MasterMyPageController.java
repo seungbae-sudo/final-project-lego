@@ -36,19 +36,31 @@ public class MasterMyPageController {
 
 		String id=memberVO.getId();
 		List<BoardVO> list= masterMyPageMapper.findMyBoard(id);
-		System.out.println(list);
 		model.addAttribute("BoardList", list);
+		model.addAttribute("member", memberVO);
+		model.addAttribute("masterDetail", masterMyPageMapper.findMasterDetailList(memberVO.getId()));
 		return "mastermypage-cart";
 	}
 
 	@RequestMapping("/mastermypage-review")
-	public String mastermypageReview() {
+	public String mastermypageReview(@AuthenticationPrincipal MemberVO memberVO,Model model) {
+		model.addAttribute("member", memberVO);
+		model.addAttribute("masterDetail", masterMyPageMapper.findMasterDetailList(memberVO.getId()));
 		return "mastermypage-review";
 	}
 
 	@RequestMapping("/mastermypage-consult")
-	public String mastermypageConsult() {
+	public String mastermypageConsult(@AuthenticationPrincipal MemberVO memberVO,Model model) {
+		model.addAttribute("member", memberVO);
+		model.addAttribute("masterDetail", masterMyPageMapper.findMasterDetailList(memberVO.getId()));
 		return "mastermypage-consult";
+	}
+	
+	@RequestMapping("/mastermypage-message")
+	public String mastermypageMessage(@AuthenticationPrincipal MemberVO memberVO,Model model) {
+		model.addAttribute("member", memberVO);
+		model.addAttribute("masterDetail", masterMyPageMapper.findMasterDetailList(memberVO.getId()));
+		return "mastermypage-Message";
 	}
 
 	@RequestMapping("masterUpdateForm")
@@ -62,8 +74,8 @@ public class MasterMyPageController {
 	@PostMapping("updateMaster")
 	//첫번째 매개변수 Authentication : Spring Security 인증 정보 , 두번째 매개변수 memberVO : 수정폼에서 전달받는 데이터 
 	public String updateMemberAction(Authentication authentication,String specifications, String career, MemberVO memberVO) {
-		System.out.println(specifications+career);
-		System.out.println(memberVO);
+//		System.out.println(specifications+career);
+//		System.out.println(memberVO);
 		
 		MemberVO vo = (MemberVO)authentication.getPrincipal();	
 		MasterVO mvo = new MasterVO();
