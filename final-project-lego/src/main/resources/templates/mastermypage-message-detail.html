@@ -57,7 +57,7 @@
                         </th:block>
                      </div>
                         <div>
-                           <form th:action="@{/sendMessage}" method="post">
+                           <form th:action="@{/masterSendMessage}" method="post">
                            	  <input type="hidden" name="receiveId" th:value="${receiveID}">
                            	  <input type="hidden" name="receiveName" th:value="${receiveName}">
                               <textarea class="message-textarea" name="messageContent" placeholder="메세지를 입력하세요"></textarea>

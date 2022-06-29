@@ -84,7 +84,7 @@
          order by receive_date asc
 	</select>
 	
-	<insert id="sendMessage" parameterType="String">
+	<insert id="masterSendMessage" parameterType="String">
 	insert into message(message_no, message_content, id,receive_id,receive_date) values(message_no_seq.nextval, #{messageContent},#{sendMvo.id},#{reMvo.id},sysdate)
 	</insert>
 	

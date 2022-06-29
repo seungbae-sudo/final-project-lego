@@ -71,12 +71,11 @@ public class MasterMyPageController {
 	// 내가 쓴 글 
 	@RequestMapping("/mastermypage-cart")
 	public String mastermypageCart(@AuthenticationPrincipal MemberVO memberVO,Model model) {
-		String id=memberVO.getId();
-		List<BoardVO> list= masterMyPageMapper.findMyBoard(id);
-		System.out.println(list.get(0));
-		model.addAttribute("BoardList", list);
 		model.addAttribute("member", memberVO);
 		model.addAttribute("masterDetail", masterMyPageMapper.findMasterDetailList(memberVO.getId()));
+		String id=memberVO.getId();
+		List<BoardVO> list= masterMyPageMapper.findMyBoard(id);
+		model.addAttribute("BoardList", list);
 		return "mastermypage-cart";
 	}
 	// 리뷰 
@@ -121,7 +120,6 @@ public class MasterMyPageController {
 	public String mastermypageMessageDetail(@AuthenticationPrincipal MemberVO memberVO,Model model,@RequestParam("receiveID") String receiveID,@RequestParam("receiveName") String receiveName) {
 		model.addAttribute("member", memberVO);
 		model.addAttribute("masterDetail", masterMyPageMapper.findMasterDetailList(memberVO.getId()));
-		
 		MessageVO messageVO = new MessageVO();
 		MemberVO reMvo = new MemberVO();
 		reMvo.setId(receiveID);
@@ -129,19 +127,15 @@ public class MasterMyPageController {
 		sendMvo.setId(memberVO.getId());
 		messageVO.setReMvo(reMvo);
 		messageVO.setSendMvo(sendMvo);
-		System.out.println(messageVO);
-		
 		List<MessageVO> message = masterMyPageMapper.findMyMessageDetail(messageVO);
 		model.addAttribute("receiveID",receiveID);
 		model.addAttribute("receiveName",receiveName);
-		
 		model.addAttribute("messageDetail",message);
-		System.out.println(message);
 		return "mastermypage-message-detail";
 	}
 	// 메세지 전송
-	@PostMapping("/sendMessage")
-	public String sendMessage(Model model,MessageVO messageVO,String receiveId,String sendId, String receiveName, RedirectAttributes redirect,@AuthenticationPrincipal MemberVO memberVO) {
+	@PostMapping("/masterSendMessage")
+	public String masterSendMessage(Model model,MessageVO messageVO,String receiveId,String sendId, String receiveName, RedirectAttributes redirect,@AuthenticationPrincipal MemberVO memberVO) {
 	      MemberVO reVO = new MemberVO();
 	      MemberVO seVO = new MemberVO();
 	      reVO.setId(receiveId);
