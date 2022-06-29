@@ -33,6 +33,11 @@
    		<result column="name" property="sendMvo.name"/>
    	</resultMap>
    	
+   	<resultMap type="org.kosta.finalproject.lego.vo.MessageVO" id="MemberResult">
+				<result column="name" property="reMvo.name"/>
+				<result column="id" property="reMvo.id"/>
+		</resultMap>
+   	
    <select id ="findMyBoard" resultType="org.kosta.finalproject.lego.vo.BoardVO" resultMap="BoardCategoryResultMap">
    		select b.board_no,b.board_title,c.category_name, c.category_no
 		from board b, board_category c
@@ -61,7 +66,7 @@
 	group by ms.id, m.name
 	</select>
 	
-	<select id="findMyMessageDetail">
+	<select id="findMyMessageDetail" resultType="org.kosta.finalproject.lego.vo.MessageVO" parameterType="org.kosta.finalproject.lego.vo.MessageVO" resultMap="MemberResult">
 	select ms.message_no,ms.message_content, ms.receive_id, ms.receive_date,m.name
          from message ms, member m 
          where ms.id=#{sendMvo.id}
@@ -78,5 +83,9 @@
          
          order by receive_date asc
 	</select>
+	
+	<insert id="sendMessage" parameterType="String">
+	insert into message(message_no, message_content, id,receive_id,receive_date) values(message_no_seq.nextval, #{messageContent},#{sendMvo.id},#{reMvo.id},sysdate)
+	</insert>
 	
 </mapper>

@@ -44,9 +44,28 @@
 						<li><a th:href="@{/mastermypage-consult}">상담신청내역</a></li>
 						<li><a class="active" th:href="@{/mastermypage-message}">메세지함</a></li>
 					</ul>
-					<div class="dashboard-wrapper user-dashboard profile-detail">
-					<span th:text="|${mmpmd}님 메세지|"></span>
-					</div>
+					<div class="dashboard-wrapper user-dashboard profile-detail message-detail-wrap">
+
+                  <div class="table-responsive message-content">
+                     <h2 th:text="|${receiveName}님과의 대화|">대화 상대 이름 </h2> 
+                     <a  th:href="@{mastermypage-message}">메세지 리스트로 가기</a>
+                     <div class="message-bg">
+                        <th:block th:each="message:${messageDetail}">
+                           <div>
+                              <pre th:text="${message.messageContent}">대화 내용</pre><div th:text="${message.receiveDate}"> 메세지 시간 </div>
+                           </div>
+                        </th:block>
+                     </div>
+                        <div>
+                           <form th:action="@{/sendMessage}" method="post">
+                           	  <input type="hidden" name="receiveId" th:value="${receiveID}">
+                           	  <input type="hidden" name="receiveName" th:value="${receiveName}">
+                              <textarea class="message-textarea" name="messageContent" placeholder="메세지를 입력하세요"></textarea>
+                              <input type="submit" value="전송">
+                           </form>
+                        </div>
+                  </div>
+               </div>
 				</div>
 			</div>
 		</div>

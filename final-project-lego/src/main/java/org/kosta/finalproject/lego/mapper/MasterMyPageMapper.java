@@ -27,4 +27,9 @@ public interface MasterMyPageMapper {
 
 	List<MessageVO> findMyMessage(String id);
 	
+	List<MessageVO> findMyMessageDetail(MessageVO messageVO);
+
+	void message(MessageVO messageVO);
+	
+	
 }
