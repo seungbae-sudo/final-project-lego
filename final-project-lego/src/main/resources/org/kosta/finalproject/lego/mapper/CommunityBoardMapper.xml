@@ -70,4 +70,8 @@
 		and b. board_no=#{value}
 	</select>
 
+
+	<update id="updateHits" parameterType="int">
+		UPDATE board SET hits = hits+1 WHERE board_no =#{value}
+	</update>
 </mapper>

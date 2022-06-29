@@ -54,9 +54,8 @@ public class WebSecurityConfig  {
 				.and() 
 				.formLogin().permitAll();//로그인 폼은 인증없이 접근하도록 설정 
 		// 로그아웃을 위한 설정, 로그아웃 처리 후 로그인 폼이 있는 home으로 이동 , session invalidate (무효화한다) 
+
 		http.logout().permitAll().logoutUrl("/logout").logoutSuccessUrl("/").invalidateHttpSession(true);
-		
-			 
 		
 		//Spring Security에서 인증이 필요한 서비스를 비인증 상태에서 요청하면 AccessDeniedException 발생된다
 		//이 때 CustomAuthenticationEntryPoint 객체가 실행되도록 설정

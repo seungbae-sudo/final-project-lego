@@ -1,7 +1,10 @@
 package org.kosta.finalproject.lego.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.kosta.finalproject.lego.mapper.CommunityBoardMapper;
 import org.kosta.finalproject.lego.vo.BoardCategoryVO;
@@ -23,6 +26,7 @@ import lombok.RequiredArgsConstructor;
 public class CommunityBoardController {
 	private final CommunityBoardMapper communityBoardMapper;
 
+
 	@RequestMapping("/writeForm")
 	public String boardWrite() {
 		return "board-write-form";
@@ -42,8 +46,8 @@ public class CommunityBoardController {
 	}
 
 	@RequestMapping(value = { "/goCommunity", "/board-posting-result" ,"/boardUpdateResult","/boardDeleteResult"})
-	public String goCommunity(Model model, @RequestParam("categoryNo") int categoryNo) {
-		List<BoardVO> list = communityBoardMapper.findAllCommunityList(categoryNo);
+	public String goCommunity(Model model, @RequestParam("categoryNo") int categoryNo,HttpServletRequest request) {
+		List<BoardVO> list =communityBoardMapper.findAllCommunityList(categoryNo);
 		model.addAttribute("CategoryList", list);
 
 		return "community-list";
@@ -81,8 +85,10 @@ public class CommunityBoardController {
 	}
 
 	
+
 	@RequestMapping("/boardDetail")
-	public String boradDetail(int boardNo, Model model, int categoryNo,CommentVO commentVO) {
+	public String boradDetail(int boardNo, Model model, int categoryNo,CommentVO commentVO,@AuthenticationPrincipal MemberVO memberVO,HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
 		BoardCategoryVO bcvo = new BoardCategoryVO();
 		bcvo.setCategoryNo(categoryNo);
 		BoardVO bvo = communityBoardMapper.findBoardDetailByBoardNo(boardNo);
@@ -91,6 +97,14 @@ public class CommunityBoardController {
 		model.addAttribute("categoryNo", categoryNo);
 		List<CommentVO> list=communityBoardMapper.findCommentList(boardNo);
 		model.addAttribute("commentList", list);
+		model.addAttribute("mvo", memberVO);
+		@SuppressWarnings("unchecked")
+		ArrayList<Integer> list1 = (ArrayList<Integer>) session.getAttribute("CommunityBoardNoList");
+		if(!list1.contains(boardNo)) {
+			communityBoardMapper.updateHits(boardNo);
+			list1.add(boardNo);		
+		}
+		
 		return "board-detail";
 	}
 	
@@ -98,7 +112,7 @@ public class CommunityBoardController {
 	
 	@PostMapping("/CommentWrite")
 	public String CommentWrite(CommentVO commentVO,@AuthenticationPrincipal MemberVO memberVO, int boardNo, int categoryNo) {
-		/* BoardVO bvo= communityBoardMapper.findBVO(boardNo); */
+		
 		System.out.println(boardNo);
 		BoardVO bvo=new BoardVO();
 		bvo.setBoardNo(boardNo);

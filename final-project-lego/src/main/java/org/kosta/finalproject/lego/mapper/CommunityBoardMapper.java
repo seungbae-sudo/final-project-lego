@@ -26,8 +26,6 @@ public interface CommunityBoardMapper {
 
 	List<CommentVO> findCommentList(int boardNo);
 
-	/* BoardVO findBVO(int boardNo); */
-
-
+	void updateHits(int boardNo);
 
 }

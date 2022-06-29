@@ -114,3 +114,6 @@ and m.id=cm.id
 
 --commentDelete
 DELETE FROM board_comment WHERE comment_no =' 74'
+
+--hits
+UPDATE board SET hits = hits+1 WHERE board_no = 81
