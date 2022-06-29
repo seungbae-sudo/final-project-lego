@@ -115,4 +115,22 @@ select ms.id, ms.receive_id, ms.message_content
 from member m, message ms
 where m.id = ms.id and ms.id = 'as@as'
 
+select ms.message_no,ms.message_content, ms.receive_id, ms.receive_date,m.name
+from message ms, member m 
+where ms.id=#{sendMvo.id}
+and ms.receive_id=#{reMvo.id}
+and ms.receive_id=m.id
 
+union all
+         
+select ms.message_no,ms.message_content, ms.receive_id, ms.receive_date,m.name
+from message ms, member m 
+where ms.id=#{reMvo.id}
+and ms.receive_id=#{sendMvo.id}
+and ms.receive_id=m.id
+         
+order by receive_date asc
+
+select * from message where id = 'as@as'
+
+delete from message where receive_id = 'as@as'

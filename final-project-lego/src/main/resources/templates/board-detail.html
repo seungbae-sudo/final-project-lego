@@ -53,8 +53,37 @@
 					<button type="button"  class="btn btn-success" onclick="deletePost()">삭제</button>
 				</div>
 				
+			<!-----------------------------------/* 좋아요 test  */------------------------------------------>
 			<div>
 				<h3 >댓글</h3>
+				
+			<!-- 	<th:with>
+				<th:if test="${fn:contains(sessionScope.LikeNoList, cvo.boardNo)}">
+					<th:with>
+						<th:if test="${fn:contains(sessionScope.LikeDownList,cvo.boardNo) }">
+							<a th:href="{/@likesUp}?boardNo=${boardNo}&categoryNo=${categoryNo}">			/*&pageNo=${pageNo} */
+								<i class='far fa-heart icon'>빈하트</i>
+							</a> ${bcvo.likes}
+						</th:if>
+						<th:unless>
+							<a th:href="{/@likesDown}boardNo=${boardNo }&carNo=${carNo}">									/*&pageNo=${pageNo} */
+								<i class="fa fa-heart" style="font-size: 24px; color: red">빨간하트</i>
+							</a>${bcvo.likes}
+						</th:unless>
+					</th:with>
+				</th:if>
+				
+				<th:unless>
+					<a th:href="{/@likesUp}?boardNo=${cvo.boardNo }&carNo=${carNo}&pageNo=${pageNo}"><i
+						class='far fa-heart icon'></i></a> ${cvo.likeNo }
+				
+					</th:unless>
+
+			</th:with> -->
+			
+			<!-----------------------------------/* 좋아요 test  */------------------------------------------>
+			
+			
 			</div>
 			<hr>
 			<div class="content">
@@ -65,19 +94,23 @@
 				<button class="col-md-1 btn" type="submit" onclick="compost()">작성</button>
 			</form> 
 			
-			<form action="">
 			<table class="table table-comment">
 				<tbody class="up-space">
 					 <tr th:each="comList:${commentList}">
 	                 	<td class="col-md-8"  th:text="${comList.commentContent}"></td>
 	                 	<td class="col-md-2"  th:text="${comList.commentDate} "></td>
-	                 	<td class="col-md-2"  th:text="${comList.mvo.name} "></td>
-	                 	 <!--/*  <button type="button" onclick="comdeletepost()">삭제</button> */-->
+	                 	<td class="col-md-1"  th:text="${comList.mvo.name} "></td>
+	                 	<td class="col-md-1" ><form th:action="@{/CommentDelete}" method="post" th:if="${mvo.id}==${comList.mvo.id}">
+		                 			<input type="hidden" name="commentNo" th:value="${comList.commentNo}">
+									<input type="hidden" name="categoryNo" th:value="${categoryNo}"> 
+									<input type="hidden" name="boardNo" th:value="${bvo.boardNo}">
+								<!--<input type="hidden" name="pageNo" value="${pageNo}"> -->
+									 <button type="submit" onclick="comdeletepost()">삭제</button>
+	                 		</form>
+	                 	</td>
 		            </tr>
 	             </tbody>
-		</table>
-		
-						 
+			</table>
 			</div>
 		</section>
 

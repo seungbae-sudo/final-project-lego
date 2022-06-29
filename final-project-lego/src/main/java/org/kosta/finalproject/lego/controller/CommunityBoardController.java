@@ -113,14 +113,23 @@ public class CommunityBoardController {
 	@PostMapping("/CommentWrite")
 	public String CommentWrite(CommentVO commentVO,@AuthenticationPrincipal MemberVO memberVO, int boardNo, int categoryNo) {
 		
-		System.out.println(boardNo);
 		BoardVO bvo=new BoardVO();
 		bvo.setBoardNo(boardNo);
 		commentVO.setBvo(bvo);
 		commentVO.setMvo(memberVO);
-		System.out.println(commentVO);
 		communityBoardMapper.writeComment(commentVO);
-		return "redirect:/boardDetail?boardNo="+boardNo+"&categoryNo="+categoryNo;
+		return "redirect:/board-detail?boardNo="+boardNo+"&categoryNo="+categoryNo;
+	}
+	
+	@PostMapping("/CommentDelete")
+	public String CommentDelete(Model model,int commentNo,@AuthenticationPrincipal MemberVO memberVO, int boardNo, int categoryNo) {
+
+	
+
+		communityBoardMapper.deleteComment(commentNo);
+
+
+		return "redirect:/board-detail?boardNo="+boardNo+"&categoryNo="+categoryNo;
 	}
 
 }

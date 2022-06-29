@@ -16,17 +16,20 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class QnAController {
 	private final QnAMapper qnaMapper;
+
 	@RequestMapping("/QnAList")
 	public String QnAList(Model model) {
 		model.addAttribute("qnaList", qnaMapper.findQnAList());
 		model.addAttribute("qnaCommentList", qnaMapper.findQnACommentList());
 		return "QnA-list";
 	}
+
 	@RequestMapping("/QnAWriteFrom")
 	public String QnAWriteFrom() {
-				
+
 		return "QnA-write-form";
 	}
+
 	@PostMapping("/QnAWrite")
 	public String QnAWrite(@AuthenticationPrincipal MemberVO memberVO, String ask) {
 		QnAVO qnaVO = new QnAVO();
@@ -35,19 +38,42 @@ public class QnAController {
 		qnaMapper.writeQnA(qnaVO);
 		return "redirect:/QnAList";
 	}
+
 	@RequestMapping("/QnADetail")
-	public String QnADetail(int qnaNo,Model model) {
+	public String QnADetail(int qnaNo, Model model) {
 		model.addAttribute("qnaNo", qnaNo);
-		model.addAttribute("qnaDetail",qnaMapper.qnaDetail(qnaNo));
+		model.addAttribute("qnaDetail", qnaMapper.qnaDetail(qnaNo));
 		return "QnA-detail";
 	}
+
 	@PostMapping("/QnACommentWrite")
-	public String QnACommentWrite(QnACommentVO qnaCommentVO,@AuthenticationPrincipal MemberVO memberVO,int qnaNo) {
-		QnAVO qnaVO= new QnAVO();
+	public String QnACommentWrite(QnACommentVO qnaCommentVO, @AuthenticationPrincipal MemberVO memberVO, int qnaNo) {
+		QnAVO qnaVO = new QnAVO();
 		qnaVO.setQnaNo(qnaNo);
 		qnaCommentVO.setQnaVO(qnaVO);
 		qnaCommentVO.setMemberVO(memberVO);
 		qnaMapper.writeQnAComment(qnaCommentVO);
 		return "redirect:/QnAList";
+	}
+
+	@PostMapping("/QnAdelete")
+	public String QnAdelete(int qnaNo) {
+		qnaMapper.deleteQna(qnaNo);
+		return "redirect:./QnAList";
+	}
+
+	@RequestMapping("/QnAupdateForm")
+	public String QnAupdate(int qnaNo, Model model) {
+		model.addAttribute("qnaNo", qnaNo);
+		model.addAttribute("qnaDetail", qnaMapper.qnaDetail(qnaNo));
+		return "QnA-update-form";
+	}
+	@PostMapping("/QnAUpdate")
+	public String QnAUpdate(String ask, int qnaNo) {
+		QnAVO qnaVO = new QnAVO();
+		qnaVO.setAsk(ask);
+		qnaVO.setQnaNo(qnaNo);
+		qnaMapper.updateQnA(qnaVO);
+		return "redirect:/QnADetail?qnaNo="+qnaNo;
 	}
 }

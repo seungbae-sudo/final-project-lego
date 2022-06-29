@@ -18,4 +18,8 @@ public interface QnAMapper {
 	QnAVO qnaDetail(int qnaNo);
 	
 	List<QnACommentVO> findQnACommentList();
+
+	void deleteQna(int qnaNo);
+
+	void updateQnA(QnAVO qnaVO);
 }
