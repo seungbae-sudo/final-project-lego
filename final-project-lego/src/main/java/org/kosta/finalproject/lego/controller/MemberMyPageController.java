@@ -8,6 +8,8 @@ import org.kosta.finalproject.lego.serivce.MemberService;
 import org.kosta.finalproject.lego.vo.BoardVO;
 import org.kosta.finalproject.lego.vo.BookingVO;
 import org.kosta.finalproject.lego.vo.MemberVO;
+import org.kosta.finalproject.lego.vo.MessageVO;
+import org.kosta.finalproject.lego.vo.ReviewVO;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -27,8 +29,12 @@ public class MemberMyPageController {
 	
 	
 	//탭 이동 컨트롤러***************
+	//내 찜목록
 	@RequestMapping("/mypage-cart")
-	public String mypageCart() {
+	public String mypageCart(@AuthenticationPrincipal MemberVO memberVO,Model model) {
+		String id =memberVO.getId();
+		List<ReviewVO> cartList=memberMyPageMapper.findCartList(id);
+		model.addAttribute("cartList", cartList);
 		return "mypage-cart";
 	}
 	
@@ -76,6 +82,31 @@ public class MemberMyPageController {
 	@RequestMapping("updateResult")
 	public String UpdateResult() {
 		return "mypage";
+	}
+	
+	@RequestMapping("mypage-message")
+	public String mypageMessage(@AuthenticationPrincipal MemberVO memberVO,Model model) {
+		List<MessageVO> list =memberMyPageMapper.findMessageList( memberVO.getId());
+		model.addAttribute("messageList", list);
+		return "mypage-message";
+	}
+	
+	@RequestMapping("message-detail")
+	public String mypageMessageDetail(@AuthenticationPrincipal MemberVO memberVO,String receiveId,String receiveName,Model model) {
+		MessageVO messageVO=new MessageVO();
+		MemberVO reMvo= new MemberVO();
+		reMvo.setId(receiveId);
+		MemberVO sendMvo= new MemberVO();
+		sendMvo.setId(memberVO.getId());
+		messageVO.setReMvo(reMvo);
+		messageVO.setSendMvo(sendMvo); //보내는 사람 
+
+		
+		List<MessageVO> message = memberMyPageMapper.findMyMessageDetailByMessageVO(messageVO);
+		System.out.println(message);
+		model.addAttribute("receiveName",receiveName);
+		model.addAttribute("messageDetail",message);
+		return "mypage-message-detail";
 	}
 }
 

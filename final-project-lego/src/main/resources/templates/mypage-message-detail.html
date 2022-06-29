@@ -34,36 +34,29 @@
 								alt="Image">
 						</div>
 						<div class="media-body">
-							<h2 class="media-heading">손석구</h2>
-						
+							<h2 class="media-heading" pd-t30>손석구</h2>
+							
 						</div>
 					</div>
 					<ul class="list-inline dashboard-menu text-center">
 						<li><a href="dashboard.html"  th:href="@{/mypage}">회원정보</a></li>
 						<li><a  href="order.html" th:href="@{/mypage-cart}">찜목록</a></li>
 						<li><a th:href="@{/mypage-wrote}">내가 쓴 글</a></li>
-						<li><a  class="active"  th:href="@{/mypage-booking}">내 상담목록</a></li>
-						<li><a th:href="@{/mypage-message}">메세지함</a></li>
+						<li><a th:href="@{/mypage-booking}">내 상담목록</a></li>
+						<li><a class="active" th:href="@{/mypage-message}">메세지함</a></li>
 					</ul>
 					<div class="dashboard-wrapper user-dashboard profile-detail">
+
 						<div class="table-responsive">
-							<table class="table">
-								<thead>
-									<tr>
-										<th class="col-md-2 text-center" >고수 이름</th>
-										<th class="col-md-6 text-center">분야</th>
-										<th class="col-md-3 text-center">상담 예약 날짜</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr th:each="list:${CartList}">
-										<td class="text-center" th:text="${list.mvo.name}">아이유</td>
-										<td class="text-center"  th:text="${list.cvo.lessonSort}"><a href="">보컬</a></td>
-										<td class="text-center"  th:text="${list.bookingDay}">2022.06.22</td>
-									</tr>
-								</tbody>
-							</table>
-							
+							<h2 th:text="${receiveName}">대화 상대 이름 </h2> 
+							<a  th:href="@{/mypage-message}">메세지 리스트로 가기</a>
+							<div>
+								<th:block th:each="message:${messageDetail}">
+									<div>
+										<pre th:text="${message.messageContent}">대화 내용</pre><div th:text="${message.receiveDate}"> 메세지 시간 </div>
+									</div>
+								</th:block>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -72,8 +65,3 @@
 	</section>
 
 </div>
-<script type="text/javascript">
-	$(function(){
-		$.ajax
-	});
-</script>

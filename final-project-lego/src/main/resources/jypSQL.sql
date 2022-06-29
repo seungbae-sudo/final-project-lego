@@ -174,70 +174,66 @@ select*from master
 cart
 
 -- 해당 고수의 평균 평점
-select 
-(
-select avg(score) from review where master_id='as@as'
-) r, cart
-
-
-select m.name, ms.specifications , round(avg(r.score) as score_arg)
-select round(avg(r.score))
-from review r, cart c, member m, master ms
-where c.id='lsj@naver.com'
-and r.master_id=ms.id
-group by m.name, ms.specifications
-
-select round(avg(r.score)),m.name
-from (select name, id from member) m,review r, cart c,master ms
-where c.id='lsj@naver.com'
-and r.id=c.id
-and m.id=r.master_id
-and r.master_id=ms.id
-group by m.name,ms.specifications
-
-select specifications,career
-from master
 
 select*from review
 select*from member
 select*from master
 select *from cart 
-      22 aa@aa         12@12
-
-select round(avg(r.score)), to_char(dbms_lob.substr(ms.specifications, 4000)),m.name
-from (select name, id from member) m,review r, cart c,master ms
-where c.id='aa@aa '
-and r.id=c.id
-and m.id=r.master_id
-and r.master_id=ms.id
-group by to_char(dbms_lob.substr(ms.specifications, 4000)),m.name
 
 -- cart에 있는 아이디가 지금 로그인한사람 아이디 
 -- cart에 있는 master_id를 통해 member name을 가져와야한다 
 -- cart 에 있는 master_id를 통해 master specifications를 가져와야한다 
 -- cart에 있는 master_id를 통해 review에 있는 score를 평균을 내서 가져와야한다 
-select round(avg(r.score)), to_char(dbms_lob.substr(ms.specifications, 4000)),m.name
-from (select name, id from member) m,review r, cart c,master ms
-where c.id='aa@aa '
-and c.master_id=m.id
-and c.master_id=ms.id
-and c.master_id=r.master_id
-group by to_char(dbms_lob.substr(ms.specifications, 4000)),m.name
 
-select round(avg(r.score)), to_char(dbms_lob.substr(ms.specifications, 4000)), m.name
-from cart c,member m,master ms,review r
-where c.id='aa@aa' 
+select nvl(round(avg(r.score)),0) as score, to_char(dbms_lob.substr(ms.specifications, 4000)) as specifications ,m.name
+from cart c, member m,review r,master ms
+where c.id='aa@aa'
 and c.master_id=m.id
+and c.master_id=r.master_id(+)
 and c.master_id=ms.id
 group by to_char(dbms_lob.substr(ms.specifications, 4000)),m.name
 
 
-select*from review
+-- 메세지 리스트
 
-select to_char(dbms_lob.substr(ms.specifications, 4000)), m.name
-from cart c,member m,master ms,review r
-where c.id='aa@aa' 
-and c.master_id=m.id
-and c.master_id=ms.id
-and r.master_id
-group by to_char(dbms_lob.substr(ms.specifications, 4000)),m.name
+-- id => 보낸사람 : 나
+-- 받은사람 receive_id : 고수 
+-- 해당 받은 사람의 이름이 나와야함 member name을 receiv_id 와 비교 =>m.name은 고수의 이름 
+-- 최신순으로 정렬 // 나중에! => order by me.receive_date desc 를 할경우 중복이 안돼
+
+
+select ms.receive_id,m.name
+from message ms, member m
+where ms.id='aa@aa'
+and ms.receive_id=m.id
+group by ms.receive_id,m.name
+
+-- 메세지 상세보기
+
+select*from message
+
+select ms.message_no,ms.message_content, ms.receive_id, ms.receive_date,m.name
+from message ms, member m 
+where ms.id='sg@sg'
+and ms.receive_id='as@as'
+and ms.receive_id=m.id
+order by ms.receive_date desc
+
+
+
+
+select ms.message_no,ms.message_content, ms.receive_id, ms.receive_date,m.name
+from message ms, member m 
+where ms.id='sg@sg'
+and ms.receive_id='as@as'
+and ms.receive_id=m.id
+
+union all
+
+select ms.message_no,ms.message_content, ms.receive_id, ms.receive_date,m.name
+from message ms, member m 
+where ms.id='as@as'
+and ms.receive_id='sg@sg'
+and ms.receive_id=m.id
+
+order by receive_date asc
