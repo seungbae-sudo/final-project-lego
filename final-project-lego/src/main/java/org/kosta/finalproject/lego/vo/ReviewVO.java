@@ -14,4 +14,5 @@ public class ReviewVO {
 	private String reviewContent;
 	private MemberVO mvo;
 	private MasterVO msvo;
+	private ImageVO imageVo;
 }

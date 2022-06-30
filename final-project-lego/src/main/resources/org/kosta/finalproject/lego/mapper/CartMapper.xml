@@ -4,4 +4,8 @@
 	<insert id="addCart" parameterType="string">
 		insert into cart(cart_no, id, master_id) values(cart_no_seq.nextval,#{id},#{masterId})
  	</insert>
+ 	
+ 	<delete id="deleteCart" parameterType="string">
+ 		delete from cart  where id=#{id} and master_id=#{masterId}
+ 	</delete>
 </mapper>

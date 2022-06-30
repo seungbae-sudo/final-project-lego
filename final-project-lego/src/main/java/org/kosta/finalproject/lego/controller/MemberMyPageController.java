@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.kosta.finalproject.lego.mapper.CartMapper;
 import org.kosta.finalproject.lego.mapper.MemberMyPageMapper;
 import org.kosta.finalproject.lego.mapper.MessageMapper;
 import org.kosta.finalproject.lego.serivce.MemberMypageService;
@@ -21,6 +22,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +37,7 @@ public class MemberMyPageController {
 	private final MemberMyPageMapper memberMyPageMapper;
 	private final MemberMypageService memberMypageService;
 	private final MessageMapper messageMapper;
+	private final CartMapper cartMapper;
 
 	// mypage로 가는 건 homeController에서 ! 옮김!
 	@RequestMapping(value={"/mypage","updateResult"})
@@ -48,11 +51,32 @@ public class MemberMyPageController {
 	}
 
 	// 탭 이동 컨트롤러***************
+	
+	
+	//북마크 삭제
+	@RequestMapping("delete-cart")
+	public String deleteCart(@AuthenticationPrincipal MemberVO memberVO,String masterId) {
+		cartMapper.deleteCart(memberVO.getId(),masterId);
+		return "redirect:mypage-cart";
+	}
+	
 	// 내 찜목록
 	@RequestMapping("/mypage-cart")
 	public String mypageCart(@AuthenticationPrincipal MemberVO memberVO, Model model) {
 		String id = memberVO.getId();
 		List<ReviewVO> cartList = memberMyPageMapper.findCartList(id);
+		System.out.println(cartList);
+		
+		
+		//위 리스트에 있는 imageName은 '이미지파일명.jpg ' 이렇게 저장되어있다 
+		//해당 이미지 파일명을 리스트 갯수 만큼 반복 문을 돌려 모든 imageName 명을 경로명으로 변경해주었다.
+		ArrayList<String> imageSrcList=new ArrayList();
+		for(int i=0;i<cartList.size();i++) {
+			String imageName=cartList.get(i).getImageVo().getImageName();
+			String listSrc = "./images/" +cartList.get(i).getMvo().getId()+ "/" + imageName;
+			cartList.get(i).getImageVo().setImageName(listSrc);
+		}
+		
 		model.addAttribute("cartList", cartList);
 		
 		// 프로필 이미지 경로 
@@ -62,8 +86,10 @@ public class MemberMyPageController {
 		
 		return "mypage-cart";
 	}
+	
+	
 
-	// 내가 쓴 글
+	// 내가 쓴 글**************************************************
 	@RequestMapping("mypage-wrote")
 	public String mypageWrote(@AuthenticationPrincipal MemberVO memberVO, Model model) {
 		String id = memberVO.getId();
@@ -84,7 +110,7 @@ public class MemberMyPageController {
 	public String mypageBooking(@AuthenticationPrincipal MemberVO memberVO, Model model) {
 		List<BookingVO> CartList = memberMyPageMapper.findMyBookingList(memberVO.getId());
 		System.out.println(CartList);
-
+		
 		model.addAttribute("CartList", CartList);
 		
 		// 프로필 이미지 경로 
@@ -228,5 +254,7 @@ public class MemberMyPageController {
 		redirect.addAttribute("receiveName", receiveName);
 		return "redirect:sendMessageResult";
 	}
+	
+
 
 }
