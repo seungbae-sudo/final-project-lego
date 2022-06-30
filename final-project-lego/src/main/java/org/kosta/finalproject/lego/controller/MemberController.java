@@ -50,6 +50,7 @@ public class MemberController {
 			return "redirect:/";
 		} else {
 			masterService.registerMember(memberVO);
+			imageMapper.uploadImage(imageVO);
 			try {
 				folder.mkdir();
 				file.transferTo(new File(

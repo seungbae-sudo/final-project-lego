@@ -58,4 +58,8 @@ public class SurveyController {
 
 		return "master-detail";
 	}
+	@RequestMapping("/bookingForm")
+	public String bookingFrom() {
+		return "booking-form";
+	}
 }
