@@ -195,18 +195,34 @@ group by to_char(dbms_lob.substr(ms.specifications, 4000)),m.name
 
 
 -- 메세지 리스트
-
+select*from message
 -- id => 보낸사람 : 나
 -- 받은사람 receive_id : 고수 
 -- 해당 받은 사람의 이름이 나와야함 member name을 receiv_id 와 비교 =>m.name은 고수의 이름 
 -- 최신순으로 정렬 // 나중에! => order by me.receive_date desc 를 할경우 중복이 안돼
 
-
-select ms.receive_id,m.name
+ select ms.receive_id as id,m.name
+ from message ms, member m
+ where ms.id=#{value}
+ and ms.receive_id=m.id
+ group by ms.receive_id,m.name
+ 
+ 
+select ms.receive_id as id,m.name
 from message ms, member m
-where ms.id='aa@aa'
+where ms.id='sooyoung@a'
 and ms.receive_id=m.id
 group by ms.receive_id,m.name
+
+--이미지 추가 
+delete from message where receive_id='as@as' and id='sooyoung@a'
+
+select ms.receive_id as id,m.name,i.image_name
+from message ms, member m , images i
+where ms.id='sooyoung@a'
+and ms.receive_id=m.id
+and ms.receive_id=i.id(+)
+group by ms.receive_id,m.name,i.image_name
 
 -- 메세지 상세보기
 
@@ -233,6 +249,9 @@ order by receive_date asc
 select*from images
 select*from images where id=#{value}
 
+
+update images set password=#{password},name=#{name},address=#{address}, tel=#{tel}
+			where id=#{id}		
 --예약 시스템
 
 select*from booking

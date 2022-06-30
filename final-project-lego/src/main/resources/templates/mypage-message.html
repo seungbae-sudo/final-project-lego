@@ -30,11 +30,10 @@
 				<div class="col-md-12">
 					<div class="media">
 						<div class="pull-left profile">
-							<img class="media-object user-img" src="./images/일반회원.jpg"
-								alt="Image">
+							<img class="media-object user-img" th:src="${src}" alt="Image">
 						</div>
 						<div class="media-body">
-							<h2 class="media-heading" pd-t30>손석구</h2>
+							<h2 class="media-heading" sec:authentication="principal.name">손석구</h2>
 
 						</div>
 					</div>
@@ -49,9 +48,10 @@
 					<div class="messge-list">
 						<div th:each="message:${messageList}">
 							<div>
-								<a th:href="@{/message-detail(receiveId=${message.reMvo.id},receiveName=${message.reMvo.name})}"> 
-									<img class="media-object user-img" src="./images/message.png" alt="Image" align="bottom"> 
+								<a th:href="@{/message-detail(receiveId=${message.reMvo.id},receiveName=${message.reMvo.name})}">
+									<img class="media-object user-img" th:src="${message.imageVo.imageName}" alt="Image" align="bottom"> 
 									<span th:text="|${message.reMvo.name}님|">바보</span>
+
 								</a>
 							</div>
 						</div>

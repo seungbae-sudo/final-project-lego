@@ -13,4 +13,5 @@ public class MessageVO {
 	private MemberVO reMvo;
 	private MemberVO sendMvo;
 	private String receiveDate;
+	private ImageVO imageVo;
 }
