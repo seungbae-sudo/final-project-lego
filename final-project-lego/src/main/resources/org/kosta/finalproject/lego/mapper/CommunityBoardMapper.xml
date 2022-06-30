@@ -79,4 +79,12 @@
 	<delete id="deleteComment" parameterType="int">
 		DELETE FROM board_comment WHERE comment_no =#{value}
 	</delete>
+	
+	<update id="likesUp" parameterType="int">
+		UPDATE board SET likes = likes+1 WHERE board_no =#{value}
+	</update>
+	
+	<delete id="likesDown" parameterType="int">
+		UPDATE board SET likes = likes -1 WHERE board_no =#{value}
+	</delete>
 </mapper>
