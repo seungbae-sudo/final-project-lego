@@ -46,9 +46,7 @@ public class MasterMyPageController {
 			MemberVO memberVO, String deleteFile, @RequestBody MultipartFile file) {
 		// System.out.println(specifications+career);
 		// System.out.println(memberVO);
-		ImageVO imageVO = new ImageVO();
-		File deleteImage = new File("C:\\finalproject\\final-project-lego\\final-project-lego\\src\\main\\resources\\static\\images\\"+memberVO.getId()+"\\"+deleteFile);
-		deleteImage.delete();
+		
 		MemberVO vo = (MemberVO) authentication.getPrincipal();
 		MasterVO mvo = new MasterVO();
 		mvo.setId(vo.getId());
@@ -63,11 +61,14 @@ public class MasterMyPageController {
 		vo.setTel(memberVO.getTel());
 		// mapper 에서 update sql문을 작성해서 기존 url 이름을 file.getOriginalFilename()을 ImageVO.setImageName()에 할당하여 
 		//update를 한다.
-		
-		imageVO.setImageName(file.getOriginalFilename());
+		ImageVO imageVO = new ImageVO();
 		imageVO.setMemberVO(memberVO);
+		File folder = new File("C:\\finalproject\\final-project-lego\\final-project-lego\\src\\main\\resources\\static\\images\\"+memberVO.getId()+"\\"+deleteFile);
+		imageVO.setImageName(file.getOriginalFilename());
 		imageMapper.updateImage(imageVO);
+		System.out.println(imageVO);
 		try {
+			folder.delete();
 			file.transferTo(new File(
 					"C:\\finalproject\\final-project-lego\\final-project-lego\\src\\main\\resources\\static\\images\\"+memberVO.getId()+"\\"
 							+ file.getOriginalFilename()));
@@ -83,15 +84,29 @@ public class MasterMyPageController {
 	public String mastermypage(@AuthenticationPrincipal MemberVO memberVO, Model model) {
 		model.addAttribute("member", memberVO);
 		model.addAttribute("masterDetail", masterMyPageMapper.findMasterDetailList(memberVO.getId()));
+		
+		ImageVO image = masterMyPageMapper.getImageId(memberVO.getId());
+		System.out.println(image);
+		String src = "./images/"+image.getMemberVO().getId()+"/"+image.getImageName();
+		System.out.println(src);
+		model.addAttribute("src",src);
+		
 		return "master-mypage";
 	}
 
 	// 회원정보 수정폼 이동
-	@RequestMapping("masterUpdateForm")
+	@RequestMapping("/masterUpdateForm")
 	// @AuthenticationPrincipal : Spring Security를 통해 로그인한 인증정보를 받아오는 어노테이션
 	public String updateForm(@AuthenticationPrincipal MemberVO memberVO, Model model) {
 		model.addAttribute("member", memberVO);
 		model.addAttribute("masterDetail", masterMyPageMapper.findMasterDetailList(memberVO.getId()));
+		
+		ImageVO image = masterMyPageMapper.getImageId(memberVO.getId());
+		System.out.println(image);
+		String src = "./images/"+image.getMemberVO().getId()+"/"+image.getImageName();
+		model.addAttribute("ImageVO",image);
+		model.addAttribute("src",src);
+		System.out.println(image);
 		return "masterUpdateForm";
 	}
 
@@ -103,6 +118,11 @@ public class MasterMyPageController {
 		String id = memberVO.getId();
 		List<BoardVO> list = masterMyPageMapper.findMyBoard(id);
 		model.addAttribute("BoardList", list);
+		
+		ImageVO image = masterMyPageMapper.getImageId(memberVO.getId());
+		String src = "./images/"+image.getMemberVO().getId()+"/"+image.getImageName();
+		model.addAttribute("src",src);
+		
 		return "mastermypage-cart";
 	}
 
@@ -113,6 +133,11 @@ public class MasterMyPageController {
 		model.addAttribute("masterDetail", masterMyPageMapper.findMasterDetailList(memberVO.getId()));
 		List<ReviewVO> rvo = masterMyPageMapper.findMyReview(memberVO.getId());
 		model.addAttribute("review", rvo);
+		
+		ImageVO image = masterMyPageMapper.getImageId(memberVO.getId());
+		String src = "./images/"+image.getMemberVO().getId()+"/"+image.getImageName();
+		model.addAttribute("src",src);
+		
 		return "mastermypage-review";
 	}
 
@@ -123,6 +148,11 @@ public class MasterMyPageController {
 		BookingVO bkvo = masterMyPageMapper.findMyBooking(memberVO.getId());
 		model.addAttribute("masterDetail", masterMyPageMapper.findMasterDetailList(memberVO.getId()));
 		model.addAttribute("Booking", bkvo);
+		
+		ImageVO image = masterMyPageMapper.getImageId(memberVO.getId());
+		String src = "./images/"+image.getMemberVO().getId()+"/"+image.getImageName();
+		model.addAttribute("src",src);
+		
 		return "mastermypage-consult";
 	}
 
@@ -135,6 +165,11 @@ public class MasterMyPageController {
 		model.addAttribute("masterDetail", masterMyPageMapper.findMasterDetailList(memberVO.getId()));
 		model.addAttribute("Booking", bkvo);
 		model.addAttribute("bcd", bcd);
+		
+		ImageVO image = masterMyPageMapper.getImageId(memberVO.getId());
+		String src = "./images/"+image.getMemberVO().getId()+"/"+image.getImageName();
+		model.addAttribute("src",src);
+		
 		return "mastermypage-consult-detail";
 	}
 
@@ -145,6 +180,11 @@ public class MasterMyPageController {
 		model.addAttribute("masterDetail", masterMyPageMapper.findMasterDetailList(memberVO.getId()));
 		List<MessageVO> list = masterMyPageMapper.findMyMessage(memberVO.getId());
 		model.addAttribute("messageList", list);
+		
+		ImageVO image = masterMyPageMapper.getImageId(memberVO.getId());
+		String src = "./images/"+image.getMemberVO().getId()+"/"+image.getImageName();
+		model.addAttribute("src",src);
+		
 		return "mastermypage-Message";
 	}
 
@@ -165,6 +205,11 @@ public class MasterMyPageController {
 		model.addAttribute("receiveID", receiveID);
 		model.addAttribute("receiveName", receiveName);
 		model.addAttribute("messageDetail", message);
+		
+		ImageVO image = masterMyPageMapper.getImageId(memberVO.getId());
+		String src = "./images/"+image.getMemberVO().getId()+"/"+image.getImageName();
+		model.addAttribute("src",src);
+		
 		return "mastermypage-message-detail";
 	}
 
@@ -181,6 +226,11 @@ public class MasterMyPageController {
 		messageMapper.message(messageVO);
 		redirect.addAttribute("receiveID", receiveId);
 		redirect.addAttribute("receiveName", receiveName);
+		
+		ImageVO image = masterMyPageMapper.getImageId(memberVO.getId());
+		String src = "./images/"+image.getMemberVO().getId()+"/"+image.getImageName();
+		model.addAttribute("src",src);
+		
 		return "redirect:/mastermypage-message-detail";
 	}
 

@@ -11,7 +11,7 @@ update master set specifications = '1' , career='1' where id='asdf@asd'
 select * from master where id = 'asdf@asd'
 
 회원member, 게시판board, 카테고리board_category, 
-보드넘버,제목(보드테이블),카테고리(카테고리테이블)
+보드넘버,제목(보드테이블),카테고리(카테고	리테이블)
 
 select board_title from board where id = 'lsj@naver.com'
 select * from board_category
