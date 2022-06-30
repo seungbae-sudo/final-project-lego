@@ -35,16 +35,5 @@ class FinalProjectLegoApplicationTests {
 
 		Assertions.assertNotNull(list);
 	}
-	@Test
-	void updateMember() {
-		String id="kosta@naver.com";
-		String password="aa";
-		String name="손석구석구";
-		String address="서울";
-		String tel="10048888888";
-		MemberVO mvo=new MemberVO(id,password,name,address,tel);
-		System.out.println(mvo);
-		memberService.updateMember(mvo);
-		System.out.println(mvo);
-	}
+
 }
