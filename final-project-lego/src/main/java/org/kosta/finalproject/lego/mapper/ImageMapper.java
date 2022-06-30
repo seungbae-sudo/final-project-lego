@@ -6,4 +6,6 @@ import org.kosta.finalproject.lego.vo.ImageVO;
 public interface ImageMapper {
 	
 	void uploadImage(ImageVO imageVO);
+
+	void updateImage(ImageVO imageVO);
 }

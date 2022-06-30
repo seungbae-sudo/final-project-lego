@@ -30,8 +30,7 @@
 				<div class="col-md-12">
 					<div class="media">
 						<div class="pull-left profile">
-							<img class="media-object user-img" src="./images/고수.jpg"
-								alt="Image">
+							<img class="media-object user-img" th:src="${src}" alt="Image">
 						</div>
 						<div class="media-body">
 							<h2 class="media-heading" th:text="${member.name}"></h2>
@@ -50,7 +49,7 @@
 							<table class="table">
 								<thead>
 									<tr>
-										<th>고객 아이디</th>
+										<th>고객 이름</th>
 										<th>평점</th>
 										<th>고객 리뷰</th>
 										<th></th>
@@ -59,7 +58,7 @@
 								<tbody>
 									<tr th:each="rv:${review}">
 										<td th:text="${rv.mvo.name}"></td>
-										<td th:text="${rv.score}"></td>
+										<td th:text="|${rv.score}점|"></td>
 										<td th:text="${rv.reviewContent}">
 										</td>
 									</tr>

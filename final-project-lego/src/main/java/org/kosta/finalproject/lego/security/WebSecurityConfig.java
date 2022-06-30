@@ -1,5 +1,10 @@
 package org.kosta.finalproject.lego.security;
 
+import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -30,6 +35,8 @@ public class WebSecurityConfig  {
 	 */
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {		
+		
+		
 		/*	
 		 	인증 처리 : 로그인 여부에 따라 접근 가능한 서비스를 설정 
 		 	/  , home : welcome file 		
@@ -41,6 +48,7 @@ public class WebSecurityConfig  {
 			위의 지정한 url 에는 permitAll() 로그인 인증없이 서비스 되고 
 			그 외의 요청에는 anyRequest().authenticated()  로그인 인증된 사용자만 접근할 수 있다 
 		 */
+	
 		http.authorizeRequests().antMatchers("/","/**").permitAll()
 		.anyRequest().authenticated();
 		

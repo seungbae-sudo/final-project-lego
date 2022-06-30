@@ -4,4 +4,7 @@
 <insert id="uploadImage" parameterType="org.kosta.finalproject.lego.vo.ImageVO">
 	insert into images(image_no,image_name,id) values(image_no_seq.nextval,#{imageName},#{memberVO.id})
 </insert>
+<update id="updateImage" parameterType="org.kosta.finalproject.lego.vo.ImageVO">
+		update images set image_name=#{imageName} where id=#{memberVO.id}
+</update>
 </mapper>

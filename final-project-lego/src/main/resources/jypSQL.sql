@@ -185,28 +185,45 @@ select *from cart
 -- cart 에 있는 master_id를 통해 master specifications를 가져와야한다 
 -- cart에 있는 master_id를 통해 review에 있는 score를 평균을 내서 가져와야한다 
 
-select nvl(round(avg(r.score)),0) as score, to_char(dbms_lob.substr(ms.specifications, 4000)) as specifications ,m.name
-from cart c, member m,review r,master ms
-where c.id='aa@aa'
+select nvl(round(avg(r.score)),0) as score, to_char(dbms_lob.substr(ms.specifications, 4000)) as specifications ,m.name,c.master_id,i.image_name
+from cart c, member m,review r,master ms,images i
+where c.id='sooyoung@a'
 and c.master_id=m.id
 and c.master_id=r.master_id(+)
 and c.master_id=ms.id
-group by to_char(dbms_lob.substr(ms.specifications, 4000)),m.name
+and c.master_id=i.id(+)
+group by to_char(dbms_lob.substr(ms.specifications, 4000)),m.name,c.master_id,i.image_name
 
 
 -- 메세지 리스트
-
+select*from message
 -- id => 보낸사람 : 나
 -- 받은사람 receive_id : 고수 
 -- 해당 받은 사람의 이름이 나와야함 member name을 receiv_id 와 비교 =>m.name은 고수의 이름 
 -- 최신순으로 정렬 // 나중에! => order by me.receive_date desc 를 할경우 중복이 안돼
 
-
-select ms.receive_id,m.name
+ select ms.receive_id as id,m.name
+ from message ms, member m
+ where ms.id=#{value}
+ and ms.receive_id=m.id
+ group by ms.receive_id,m.name
+ 
+ 
+select ms.receive_id as id,m.name
 from message ms, member m
-where ms.id='aa@aa'
+where ms.id='sooyoung@a'
 and ms.receive_id=m.id
 group by ms.receive_id,m.name
+
+--이미지 추가 
+delete from message where receive_id='as@as' and id='sooyoung@a'
+
+select ms.receive_id as id,m.name,i.image_name
+from message ms, member m , images i
+where ms.id='sooyoung@a'
+and ms.receive_id=m.id
+and ms.receive_id=i.id(+)
+group by ms.receive_id,m.name,i.image_name
 
 -- 메세지 상세보기
 
@@ -233,6 +250,27 @@ order by receive_date asc
 select*from images
 select*from images where id=#{value}
 
+
+update images set password=#{password},name=#{name},address=#{address}, tel=#{tel}
+			where id=#{id}		
 --예약 시스템
 
 select*from booking
+
+--북마크 취소?
+
+select*from cart where id='sooyoung@a' 
+
+delete from cart  where id='sooyoung@a' and master_id='as@as'
+
+--고수 스킬 값 나오게 하기
+
+select s.skills from master_detail m,skills s where m.id =  '2022@2'and m.skills_id>0 and m.skills_id = s.skills_id
+union all
+select t.times from master_detail m,times t where m.id = '2022@2' and m.times_id>0 and m.times_id = t.times_id
+union all
+select d.days
+from master_detail m,days d where m.id =  '2022@2' and m.days_id>0 and m.days_id = d.days_id
+
+
+

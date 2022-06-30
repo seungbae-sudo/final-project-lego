@@ -31,8 +31,7 @@
 				<div class="col-md-12">
 					<div class="media">
 						<div class="pull-left profile">
-							<img class="media-object user-img" src="./images/일반회원.jpg"
-								alt="Image">
+							<img class="media-object user-img" th:src="${src}" alt="Image">
 						</div>
 						<div class="media-body">
 							<h2 class="media-heading " sec:authentication="principal.name">손석구</h2>
@@ -52,12 +51,13 @@
 							<h4>Total Orders</h4>
 							<div class="table-responsive">
 								<div class="media-body">
-									<form method="post" th:action="@{UpdateMember}">
+									<form method="post" th:action="@{UpdateMember}" enctype="multipart/form-data">
 										이메일 : <input type="email" name="id" placeholder="이메일" th:value="${member.id}" readonly><br>
 										비밀번호 : <input type="text" name="password" placeholder="패스워드" required="required"><br>
 										이름 : <input type="text" name="name" 	th:value="${member.name}" placeholder="이름" required="required"> <br>
 										주소 : <input type="text" 	name="address" 	th:value="${member.address}" placeholder="주소" required="required"><br>
 										핸드폰 번호 : <input type="text"  name="tel"  th:value="${member.tel}" placeholder="핸드폰 번호" required="required"><br>
+										프로필 이미지 변경하기 <input multiple="multiple" type="file" value="파일 선택" name="file"/>
 										<input type="submit" value="회원정보수정">
 									</form>
 								</div>

@@ -30,11 +30,10 @@
 				<div class="col-md-12">
 					<div class="media">
 						<div class="pull-left profile">
-							<img class="media-object user-img" src="./images/일반회원.jpg"
-								alt="Image">
+							<img class="media-object user-img" th:src="${src}" alt="Image">
 						</div>
 						<div class="media-body">
-							<h2 class="media-heading" pd-t30>손석구</h2>
+							<h2 class="media-heading" sec:authentication="principal.name">손석구</h2>
 							
 						</div>
 					</div>
@@ -60,7 +59,9 @@
 								<tbody>
 									<tr th:each="list:${cartList}">
 										
-										<td >이미지</td>
+										<td >
+											<img class="" th:src="${list.imageVo.imageName}" alt="Image">
+										</td>
 										<td > 
 											<div>
 												<span th:text="${list.mvo.name}">고수 이름</span> <span th:text="${list.score}">고수 평점</span>
@@ -70,7 +71,7 @@
 											</div>
 										</td>
 										<td class="text-center">
-												<a href=""><i class="bi bi-bookmark"></i></a>
+												<a th:href="@{/delete-cart(masterId=${list.mvo.id})}"><i class="bi bi-bookmark"></i></a>
 										</td>
 									</tr>
 								</tbody>
