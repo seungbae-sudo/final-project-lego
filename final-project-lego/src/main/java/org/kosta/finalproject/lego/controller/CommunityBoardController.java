@@ -87,6 +87,7 @@ public class CommunityBoardController {
 	
 	//findBoardDetailByBoardNo //findCommentList	//updateHits
 	@RequestMapping("/board-detail")
+	@SuppressWarnings({ "unchecked"})
 	public String boradDetail(int boardNo, Model model, int categoryNo,@AuthenticationPrincipal MemberVO memberVO,HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
 		BoardCategoryVO bcvo = new BoardCategoryVO();
@@ -100,13 +101,14 @@ public class CommunityBoardController {
 		model.addAttribute("mvo", memberVO);
 		
 		//조회수 (권한주기, 재증가방지) 
-		@SuppressWarnings("unchecked")
+		
 		ArrayList<Integer> list1 = (ArrayList<Integer>) session.getAttribute("CommunityBoardNoList");
 		if(!list1.contains(boardNo)) {
 		communityBoardMapper.updateHits(boardNo);
+		  
 		list1.add(boardNo);		
 		}
-		
+
 		return "board-detail";
 	}
 	
@@ -132,15 +134,24 @@ public class CommunityBoardController {
 	public String LikesUp(Model model,@AuthenticationPrincipal MemberVO memberVO, HttpServletRequest request,int boardNo, int categoryNo) {
 		HttpSession session = request.getSession();
 		//좋아요 권한(중복방지)
+
 		ArrayList<Integer> list_up = (ArrayList<Integer>) session.getAttribute("LikesUpList");
 		ArrayList<Integer> list_down = (ArrayList<Integer>) session.getAttribute("LikesDownList");
-		  
 		  if(!list_up.contains(boardNo)) {
 			  communityBoardMapper.likesUp(boardNo);
 			  list_up.add(boardNo);
-			  list_down.remove(boardNo);
+			  list_down.remove(Integer.valueOf(boardNo));
 		  }
+		  BoardVO bvo = communityBoardMapper.findBoardDetailByBoardNo(boardNo);
+		  List<CommentVO> list=communityBoardMapper.findCommentList(boardNo);
+			model.addAttribute("commentList", list);
+		  model.addAttribute("LikesUpList", list_up);
+		  model.addAttribute("LikesDownList", list_down);
+		  model.addAttribute("bvo",bvo);
+		  model.addAttribute("categoryNo",categoryNo);
+		  model.addAttribute("mvo", memberVO);
 		 
+		 System.out.println(list_up+"up");
 		return "board-detail";
 	}
 	
@@ -151,13 +162,20 @@ public class CommunityBoardController {
 		//좋아요 권한(중복방지)
 		ArrayList<Integer> list_up = (ArrayList<Integer>) session.getAttribute("LikesUpList");
 		ArrayList<Integer> list_down = (ArrayList<Integer>) session.getAttribute("LikesDownList");
-		  
 		  if(!list_down.contains(boardNo)) {
 			  communityBoardMapper.likesDown(boardNo);
 			  list_down.add(boardNo);
-			  list_up.remove(boardNo);
+			  list_up.remove(Integer.valueOf(boardNo));
 		  }
-		 
+		  System.out.println(list_up+"down");
+		  BoardVO bvo = communityBoardMapper.findBoardDetailByBoardNo(boardNo);
+		  List<CommentVO> list=communityBoardMapper.findCommentList(boardNo);
+			model.addAttribute("commentList", list);
+		  model.addAttribute("bvo",bvo);
+		  model.addAttribute("categoryNo",categoryNo);
+		  model.addAttribute("mvo", memberVO);
+		  model.addAttribute("LikesUpList", list_up);
+		  model.addAttribute("LikesDownList", list_down);
 		return "board-detail";
 	}
 

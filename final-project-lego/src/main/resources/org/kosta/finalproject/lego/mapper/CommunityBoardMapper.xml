@@ -56,13 +56,6 @@
 		<result column="id" property="mvo.id"/>
 	</resultMap>
 	
-<!-- 	<select id="findBVO" resultType="int" resultMap="memberAndBoardResultMap">
-		select comment_content, comment_no,comment_date , m.name
-		from board_comment cm, member m
-		where cm.id=m.id
-		and  board_no=#{value}
-	</select> -->
-	
 	<select id="findCommentList" resultType="org.kosta.finalproject.lego.vo.CommentVO" resultMap="memberAndBoardResultMap">
 		select cm.comment_content, cm.comment_no,cm.comment_date , m.name, m.id
 		from  board b, member m, board_comment cm
