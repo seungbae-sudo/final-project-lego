@@ -134,3 +134,9 @@ order by receive_date asc
 select * from message where id = 'as@as'
 
 delete from message where receive_id = 'as@as'
+
+select i.*,m.id from images i, member m where i.id = m.id
+
+update images set image_name = '김승배님.jpg' where id = '534534@423423'
+
+select * from images

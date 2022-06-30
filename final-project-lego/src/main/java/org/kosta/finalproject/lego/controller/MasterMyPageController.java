@@ -1,14 +1,18 @@
 package org.kosta.finalproject.lego.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.kosta.finalproject.lego.mapper.ImageMapper;
 import org.kosta.finalproject.lego.mapper.MasterMyPageMapper;
 import org.kosta.finalproject.lego.mapper.MessageMapper;
 import org.kosta.finalproject.lego.serivce.MasterService;
 import org.kosta.finalproject.lego.vo.BoardVO;
 import org.kosta.finalproject.lego.vo.BookingVO;
+import org.kosta.finalproject.lego.vo.ImageVO;
 import org.kosta.finalproject.lego.vo.MasterVO;
 import org.kosta.finalproject.lego.vo.MemberVO;
 import org.kosta.finalproject.lego.vo.MessageVO;
@@ -32,6 +36,7 @@ public class MasterMyPageController {
 	private final MasterMyPageMapper masterMyPageMapper;
 	private final MasterService masterService;
 	private final MessageMapper messageMapper;
+	private final ImageMapper imageMapper;
 
 	// 회원정보 수정
 	@PostMapping("/updateMaster")
@@ -41,6 +46,9 @@ public class MasterMyPageController {
 			MemberVO memberVO, String deleteFile, @RequestBody MultipartFile file) {
 		// System.out.println(specifications+career);
 		// System.out.println(memberVO);
+		ImageVO imageVO = new ImageVO();
+		File deleteImage = new File("C:\\finalproject\\final-project-lego\\final-project-lego\\src\\main\\resources\\static\\images\\"+memberVO.getId()+"\\"+deleteFile);
+		deleteImage.delete();
 		MemberVO vo = (MemberVO) authentication.getPrincipal();
 		MasterVO mvo = new MasterVO();
 		mvo.setId(vo.getId());
@@ -53,6 +61,20 @@ public class MasterMyPageController {
 		vo.setName(memberVO.getName());
 		vo.setAddress(memberVO.getAddress());
 		vo.setTel(memberVO.getTel());
+		// mapper 에서 update sql문을 작성해서 기존 url 이름을 file.getOriginalFilename()을 ImageVO.setImageName()에 할당하여 
+		//update를 한다.
+		
+		imageVO.setImageName(file.getOriginalFilename());
+		imageVO.setMemberVO(memberVO);
+		imageMapper.updateImage(imageVO);
+		try {
+			file.transferTo(new File(
+					"C:\\finalproject\\final-project-lego\\final-project-lego\\src\\main\\resources\\static\\images\\"+memberVO.getId()+"\\"
+							+ file.getOriginalFilename()));
+
+		} catch (IllegalStateException | IOException e) {
+			e.printStackTrace();
+		}
 		return "redirect:mastermypage";
 	}
 

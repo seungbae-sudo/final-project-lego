@@ -88,4 +88,8 @@
 	insert into message(message_no, message_content, id,receive_id,receive_date) values(message_no_seq.nextval, #{messageContent},#{sendMvo.id},#{reMvo.id},sysdate)
 	</insert>
 	
+	<update id="updateImage" parameterType="org.kosta.finalproject.lego.vo.ImageVO">
+		update images set image_name = '#{imageName}' where id = 'memberVO.id'
+	</update>
+	
 </mapper>
