@@ -29,4 +29,6 @@ public interface MemberMyPageMapper {
 
 	ImageVO getImageById(String id);
 
+	void updateImage(ImageVO imageVO);
+
 }
