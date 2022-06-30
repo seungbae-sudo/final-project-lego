@@ -1,4 +1,5 @@
 CREATE SEQUENCE board_seq;
+DROP SEQUENCE board_seq;
 
 INSERT INTO board_category(category_no,category_name) values(1,'꿀팁');
 INSERT INTO board_category(category_no,category_name) values(2,'추천');
@@ -94,6 +95,7 @@ select b.*,m.*,bc.*
 --comment
 select*from board_comment;
 CREATE SEQUENCE  board_comment_seq;
+DROP SEQUENCE board_comment_seq;
 
 --comment insert
 insert into board_comment(comment_no,comment_content,board_no,comment_date,id) values(board_comment_seq.nextval,'nct가 머야~','81', sysdate,'lsj@naver.com')
@@ -120,3 +122,10 @@ WHERE bc.
 select
 --hits
 UPDATE board SET hits = hits+1 WHERE board_no = 81
+
+--likesUp
+UPDATE board SET likes = likes+1 WHERE board_no = 1
+
+select*from board
+--likesDown
+UPDATE board SET likes = likes -1 WHERE board_no = 1 

@@ -30,4 +30,8 @@ public interface CommunityBoardMapper {
 
 	void deleteComment(int commentNo);
 
+	void likesUp(int boardNo);
+
+	void likesDown(int boardNo);
+
 }
