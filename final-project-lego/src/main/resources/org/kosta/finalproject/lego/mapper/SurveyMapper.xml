@@ -50,4 +50,15 @@
    		from master ms, member m
    		where m.id=ms.id and ms.id =#{value}
    </select>
+   
+   <select id="findBookingDayByMasterId" resultType="org.kosta.finalproject.lego.vo.BookingVO">
+   		select to_char(booking_day,'yyyy-fmmm-dd') as booking_day
+		from booking
+		where master_id = #{value}
+   </select>
+   
+   <insert id="BookingToMaster" parameterType="org.kosta.finalproject.lego.vo.BookingVO">
+   	insert into booking(booking_no,booking_content,booking_day,master_id,member_id) values(booking_no_seq.nextval,#{bookingContent},#{bookingDay},#{mdVO.id},#{mvo.id})
+   
+   </insert>
 </mapper>

@@ -40,22 +40,13 @@ CREATE TABLE board_comment
 
 CREATE TABLE booking
 (
-	booking_no            NUMBER ,
-	condition             VARCHAR2(100) not NULL ,
+	booking_no            NUMBER primary key,
 	booking_day           date not NULL ,
 	booking_content       CLOB not NULL ,
-	booking_times         VARCHAR2(100) not NULL ,
-	skills_id             NUMBER  ,
-	times_id              NUMBER ,
-	days_id               NUMBER ,
 	master_id                    VARCHAR2(100) not null,
 	member_id                  varchar2(100) not null,
 	CONSTRAINT fk_booking_member_id FOREIGN KEY(member_id) REFERENCES member(id),
-	CONSTRAINT fk_booking_master_id FOREIGN KEY(master_id) REFERENCES master(id),
-	CONSTRAINT pk_booking_share PRIMARY KEY(master_id,skills_id,times_id,days_id,booking_no),
-	CONSTRAINT fk_booking_skills_id FOREIGN KEY(skills_id) REFERENCES skills(skills_id),
-	CONSTRAINT fk_booking_times_id FOREIGN KEY(times_id) REFERENCES times(times_id),
-	CONSTRAINT fk_booking_days_id FOREIGN KEY(days_id) REFERENCES days(days_id)
+	CONSTRAINT fk_booking_master_id FOREIGN KEY(master_id) REFERENCES master(id)
 );
 
 

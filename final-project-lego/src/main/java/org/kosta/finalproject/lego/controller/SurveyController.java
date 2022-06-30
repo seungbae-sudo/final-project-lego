@@ -1,13 +1,20 @@
 package org.kosta.finalproject.lego.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.kosta.finalproject.lego.mapper.CartMapper;
 import org.kosta.finalproject.lego.mapper.MasterMapper;
 import org.kosta.finalproject.lego.mapper.SurveyMapper;
+import org.kosta.finalproject.lego.vo.BookingVO;
+import org.kosta.finalproject.lego.vo.MasterDetailVO;
 import org.kosta.finalproject.lego.vo.MasterVO;
 import org.kosta.finalproject.lego.vo.MemberVO;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.RequiredArgsConstructor;
@@ -59,7 +66,25 @@ public class SurveyController {
 		return "master-detail";
 	}
 	@RequestMapping("/bookingForm")
-	public String bookingFrom() {
+	public String bookingFrom(String masterId, Model model, String masterName) {
+		List<BookingVO> bvo = surveyMapper.findBookingDayByMasterId(masterId);
+		List<String> list = new ArrayList<String>();
+		for(int i = 0;i<bvo.size();i++) {
+			list.add(bvo.get(i).getBookingDay());
+		}
+		System.out.println(list);
+		model.addAttribute("Day", list);
+		model.addAttribute("masterId",masterId);
+		model.addAttribute("masterName",masterName);
 		return "booking-form";
+	}
+	@PostMapping("/bookingGo")
+	public String booking(Model model,@AuthenticationPrincipal MemberVO memberVO,BookingVO bookingVO,String masterId) {
+		bookingVO.setMvo(memberVO);
+		MasterDetailVO mdvo = new MasterDetailVO();
+		mdvo.setId(masterId);
+		bookingVO.setMdVO(mdvo);
+		surveyMapper.BookingToMaster(bookingVO);
+	return "redirect:/mypage";
 	}
 }
