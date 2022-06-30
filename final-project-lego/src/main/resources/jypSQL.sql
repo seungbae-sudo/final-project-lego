@@ -232,3 +232,7 @@ order by receive_date asc
 
 select*from images
 select*from images where id=#{value}
+
+--예약 시스템
+
+select*from booking
