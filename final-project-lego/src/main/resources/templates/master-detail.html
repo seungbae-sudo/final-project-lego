@@ -57,7 +57,8 @@
 		</form>
 					<form th:action="@{/bookingForm}">
 					
-					<input type="hidden" name="masterId" th:value="${masterList.id}">
+					<input type="hidden" name="masterId" th:value="${masterList.id}"> 
+					<input type="hidden" name="masterName" th:value="${masterList.name}"> 
 			<button type="submit">상담 신청하기</button>
 		</form>
 		</div>
