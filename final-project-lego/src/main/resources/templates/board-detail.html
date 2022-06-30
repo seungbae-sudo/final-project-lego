@@ -53,38 +53,46 @@
 					<button type="button"  class="btn btn-success" onclick="deletePost()">삭제</button>
 				</div>
 				
-			<!-----------------------------------/* 좋아요 test  */------------------------------------------>
-			<div>
-				<h3 >댓글</h3>
-				
-			<!-- 	<th:with>
-				<th:if test="${fn:contains(sessionScope.LikeNoList, cvo.boardNo)}">
-					<th:with>
-						<th:if test="${fn:contains(sessionScope.LikeDownList,cvo.boardNo) }">
-							<a th:href="{/@likesUp}?boardNo=${boardNo}&categoryNo=${categoryNo}">			/*&pageNo=${pageNo} */
-								<i class='far fa-heart icon'>빈하트</i>
-							</a> ${bcvo.likes}
-						</th:if>
-						<th:unless>
-							<a th:href="{/@likesDown}boardNo=${boardNo }&carNo=${carNo}">									/*&pageNo=${pageNo} */
-								<i class="fa fa-heart" style="font-size: 24px; color: red">빨간하트</i>
-							</a>${bcvo.likes}
-						</th:unless>
-					</th:with>
-				</th:if>
-				
-				<th:unless>
-					<a th:href="{/@likesUp}?boardNo=${cvo.boardNo }&carNo=${carNo}&pageNo=${pageNo}"><i
-						class='far fa-heart icon'></i></a> ${cvo.likeNo }
-				
-					</th:unless>
 
-			</th:with> -->
-			
-			<!-----------------------------------/* 좋아요 test  */------------------------------------------>
-			
-			
+
+
+
+
+			<div>
+				<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
+				<h3 >댓글 <i class='far fa-heart icon'></i></h3>
+		
+                              
+	
+				<div th:with>
+					<div th:if test="${fn:contains(sessionScope.LikesUpList, bvo.boardNo)}">
+						<div th:with>
+							<div th:if test="${fn:contains(sessionScope.LikesDownList,bvo.boardNo) }">
+								<a th:href="{/@likesUp}?boardNo=${bvo.boardNo}&categoryNo=${categoryNo}">				
+									<i class='far fa-heart icon'>빈하트</i>
+								</a> ${bvo.likes}
+							</div>
+							<div th:unless>
+								<a th:href="{/@likesDown}boardNo=${bvo.boardNo }&categoryNo=${categoryNo}">			
+									<i class="fa fa-heart" style="font-size: 24px; color: red">빨간하트</i>
+								</a>${bvo.likes}
+							</div>
+						</div>
+					</div>
+				
+					<div th:unless>
+						<a th:href="{/@likesUp}?boardNo=${bvo.boardNo }&categoryNo=${categoryNo}">									
+							<i class='far fa-heart icon'></i>
+						</a> ${bvo.likes }
+					</div>
+				</div>
+	
+				<!--/*&pageNo=${pageNo} */-->
+				
 			</div>
+			
+			
+			
 			<hr>
 			<div class="content">
 			<form id="compostForm" action="" th:action="@{/CommentWrite}" method="post">

@@ -85,7 +85,7 @@ public class CommunityBoardController {
 	}
 
 	
-
+	//findBoardDetailByBoardNo //findCommentList	//updateHits
 	@RequestMapping("/board-detail")
 	public String boradDetail(int boardNo, Model model, int categoryNo,@AuthenticationPrincipal MemberVO memberVO,HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
@@ -98,21 +98,21 @@ public class CommunityBoardController {
 		List<CommentVO> list=communityBoardMapper.findCommentList(boardNo);
 		model.addAttribute("commentList", list);
 		model.addAttribute("mvo", memberVO);
+		
+		//조회수 (권한주기, 재증가방지) 
 		@SuppressWarnings("unchecked")
 		ArrayList<Integer> list1 = (ArrayList<Integer>) session.getAttribute("CommunityBoardNoList");
 		if(!list1.contains(boardNo)) {
-			communityBoardMapper.updateHits(boardNo);
-			list1.add(boardNo);		
+		communityBoardMapper.updateHits(boardNo);
+		list1.add(boardNo);		
 		}
 		
 		return "board-detail";
 	}
 	
 	//comment  관련 controller
-	
 	@PostMapping("/CommentWrite")
 	public String CommentWrite(CommentVO commentVO,@AuthenticationPrincipal MemberVO memberVO, int boardNo, int categoryNo) {
-		
 		BoardVO bvo=new BoardVO();
 		bvo.setBoardNo(boardNo);
 		commentVO.setBvo(bvo);
@@ -123,13 +123,42 @@ public class CommunityBoardController {
 	
 	@PostMapping("/CommentDelete")
 	public String CommentDelete(Model model,int commentNo,@AuthenticationPrincipal MemberVO memberVO, int boardNo, int categoryNo) {
-
-	
-
 		communityBoardMapper.deleteComment(commentNo);
-
-
 		return "redirect:/board-detail?boardNo="+boardNo+"&categoryNo="+categoryNo;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@RequestMapping("/likesUp")
+	public String LikesUp(Model model,@AuthenticationPrincipal MemberVO memberVO, HttpServletRequest request,int boardNo, int categoryNo) {
+		HttpSession session = request.getSession();
+		//좋아요 권한(중복방지)
+		ArrayList<Integer> list_up = (ArrayList<Integer>) session.getAttribute("LikesUpList");
+		ArrayList<Integer> list_down = (ArrayList<Integer>) session.getAttribute("LikesDownList");
+		  
+		  if(!list_up.contains(boardNo)) {
+			  communityBoardMapper.likesUp(boardNo);
+			  list_up.add(boardNo);
+			  list_down.remove(boardNo);
+		  }
+		 
+		return "board-detail";
+	}
+	
+	@SuppressWarnings("unchecked")
+	@RequestMapping("/likesDown")
+	public String LikesDown(Model model,@AuthenticationPrincipal MemberVO memberVO, HttpServletRequest request,int boardNo, int categoryNo) {
+		HttpSession session = request.getSession();
+		//좋아요 권한(중복방지)
+		ArrayList<Integer> list_up = (ArrayList<Integer>) session.getAttribute("LikesUpList");
+		ArrayList<Integer> list_down = (ArrayList<Integer>) session.getAttribute("LikesDownList");
+		  
+		  if(!list_down.contains(boardNo)) {
+			  communityBoardMapper.likesDown(boardNo);
+			  list_down.add(boardNo);
+			  list_up.remove(boardNo);
+		  }
+		 
+		return "board-detail";
 	}
 
 }

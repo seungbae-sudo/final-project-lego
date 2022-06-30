@@ -55,6 +55,11 @@
 					<input type="hidden" name="masterId" th:value="${masterList.id}">
 			<button type="submit">메세지 보내기</button>
 		</form>
+					<form th:action="@{/bookingForm}">
+					
+					<input type="hidden" name="masterId" th:value="${masterList.id}">
+			<button type="submit">상담 신청하기</button>
+		</form>
 		</div>
 	</section>
 </div>
