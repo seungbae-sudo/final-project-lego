@@ -71,7 +71,9 @@ where m.id = b.member_id
 and b.master_id = 'as@as'
 
 insert into review(review_no,score,review_content,id,master_id)
-values(review_seq.nextval,5,'이 바보야','33@33','as@as'); 
+values(review_seq.nextval,5,'이 바보야','33@33','ksg@1'); 
+
+select * from member where id = '33@33'
 
 create sequence review_seq
 select * from review
@@ -140,3 +142,71 @@ select i.*,m.id from images i, member m where i.id = m.id
 update images set image_name = '김승배님.jpg' where id = '534534@423423'
 
 select * from images
+
+select * from master where id = 'ksg@1'
+
+select * from category
+
+select * from master_detail where id = 'ksg@1'
+
+select * from skills
+
+select * from category
+
+select * from skills
+
+select * from times
+
+select * from days
+select * from master_detail
+
+select * from master_detail where id = 'ksg@1' skils_id=16(중국어) times_id=1(이른오전 9시이전) days_id=1 월요일
+
+select distinct m.* from skills s,times t,days d,master_detail m where m.id = 'ksg@1'
+
+select * from master_detail m,skills s where m.id = '2022@2' and m.skills_id>0 and m.skills_id = s.skills_id
+select * from master_detail m,times t where m.id = '2022@2' and m.times_id>0 and m.times_id = t.times_id
+select * from master_detail m,days d where m.id = '2022@2' and m.days_id>0 and m.days_id = d.days_id
+
+select r.board_no, r.board_title,r.hits, m.name
+from(
+	select b.board_no, b.board_title,b. hits, b.id
+	from  board b, board_category bc
+	where b.category_no=1
+	and b.category_no=bc.category_no
+) r, member m
+where  r.id=m.id
+
+select distinct s.skills,d.days,t.times,m.id
+from(
+	select *
+	from master_detail m,skills s
+	where m.id = '2022@2'
+	and m.skills_id>0
+	and m.skills_id = s.skills_id
+)s, (select *
+	from master_detail m,times t 
+	where m.id = '2022@2'
+	and m.times_id>0 
+	and m.times_id = t.times_id
+)t, (select * 
+	from master_detail m,days d 
+	where m.id = '2022@2' 
+	and m.days_id>0 
+	and m.days_id = d.days_id
+)d, master_detail m
+where m.id = '2022@2'
+
+select * from category
+
+union all
+select t.times from master_detail m,times t where m.id = '2022@2' and m.times_id>0 and m.times_id = t.times_id
+union all
+select d.days
+from master_detail m,days d where m.id =  '2022@2' and m.days_id>0 and m.days_id = d.days_id
+
+select c.lesson_sort from master m,category c where id = '2022@2' and m.category_no = c.category_no
+union all
+select s.skills from master_detail m,skills s where m.id =  '2022@2'and m.skills_id>0 and m.skills_id = s.skills_id
+
+

@@ -31,8 +31,11 @@
 						</div>
 						<div class="media-body">
 							<h2 class="media-heading" th:text="${member.name}">고수</h2>
-							
-							
+								<span class="media-heading" th:text="|분야 : ${Mycategory.lessonSort}|"></span>
+									<div th:each="ms:${MySkills}">
+										<span class="media-heading" th:text="|보유 기술 : ${ms.skills}|"></span>
+									</div>
+									<span class="media-heading" th:text="|경력 : ${masterDetail.career} 년|"></span>
 						</div>
 					</div>
 					<ul class="list-inline dashboard-menu text-center">
@@ -48,7 +51,9 @@
 								<div class="media-body">
 									<ul class="user-profile-list">
 									</ul>
-									<p class="media-heading" th:text="|경력 : ${masterDetail.career} 년|"></p>
+									
+									
+									
 									<pre th:text="${masterDetail.specifications}"style="background-color: white; border-color:white;"></pre>
 									<form method="get" th:action="@{/masterUpdateForm}">
                              			 <input type="submit"value="회원정보 수정하기" >

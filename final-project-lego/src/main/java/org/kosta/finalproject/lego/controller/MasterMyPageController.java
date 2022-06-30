@@ -2,9 +2,8 @@ package org.kosta.finalproject.lego.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.kosta.finalproject.lego.mapper.ImageMapper;
 import org.kosta.finalproject.lego.mapper.MasterMyPageMapper;
@@ -17,6 +16,7 @@ import org.kosta.finalproject.lego.vo.MasterVO;
 import org.kosta.finalproject.lego.vo.MemberVO;
 import org.kosta.finalproject.lego.vo.MessageVO;
 import org.kosta.finalproject.lego.vo.ReviewVO;
+import org.kosta.finalproject.lego.vo.SkillsVO;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -84,6 +84,12 @@ public class MasterMyPageController {
 	public String mastermypage(@AuthenticationPrincipal MemberVO memberVO, Model model) {
 		model.addAttribute("member", memberVO);
 		model.addAttribute("masterDetail", masterMyPageMapper.findMasterDetailList(memberVO.getId()));
+		
+		model.addAttribute("Mycategory",masterMyPageMapper.MyCategory(memberVO.getId()));
+		
+		List<SkillsVO> svo = masterMyPageMapper.MySkills(memberVO.getId());
+		model.addAttribute("MySkills",svo);
+		System.out.println(svo);
 		
 		ImageVO image = masterMyPageMapper.getImageId(memberVO.getId());
 		System.out.println(image);
@@ -179,11 +185,21 @@ public class MasterMyPageController {
 		model.addAttribute("member", memberVO);
 		model.addAttribute("masterDetail", masterMyPageMapper.findMasterDetailList(memberVO.getId()));
 		List<MessageVO> list = masterMyPageMapper.findMyMessage(memberVO.getId());
+		
+		
+		ArrayList<String> imageSrcList=new ArrayList();
+		for(int i=0;i<list.size();i++) {
+			String imageName=list.get(i).getImageVo().getImageName();
+			String listSrc = "./images/" +list.get(i).getReMvo().getId()+ "/" + imageName;
+			list.get(i).getImageVo().setImageName(listSrc);
+		}
+		
 		model.addAttribute("messageList", list);
 		
 		ImageVO image = masterMyPageMapper.getImageId(memberVO.getId());
 		String src = "./images/"+image.getMemberVO().getId()+"/"+image.getImageName();
 		model.addAttribute("src",src);
+		System.out.println(src);
 		
 		return "mastermypage-Message";
 	}

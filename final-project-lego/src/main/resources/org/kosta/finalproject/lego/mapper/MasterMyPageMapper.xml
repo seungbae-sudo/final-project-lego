@@ -12,6 +12,27 @@
    		select id,career,category_no,specifications from master where id =#{value}
    </select>
    
+   <select id="findMasterCategory" >
+	select distinct s.skills,d.days,t.times,m.id
+	from(
+	select *
+	from master_detail m,skills s
+	where m.id = #{value}
+	and m.skills_id>0
+	and m.skills_id = s.skills_id
+	)s, (select *
+	from master_detail m,times t 
+	where m.id = #{value}
+	and m.times_id>0 
+	and m.times_id = t.times_id
+	)t, (select * 
+	from master_detail m,days d 
+	where m.id = #{value}
+	and m.days_id>0 
+	and m.days_id = d.days_id
+	)d, master_detail m
+	where m.id = #{value}
+	</select>
 
    <resultMap type="org.kosta.finalproject.lego.vo.BookingVO" id="BookingResult">
    		<result column="id" property="mvo.id"/>
@@ -92,6 +113,14 @@
 	</resultMap>
 	<select id="getImageId" parameterType="string" resultType="org.kosta.finalproject.lego.vo.ImageVO" resultMap="imageResult">
 		select * from images where id=#{value}
+	</select>
+	
+	<select id="MyCategory" resultType="org.kosta.finalproject.lego.vo.CategoryVO">
+	select c.lesson_sort from master m,category c where id = #{value} and m.category_no = c.category_no
+	</select>
+	
+	<select id="MySkills" resultType="org.kosta.finalproject.lego.vo.SkillsVO">
+	select s.skills from master_detail m,skills s where m.id = #{value} and m.skills_id>0 and m.skills_id = s.skills_id
 	</select>
 	
 
