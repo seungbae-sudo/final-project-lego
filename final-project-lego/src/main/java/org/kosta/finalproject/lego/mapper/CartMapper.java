@@ -8,5 +8,7 @@ import org.kosta.finalproject.lego.vo.MemberVO;
 public interface CartMapper {
 	
 	void addCart(String id, String masterId);
+
+	void deleteCart(String id, String masterId);
 	
 }
