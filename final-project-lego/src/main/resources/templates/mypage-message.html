@@ -49,7 +49,7 @@
 						<div th:each="message:${messageList}">
 							<div>
 								<a th:href="@{/message-detail(receiveId=${message.reMvo.id},receiveName=${message.reMvo.name})}">
-									<img class="media-object user-img" th:src="${message.imageVo.imageName}" alt="Image" align="bottom"> 
+									<img class="media-object message-img" th:src="${message.imageVo.imageName}" alt="Image" align="bottom"> 
 									<span th:text="|${message.reMvo.name}님|">바보</span>
 
 								</a>

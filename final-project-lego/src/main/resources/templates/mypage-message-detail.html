@@ -65,13 +65,13 @@
 									</th:block>
 								</ul>
 							</div>
-							<div>
+							<div class="sendWrap">
 								<form
 									th:action="@{/sendMessage(receiveId=${receiveId},sendId=${sendId},receiveName=${receiveName})}"
 									method="post">
 									<textarea class="message-textarea" name="messageContent"
 										placeholder="메세지를 입력하세요"></textarea>
-									<input type="submit" value="전송">
+									<input type="submit" value="전송" class="SendBtn">
 								</form>
 							</div>
 						</div>

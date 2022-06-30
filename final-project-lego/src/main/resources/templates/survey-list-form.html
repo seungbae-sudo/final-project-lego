@@ -6,64 +6,140 @@
 
 
 <div layout:fragment="main">
-	<div class="container pt-4">
+	<div class="container pt-4 survey-wrap">
 		<!--/*   thymeleaf comment    */-->
-		<div class="">
-
+		<div class="survey-content">
+			
 			<form action="" method="post" th:action="@{/findMasterList}">
-				<p>2. 어떤 서비스를 제공할 수 있나요?</p>
+			<ul id="slider">
+				<li class="on">
+					<p>2. 어떤 서비스를 제공할 수 있나요?</p>
 
-				<input type="hidden" th:name="categoryNo" th:value="${categoryNo}">
+					<input type="hidden" th:name="categoryNo" th:value="${categoryNo}">
 
-				<th:block th:switch="${categoryNo}">
-					<th:block th:case="1">
-						<div th:each="sk: ${skills}">
-							<input type="checkbox" th:name="skills" th:text="${sk.skills}"
-								th:value="${sk.skillsId}"
-								th:if="${sk.skillsId>0&&sk.skillsId<5}">
-						</div>
+					<th:block th:switch="${categoryNo}">
+						<th:block th:case="1">
+							<div th:each="sk: ${skills}">
+								<input type="checkbox" th:name="skills" th:text="${sk.skills}"
+									th:value="${sk.skillsId}"
+									th:if="${sk.skillsId>0&&sk.skillsId<5}">
+							</div>
+						</th:block>
+						<th:block th:case="2">
+							<div th:each="sk: ${skills}">
+								<input type="checkbox" th:name="skills" th:text="${sk.skills}"
+									th:value="${sk.skillsId}"
+									th:if="${sk.skillsId>4&&sk.skillsId<9}">
+							</div>
+						</th:block>
+						<th:block th:case="3">
+							<div th:each="sk: ${skills}">
+								<input type="checkbox" th:name="skills" th:text="${sk.skills}"
+									th:value="${sk.skillsId}"
+									th:if="${sk.skillsId>8&&sk.skillsId<13}">
+							</div>
+						</th:block>
+						<th:block th:case="4">
+							<div th:each="sk: ${skills}">
+								<input type="checkbox" th:name="skills" th:text="${sk.skills}"
+									th:value="${sk.skillsId}"
+									th:if="${sk.skillsId>12&&sk.skillsId<17}">
+							</div>
+						</th:block>
 					</th:block>
-					<th:block th:case="2">
-						<div th:each="sk: ${skills}">
-							<input type="checkbox" th:name="skills" th:text="${sk.skills}"
-								th:value="${sk.skillsId}"
-								th:if="${sk.skillsId>4&&sk.skillsId<9}">
-						</div>
-					</th:block>
-					<th:block th:case="3">
-						<div th:each="sk: ${skills}">
-							<input type="checkbox" th:name="skills" th:text="${sk.skills}"
-								th:value="${sk.skillsId}"
-								th:if="${sk.skillsId>8&&sk.skillsId<13}">
-						</div>
-					</th:block>
-					<th:block th:case="4">
-						<div th:each="sk: ${skills}">
-							<input type="checkbox" th:name="skills" th:text="${sk.skills}"
-								th:value="${sk.skillsId}"
-								th:if="${sk.skillsId>12&&sk.skillsId<17}">
-						</div>
-					</th:block>
-				</th:block>
+				</li>
 
 
 
-				<hr>
-				<p>3. 어떤 서비스를 제공할 수 있나요?</p>
-				<div th:each="ti: ${times}">
-					<input type="checkbox" th:name="times" th:text="${ti.times}"
-						th:value="${ti.timesId}" th:if="${ti.timesId>0}">
-				</div>
-				<hr>
-				<p>4. 어떤 서비스를 제공할 수 있나요?</p>
-				<div th:each="d: ${day}">
-					<input type="checkbox" th:name="days" th:text="${d.days}"
-						th:value="${d.daysId}" th:if="${d.daysId>0}">
-				</div>
-				<button type="submit">다음</button>
+				<li>
+					<p>3. 어떤 서비스를 제공할 수 있나요?</p>
+					<div th:each="ti: ${times}">
+						<input type="checkbox" th:name="times" th:text="${ti.times}"
+							th:value="${ti.timesId}" th:if="${ti.timesId>0}">
+					</div>
+				</li>
+
+				<li>
+					<p>4. 어떤 서비스를 제공할 수 있나요?</p>
+					<div th:each="d: ${day}">
+						<input type="checkbox" th:name="days" th:text="${d.days}"
+							th:value="${d.daysId}" th:if="${d.daysId>0}">
+					</div>
+					<button id="surveyBtn" type="submit">결과보기</button>
+				</li>
+				</ul>
 			</form>
+			<span id="prev">PREV</span>
+			<span id="next">NEXT</span>
 		</div>
 	</div>
+	
+	 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+	<script type="text/javascript">
+
+	$('#next').click(function(){
+		slideNext();	
+	})
+
+	$('#prev').click(function(){
+		slidePrev();	
+	})
+
+	function slideNext(){
+		
+	  if( $('li').is(':animated') ){
+	  	return false;
+	  }
+	  
+	  let left = $('li.on').width(); 
+	  let currentIdx = $('li.on').index(); 
+	  let nextIdx = currentIdx + 1; 
+	  
+	  if(nextIdx > $('li').length - 1){
+	  	nextIdx = 0;
+	  }
+	  
+	  $('li').removeClass('on')
+	  $('li').eq(currentIdx).css({zIndex : 10})
+	  $('li').eq(nextIdx).addClass('on').css({
+		  	left: left,
+		    zIndex: 20,
+		    display: 'block'
+	  }).animate({
+	  		left: 0
+	  }, 500, function(){
+	  	$('li').eq(currentIdx).css({display:'none'})
+	  })
+	  
+	}
+
+	function slidePrev(){
+		
+	  if( $('li').is(':animated') ){
+	  	return false;
+	  }
+	  
+	  let left = $('li.on').width() * -1; 
+	  let currentIdx = $('li.on').index();
+	  let prevIdx = currentIdx - 1; 
+	  
+	  $('li').removeClass('on')
+	  $('li').eq(currentIdx).css({zIndex : 10})
+	  $('li').eq(prevIdx).addClass('on').css({
+		  	left: left,
+		    zIndex: 20,
+		    display: 'block'
+	  }).animate({
+	  	left: 0
+	  }, 500, function(){
+	  	$('li').eq(currentIdx).css({display:'none'})
+	  })
+	  
+	}
+
+
+	
+	</script>
 
 </div>
 </html>

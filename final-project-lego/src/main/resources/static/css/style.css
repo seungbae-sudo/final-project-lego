@@ -1,5 +1,7 @@
 
 @import url("https://fonts.googleapis.com/css?family=Poppins:300,400,500");
+
+
 /*레고  */
 /* index */
 
@@ -19,20 +21,84 @@
 	margin-top: 40px;
 }
 /* 고수 찾기 */
-
-/* .survey-wrap{
-	width: 500px;
-	height: 600px;
-	background: orange;
-	position: relative;
+.survey-wrap{
+        margin-top: 80px;
+    margin-left: 200px;
 }
 
 .survey-content{
-	width: 500px;
-	height: 600px;
-	position: absolute;
-} */
+    height: 610px;
+    background-color: #e49a6a;
+    width: 500px;
+    margin-left: 250px;
+    padding: 30px 2px;
+    border-radius: 20px;
+    
+    position: relative;
+}
 
+#slider {
+	    position: relative;
+    width: 400px;
+    height: 530px;
+    overflow: hidden;
+    background-color: whitesmoke;
+    margin-left: 48px;
+    margin-top: 10px;
+    padding: 10px 20px;
+    border-radius: 20px;
+}
+#slider li {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 40px;
+}
+
+#slider li:first-child {
+  display: block;
+}
+
+#slider li div{
+	padding: 10px;
+    margin-bottom: 10px;
+     text-decoration: underline;
+}
+
+#slider li p{
+	font-size: 16px;
+    padding: 7px 30px;
+    background: silver;
+    box-sizing: border-box;
+    border-radius: 20px;
+}
+
+#slider li div input{
+	margin-right: 9px;
+}
+#surveyBtn{
+	position: absolute;
+    bottom: 90px;
+    right: 28px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: 1px solid #888;
+}
+
+#prev{
+	position: absolute;
+	left: 9px;
+	 top: 290px;
+	 cursor: pointer;
+}
+
+#next{
+	    position: absolute;
+    right: 9px;
+    top: 290px;
+    cursor: pointer;
+}
 
 /* 로그인 */
 
@@ -50,6 +116,7 @@
     border-radius: 50%;
     height: 100%;
     object-fit: cover;
+    box-shadow: 2px 1px 3px lightgrey;
 }
 
 .profile-detail{
@@ -61,6 +128,13 @@
     margin-left: 190px;
 }
 /*마이페이지 메세지 리스트*/
+.message-img{
+	    width: 101px;
+    height: 91px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 8px;
+}
 .messge-list{
 	display: flex;
     width: 1050px;
@@ -69,30 +143,57 @@
     margin-top: 50px;
     flex-wrap: wrap;
 }
+
+.messge-list div div a{
+    width: 154px;
+    height: 146px;
+    display: block;
+    background: #f5f5f5;
+    padding: 10px 25px;
+    margin-right: 17px;
+    border-radius: 20px;
+    box-shadow: 2px 3px 4px #999;
+}
 /*마이페이지 메세지 상세보기 */
 .message-detail-wrap{
 	height: 710px;
 }
 .message-bg{
-    padding: 20px 20px;
+        padding: 20px 20px;
     width: 433px;
     background-color: #e49a6a;
     height: 500px;
     overflow: inherit;
     border-radius: 20px;
+    box-shadow: 7px 7px 8px lightgrey;
 }
 
 .message-content{
-    margin-left: 145px;
+    margin-left: 207px;
 }
 
+.sendWrap{
+	position: relative;
+}
 .message-textarea{
-    width: 370px;
+        width: 355px;
     margin-top: 10px;
     padding: 10px;
     border-radius: 10px;
+    border: 2px dashed lightgray;
+    margin-top: 15px;
+    margin-left: 4px;
 }
 
+.SendBtn{
+	    position: absolute;
+    width: 60px;
+    top: 16px;
+    height: 63px;
+    margin-left: 8px;
+    border-radius: 10px;
+    border: 1px solid lightgray;
+}
 .mypage-message{
 	width: 200px;
     white-space: normal;
