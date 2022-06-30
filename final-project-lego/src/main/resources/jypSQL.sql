@@ -210,18 +210,6 @@ group by ms.receive_id,m.name
 
 -- 메세지 상세보기
 
-select*from message
-
-select ms.message_no,ms.message_content, ms.receive_id, ms.receive_date,m.name
-from message ms, member m 
-where ms.id='sg@sg'
-and ms.receive_id='as@as'
-and ms.receive_id=m.id
-order by ms.receive_date desc
-
-
-
-
 select ms.message_no,ms.message_content, ms.receive_id, ms.receive_date,m.name
 from message ms, member m 
 where ms.id='sg@sg'
@@ -237,3 +225,14 @@ and ms.receive_id='sg@sg'
 and ms.receive_id=m.id
 
 order by receive_date asc
+
+
+
+---images
+
+select*from images
+select*from images where id=#{value}
+
+--예약 시스템
+
+select*from booking

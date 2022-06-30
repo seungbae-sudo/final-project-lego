@@ -86,4 +86,12 @@
 			order by receive_date asc
 		</select>
 		
+		
+		<resultMap type="org.kosta.finalproject.lego.vo.ImageVO" id="imageMvoResult">
+				<result column="id" property="memberVO.id"/>
+		</resultMap>
+		
+		<select id="getImageById" parameterType="string" resultType="org.kosta.finalproject.lego.vo.ImageVO" resultMap="imageMvoResult">
+			select*from images where id=#{value}
+		</select>
 </mapper>
