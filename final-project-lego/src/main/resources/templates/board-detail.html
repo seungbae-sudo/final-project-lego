@@ -54,72 +54,78 @@
 				</div>
 				
 
-
-
-
-
+			<!-- 댓글과 좋아요 -->
 			<div>
 				<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
 				<h3 >댓글 <i class='far fa-heart icon'></i></h3>
-		
-                              
-	
-				<div th:with>
-					<div th:if test="${fn:contains(sessionScope.LikesUpList, bvo.boardNo)}">
-						<div th:with>
-							<div th:if test="${fn:contains(sessionScope.LikesDownList,bvo.boardNo) }">
-								<a th:href="{/@likesUp}?boardNo=${bvo.boardNo}&categoryNo=${categoryNo}">				
-									<i class='far fa-heart icon'>빈하트</i>
-								</a> ${bvo.likes}
-							</div>
-							<div th:unless>
-								<a th:href="{/@likesDown}boardNo=${bvo.boardNo }&categoryNo=${categoryNo}">			
-									<i class="fa fa-heart" style="font-size: 24px; color: red">빨간하트</i>
-								</a>${bvo.likes}
-							</div>
-						</div>
-					</div>
+			
 				
-					<div th:unless>
-						<a th:href="{/@likesUp}?boardNo=${bvo.boardNo }&categoryNo=${categoryNo}">									
-							<i class='far fa-heart icon'></i>
-						</a> ${bvo.likes }
-					</div>
-				</div>
-	
-				<!--/*&pageNo=${pageNo} */-->
-				
-			</div>
+						<!--  	<span th:text="${session.LikesUpList}"></span>
+							<span th:if="${#lists.isEmpty(session.LikesUpList)}">
+					
+									<span th:if="${#lists.contains(session.LikesDownList,bvo.boardNo)}">
+										<a th:href="@{/likesUp(boardNo=${bvo.boardNo},categoryNo=${categoryNo})}">
+											<i class="fas fa-cat"></i>
+										</a> 
+									</span>
+									<span th:unless="${#lists.contains(session.LikesDownList,bvo.boardNo)}">
+										<a th:href="@{/likesDown(boardNo=${bvo.boardNo},categoryNo=${categoryNo})}">									
+											<i class='far fa-heart icon'></i>
+										</a> 
+									</span>
+									
+								</span>
+								
+								<span th:unless="${#lists.contains(session.LikesDownList,bvo.boardNo)}">
+										<a th:href="@{/likesUp(boardNo=${bvo.boardNo},categoryNo=${categoryNo})}">
+											<i class="fas fa-cat"></i>
+										</a> 
+									</span>
+					
+--><span th:text="${session.LikesUpList}"></span>
+<span th:if="${!#lists.contains(session.LikesUpList,bvo.boardNo)}">
+										<a th:href="@{/likesUp(boardNo=${bvo.boardNo},categoryNo=${categoryNo})}">
+											<i class="fas fa-cat"></i>
+										</a> 
+									</span>
+									<span th:if="${!#lists.contains(session.LikesDownList,bvo.boardNo)}">
+										<a th:href="@{/likesDown(boardNo=${bvo.boardNo},categoryNo=${categoryNo})}">									
+											<i class='far fa-heart icon'></i>
+										</a> 
+									</span>
+		</div>
 			
 			
 			
 			<hr>
 			<div class="content">
-			<form id="compostForm" action="" th:action="@{/CommentWrite}" method="post">
-				<input type="hidden" name="categoryNo" th:value="${categoryNo}">
-				<input type="hidden" name="boardNo" th:value="${bvo.boardNo}">
-				<input class="col-md-10" type="text" id="commentContent" name="commentContent" placeholder="댓글을 입력하세요">
-				<button class="col-md-1 btn" type="submit" onclick="compost()">작성</button>
-			</form> 
-			
-			<table class="table table-comment">
-				<tbody class="up-space">
-					 <tr th:each="comList:${commentList}">
-	                 	<td class="col-md-8"  th:text="${comList.commentContent}"></td>
-	                 	<td class="col-md-2"  th:text="${comList.commentDate} "></td>
-	                 	<td class="col-md-1"  th:text="${comList.mvo.name} "></td>
-	                 	<td class="col-md-1" ><form th:action="@{/CommentDelete}" method="post" th:if="${mvo.id}==${comList.mvo.id}">
-		                 			<input type="hidden" name="commentNo" th:value="${comList.commentNo}">
-									<input type="hidden" name="categoryNo" th:value="${categoryNo}"> 
-									<input type="hidden" name="boardNo" th:value="${bvo.boardNo}">
-								<!--<input type="hidden" name="pageNo" value="${pageNo}"> -->
-									 <button type="submit" onclick="comdeletepost()">삭제</button>
-	                 		</form>
-	                 	</td>
-		            </tr>
-	             </tbody>
-			</table>
+				<form id="compostForm" action="" th:action="@{/CommentWrite}" method="post">
+					<input type="hidden" name="categoryNo" th:value="${categoryNo}">
+					<input type="hidden" name="boardNo" th:value="${bvo.boardNo}">
+					<input class="col-md-10" type="text" id="commentContent" name="commentContent" placeholder="댓글을 입력하세요">
+					<button class="col-md-1 btn" type="submit" onclick="compost()">작성</button>
+				</form> 
+				
+				<table class="table table-comment">
+					<tbody class="up-space">
+						 <tr th:each="comList:${commentList}">
+		                 	<td class="col-md-8"  th:text="${comList.commentContent}"></td>
+		                 	<td class="col-md-2"  th:text="${comList.commentDate} "></td>
+		                 	<td class="col-md-1"  th:text="${comList.mvo.name} "></td>
+		                 	<td class="col-md-1" ><form th:action="@{/CommentDelete}" method="post" th:if="${mvo.id}==${comList.mvo.id}">
+			                 			<input type="hidden" name="commentNo" th:value="${comList.commentNo}">
+										<input type="hidden" name="categoryNo" th:value="${categoryNo}"> 
+										<input type="hidden" name="boardNo" th:value="${bvo.boardNo}">
+									<!--<input type="hidden" name="pageNo" value="${pageNo}"> -->
+										 <button type="submit" onclick="comdeletepost()">삭제</button>
+		                 		</form>
+		                 	</td>
+			            </tr>
+		             </tbody>
+				</table>
 			</div>
+		
+		
 		</section>
 
 		<script type="text/javascript">
