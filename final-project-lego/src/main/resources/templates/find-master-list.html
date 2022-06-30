@@ -8,30 +8,7 @@
 <section class="user-dashboard page-wrapper">
 
   <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="dashboard-wrapper user-dashboard">
-          <div class="table-responsive">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th class="col-sm-2">이름</th>
-                  <th class="col-sm-8">스펙</th>
-                  <th class="col-sm-2">경력</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr th:each="list:${masterList}">
-                  <td th:text="${list.name}"></td>
-                  <td th:text="${list.specifications}"></td>
-                  <td th:text="${list.career}"></td>
-                </tr>           
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
+ 
      
     <div class="table-responsive">
     <form action="" th:action="@{/addCart}">
