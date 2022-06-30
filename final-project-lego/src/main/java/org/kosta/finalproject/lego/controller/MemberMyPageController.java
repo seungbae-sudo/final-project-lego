@@ -8,6 +8,7 @@ import org.kosta.finalproject.lego.serivce.MemberMypageService;
 import org.kosta.finalproject.lego.serivce.MemberService;
 import org.kosta.finalproject.lego.vo.BoardVO;
 import org.kosta.finalproject.lego.vo.BookingVO;
+import org.kosta.finalproject.lego.vo.ImageVO;
 import org.kosta.finalproject.lego.vo.MemberVO;
 import org.kosta.finalproject.lego.vo.MessageVO;
 import org.kosta.finalproject.lego.vo.ReviewVO;
@@ -27,8 +28,15 @@ public class MemberMyPageController {
 	private final MemberMyPageMapper memberMyPageMapper;
 	private final MemberMypageService  memberMypageService;
 	private final MessageMapper messageMapper;
-	//mypage로 가는 건 homeController에서 !
 	
+	
+	//mypage로 가는 건 homeController에서 ! 옮김!
+	@RequestMapping("/mypage")
+	public String mypage(@AuthenticationPrincipal MemberVO memberVO,Model model) {
+//		ImageVO image= memberMyPageMapper.getImageById(memberVO.getId());
+//		model.addAttribute("image", image);
+		return "mypage";
+	}
 	
 	//탭 이동 컨트롤러***************
 	//내 찜목록

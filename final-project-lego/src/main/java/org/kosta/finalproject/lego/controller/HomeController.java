@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.kosta.finalproject.lego.vo.MemberVO;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,10 +47,7 @@ public class HomeController {
 		return "loginForm";
 	}
 	
-	@RequestMapping("/mypage")
-	public String mypage() {
-		return "mypage";
-	}
+
 	
 	@RequestMapping("/findMasterForm")
 	public String findMaster() {
