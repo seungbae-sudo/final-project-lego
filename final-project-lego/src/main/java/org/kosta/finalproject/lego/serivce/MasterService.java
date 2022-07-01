@@ -7,6 +7,7 @@ import org.kosta.finalproject.lego.vo.DaysVO;
 import org.kosta.finalproject.lego.vo.MasterDetailVO;
 import org.kosta.finalproject.lego.vo.MasterVO;
 import org.kosta.finalproject.lego.vo.MemberVO;
+import org.kosta.finalproject.lego.vo.ReviewVO;
 import org.kosta.finalproject.lego.vo.SkillsVO;
 import org.kosta.finalproject.lego.vo.TimesVO;
 
@@ -33,4 +34,6 @@ public interface MasterService {
 	void updateMaster(MasterVO mvo);
 
 	void updateMember(MemberVO memberVO);
+
+	List<ReviewVO> findMasterRanking();
 }

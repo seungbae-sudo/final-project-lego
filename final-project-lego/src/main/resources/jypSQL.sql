@@ -283,4 +283,19 @@ select d.days
 from master_detail m,days d where m.id =  '2022@2' and m.days_id>0 and m.days_id = d.days_id
 
 
+-- 랭킹 
+-- 고수 이름/ 고수 아이디/ 평균 점수 / 스펙/ 이미지 
+-- 5위 
+select score,specifications,id,name,image_name
+from (
+	select nvl(round(avg(r.score)),0) as score, to_char(dbms_lob.substr(ms.specifications, 4000)) as specifications, m.id,m.name,i.image_name
+	from member m, master ms, review r, images i
+	where m.id=ms.id
+	and m.id=r.master_id
+	and m.id=i.id
+	group by to_char(dbms_lob.substr(ms.specifications, 4000)), m.id,m.name,i.image_name
+	order by score desc
+) 
+where 6> rownum
+
 

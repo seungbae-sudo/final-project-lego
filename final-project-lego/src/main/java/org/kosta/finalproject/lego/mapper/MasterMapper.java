@@ -9,6 +9,7 @@ import org.kosta.finalproject.lego.vo.DaysVO;
 import org.kosta.finalproject.lego.vo.MasterDetailVO;
 import org.kosta.finalproject.lego.vo.MasterVO;
 import org.kosta.finalproject.lego.vo.MemberVO;
+import org.kosta.finalproject.lego.vo.ReviewVO;
 import org.kosta.finalproject.lego.vo.SkillsVO;
 import org.kosta.finalproject.lego.vo.TimesVO;
 
@@ -39,4 +40,6 @@ public interface MasterMapper {
 	void registerTimes(MasterDetailVO masterDetailVO);
 	
 	MasterVO findMasterById(String id);
+
+	List<ReviewVO> findMasterRanking();
 }

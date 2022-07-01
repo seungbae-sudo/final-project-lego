@@ -1,9 +1,12 @@
 package org.kosta.finalproject.lego.controller;
 
+import java.util.List;
+
 import org.kosta.finalproject.lego.serivce.MasterService;
 import org.kosta.finalproject.lego.vo.CategoryVO;
 import org.kosta.finalproject.lego.vo.MasterDetailVO;
 import org.kosta.finalproject.lego.vo.MasterVO;
+import org.kosta.finalproject.lego.vo.ReviewVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -69,4 +72,19 @@ public class MasterController {
 	public String findMasterByKeyword() {
 		return "find-master-list";
 	}
+	
+	
+	
+	//고수 랭킹 5위까지 
+	@RequestMapping("find-master-raking")
+	public String findMasterRaking(Model model) {
+		List<ReviewVO> list =masterService.findMasterRanking();
+
+
+		
+		model.addAttribute("rankingList", list);
+		return "master-raking-list";
+	}
+	
+	
 }

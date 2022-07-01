@@ -1,8 +1,19 @@
 
 @import url("https://fonts.googleapis.com/css?family=Poppins:300,400,500");
 
+.all_star{
+	width:180px; height:25px; margin:10px;font-family: "Font Awesome 5 Free"; font-weight:900; 
+}
 
+.all_star option{
+	font-family: "Font Awesome 5 Free"; font-weight:900;
+}
 /*레고  */
+/*test*/
+.mama{
+	font-color:red;
+}
+
 /* index */
 
 .btn-round {

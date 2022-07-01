@@ -35,8 +35,33 @@
    <insert id="registerTimes" parameterType="org.kosta.finalproject.lego.vo.MasterDetailVO">
 		insert into master_detail(id,times_id) values(#{id},#{timesId})
    </insert>
-   
+
    <select id="findMasterById" resultType="org.kosta.finalproject.lego.vo.MasterVO" >
    		select * from master where id= #{id}
    </select>
+   
+   <resultMap type="org.kosta.finalproject.lego.vo.ReviewVO" id="MemberAndMasterForRankingResult">
+      <result column="name" property="mvo.name"/>
+      <result column="id" property="mvo.id"/>
+      <result column="specifications" property="msvo.specifications"/>
+      <result column="image_name" property="imageVo.imageName"/>
+   </resultMap>
+   
+   <select id="findMasterRanking" resultType="org.kosta.finalproject.lego.vo.ReviewVO" resultMap="MemberAndMasterForRankingResult">
+   		select score,specifications,id,name,image_name
+		from (
+			select nvl(round(avg(r.score)),0) as score, to_char(dbms_lob.substr(ms.specifications, 4000)) as specifications, m.id,m.name,i.image_name
+			from member m, master ms, review r, images i
+			where m.id=ms.id
+			and m.id=r.master_id
+			and m.id=i.id
+			group by to_char(dbms_lob.substr(ms.specifications, 4000)), m.id,m.name,i.image_name
+			order by score desc
+		) 
+		where 6> rownum 
+   </select>
+   
+   
+   
+	
 </mapper>
