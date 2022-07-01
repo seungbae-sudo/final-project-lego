@@ -43,27 +43,17 @@
 						<li><a th:href="@{/mastermypage-consult}">상담신청내역</a></li>
 						<li><a th:href="@{/mastermypage-message}">메세지함</a></li>
 					</ul>
-					<div class="dashboard-wrapper user-dashboard profile-detail">
-
-						<div class="table-responsive">
-							<table class="table">
-								<thead>
-									<tr>
-										<th>고객 이름</th>
-										<th>평점</th>
-										<th>고객 리뷰</th>
-										<th></th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr th:each="rv:${review}">
-										<td th:text="${rv.mvo.name}"></td>
-										<td th:text="|${rv.score}점|"></td>
-										<td th:text="${rv.reviewContent}">
-										</td>
-									</tr>
-								</tbody>
-							</table>
+					<div class="dashboard-wrapper user-dashboard profile-detail" >
+						<div th:each="rv:${review}">
+							<div>
+								<div>
+									<span th:text="${rv.mvo.name}"></span>
+									<span th:text="${rv.score}"><i class="bi bi-star-fill"></i></span>
+								</div>
+								<div>
+									<span th:text="${rv.reviewContent}"></span>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -72,3 +62,12 @@
 	</section>
 
 </div>
+
+
+
+<!--
+	 			<th:each="rv:${review}">
+				<th:text="${rv.mvo.name}">
+				<th:text="|${rv.score}점|">
+				<th:text="${rv.reviewContent}">
+-->
