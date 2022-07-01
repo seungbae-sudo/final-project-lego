@@ -55,9 +55,9 @@
 								</thead>
 								<tbody>
 									<tr th:each="Booking:${Booking}">
-										<td><a class="col-md-4" th:text="${Booking.mvo.name}" th:href="@{/mastermypage-consult-detail(bcd=${Booking.mvo.name})}"></a></td>
+										<td><a class="col-md-4" th:text="${Booking.mvo.name}"></a></td>
 										<td class="col-md-4" th:text="${Booking.bookingDay}"></td>
-										<td><button>메세지함 이동</button></td>
+										<td><a th:href="@{/mastermypage-consult-detail(BookingNo=${Booking.bookingNo})}">상담내용 보기</a></td>
 									</tr>
 								</tbody>
 							</table>

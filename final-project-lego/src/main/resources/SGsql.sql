@@ -220,10 +220,21 @@ and ms.id = 'ksg@1'
 and i.id(+) = ms.receive_id
 group by m.name, i.image_name
 
-
+select b.*,m.name 
+from booking b,member m 
+where booking_no=10
+and m.id=b.member_id
 
 select * from message
 
+select * from booking
+
+booking_no
+booking_day
+booking_content
+master_id
+
+member_id
 
 
 
