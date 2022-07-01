@@ -90,12 +90,21 @@
 	
 	
 	<select id="findMyMessage" resultType="org.kosta.finalproject.lego.vo.MessageVO" resultMap="MessageResult">
-	select m.name, i.image_name ,m.id
+	select m.name, i.image_name ,m.id, ms.receive_id
 	from message ms, member m, images i
-	where m.id = ms.receive_id 
-	and ms.id = #{value}
+	where m.id = ms.receive_id
 	and i.id(+) = ms.receive_id
-	group by m.name, i.image_name,m.id
+	and ms.id = 'ksb@kosta.com'
+	group by m.name, i.image_name,m.id, ms.receive_id
+
+	union all
+	
+	select m.name, i.image_name, m.id, ms.receive_id
+	from message ms, member m, images i
+	where ms.receive_id = 'ksb@kosta.com'
+	and m.id = ms.id
+	and i.id(+) = ms.id
+	group by m.name, i.image_name,m.id, ms.receive_id
 	</select>
 	
 	<select id="findMyMessageDetail" resultType="org.kosta.finalproject.lego.vo.MessageVO" parameterType="org.kosta.finalproject.lego.vo.MessageVO" resultMap="MemberResult">
