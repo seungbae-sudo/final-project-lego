@@ -15,6 +15,7 @@ import org.kosta.finalproject.lego.serivce.MemberService;
 import org.kosta.finalproject.lego.vo.BoardVO;
 import org.kosta.finalproject.lego.vo.BookingVO;
 import org.kosta.finalproject.lego.vo.ImageVO;
+import org.kosta.finalproject.lego.vo.MasterVO;
 import org.kosta.finalproject.lego.vo.MemberVO;
 import org.kosta.finalproject.lego.vo.MessageVO;
 import org.kosta.finalproject.lego.vo.ReviewVO;
@@ -106,7 +107,7 @@ public class MemberMyPageController {
 	}
 
 	// 내 상담 목록
-	@RequestMapping("mypage-booking")
+	@RequestMapping(value={"mypage-booking","mypageReviewWriteResult"})
 	public String mypageBooking(@AuthenticationPrincipal MemberVO memberVO, Model model) {
 		List<BookingVO> CartList = memberMyPageMapper.findMyBookingList(memberVO.getId());
 		System.out.println(CartList);
@@ -120,6 +121,37 @@ public class MemberMyPageController {
 		
 		return "mypage-booking";
 	}
+	
+
+	   //상담목록에서 리뷰폼으로 가기
+	   @RequestMapping("mypage-reviewWriteForm")
+	   public String mypageReviewWriteForm(@AuthenticationPrincipal MemberVO memberVO, Model model,String masterId) {
+	      // 프로필 이미지 경로 
+	            ImageVO image = memberMyPageMapper.getImageById(memberVO.getId());
+	            String src = "./images/" + image.getMemberVO().getId() + "/" + image.getImageName();
+	            model.addAttribute("src", src);      
+	            model.addAttribute("masterId", masterId);
+	      return "mypage-reviewWriteForm";
+	   }
+	   
+	   @PostMapping("mypage-reviewWrite")
+	   public String mypageReviewWrite(@AuthenticationPrincipal MemberVO memberVO,Model model,String masterId,ReviewVO reviewVO) {
+	      MasterVO masterVO=new MasterVO();
+	      masterVO.setId(masterId);
+	      reviewVO.setMsvo(masterVO);
+	      reviewVO.setMvo(memberVO);
+	      
+	      memberMyPageMapper.reviewWrite(reviewVO);
+	      
+	      
+	      return "redirect:mypageReviewWriteResult";
+	   }
+	//   
+	//   @RequestMapping("mypageReviewWriteResult")
+	//   public String mypageReviewWriteResult() {
+//	      return "/";
+	//   }
+	
 
 	// 마이페이지 회원정보 수정
 	@RequestMapping("memberUpdateForm")

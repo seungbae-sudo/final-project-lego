@@ -31,4 +31,6 @@ public interface MemberMyPageMapper {
 
 	void updateImage(ImageVO imageVO);
 
+	void reviewWrite(ReviewVO reviewVO);
+
 }
