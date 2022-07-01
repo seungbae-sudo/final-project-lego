@@ -129,3 +129,5 @@ UPDATE board SET likes = likes+1 WHERE board_no = 1
 select*from board
 --likesDown
 UPDATE board SET likes = likes -1 WHERE board_no = 1 
+
+
