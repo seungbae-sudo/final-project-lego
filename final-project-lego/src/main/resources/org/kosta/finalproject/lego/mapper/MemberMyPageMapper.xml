@@ -31,11 +31,12 @@
 		
 		<resultMap type="org.kosta.finalproject.lego.vo.BookingVO" id="skillAndMemberResult">
 				<result column="name" property="mvo.name"/>
+				<result column="master_id" property="mvo.id"/>
 				<result column="lesson_sort" property="cvo.lessonSort"/>
 			</resultMap>
 
 		<select id="findMyBookingList" resultMap="skillAndMemberResult" resultType="org.kosta.finalproject.lego.vo.BookingVO">
-			select r.name, r.lesson_sort, b.booking_day
+			select r.name, r.lesson_sort, b.booking_day,b.master_id
 			from(
 					select ms.id, m.name, c.lesson_sort
 					from master ms, category c,member m
@@ -105,4 +106,10 @@
 		<select id="getImageById" parameterType="string" resultType="org.kosta.finalproject.lego.vo.ImageVO" resultMap="imageMvoResult">
 			select*from images where id=#{value}
 		</select>
+		
+      	<insert id="reviewWrite" parameterType="org.kosta.finalproject.lego.vo.ReviewVO">
+	         insert into review(review_no,score,review_content,id,master_id)
+	         values(review_seq.nextval,#{score},#{reviewContent},#{mvo.id},#{msvo.id})
+      </insert>
+      
 </mapper>

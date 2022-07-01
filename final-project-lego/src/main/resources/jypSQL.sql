@@ -104,7 +104,17 @@ from(
 	where ms.id=md.id
 	and ms.id=m.id) r, booking b
 where r.id=b.master_id
-and b.member_id='lsj@naver.com'
+and b.member_id='ssg@kosta.com'
+
+
+select r.name, r.lesson_sort, b.booking_day,b.master_id
+from(
+		select ms.id, m.name, c.lesson_sort
+		from master ms, category c,member m
+		where ms.category_no=c.category_no
+		and m.id=ms.id) r, booking b
+where r.id=b.master_id
+and b.member_id='ssg@kosta.com'
 
 
 
