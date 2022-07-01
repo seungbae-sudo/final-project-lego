@@ -187,12 +187,13 @@ public class MasterMyPageController {
 		List<MessageVO> list = masterMyPageMapper.findMyMessage(memberVO.getId());
 		
 		
-		ArrayList<String> imageSrcList=new ArrayList();
-		for(int i=0;i<list.size();i++) {
-			String imageName=list.get(i).getImageVo().getImageName();
-			String listSrc = "./images/" +list.get(i).getReMvo().getId()+ "/" + imageName;
-			list.get(i).getImageVo().setImageName(listSrc);
-		}
+		
+		  ArrayList<String> imageSrcList=new ArrayList(); for(int
+		  i=0;i<list.size();i++) { String
+		  imageName=list.get(i).getImageVo().getImageName(); String listSrc =
+		  "./images/" +list.get(i).getReMvo().getId()+ "/" + imageName;
+		  list.get(i).getImageVo().setImageName(listSrc); }
+		 
 		
 		model.addAttribute("messageList", list);
 		

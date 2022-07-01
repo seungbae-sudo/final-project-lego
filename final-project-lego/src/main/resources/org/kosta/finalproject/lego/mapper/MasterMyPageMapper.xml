@@ -52,6 +52,7 @@
    	<resultMap type="org.kosta.finalproject.lego.vo.MessageVO" id="MessageResult">
    		<result column="id" property="sendMvo.id"/>
    		<result column="name" property="sendMvo.name"/>
+   		<result column="image_name" property="imageVo.imageName"/>
    	</resultMap>
    	
    	<resultMap type="org.kosta.finalproject.lego.vo.MessageVO" id="MemberResult">
@@ -80,11 +81,14 @@
 	and r.master_id = #{value}
 	</select>
 	
+	
 	<select id="findMyMessage" resultType="org.kosta.finalproject.lego.vo.MessageVO" resultMap="MessageResult">
-	select ms.id, m.name
-	from message ms, member m, master ma
-	where m.id=ms.id and ma.id=#{value} and ms.receive_id = ma.id
-	group by ms.id, m.name
+	select m.name, i.image_name
+	from message ms, member m, images i
+	where m.id = ms.receive_id 
+	and ms.id = #{value}
+	and i.id(+) = ms.receive_id
+	group by m.name, i.image_name
 	</select>
 	
 	<select id="findMyMessageDetail" resultType="org.kosta.finalproject.lego.vo.MessageVO" parameterType="org.kosta.finalproject.lego.vo.MessageVO" resultMap="MemberResult">

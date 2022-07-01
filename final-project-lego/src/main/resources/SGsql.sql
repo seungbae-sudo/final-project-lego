@@ -196,8 +196,12 @@ from(
 	and m.days_id = d.days_id
 )d, master_detail m
 where m.id = '2022@2'
-
+select * from images
 select * from category
+
+
+
+
 
 union all
 select t.times from master_detail m,times t where m.id = '2022@2' and m.times_id>0 and m.times_id = t.times_id
@@ -208,5 +212,23 @@ from master_detail m,days d where m.id =  '2022@2' and m.days_id>0 and m.days_id
 select c.lesson_sort from master m,category c where id = '2022@2' and m.category_no = c.category_no
 union all
 select s.skills from master_detail m,skills s where m.id =  '2022@2'and m.skills_id>0 and m.skills_id = s.skills_id
+
+select m.name, i.image_name
+from message ms, member m, images i
+where m.id = ms.receive_id 
+and ms.id = 'ksg@1'
+and i.id(+) = ms.receive_id
+group by m.name, i.image_name
+
+
+
+select * from message
+
+
+
+
+
+
+
 
 
