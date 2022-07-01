@@ -56,9 +56,8 @@
 
 			<!-- 댓글과 좋아요 -->
 			<div>
-				<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
-				<h3 >댓글 <i class='far fa-heart icon'></i></h3>
-			
+				<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+				<span class=commentName style='margin-right: 300px; font-size:30px;'>댓글</span>
 				
 						<!--  	<span th:text="${session.LikesUpList}"></span>
 							<span th:if="${#lists.isEmpty(session.LikesUpList)}">
@@ -82,17 +81,23 @@
 										</a> 
 									</span>
 					
---><span th:text="${session.LikesUpList}"></span>
-<span th:if="${!#lists.contains(session.LikesUpList,bvo.boardNo)}">
+-->
+						<span style='margin-left: 500px;'  >
+							<!-- <span th:text="${session.LikesUpList}"></span> -->
+							
+							<th:block th:if="${!#lists.contains(session.LikesUpList,bvo.boardNo)}">
 										<a th:href="@{/likesUp(boardNo=${bvo.boardNo},categoryNo=${categoryNo})}">
-											<i class="fas fa-cat"></i>
+											<i class="fa fa-thumbs-o-up" style="font-size:24px"></i>
 										</a> 
-									</span>
-									<span th:if="${!#lists.contains(session.LikesDownList,bvo.boardNo)}">
-										<a th:href="@{/likesDown(boardNo=${bvo.boardNo},categoryNo=${categoryNo})}">									
-											<i class='far fa-heart icon'></i>
-										</a> 
-									</span>
+										<span th:text="${bvo.likes}"></span>										
+							</th:block>
+							<th:block th:if="${!#lists.contains(session.LikesDownList,bvo.boardNo)}">
+										<a  th:href="@{/likesDown(boardNo=${bvo.boardNo},categoryNo=${categoryNo})}">									
+											<i class="fa fa-thumbs-up" style="font-size:24px; color:red;"></i>
+										</a>
+										<span th:text="${bvo.likes}"></span>		
+							</th:block>
+						</span>
 		</div>
 			
 			
@@ -127,7 +132,7 @@
 		
 		
 		</section>
-
+		
 		<script type="text/javascript">
 
 		function updatePost(){
@@ -152,6 +157,7 @@
 				document.getElementById("compostForm").submit();
 			}
 		}
+	
 		</script>
 	
 </html>
