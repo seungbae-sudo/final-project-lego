@@ -15,9 +15,9 @@
 				</div>
 				<div class="col-md-5 col-xs-12 col-sm-4 header-setting">
 					<!--검색창 -->
-									<form action="post">
+									<form action="get" th:action="@{/searchKeyword}">
 										<input type="search" class="form-control"
-											placeholder="원하는 레슨의 분야를 검색해주세요!">
+											placeholder="원하는 레슨의 분야를 검색해주세요!" name="keyword">
 											<button type="submit"> 검색</button>
 									</form>
 				</div>

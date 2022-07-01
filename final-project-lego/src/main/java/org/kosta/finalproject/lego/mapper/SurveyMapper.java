@@ -1,6 +1,7 @@
 package org.kosta.finalproject.lego.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.kosta.finalproject.lego.vo.BookingVO;
@@ -29,4 +30,6 @@ public interface SurveyMapper {
 	void BookingToMaster(BookingVO bookingVO);
 	
 	List<MasterVO> findMasterByKeyword(String keyword, String keyword2);
+
+	List<MasterVO> findMasterByKeyword(Map<String, String> map);
 }

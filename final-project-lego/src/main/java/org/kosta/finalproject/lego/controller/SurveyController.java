@@ -1,7 +1,9 @@
 package org.kosta.finalproject.lego.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.kosta.finalproject.lego.mapper.CartMapper;
 import org.kosta.finalproject.lego.mapper.MasterMapper;
@@ -86,8 +88,14 @@ public class SurveyController {
 		surveyMapper.BookingToMaster(bookingVO);
 	return "redirect:/mypage";
 	}
-	@RequestMapping("search")
-	public String search() {
-		return "";
+	@RequestMapping("/searchKeyword")
+	public String search(Model model, String keyword) {
+		System.out.println(keyword);
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("KEYWORD", keyword);
+		map.put("KEYWORD2", keyword);
+		List<MasterVO> list = surveyMapper.findMasterByKeyword(map);
+		model.addAttribute("masterList", list);
+		return "find-master-list";
 	}
 }

@@ -37,7 +37,8 @@
                               </td>
                               <td class="text-center">                          		
                               		<input type="hidden" name="id" th:value="${list.id}">
-                              		<input type="hidden" name="categoryNo" th:value="${categoryNo}">
+                              		<!-- <input type="hidden" name="categoryNo" th:value="${categoryNo}"> -->
+                              		<input type="hidden" name="categoryNo" th:value="${list.category.categoryNo}">
                               		<button type="submit" class="bi bi-bookmark" style="background-color: white;border-color: white;" name="masterId" th:value="${list.id}"></button>
                               	
                               
