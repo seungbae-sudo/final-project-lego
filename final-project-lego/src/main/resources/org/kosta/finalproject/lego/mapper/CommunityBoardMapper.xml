@@ -54,14 +54,24 @@
 		<result column="board_no" property="bvo.boardNo"/>
 		<result column="name" property="mvo.name"/>
 		<result column="id" property="mvo.id"/>
+		<result column="authority" property="authority.authority"/>
 	</resultMap>
 	
 	<select id="findCommentList" resultType="org.kosta.finalproject.lego.vo.CommentVO" resultMap="memberAndBoardResultMap">
+		select cm.comment_content, cm.comment_no,cm.comment_date , m.name, m.id, a.authority
+		from  board b, member m, board_comment cm, authorities a
+		where b.board_no=cm.board_no
+		and a.username = m.id 
+		and m.id=cm.id
+		and b.board_no=#{value}
+		
+<!-- 		
+		마스터 표시 전 
+		
 		select cm.comment_content, cm.comment_no,cm.comment_date , m.name, m.id
 		from  board b, member m, board_comment cm
 		where b.board_no=cm.board_no
-		and m.id=cm.id
-		and b. board_no=#{value}
+		and m.id=cm.id -->
 	</select>
 
 

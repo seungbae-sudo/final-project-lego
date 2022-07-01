@@ -83,8 +83,8 @@
 					
 -->
 						<span style='margin-left: 500px;'  >
-							<!-- <span th:text="${session.LikesUpList}"></span> -->
-							
+						
+							<th:block th:if="${#lists.contains(session.LikesUpList,bvo.boardNo)}">
 							<th:block th:if="${!#lists.contains(session.LikesUpList,bvo.boardNo)}">
 										<a th:href="@{/likesUp(boardNo=${bvo.boardNo},categoryNo=${categoryNo})}">
 											<i class="fa fa-thumbs-o-up" style="font-size:24px"></i>
@@ -96,6 +96,12 @@
 											<i class="fa fa-thumbs-up" style="font-size:24px; color:red;"></i>
 										</a>
 										<span th:text="${bvo.likes}"></span>		
+							</th:block>
+							</th:block>
+							<th:block th:if="${!#lists.contains(session.LikesUpList,bvo.boardNo)}">
+								<a th:href="@{/likesUp(boardNo=${bvo.boardNo},categoryNo=${categoryNo})}">
+											<i class="fa fa-thumbs-o-up" style="font-size:24px"></i>
+										</a> <span th:text="${bvo.likes}"></span>		
 							</th:block>
 						</span>
 		</div>
@@ -114,9 +120,12 @@
 				<table class="table table-comment">
 					<tbody class="up-space">
 						 <tr th:each="comList:${commentList}">
-		                 	<td class="col-md-8"  th:text="${comList.commentContent}"></td>
+		                 	<td class="col-md-6"  th:text="${comList.commentContent}"></td>
 		                 	<td class="col-md-2"  th:text="${comList.commentDate} "></td>
 		                 	<td class="col-md-1"  th:text="${comList.mvo.name} "></td>
+		            		 <td class="col-md-1" style='text-align:center; background-color:#e49a6a; opacity:0.8; border-radius:20px;' th:text="|고수|" th:if="${#strings.contains(comList.Authority.authority, 'MASTER')}"></td>
+		            		<!--/* 한번에 합치기 :  <td class="col-md-2"  th:text="|${comList.mvo.name} 고수| " th:if="${#strings.contains(comList.Authority.authority, 'MASTER')}"></td> */--> 
+		            		
 		                 	<td class="col-md-1" ><form th:action="@{/CommentDelete}" method="post" th:if="${mvo.id}==${comList.mvo.id}">
 			                 			<input type="hidden" name="commentNo" th:value="${comList.commentNo}">
 										<input type="hidden" name="categoryNo" th:value="${categoryNo}"> 

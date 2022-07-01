@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.kosta.finalproject.lego.mapper.CommunityBoardMapper;
+import org.kosta.finalproject.lego.vo.Authority;
 import org.kosta.finalproject.lego.vo.BoardCategoryVO;
 import org.kosta.finalproject.lego.vo.BoardVO;
 import org.kosta.finalproject.lego.vo.CommentVO;
@@ -88,7 +89,7 @@ public class CommunityBoardController {
 	//findBoardDetailByBoardNo //findCommentList	//updateHits
 	@RequestMapping("/board-detail")
 	@SuppressWarnings({ "unchecked"})
-	public String boradDetail(int boardNo, Model model, int categoryNo,@AuthenticationPrincipal MemberVO memberVO,HttpServletRequest request) {
+	public String boradDetail(int boardNo, Model model, int categoryNo,@AuthenticationPrincipal MemberVO memberVO,Authority authority, HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
 		BoardCategoryVO bcvo = new BoardCategoryVO();
 		bcvo.setCategoryNo(categoryNo);
@@ -99,6 +100,8 @@ public class CommunityBoardController {
 		List<CommentVO> list=communityBoardMapper.findCommentList(boardNo);
 		model.addAttribute("commentList", list);
 		model.addAttribute("mvo", memberVO);
+		model.addAttribute("authority", authority);
+		System.out.println(authority);
 		
 		//조회수 (권한주기, 재증가방지) 
 		

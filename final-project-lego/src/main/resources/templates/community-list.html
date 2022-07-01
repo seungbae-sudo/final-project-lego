@@ -64,9 +64,8 @@
   <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
   <script >
 $("#cateBtn li").click(function(){
-    $("#cateBtn li").removeClass("active");
-    $(this).addClass("active");
-});
+    $(this).addClass("active").siblings.removeClass("active");
+}); 
 </script>
 </section>
 

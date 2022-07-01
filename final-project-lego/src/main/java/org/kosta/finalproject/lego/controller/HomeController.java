@@ -19,13 +19,9 @@ import lombok.extern.slf4j.Slf4j;
 public class HomeController {
 	@RequestMapping("/")
 	
-	public String home(Authentication authentication,Model model,HttpServletRequest request) {
-		HttpSession session = request.getSession(false);
+	public String home(Authentication authentication,Model model) {
 		if(authentication!=null) {
 			  log.info("Home: 인증받은 사용자 {} ",authentication.getPrincipal());
-			session.setAttribute("CommunityBoardNoList", new ArrayList<Integer>());
-			  session.setAttribute("LikesUpList",new ArrayList<Integer>());
-			  session.setAttribute("LikesDownList",new ArrayList<Integer>());
 			
 		}
 			else {
@@ -43,7 +39,11 @@ public class HomeController {
 	
 	
 	@RequestMapping("/loginForm")
-	public String loginForm() {
+	public String loginForm(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		session.setAttribute("CommunityBoardNoList", new ArrayList<Integer>());
+		  session.setAttribute("LikesUpList",new ArrayList<Integer>());
+		  session.setAttribute("LikesDownList",new ArrayList<Integer>());
 		return "loginForm";
 	}
 	
