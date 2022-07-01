@@ -35,7 +35,7 @@
 	</select>
 
    <resultMap type="org.kosta.finalproject.lego.vo.BookingVO" id="BookingResult">
-   		<result column="id" property="mvo.id"/>
+   		<result column="member_id" property="mvo.id"/>
    		<result column="name" property="mvo.name" />	
    </resultMap>
 
@@ -74,6 +74,13 @@
 	and b.master_id = #{value}
 	</select>
 	
+   	<select id="findMyBookingDetail" resultType="org.kosta.finalproject.lego.vo.BookingVO" resultMap="BookingResult">
+		select b.booking_no,b.booking_day,b.booking_content,b.master_id,b.member_id,m.name 
+		from booking b,member m 
+		where booking_no=#{value}
+		and m.id=b.member_id		
+	</select>
+	
 	<select id="findMyReview" resultType="org.kosta.finalproject.lego.vo.ReviewVO" resultMap="ReviewResult">
 	select r.id, r.score, r.review_content, m.name
 	from review r, member m
@@ -83,12 +90,12 @@
 	
 	
 	<select id="findMyMessage" resultType="org.kosta.finalproject.lego.vo.MessageVO" resultMap="MessageResult">
-	select m.name, i.image_name
+	select m.name, i.image_name ,m.id
 	from message ms, member m, images i
 	where m.id = ms.receive_id 
 	and ms.id = #{value}
 	and i.id(+) = ms.receive_id
-	group by m.name, i.image_name
+	group by m.name, i.image_name,m.id
 	</select>
 	
 	<select id="findMyMessageDetail" resultType="org.kosta.finalproject.lego.vo.MessageVO" parameterType="org.kosta.finalproject.lego.vo.MessageVO" resultMap="MemberResult">

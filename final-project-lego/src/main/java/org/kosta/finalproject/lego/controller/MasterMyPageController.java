@@ -151,7 +151,7 @@ public class MasterMyPageController {
 	@RequestMapping("/mastermypage-consult")
 	public String mastermypageConsult(@AuthenticationPrincipal MemberVO memberVO, Model model, BookingVO bookingVO) {
 		model.addAttribute("member", memberVO);
-		BookingVO bkvo = masterMyPageMapper.findMyBooking(memberVO.getId());
+		List<BookingVO> bkvo = masterMyPageMapper.findMyBooking(memberVO.getId());
 		model.addAttribute("masterDetail", masterMyPageMapper.findMasterDetailList(memberVO.getId()));
 		model.addAttribute("Booking", bkvo);
 		
@@ -165,12 +165,12 @@ public class MasterMyPageController {
 	// 상담목록 디테일
 	@RequestMapping("/mastermypage-consult-detail")
 	public String mastermypageConsultDetail(@AuthenticationPrincipal MemberVO memberVO, Model model,
-			BookingVO bookingVO, String bcd) {
+			BookingVO bookingVO, int BookingNo) {
 		model.addAttribute("member", memberVO);
-		BookingVO bkvo = masterMyPageMapper.findMyBooking(memberVO.getId());
+		BookingVO bkvo = masterMyPageMapper.findMyBookingDetail(BookingNo);
 		model.addAttribute("masterDetail", masterMyPageMapper.findMasterDetailList(memberVO.getId()));
 		model.addAttribute("Booking", bkvo);
-		model.addAttribute("bcd", bcd);
+		
 		
 		ImageVO image = masterMyPageMapper.getImageId(memberVO.getId());
 		String src = "./images/"+image.getMemberVO().getId()+"/"+image.getImageName();
@@ -186,13 +186,16 @@ public class MasterMyPageController {
 		model.addAttribute("masterDetail", masterMyPageMapper.findMasterDetailList(memberVO.getId()));
 		List<MessageVO> list = masterMyPageMapper.findMyMessage(memberVO.getId());
 		
+		System.out.println(list);
 		
 		
-		  ArrayList<String> imageSrcList=new ArrayList(); for(int
-		  i=0;i<list.size();i++) { String
-		  imageName=list.get(i).getImageVo().getImageName(); String listSrc =
-		  "./images/" +list.get(i).getReMvo().getId()+ "/" + imageName;
-		  list.get(i).getImageVo().setImageName(listSrc); }
+		  ArrayList<String> imageSrcList=new ArrayList(); 
+		  for(int i=0;i<list.size();i++) { 
+			  String imageName=list.get(i).getImageVo().getImageName(); 
+			  String listSrc ="./images/" +list.get(i).getSendMvo().getId()+ "/" + imageName;
+			  list.get(i).getImageVo().setImageName(listSrc); 
+		  }
+		 
 		 
 		
 		model.addAttribute("messageList", list);
@@ -211,6 +214,10 @@ public class MasterMyPageController {
 			@RequestParam("receiveID") String receiveID, @RequestParam("receiveName") String receiveName) {
 		model.addAttribute("member", memberVO);
 		model.addAttribute("masterDetail", masterMyPageMapper.findMasterDetailList(memberVO.getId()));
+		
+		System.out.println(receiveID+" "+receiveName);
+		
+		
 		MessageVO messageVO = new MessageVO();
 		MemberVO reMvo = new MemberVO();
 		reMvo.setId(receiveID);

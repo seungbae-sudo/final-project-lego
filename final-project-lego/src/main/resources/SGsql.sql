@@ -71,7 +71,9 @@ where m.id = b.member_id
 and b.master_id = 'as@as'
 
 insert into review(review_no,score,review_content,id,master_id)
-values(review_seq.nextval,5,'이 바보야','33@33','ksg@1'); 
+values(review_seq.nextval,1,'평균값','ssg@kosta.com','ksg@kosta.com'); 
+
+select * from review
 
 select * from member where id = '33@33'
 
@@ -220,10 +222,21 @@ and ms.id = 'ksg@1'
 and i.id(+) = ms.receive_id
 group by m.name, i.image_name
 
-
+select b.*,m.name 
+from booking b,member m 
+where booking_no=10
+and m.id=b.member_id
 
 select * from message
 
+select * from booking
+
+booking_no
+booking_day
+booking_content
+master_id
+
+member_id
 
 
 

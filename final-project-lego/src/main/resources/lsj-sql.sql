@@ -130,4 +130,17 @@ select*from board
 --likesDown
 UPDATE board SET likes = likes -1 WHERE board_no = 1 
 
+-- comment 고수찾기
+select authority
+from authorities
+where username = 'lsj@kosta.com'
+
+
+select cm.comment_content, cm.comment_no,cm.comment_date , m.name, m.id, a.authority
+		from  board b, member m, board_comment cm, authorities a
+		where b.board_no=cm.board_no
+		and a.username = m.id 
+		and m.id=cm.id
+		and b. board_no=16
+
 

@@ -24,7 +24,7 @@ public interface MasterMyPageMapper {
 
 	List<BoardVO> findMyBoard(String id);
 	
-	BookingVO findMyBooking(String id);
+	List<BookingVO> findMyBooking(String id);
 
 	List<ReviewVO> findMyReview(String id);
 
@@ -39,6 +39,8 @@ public interface MasterMyPageMapper {
 	CategoryVO MyCategory(String id);
 
 	List<SkillsVO> MySkills(String id);
+
+	BookingVO findMyBookingDetail(int bookingNo);
 	
 	
 }

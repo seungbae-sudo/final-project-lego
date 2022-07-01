@@ -30,7 +30,7 @@
 				<div class="col-md-12">
 					<div class="media">
 						<div class="pull-left profile">
-							<img class="media-object user-img" alt="Image">
+							<img class="media-object user-img" th:src="${src}"alt="Image">
 						</div>
 						<div class="media-body">
 							<h2 class="media-heading" th:text="${member.name}"></h2>
@@ -47,7 +47,7 @@
 						<div th:each="message:${messageList}">
 							<div >
 								<a th:href="@{/mastermypage-message-detail(receiveID=${message.sendMvo.id},receiveName=${message.sendMvo.name})}">
-									<img class="media-object user-img" alt="Image" align="bottom">
+									<img class="media-object message-img" alt="Image" th:src="${message.imageVo.imageName}"align="bottom">
 									<span th:text="|${message.sendMvo.name}님|">바보</span></a>
 							</div>
 						</div>

@@ -25,10 +25,10 @@
                        
                            <tr th:each="list:${masterList}">
                              
-                              <td >이미지</td>
+                              <td ><img th:src="|../images/${list.id}/${list.imageVO.imageName}|"> <td>
                               <td > 
                                  <div>
-                                 <a th:href="@{/surveyFindMasterById(masterId=${list.id})}" ><span th:text="${list.name}" class="col-md-3" >고수 이름</span></a> <span> 4.5점</span>
+                                 <a th:href="@{/surveyFindMasterById(masterId=${list.id})}" ><span th:text="${list.name}" class="col-md-3" >고수 이름</span></a> <span th:text="|${list.reviewVO.score} 점|"> 4.5점</span>
                                  </div>
                                  <div>
                                     <span th:text="${list.specifications}"></span>
