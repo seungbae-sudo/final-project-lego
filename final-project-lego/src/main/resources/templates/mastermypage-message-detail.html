@@ -44,23 +44,29 @@
 						<li><a class="active" th:href="@{/mastermypage-message}">메세지함</a></li>
 					</ul>
 					<div class="dashboard-wrapper user-dashboard profile-detail message-detail-wrap">
-
-                  <div class="table-responsive message-content">
-                     <h2 th:text="|${receiveName}님과의 대화|">대화 상대 이름 </h2> 
-                     <a  th:href="@{mastermypage-message}">메세지 리스트로 가기</a>
-                     <div class="message-bg">
-                        <th:block th:each="message:${messageDetail}">
-                           <div>
-                              <pre th:text="${message.messageContent}">대화 내용</pre><div th:text="${message.receiveDate}"> 메세지 시간 </div>
-                           </div>
-                        </th:block>
+						<div class="table-responsive message-content">
+                    		<h2 th:text="|${receiveName}님과의 대화|">대화 상대 이름 </h2> 
+                  			  <a  th:href="@{mastermypage-message}">메세지 리스트로 가기</a>
+                    			 <div class="message-bg">
+                     				<ul class="message-li">
+                        				<th:block th:each="message:${messageDetail}">
+                           			<li>
+                           			<div class="plz">
+                              			<pre class="mypage-message" th:text="${message.messageContent}">대화 내용</pre>
+                             			<div th:text="${message.receiveDate}"> 메세지 시간</div>
+                             			<span class="hidden receiveId" th:text="${message.reMvo.id}" ></span>
+										<span class="hidden MyId" th:text="${sendId}"></span>
+                           			</div>
+                           		</li>
+                        	</th:block>
+                        </ul>
                      </div>
-                        <div>
+                        <div class="sendWrap">
                            <form th:action="@{/masterSendMessage}" method="post">
                            	  <input type="hidden" name="receiveId" th:value="${receiveID}">
                            	  <input type="hidden" name="receiveName" th:value="${receiveName}">
                               <textarea class="message-textarea" name="messageContent" placeholder="메세지를 입력하세요"></textarea>
-                              <input type="submit" value="전송">
+                              <input type="submit" value="전송" class="SendBtn">
                            </form>
                         </div>
                   </div>
@@ -68,6 +74,18 @@
 				</div>
 			</div>
 		</div>
+		<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+		<script type="text/javascript">
+			//내가 받은 메세지 일 경우 오른쪽에 아닐경우엔 왼쪽에 위치하는 클래스를 추가한다
+			$(function(){
+				$(".message-li li").each(function( index, element ) {
+					if($(this).find('.receiveId').text()!=$(this).find('.MyId').text()){
+						$(this).find('.plz').addClass('my-message');
+					}
+					
+				});
+			});
+			</script>
 	</section>
 
 </div>

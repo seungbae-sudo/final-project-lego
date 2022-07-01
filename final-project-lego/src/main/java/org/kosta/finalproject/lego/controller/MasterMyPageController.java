@@ -200,11 +200,11 @@ public class MasterMyPageController {
 		
 		model.addAttribute("messageList", list);
 		System.out.println(list);
+		
 		ImageVO image = masterMyPageMapper.getImageId(memberVO.getId());
 		String src = "./images/"+image.getMemberVO().getId()+"/"+image.getImageName();
 		model.addAttribute("src",src);
 		
-		System.out.println(src);
 		System.out.println(list);
 		
 		
@@ -216,6 +216,7 @@ public class MasterMyPageController {
 	@RequestMapping("/mastermypage-message-detail")
 	public String mastermypageMessageDetail(@AuthenticationPrincipal MemberVO memberVO, Model model,
 			@RequestParam("receiveID") String receiveID, @RequestParam("receiveName") String receiveName) {
+		
 		model.addAttribute("member", memberVO);
 		model.addAttribute("masterDetail", masterMyPageMapper.findMasterDetailList(memberVO.getId()));
 		
@@ -225,14 +226,24 @@ public class MasterMyPageController {
 		MessageVO messageVO = new MessageVO();
 		MemberVO reMvo = new MemberVO();
 		reMvo.setId(receiveID);
+		
+		//System.out.println(reMvo+"왜 안되는지? ");
 		MemberVO sendMvo = new MemberVO();
 		sendMvo.setId(memberVO.getId());
 		messageVO.setReMvo(reMvo);
 		messageVO.setSendMvo(sendMvo);
+		
+		System.out.println(messageVO+"왜 안되는지? ");
 		List<MessageVO> message = masterMyPageMapper.findMyMessageDetail(messageVO);
+		//System.out.println(message);
+		
+		
 		model.addAttribute("receiveID", receiveID);
 		model.addAttribute("receiveName", receiveName);
+		
 		model.addAttribute("messageDetail", message);
+		model.addAttribute("sendId", memberVO.getId());
+		
 		
 		ImageVO image = masterMyPageMapper.getImageId(memberVO.getId());
 		String src = "./images/"+image.getMemberVO().getId()+"/"+image.getImageName();
@@ -254,6 +265,7 @@ public class MasterMyPageController {
 		messageMapper.message(messageVO);
 		redirect.addAttribute("receiveID", receiveId);
 		redirect.addAttribute("receiveName", receiveName);
+		System.out.println();
 		
 		ImageVO image = masterMyPageMapper.getImageId(memberVO.getId());
 		String src = "./images/"+image.getMemberVO().getId()+"/"+image.getImageName();

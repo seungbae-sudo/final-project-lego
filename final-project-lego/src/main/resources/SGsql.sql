@@ -242,23 +242,28 @@ member_id
 
 select * from member
 
-select * from message
-
-    select m.name, i.image_name ,m.id, ms.receive_id
-	from message ms, member m, images i
-	where m.id = ms.receive_id
-	and i.id(+) = ms.receive_id
-	and ms.id = 'ksb@kosta.com'
-	group by m.name, i.image_name,m.id, ms.receive_id
+select * from message 
+message receive_id, id
+select * from images
+images id
+select * from member
+id
+    
+select m.name, i.image_name ,m.id, ms.receive_id
+from message ms, member m, images i
+where ms.id = m.id
+and ms.id = 'ksg@kosta.com'
+and i.id(+) = ms.receive_id
+group by m.name, i.image_name ,m.id, ms.receive_id
 
 	union all
-	
-	select m.name, i.image_name, m.id, ms.receive_id
-	from message ms, member m, images i
-	where ms.receive_id = 'ksb@kosta.com'
-	and m.id = ms.id
-	and i.id(+) = ms.id
-	group by m.name, i.image_name,m.id, ms.receive_id
+
+select m.name, i.image_name, m.id, ms.receive_id
+from message ms, member m, images i
+where ms.receive_id = 'ksg@kosta.com'
+and m.id = ms.id
+and i.id(+) = ms.id
+group by m.name, i.image_name,m.id, ms.receive_id
 	
 	select ms.*,m.*,i.* from message ms, member m, images i
 	
@@ -271,5 +276,47 @@ select * from message
 	group by ms.receive_id,m.name,i.image_name
 
 select * from message
+
+select * from 
+//
+	select m.name, i.image_name ,m.id, ms.receive_id
+	from message ms, member m, images i
+	where ms.id = m.id
+	and ms.receive_id = 'ksg@kosta.com'
+	and i.id(+) = ms.receive_id
+	
+	and ms.receive_id = 'ksg@kosta.com'
+	group by m.name, i.image_name ,m.id, ms.receive_id
+	
+		union all
+	
+	select m.name, i.image_name, m.id, ms.receive_id
+	from message ms, member m, images i
+	where ms.receive_id = 'ksg@kosta.com'
+	and m.id = ms.id
+	and i.id(+) = ms.id
+	group by m.name, i.image_name,m.id, ms.receive_id
+//
+
+select ms.id, ms.receive_id as id,m.name,i.image_name
+from message ms, member m , images i
+where ms.id= 'ksg@kosta.com'
+and ms.receive_id=m.id
+and ms.receive_id=i.id(+)
+group by ms.id,ms.receive_id,m.name,i.image_name
+
+select * from member
+
+select 
+
+select ms.id, ms.receive_id as id,m.name,i.image_name
+	from message ms, member m , images i
+	where ms.receive_id = 'ksg@kosta.com'
+	and ms.receive_id=m.id
+	and ms.receive_id=i.id(+)
+	group by ms.id,ms.receive_id,m.name,i.image_name
+
+
+
 
 

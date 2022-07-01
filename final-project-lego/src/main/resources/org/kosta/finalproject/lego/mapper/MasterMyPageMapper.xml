@@ -57,7 +57,7 @@
    	
    	<resultMap type="org.kosta.finalproject.lego.vo.MessageVO" id="MemberResult">
 				<result column="name" property="reMvo.name"/>
-				<result column="id" property="reMvo.id"/>
+				<result column="receive_id" property="reMvo.id"/>
 		</resultMap>
    	
    <select id ="findMyBoard" resultType="org.kosta.finalproject.lego.vo.BoardVO" resultMap="BoardCategoryResultMap">
@@ -90,21 +90,12 @@
 	
 	
 	<select id="findMyMessage" resultType="org.kosta.finalproject.lego.vo.MessageVO" resultMap="MessageResult">
-	select m.name, i.image_name ,m.id, ms.receive_id
-	from message ms, member m, images i
-	where m.id = ms.receive_id
-	and i.id(+) = ms.receive_id
-	and ms.id = 'ksb@kosta.com'
-	group by m.name, i.image_name,m.id, ms.receive_id
-
-	union all
-	
-	select m.name, i.image_name, m.id, ms.receive_id
-	from message ms, member m, images i
-	where ms.receive_id = 'ksb@kosta.com'
-	and m.id = ms.id
-	and i.id(+) = ms.id
-	group by m.name, i.image_name,m.id, ms.receive_id
+	select ms.id, ms.receive_id as id,m.name,i.image_name
+	from message ms, member m , images i
+	where ms.id= #{value}
+	and ms.receive_id=m.id
+	and ms.receive_id=i.id(+)
+	group by ms.id,ms.receive_id,m.name,i.image_name
 	</select>
 	
 	<select id="findMyMessageDetail" resultType="org.kosta.finalproject.lego.vo.MessageVO" parameterType="org.kosta.finalproject.lego.vo.MessageVO" resultMap="MemberResult">
