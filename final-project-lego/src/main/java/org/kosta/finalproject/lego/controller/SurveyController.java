@@ -45,7 +45,7 @@ public class SurveyController {
 		model.addAttribute("times", times);
 		model.addAttribute("categoryNo", categoryNo);
 		model.addAttribute("masterList",surveyMapper.findMasterList(skills, days, times,categoryNo));
-		System.out.println(surveyMapper.findMasterList(skills, days, times,categoryNo));
+	
 		return "find-master-list";
 	}
 	
@@ -85,5 +85,9 @@ public class SurveyController {
 		bookingVO.setMdVO(mdvo);
 		surveyMapper.BookingToMaster(bookingVO);
 	return "redirect:/mypage";
+	}
+	@RequestMapping("search")
+	public String search() {
+		return "";
 	}
 }

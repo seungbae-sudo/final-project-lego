@@ -199,11 +199,15 @@ public class MasterMyPageController {
 		 
 		
 		model.addAttribute("messageList", list);
-		
+		System.out.println(list);
 		ImageVO image = masterMyPageMapper.getImageId(memberVO.getId());
 		String src = "./images/"+image.getMemberVO().getId()+"/"+image.getImageName();
 		model.addAttribute("src",src);
+		
 		System.out.println(src);
+		System.out.println(list);
+		
+		
 		
 		return "mastermypage-Message";
 	}
