@@ -90,6 +90,15 @@ from (
 		where ms.category_no=c.category_no) r, member m, booking b
 where m.id=r.id
 
+
+select r.name, r.lesson_sort, b.booking_day,b.master_id
+from(
+		select ms.id, m.name, c.lesson_sort
+		from master ms, category c,member m
+		where ms.category_no=c.category_no
+		and m.id=ms.id) r, booking b
+where r.id=b.master_id
+and b.member_id='ssg@kosta.com'
 --booking에 member_id가 지금 로그인한 사람의 id와 같아야함
 --where b.member_id='lsj@naver.com'
 
@@ -272,5 +281,7 @@ union all
 select d.days
 from master_detail m,days d where m.id =  '2022@2' and m.days_id>0 and m.days_id = d.days_id
 
+-- 리뷰 작성하기 
 
-
+insert into review(review_no,score,review_content,id,master_id)
+values(review_seq.nextval,1,#{review_content},#{id},#{master_id}); 

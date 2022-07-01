@@ -45,34 +45,39 @@
 						<li><a th:href="@{/mypage-message}">메세지함</a></li>
 					</ul>
 					<div class="dashboard-wrapper user-dashboard profile-detail">
-						<div class="table-responsive">
-							<table class="table">
-								<thead>
-									<tr>
-										<th class="col-md-2 text-center" >고수 이름</th>
-										<th class="col-md-6 text-center">분야</th>
-										<th class="col-md-3 text-center">상담 예약 날짜</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr th:each="list:${CartList}">
-										<td class="text-center"><a th:href="@{/mypage-reviewWriteForm(masterId=${list.mvo.id})}"  th:text="${list.mvo.name}">아이유</a></td>
-										<td class="text-center"  th:text="${list.cvo.lessonSort}"><a href="">보컬</a></td>
-										<td class="text-center"  th:text="${list.bookingDay}">2022.06.22</td>
-									</tr>
-								</tbody>
-							</table>
+					<h2>리뷰 작성하기</h2>
+						<form th:action="@{/mypage-reviewWrite(masterId=${masterId})}" method="post"  id="Write">
+							<div>
+								<select name="score"  id="scoreStar">
+									<option value=1><i class="bi bi-star-fill"></i></option>
+									<option value=2><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></option>
+									<option value=3><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></option>
+									<option value=4><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></option>
+									<option value=5><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></option>
+								</select>
+							</div>
 							
-						</div>
+							<div>
+								<textarea name="reviewContent"></textarea>
+							</div>
+							
+							<button type="submit">작성하기</button>
+						</form>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
+	<script type="text/javascript">
+function check() {
+	if (document.getElementById("scoreStar").value == "") {
+		alert("카테고리를 선택해 주세요");
+		return;
+	} else {
+		document.getElementById("Write").submit();
+	}
+}
+
+</script>
 
 </div>
-<script type="text/javascript">
-	$(function(){
-		$.ajax
-	});
-</script>
