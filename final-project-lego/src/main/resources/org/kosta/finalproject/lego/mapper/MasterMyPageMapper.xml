@@ -92,9 +92,9 @@
 	<select id="findMyMessage" resultType="org.kosta.finalproject.lego.vo.MessageVO" resultMap="MessageResult">
 	select ms.id, ms.receive_id as id,m.name,i.image_name
 	from message ms, member m , images i
-	where ms.id= #{value}
-	and ms.receive_id=m.id
-	and ms.receive_id=i.id(+)
+	where ms.receive_id = #{value}
+	and ms.id=m.id
+	and ms.id=i.id(+)
 	group by ms.id,ms.receive_id,m.name,i.image_name
 	</select>
 	

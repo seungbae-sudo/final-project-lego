@@ -46,6 +46,7 @@
 					<div class="messge-list">
 						<div th:each="message:${messageList}">
 							<div>
+							<span th:text="message"></span>
 								<a th:href="@{/mastermypage-message-detail(receiveID=${message.sendMvo.id},receiveName=${message.sendMvo.name})}">
 									<img class="media-object message-img" alt="Image" th:src="${message.imageVo.imageName}" align="bottom">
 									<span th:text="|${message.sendMvo.name}님|">바보</span></a>

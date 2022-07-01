@@ -305,7 +305,7 @@ and ms.receive_id=m.id
 and ms.receive_id=i.id(+)
 group by ms.id,ms.receive_id,m.name,i.image_name
 
-select * from member
+select * from message member
 
 select 
 
@@ -316,7 +316,14 @@ select ms.id, ms.receive_id as id,m.name,i.image_name
 	and ms.receive_id=i.id(+)
 	group by ms.id,ms.receive_id,m.name,i.image_name
 
-
+	select * from images, message
+	
+	select ms.id, ms.receive_id as id,m.name,i.image_name,i.id
+	from message ms, member m , images i
+	where ms.receive_id = 'ksg@kosta.com'
+	and ms.id=m.id
+	and ms.id=i.id(+)
+	group by ms.id,ms.receive_id,m.name,i.image_name,i.id
 
 
 
