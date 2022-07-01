@@ -13,4 +13,6 @@ public class MasterVO {
 	private String career;
 	private String specifications;
 	private String name;
+	private ImageVO imageVO;
+	private ReviewVO reviewVO;
 }

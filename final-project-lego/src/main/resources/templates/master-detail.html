@@ -26,7 +26,7 @@
 				<div class="col-md-12">
 					<div class="media">
 						<div class="pull-left profile">
-							<img class="media-object user-img" src="./images/고수.jpg" alt="Image">
+							<img class="media-object user-img" th:src="|../images/${masterList.id}/${masterList.imageVO.imageName}|" alt="Image">
 						</div>
 						<div class="media-body">
 							<h2 class="media-heading" th:text="${masterList.name}">고수</h2>
