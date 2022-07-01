@@ -32,8 +32,11 @@
 						<div class="media-body">
 							<h2 class="media-heading" th:text="${member.name}">고수</h2>
 								<span class="media-heading" th:text="|분야 : ${Mycategory.lessonSort}|"></span>
-									<div th:each="ms:${MySkills}">
-										<span class="media-heading" th:text="|보유 기술 : ${ms.skills}|"></span>
+									<div>
+										<div> 보유기술 : </div>
+										<div th:each="ms:${MySkills}">
+											<span class="media-heading" th:text=" ${ms.skills}"></span>
+										</div>
 									</div>
 									<span class="media-heading" th:text="|경력 : ${masterDetail.career} 년|"></span>
 						</div>
