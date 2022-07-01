@@ -14,6 +14,7 @@
    <resultMap type="org.kosta.finalproject.lego.vo.MasterVO" id="masterResult">
    	<result column="image_name" property="imageVO.imageName"/>
    	<result column="score" property="reviewVO.score"/>
+   	<result column="category_no" property="category.categoryNo"/>
    </resultMap>
    <select id="findMasterList" resultType="org.kosta.finalproject.lego.vo.MasterVO" resultMap="masterResult">
    		select m.id,m.name, ms.career, ms.specifications ,msd.score , i.image_name
@@ -64,4 +65,18 @@
    	insert into booking(booking_no,booking_content,booking_day,master_id,member_id) values(booking_no_seq.nextval,#{bookingContent},#{bookingDay},#{mdVO.id},#{mvo.id})
    
    </insert>
+   
+   <select id="findMasterByKeyword" parameterType="org.kosta.finalproject.lego.vo.MasterVO" resultMap="masterResult">
+   		select m.id,m.name, ms.career, ms.specifications ,msd.score , i.image_name , c.category_no
+		from(
+		select  distinct m.id ,nvl(round(avg(r.score)),0) as score
+		from master_detail m , review r , skills s 
+		group by m.id,m.skills_id,s.skills_id,s.skills
+		having 
+
+			m.skills_id = s.skills_id and s.skills = #{keyword}
+		  ) msd , member m, master ms, images i , category c 
+		where m.id = ms.id and m.id=msd.id and m.id = i.id and ms.category_no =c.category_no
+   		and c.lesson_sort = #{keyword1}
+   </select>
 </mapper>

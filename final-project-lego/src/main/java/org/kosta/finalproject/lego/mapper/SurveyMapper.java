@@ -27,4 +27,6 @@ public interface SurveyMapper {
 	List<BookingVO> findBookingDayByMasterId(String masterId);
 	
 	void BookingToMaster(BookingVO bookingVO);
+	
+	List<MasterVO> findMasterByKeyword(String keyword, String keyword2);
 }
