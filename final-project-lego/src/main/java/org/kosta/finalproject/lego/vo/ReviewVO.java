@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 
 public class ReviewVO {
 	private int reviewNo;
-	private int score;
+	private float score;
 	private String reviewContent;
 	private MemberVO mvo;
 	private MasterVO msvo;

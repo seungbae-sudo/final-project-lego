@@ -10,6 +10,7 @@ import org.kosta.finalproject.lego.vo.DaysVO;
 import org.kosta.finalproject.lego.vo.MasterDetailVO;
 import org.kosta.finalproject.lego.vo.MasterVO;
 import org.kosta.finalproject.lego.vo.MemberVO;
+import org.kosta.finalproject.lego.vo.ReviewVO;
 import org.kosta.finalproject.lego.vo.SkillsVO;
 import org.kosta.finalproject.lego.vo.TimesVO;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -94,5 +95,11 @@ public class MasterServiceImpl implements MasterService {
 	public void updateMaster(MasterVO mvo) {
 		// TODO Auto-generated method stub
 		masterMyPageMapper.updateMaster(mvo);
+	}
+
+	@Override
+	public List<ReviewVO> findMasterRanking() {
+	
+		return masterMapper.findMasterRanking();
 	}
 }

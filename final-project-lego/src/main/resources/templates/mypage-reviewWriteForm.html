@@ -48,36 +48,40 @@
 					<h2>리뷰 작성하기</h2>
 						<form th:action="@{/mypage-reviewWrite(masterId=${masterId})}" method="post"  id="Write">
 							<div>
-								<select name="score"  id="scoreStar">
-									<option value=1><i class="bi bi-star-fill"></i></option>
-									<option value=2><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></option>
-									<option value=3><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></option>
-									<option value=4><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></option>
-									<option value=5><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></option>
+								<select name="score"  id="scoreStar" class="title_line grade all_star">
+									 <option value="" class='fas fa-star' >평점 선택하기</option>                           
+					                  <option value="1" class="star_1 fa">&#xf005</option>
+					                  <option value="2" class="star_2 fa">&#xf005 &#xf005</option>
+					                  <option value="3" class="star_3 fa">&#xf005 &#xf005 &#xf005</option>
+					                  <option value="4" class="star_4 fa">&#xf005 &#xf005 &#xf005 &#xf005</option>
+					                  <option value="5" class="star_5 fa">&#xf005 &#xf005 &#xf005 &#xf005 &#xf005</option>
 								</select>
 							</div>
 							
 							<div>
-								<textarea name="reviewContent"></textarea>
+								<textarea name="reviewContent" id="reviewContent"></textarea>
 							</div>
 							
-							<button type="submit">작성하기</button>
+							<button type="button" onclick="check()">작성하기</button>
 						</form>
 					</div>
 				</div>
 			</div>
 		</div>
-	</section>
-	<script type="text/javascript">
-function check() {
-	if (document.getElementById("scoreStar").value == "") {
-		alert("카테고리를 선택해 주세요");
-		return;
-	} else {
-		document.getElementById("Write").submit();
-	}
-}
+		
+		<script type="text/javascript">
+		function check() {
+			if (document.getElementById("scoreStar").value == "") {
+				alert("카테고리를 선택해 주세요");
+				return;
+			} else {
+				document.getElementById("Write").submit();
+			}
+		}
 
-</script>
+	</script>
+		
+	</section>
+	
 
 </div>

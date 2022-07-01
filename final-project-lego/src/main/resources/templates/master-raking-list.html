@@ -1,0 +1,26 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+<!--/* layout 선언부 추가 */-->
+
+<div layout:fragment="main">
+
+<section class="user-dashboard page-wrapper">
+
+  <div class="container">
+    <div class="table-responsive">
+                     <ul  >
+						<li th:each="list:${rankingList}">
+							<img th:src="|../images/${list.mvo.id}/${list.imageVo.imageName}|">
+							<span class="star_1 fa">&#xf005</span><span th:text="${list.score}"></span>
+							<span th:text="${list.mvo.name}"></span>
+							<span th:text="${list.msvo.specifications}"></span>
+							
+						</li>
+                     </ul>
+            </div>
+  </div>
+  
+  
+</section>
+</div>
