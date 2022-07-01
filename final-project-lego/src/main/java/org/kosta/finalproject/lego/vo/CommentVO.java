@@ -14,4 +14,5 @@ public class CommentVO {
 	private String commentDate;
 	private BoardVO bvo;
 	private MemberVO mvo;
+	private Authority authority;
 }
