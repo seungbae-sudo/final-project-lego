@@ -180,5 +180,13 @@ public class CommunityBoardController {
 		  model.addAttribute("LikesDownList", list_down);
 		return "board-detail";
 	}
+	
+	@RequestMapping("/searchBoardKeyword")
+	public String SearchBoardKeyword(Model model,@AuthenticationPrincipal MemberVO memberVO,String keyword) {
+		System.out.println(keyword);
+		List<BoardVO> list =communityBoardMapper.findCommunityListByTitle(keyword);
+		model.addAttribute("list",list);
+		return "board-search-list";
+	}
 
 }
