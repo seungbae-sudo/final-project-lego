@@ -9,6 +9,52 @@
 	font-family: "Font Awesome 5 Free"; font-weight:900;
 }
 /*레고  */
+/* header */
+.header-search form{
+	background-color: white;
+}
+.header-search input{
+	box-sizing:border-box;
+background-color: white;
+    width: 360px;
+    display: inline;
+    border-radius: 12px;
+    margin-right: 4px;
+}
+
+.header-search input:focus{
+	border: 1px solid #e49a6a;
+}
+.header-search form button{
+		box-sizing:border-box;
+background-color: white;
+    border: 1px solid #e49a6a;
+    padding: 6px 17px;
+    border-radius: 12px;
+}
+.header-search form button:hover{
+    background-color: #e49a6a;
+    border: none;
+    color:white;
+}
+
+.header-button form{
+	width: 120px;
+    display: inline;
+}
+.header-button form button{
+	box-sizing:border-box;
+    background-color: white;
+    border: 1px solid #e49a6a;
+    padding: 6px 17px;
+    border-radius: 12px;
+}
+
+.header-button form button:hover{
+    background-color: #e49a6a;
+    border: none;
+    color:white;
+}
 
 /* index */
 
