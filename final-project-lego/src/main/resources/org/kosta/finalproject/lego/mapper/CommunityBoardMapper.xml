@@ -55,10 +55,11 @@
 		<result column="name" property="mvo.name"/>
 		<result column="id" property="mvo.id"/>
 		<result column="authority" property="authority.authority"/>
+		<result column="username" property="authority.username"/>
 	</resultMap>
 	
 	<select id="findCommentList" resultType="org.kosta.finalproject.lego.vo.CommentVO" resultMap="memberAndBoardResultMap">
-		select cm.comment_content, cm.comment_no,cm.comment_date , m.name, m.id, a.authority
+		select cm.comment_content, cm.comment_no,cm.comment_date , m.name, m.id, a.authority, a.username
 		from  board b, member m, board_comment cm, authorities a
 		where b.board_no=cm.board_no
 		and a.username = m.id 
@@ -73,6 +74,7 @@
 		where b.board_no=cm.board_no
 		and m.id=cm.id -->
 	</select>
+
 
 
 	<update id="updateHits" parameterType="int">

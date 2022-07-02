@@ -101,7 +101,6 @@ public class CommunityBoardController {
 		model.addAttribute("commentList", list);
 		model.addAttribute("mvo", memberVO);
 		model.addAttribute("authority", authority);
-		System.out.println(authority);
 		
 		//조회수 (권한주기, 재증가방지) 
 		
