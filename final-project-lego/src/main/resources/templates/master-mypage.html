@@ -29,16 +29,18 @@
 						<div class="pull-left profile">
 							<img class="media-object user-img" th:src="${src}" alt="Image">
 						</div>
-						<div class="media-body">
+						<div class="media-body master-info-intro">
 							<h2 class="media-heading" th:text="${member.name}">고수</h2>
-								<span class="media-heading" th:text="|분야 : ${Mycategory.lessonSort}|"></span>
-									<div>
-										<div> 보유기술 : </div>
-										<div th:each="ms:${MySkills}">
-											<span class="media-heading" th:text=" ${ms.skills}"></span>
-										</div>
+							<span class="media-heading skill-box" th:text="|분야 : ${Mycategory.lessonSort}|"></span>
+							<span class="skill-box">
+								<span> 보유기술 : </span>
+								<span th:each="ms:${MySkills}" class="media-heading" th:text=" ${ms.skills}"></span>
+							</span>	
+									
+									<div class="master-info-box">
+										<span>평점</span>
+										<span class="media-heading" th:text="|경력 : ${masterDetail.career} 년|"></span>
 									</div>
-									<span class="media-heading" th:text="|경력 : ${masterDetail.career} 년|"></span>
 						</div>
 					</div>
 					<ul class="list-inline dashboard-menu text-center">
@@ -53,13 +55,17 @@
 							<div class="table-responsive">
 								<div class="media-body">
 									<ul class="user-profile-list">
+										<li>
+											<pre th:text="${masterDetail.specifications}"style="background-color: white; border-color:white;"></pre>
+										</li>
+									
 									</ul>
 									
 									
 									
-									<pre th:text="${masterDetail.specifications}"style="background-color: white; border-color:white;"></pre>
+									
 									<form method="get" th:action="@{/masterUpdateForm}">
-                             			 <input type="submit"value="회원정보 수정하기" >
+                             			 <input type="submit"value="회원정보 수정하기"  class="master-update-btn">
                              			 </form>
 								</div>
 								</div>

@@ -15,31 +15,37 @@
                      <table class="table">
                         <thead>
                            <tr>
-                              <th class="col-md-3 " ></th>
-                              <th class="col-md-7 "></th>
-                              <th class="col-md-2 "></th>
+                              <th class="col-md-2 text-center" >고수 이미지</th>
+								<th class="col-md-7 text-center">고수 정보</th>
+								<th class="col-md-2 text-center">북마크</th>
                            </tr>
                         </thead>
                          
                         <tbody>
                        
-                           <tr th:each="list:${masterList}">
+                           <tr th:each="list:${masterList}"  class="cart-list">
                              
-                              <td ><img th:src="|../images/${list.id}/${list.imageVO.imageName}|"> <td>
-                              <td > 
-                                 <div>
-                                 <a th:href="@{/surveyFindMasterById(masterId=${list.id})}" ><span th:text="${list.name}" class="col-md-3" >고수 이름</span></a> <span th:text="|${list.reviewVO.score} 점|"> 4.5점</span>
+                              <td class="cart-img">
+                              	<img id="find-master-img" th:src="|../images/${list.id}/${list.imageVO.imageName}|">
+                               </td>
+                              <td class="master-info-wrap"> 
+                                 <div class="info-wrap">
+                                 	<a th:href="@{/surveyFindMasterById(masterId=${list.id})}" >
+                                 		<span th:text="${list.name}" class="col-md-3 master-name find-master-name" >고수 이름</span>
+                                 	</a> 
+                                 	<span class="star_1 fa master-star">&#xf005</span>
+                                 	<span class="master-score" th:text="|${list.reviewVO.score} 점|"> 4.5점</span>
                                  </div>
-                                 <div>
-                                    <span th:text="${list.specifications}"></span>
-                                 </div>
+                                 <pre class="info-detail" th:text="${list.specifications}">
+                                    
+                                 </pre>
                               
                               </td>
-                              <td class="text-center">                          		
+                              <td class="text-center add-cart">                          		
                               		<input type="hidden" name="id" th:value="${list.id}">
                               		<!-- <input type="hidden" name="categoryNo" th:value="${categoryNo}"> -->
                               		<input type="hidden" name="categoryNo" th:value="${list.category.categoryNo}">
-                              		<button type="submit" class="bi bi-bookmark" style="background-color: white;border-color: white;" name="masterId" th:value="${list.id}"></button>
+                              		<button id="find-master-add-cart" type="submit" class="bi bi-bookmark " style="background-color: white;border-color: white;" name="masterId" th:value="${list.id}"></button>
                               	
                               
                                     

@@ -5,54 +5,57 @@
 
 <div layout:fragment="main">
 
-<section class="user-dashboard page-wrapper">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="col-md-5">
-					<div class="category-box category-box-2">
-						<a th:href="@{/findMaster(categoryNo=1)}" > <img src="./images/music.png" alt="" />
+	<section class="user-dashboard page-wrapper">
+		<div class="container">
+			<div class="row find-form-wrap" >
+
+				<div class="col-md-5  find-form-content">
+					<div class="category-box ">
+						<a th:href="@{/findMaster(categoryNo=1)}"> <img
+							src="./images/music.jpg" alt=""  class="find-master-img" />
 							<div class="content">
-								<h3>음악</h3>
+								<h3 class="lesson-sort">음악</h3>
 							</div>
 						</a>
 					</div>
 				</div>
-				<div class="col-md-2"></div>
-				<div class="col-md-5">
-					<div class="category-box category-box-2">
-						<a th:href="@{/findMaster(categoryNo=2)}"> <img src="./images/sport.png" alt="" />
+
+				<div class="col-md-5 find-form-content">
+					<div class="category-box">
+						<a th:href="@{/findMaster(categoryNo=2)}"> <img
+							src="./images/sport.jpg" alt=""  class="find-master-img" />
 							<div class="content">
-								<h3>운동</h3>
+								<h3 class="lesson-sort">운동</h3>
 							</div>
 						</a>
 					</div>
 				</div>
-      </div>
-    </div>
-     <div class="row">
-      <div class="col-md-12">
-        <div class="col-md-5">
-					<div class="category-box category-box-2">
-						<a th:href="@{/findMaster(categoryNo=3)}"> <img src="./images/art.png" alt="" />
+
+
+
+				<div class="col-md-5 find-form-content">
+					<div class="category-box ">
+						<a th:href="@{/findMaster(categoryNo=3)}"> <img
+							src="./images/art.jpg" alt=""  class="find-master-img" />
 							<div class="content">
-								<h3>미술</h3>
+								<h3 class="lesson-sort">미술</h3>
 							</div>
 						</a>
 					</div>
 				</div>
-				<div class="col-md-2"></div>
-				<div class="col-md-5">
-					<div class="category-box category-box-2">
-						<a th:href="@{/findMaster(categoryNo=4)}"> <img src="./images/languages.png" alt="" />
+
+				<div class="col-md-5 find-form-content">
+					<div class="category-box">
+						<a th:href="@{/findMaster(categoryNo=4)}"> <img
+							src="./images/languages.png" alt="" class="find-master-img" />
 							<div class="content">
-								<h3>외국어</h3>
+								<h3 class="lesson-sort">외국어</h3>
 							</div>
 						</a>
 					</div>
 				</div>
-      </div>
-    </div>
-  </div>
-</section>
+
+			</div>
+		</div>
+	</section>
 </div>

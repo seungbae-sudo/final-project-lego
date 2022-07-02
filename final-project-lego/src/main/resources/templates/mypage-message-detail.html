@@ -68,10 +68,10 @@
 							<div class="sendWrap">
 								<form
 									th:action="@{/sendMessage(receiveId=${receiveId},sendId=${sendId},receiveName=${receiveName})}"
-									method="post">
-									<textarea class="message-textarea" name="messageContent"
+									method="post" id="message-form">
+									<textarea id="message-textarea-area" class="message-textarea" name="messageContent"
 										placeholder="메세지를 입력하세요"></textarea>
-									<input type="submit" value="전송" class="SendBtn">
+									<input type="button" value="전송" class="SendBtn" onclick="check()">
 								</form>
 							</div>
 						</div>
@@ -90,16 +90,15 @@
 					
 				});
 			});
-			
-				
-/* 				
-				if ($("#receiveId-check").text() == $("#sendId-check").text()) {
-					$("#message-check").addClass("my-message");
-				} else {
-					$("#message-check").addClass(".receive-message");
+			//메세지 폼이 비어있을때 alert
+ 			function check() {
+				if (document.getElementById("message-textarea-area").value == "") {
+					alert("메세지를 입력해주세요");
+					return;
+				}else {
+					document.getElementById("message-form").submit();
 				}
-			}); */
-			
+			} 
 
 			  
 		</script>

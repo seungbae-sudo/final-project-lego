@@ -45,25 +45,28 @@
 						<li><a th:href="@{/mypage-message}">메세지함</a></li>
 					</ul>
 					<div class="dashboard-wrapper user-dashboard profile-detail">
-					<h2>리뷰 작성하기</h2>
-						<form th:action="@{/mypage-reviewWrite(masterId=${masterId})}" method="post"  id="Write">
-							<div>
-								<select name="score"  id="scoreStar" class="title_line grade all_star">
-									 <option value="" class='fas fa-star' >평점 선택하기</option>                           
-					                  <option value="1" class="star_1 fa">&#xf005</option>
-					                  <option value="2" class="star_2 fa">&#xf005 &#xf005</option>
-					                  <option value="3" class="star_3 fa">&#xf005 &#xf005 &#xf005</option>
-					                  <option value="4" class="star_4 fa">&#xf005 &#xf005 &#xf005 &#xf005</option>
-					                  <option value="5" class="star_5 fa">&#xf005 &#xf005 &#xf005 &#xf005 &#xf005</option>
-								</select>
-							</div>
-							
-							<div>
-								<textarea name="reviewContent" id="reviewContent"></textarea>
-							</div>
-							
-							<button type="button" onclick="check()">작성하기</button>
-						</form>
+					
+					<h2 class="review-form-title">리뷰 작성하기</h2>
+						<div class="review-write-form">
+							<form th:action="@{/mypage-reviewWrite(masterId=${masterId})}" method="post"  id="Write">
+								<div class="select-wrap">
+									<select name="score"  id="scoreStar" class="title_line grade all_star ">
+										 <option value="" class='fas fa-star' >평점 선택하기</option>                           
+						                  <option value="1" class="star_1 fa">&#xf005</option>
+						                  <option value="2" class="star_2 fa">&#xf005 &#xf005</option>
+						                  <option value="3" class="star_3 fa">&#xf005 &#xf005 &#xf005</option>
+						                  <option value="4" class="star_4 fa">&#xf005 &#xf005 &#xf005 &#xf005</option>
+						                  <option value="5" class="star_5 fa">&#xf005 &#xf005 &#xf005 &#xf005 &#xf005</option>
+									</select>
+								</div>
+								
+								<div class="textarea-content">
+									<textarea name="reviewContent" id="reviewContent"></textarea>
+								</div>
+								
+								<button class="review-form-btn" type="button" onclick="check()">작성하기</button>
+							</form>
+						</div>
 					</div>
 				</div>
 			</div>

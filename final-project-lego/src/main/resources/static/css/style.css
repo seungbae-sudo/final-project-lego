@@ -10,6 +10,20 @@
 }
 /*레고  */
 /* header */
+.top-header{
+	position: relative;
+}
+.top-header::before{
+content: "";
+position:absolute;
+	display:block;
+	width:100%;
+	background-color: #e49a6a;
+
+    height: 20px;
+    top:0px;
+    z-index: -999;
+}
 .header-search form{
 	background-color: white;
 }
@@ -57,6 +71,14 @@ background-color: white;
 }
 
 /* index */
+.main-slider{
+	margin: 10px 80px;
+}
+
+.slider-height{
+	height: 476px;
+}
+
 
 .btn-round {
   border-radius: !important 4px;
@@ -73,7 +95,76 @@ background-color: white;
 .header-setting{
 	margin-top: 40px;
 }
+
+.product-category{
+	padding-top: 50px;
+	position: relative;
+}
+
+.product-category::after{
+content: "";
+position:absolute;
+	display:block;
+	width:100%;
+	background-color: antiquewhite;
+	backdrop-filter: brightness(0.5);
+    height: 200px;
+    top:100px;
+    z-index: -999;
+}
 /* 고수 찾기 */
+
+#find-master-img{
+	width: 51%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-left: 27%;
+    box-shadow: 0px 0px 5px;
+}
+#find-master-add-cart{
+	font-size: 20px;
+    line-height: 4;
+    border: none;
+    background: none;
+}
+.find-master-name{
+	width: 100px;
+}
+
+.find-form-wrap{
+	display: flex;
+}
+
+.category-box img {
+	width: auto !important;
+}
+
+
+.find-form-content{
+	transform: translate3d(-25px, 10px, 25px)skew(-19deg, 0deg);
+}
+
+.lesson-sort{
+
+    color: white !important;
+
+    padding: 9px 124px;
+    border-radius: 7px;
+    box-shadow: -7px 4px 35px currentColor;
+    transform: skewX(10deg);
+    position: absolute;
+    top: 140px;
+    width: 330px;
+    left: -23px;
+    height: 50px;
+    line-height: 35px;
+}
+	
+}
+.find-master-img{
+	width: auto !important;
+}
 .survey-wrap{
         margin-top: 80px;
     margin-left: 200px;
@@ -152,6 +243,34 @@ background-color: white;
     top: 290px;
     cursor: pointer;
 }
+.lego-box{
+	position: relative;
+}
+.find-community{
+    width: 240px;
+    height: 90px;
+    box-shadow: 0px 0px 65px #fff;
+    top: 100px;
+    left: 50%;
+    margin-left: -120px;
+    top: 50%!important;
+    margin-top: -45px;
+    backdrop-filter: brightness(0.5);
+
+    border: 2px solid #fff;
+    padding: 14px !important;
+}
+.find-community span{
+    font-size: 22px;
+    display: block;
+}
+
+
+.find-community span,
+.find-community p{
+	color: #fff;
+	text-align: center;
+}
 
 /* 로그인 */
 
@@ -177,8 +296,190 @@ background-color: white;
     margin-top: 30px;
     padding: 20px;
     width: 890px;
-    height: 400px;
+    height: 570px;
     margin-left: 190px;
+}
+
+/* 마이페이지 */
+.mypage-btn{
+    position: absolute;
+    box-sizing: border-box;
+    background-color: white;
+    border: 1px solid #e49a6a;
+    padding: 6px 17px;
+    border-radius: 12px;
+    right: 100px;
+    bottom: 200px;
+}
+.mypage-btn:hover{
+	background-color: #e49a6a;
+    border: none;
+    color:white;
+}
+.user-profile-list{
+	border: 1px solid #e49a6a;
+    border-radius: 20px;
+    padding: 30px 20px;
+}
+
+.user-profile-list li{
+	margin-top: 10px;
+}
+
+.user-profile-list li span{
+	font-size: 17px;
+	margin-right: 10px;
+}
+.mypage-info{
+	font-weight: 700;
+}
+.user-profile-list>form{
+	position: relative;
+}
+
+/* 마이페이지 내 정보 수정하기 */
+.user-update{
+		border: 1px solid #e49a6a;
+    border-radius: 20px;
+    padding: 0px 20px;
+}
+#Write div span{
+		font-size: 17px;
+	margin-right: 10px;
+}
+#Write div {
+	margin-top:10px;
+}
+#Write div input{
+ 	padding: 10px 5px;
+ 	border-radius: 10px;
+ 	border: 1px solid #333;
+}
+
+
+#Write div input.mypage-update-btn{
+
+    box-sizing: border-box;
+    background-color: white;
+    border: 1px solid #e49a6a;
+    padding: 6px 17px;
+    border-radius: 12px;
+}
+#Write div input.mypage-update-btn:hover{
+		background-color: #e49a6a;
+    border: none;
+    color:white;
+}
+/* 마이페이지 찜목록 */
+
+.cart-list{
+	opacity: 0.7;
+    height: 108px;
+}
+.cart-list:hover{
+	
+	background-color: rgba(255, 163, 0, 0.04);
+	opacity:1;
+}
+.cart-img{
+	height: 108px;
+}
+
+.cart-img img{
+    width: 70%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-left: 13%;
+    box-shadow: 0px 0px 5px;
+}
+.info-wrap{
+	margin-left: 6px;
+}
+.master-name{
+	font-size: 20px;
+	margin-right: 4px;
+}
+.master-score{
+	font-size: 18px;
+}
+.info-detail{
+    background: none;
+    border: none;
+    white-space: normal;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: box;
+    margin-top: 1px;
+    max-height: 70px;
+    overflow: hidden;
+    vertical-align: top;
+    text-overflow: ellipsis;
+    word-break: break-word;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+}
+
+.add-cart a i{
+	font-size: 20px;
+    line-height: 4;
+}
+
+/* 마이페이지 리뷰 작성하기  */
+.review-form-title{
+font-weight: bold;
+    margin-left: 10px;
+    background-color: antiquewhite;
+    display: inline-block;
+    padding: 5px 25px;
+    border-radius: 10px;
+}
+.review-write-form{
+	border: 1px solid #999;
+	    height: 480px;
+    border-radius: 20px;
+        padding-top: 60px;
+}
+
+#Write{
+	    padding: 31px 10px;
+	    position: relative;
+}
+.select-wrap{
+	margin-left:30px;
+}
+
+.select-wrap select{
+	padding: 5px;
+    height: 40px;
+    border-radius: 10px;
+}
+.textarea-content{
+	width: 750px;
+    height: 160px;
+    margin-left: 40px;
+}
+.textarea-content textarea{
+	padding: 10px 3px;
+	width: 100%;
+	height: 100%;
+	
+}
+.review-form-btn{
+    box-sizing: border-box;
+    background-color: white;
+    border: 1px solid #e49a6a;
+    padding: 6px 17px;
+    border-radius: 12px;
+    position: absolute;
+    right: 50px;
+    bottom: -20px;
+}
+
+.review-form-btn:hover{
+ 	background-color: #e49a6a;
+    border: none;
+    color:white;
 }
 /*마이페이지 메세지 리스트*/
 .message-img{
@@ -208,6 +509,7 @@ background-color: white;
     box-shadow: 2px 3px 4px #999;
 }
 /*마이페이지 메세지 상세보기 */
+
 .message-detail-wrap{
 	height: 710px;
 }
@@ -223,8 +525,24 @@ background-color: white;
 
 .message-content{
     margin-left: 207px;
-}
 
+}
+.message-content h2{
+	display: inline-block;
+
+}
+.message-content a{
+    margin-left: 204px;
+    box-sizing:border-box;
+    border: 1px solid lightgrey;
+    padding: 4px 15px;
+    border-radius: 20px;
+}
+.message-content a:hover{
+    border:none;
+    box-sizing:border-box;
+    background-color:lightgrey; 
+}
 .sendWrap{
 	position: relative;
 }
@@ -247,6 +565,11 @@ background-color: white;
     border-radius: 10px;
     border: 1px solid lightgray;
 }
+.SendBtn:hover{
+	background-color: white;
+	border: 1px dashed gray;
+	
+}
 .mypage-message{
 	width: 200px;
     white-space: normal;
@@ -259,6 +582,97 @@ background-color: white;
 .plz{
 	display: block;
 }
+/* 고수 마이페이지 */
+/* 위쪽 정보 부분  */
+
+.master-info-intro{
+    padding-left: 121px;
+    padding-top: 0px;
+    padding-bottom: 18px;
+}
+.master-info-intro h2{
+	margin-bottom: 20px;
+}
+
+.skill-box{
+	margin-right: 10px;
+}
+.skill-box,
+.skill-box span{
+	font-size: 17px;
+}
+.master-info-box{
+height: 94px;
+    width: 500px;
+    margin: 10px 0;
+    padding: 10px;
+    background-color: linen;
+    border-radius: 20px;
+}
+.master-info-box span:nth-child(1){
+border-right: 1px solid #333;
+    display: inline-block;
+    width: 50%;
+    height: 100%;
+    line-height: 3.5;
+    padding-left: 40px;
+    font-size: 22px;
+}
+.master-info-box span:nth-child(2){
+line-height: 3.5;
+    padding-left: 40px;
+    font-size: 22px;
+}
+
+/**************************************************공통부에 들어가는 부분은 다 복사해서 html에 넣을것   */
+
+.master-update-btn{
+
+    box-sizing: border-box;
+    background-color: white;
+    border: 1px solid #e49a6a;
+    padding: 6px 17px;
+    border-radius: 12px;
+    margin-top: 20px;
+}
+.master-update-btn:hover{
+		background-color: #e49a6a;
+    border: none;
+    color:white;
+}
+.review-list{
+    margin: 20px 80px;
+    padding: 15px 20px;
+    border: 1px solid #e49a6a;
+    border-radius: 20px;
+}
+.rivew-giver-info span:nth-child(1){
+	font-size: 18px;
+	margin-right: 10px;
+}
+
+.rivew-giver-info span:nth-child(3){
+	font-size: 17px;
+}
+.rivew-content {
+
+    width: 100%;
+    margin-top: 10px;
+    background-color: antiquewhite;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.rivew-content span{
+	word-break: break-word;
+}
+
+/* 상담 내역 디테일  */
+.consult-content{
+	height: 500px;
+}
+
+
 /* community */
 .board-list{
    display: block;
@@ -587,7 +1001,7 @@ input[type="email"]:focus, input[type="password"]:focus, input[type="text"]:focu
 }
 
 .page-header {
-  background: #f5f5f5;
+  background: antiquewhite;
   margin-top: 20px;
   border-bottom: none;
   padding: 30px 0;
@@ -1912,6 +2326,7 @@ input[type="email"]:focus, input[type="password"]:focus, input[type="text"]:focu
   border: 1px solid #dedede;
   margin-top: 30px;
   padding: 20px;
+  height: auto;
 }
 
 .dashboard-wrapper h2 {

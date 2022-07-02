@@ -44,13 +44,16 @@
 						<li><a th:href="@{/mastermypage-message}">메세지함</a></li>
 					</ul>
 					<div class="dashboard-wrapper user-dashboard profile-detail" >
-						<div th:each="rv:${review}">
-							<div>
-								<div>
+						<div  class="review-list-wrap">
+							<div th:each="rv:${review}" class="review-list">
+								<div class="rivew-giver-info">
 									<span th:text="${rv.mvo.name}"></span>
-									<span th:text="${rv.score}"><i class="bi bi-star-fill"></i></span>
+									<span class="star_1 fa master-star">&#xf005</span>
+									<span th:text="|${rv.score} 점|">
+										
+									</span>
 								</div>
-								<div>
+								<div class="rivew-content">
 									<span th:text="${rv.reviewContent}"></span>
 								</div>
 							</div>

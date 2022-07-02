@@ -50,27 +50,29 @@
 							<table class="table">
 								<thead>
 									<tr>
-										<th class="col-md-3 " ></th>
-										<th class="col-md-7 "></th>
-										<th class="col-md-2 "></th>
+										<th class="col-md-2 text-center" >고수 이미지</th>
+										<th class="col-md-7 text-center">고수 정보</th>
+										<th class="col-md-2 text-center">북마크</th>
 									</tr>
 								</thead>
 								
 								<tbody>
-									<tr th:each="list:${cartList}">
+									<tr th:each="list:${cartList}" class="cart-list">
 										
-										<td >
+										<td class="cart-img" >
 											<img class="" th:src="${list.imageVo.imageName}" alt="Image">
 										</td>
-										<td > 
-											<div>
-												<span th:text="${list.mvo.name}">고수 이름</span> <span th:text="${list.score}">고수 평점</span>
+										<td class="master-info-wrap"> 
+											<div class="info-wrap" >
+												<span class="master-name" th:text="${list.mvo.name}">고수 이름</span>
+												<span class="star_1 fa master-star">&#xf005</span>
+												<span class="master-score" th:text="${list.score}">고수 평점</span>
 											</div>
-											<div th:text="${list.msvo.specifications}">
+											<pre th:text="${list.msvo.specifications}" class="info-detail">
 												고수 상세 정보 들이 여기 잔뜩 나와야함 고수 상세 정보 들이 여기 잔뜩 나와야함 고수 상세 정보 들이 여기 잔뜩 나와야함
-											</div>
+											</pre>
 										</td>
-										<td class="text-center">
+										<td class="text-center add-cart" > 
 												<a th:href="@{/delete-cart(masterId=${list.mvo.id})}"><i class="bi bi-bookmark-fill"></i></a>
 										</td>
 									</tr>

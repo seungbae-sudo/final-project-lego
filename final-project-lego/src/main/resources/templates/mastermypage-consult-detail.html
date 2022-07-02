@@ -48,11 +48,11 @@
 							<table class="table">
 								<thead>
 									<tr>
-										<th class="col-md-4" th:text="|${Booking.mvo.name} 님|" >고객 이름 </th>
+										<th class="col-md-7" th:text="|${Booking.mvo.name} 님|" >고객 이름 </th>
 										<th><a th:href="@{mastermypage-message-detail(receiveID=${Booking.mvo.id},receiveName=${Booking.mvo.name})}">메세지함 이동</a></th>
 									</tr>
 								</thead>
-								<tbody>
+								<tbody class="consult-content">
 									<tr >
 										<td th:text="${Booking.bookingContent}"></td>
 									</tr>
