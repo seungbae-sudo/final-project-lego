@@ -37,12 +37,12 @@
 					</tr>
 					<tr>
 						<td>
-							<input class="col-sm-12" type="text" name="boardTitle" placeholder="글제목" required="required">
+							<input class="col-sm-12" type="text" name="boardTitle" placeholder="글제목" required="required"  id="boardTitle">
 						</td>
 					</tr>
 					<tr>
 						<td >
-							<textarea rows="10" class="form-control" name="boardContent"
+							<textarea rows="10" class="form-control" name="boardContent" 
 								placeholder="본문내용" required="required">
 							</textarea>
 						</td>
@@ -62,7 +62,13 @@
 		if (document.getElementById("categoryNo").value == "") {
 			alert("카테고리를 선택해 주세요");
 			return;
-		} else {
+		} else if(document.getElementById("boardTitle").value == "") {
+			alert("제목및 내용을 입력해 주세요");
+			return; 
+		} else if(document.getElementById("boardContent").value == "") {
+			alert("본문내용을 입력해 주세요");
+			return; 
+		}else{
 			document.getElementById("Write").submit();
 		}
 	}

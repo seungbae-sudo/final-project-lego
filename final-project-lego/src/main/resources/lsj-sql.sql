@@ -135,12 +135,24 @@ select authority
 from authorities
 where username = 'lsj@kosta.com'
 
+-- findCommentList 2
+select cm.comment_content, cm.comment_no,cm.comment_date , m.name, m.id, a.authority, a.username
+from  board b, member m, board_comment cm, authorities a
+where b.board_no=cm.board_no
+and a.username = m.id 
+and m.id=cm.id
+and b. board_no=16
 
-select cm.comment_content, cm.comment_no,cm.comment_date , m.name, m.id, a.authority
-		from  board b, member m, board_comment cm, authorities a
-		where b.board_no=cm.board_no
-		and a.username = m.id 
-		and m.id=cm.id
-		and b. board_no=16
+
+-- findCommentList 3 (master id 추가 , commentFindMasterById)
+select cm.comment_content, cm.comment_no,cm.comment_date , m.name, m.id, a.authority, a.username, ma.id
+from  board b, member m, board_comment cm, authorities a, master ma
+where b.board_no=cm.board_no
+and a.username = m.id 
+and m.id=cm.id
+and cm.id=ma.id
+and a.username='lsj@kosta.com'
+
+   		select * from master where id= 'lsj@kosta.com'
 
 

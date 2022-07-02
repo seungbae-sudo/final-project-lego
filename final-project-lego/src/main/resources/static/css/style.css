@@ -9,10 +9,6 @@
 	font-family: "Font Awesome 5 Free"; font-weight:900;
 }
 /*레고  */
-/*test*/
-.mama{
-	font-color:red;
-}
 
 /* index */
 
@@ -220,6 +216,31 @@
 /* community */
 .board-list{
    display: block;
+}
+
+.communityWriteBtn {
+	width:100px;
+	height:40px;
+	float: right;
+	box-sizing: border-box;
+	border-radius: 20px;
+	border-color:#e49a6a;
+	background-color: #e49a6a;
+}
+
+.communityBoard{
+	margin-top:70px;
+}
+
+
+.checkMaster{
+	box-sizing:border-box;
+	border-radius:20px;
+	background-color:#e49a6a; 
+	
+}
+.checkMaster:hover, .communityWriteBtn:hover{
+	opacity: 0.8;
 }
 
 
