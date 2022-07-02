@@ -154,5 +154,11 @@ and cm.id=ma.id
 and a.username='lsj@kosta.com'
 
    		select * from master where id= 'lsj@kosta.com'
+   		
+   		
+ 
 
+--search	test
+	SELECT * FROM BOARD WHERE board_title LIKE '%' || '꿀팁' || '%' 
+	SELECT * FROM BOARD WHERE board_title LIKE '%' || #{KEYWORD} || '%' 
 

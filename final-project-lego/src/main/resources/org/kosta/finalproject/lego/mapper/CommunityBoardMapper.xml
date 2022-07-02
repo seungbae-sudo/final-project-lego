@@ -92,4 +92,10 @@
 	<delete id="likesDown" parameterType="int">
 		UPDATE board SET likes = likes -1 WHERE board_no =#{value}
 	</delete>
+	
+	<select id="findCommunityListByTitle" resultType="org.kosta.finalproject.lego.vo.BoardVO">
+		SELECT * FROM BOARD WHERE board_title LIKE '%' || #{KEYWORD} || '%'
+	</select>
+	
+	
 </mapper>

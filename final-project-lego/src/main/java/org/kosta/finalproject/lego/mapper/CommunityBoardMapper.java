@@ -34,4 +34,6 @@ public interface CommunityBoardMapper {
 
 	void likesDown(int boardNo);
 
+	List<BoardVO> findCommunityListByTitle(String boardTitle);
+
 }
