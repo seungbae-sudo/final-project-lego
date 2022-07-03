@@ -12,6 +12,7 @@
 						<h1 class="page-name">커뮤니티 게시판</h1>
 						<ol class="breadcrumb">
 							<li><a th:href="@{/}">Home</a></li>
+							<li class="active">community search</li>
 						</ol>
 					</div>
 				</div>
@@ -24,7 +25,6 @@
     <div class="row">
       <div class="col-md-12">
         <h3>검색결과</h3>
-		
         <div class="communityBoard dashboard-wrapper user-dashboard">
           <div class="table-responsive">
             <table class="table">
@@ -39,7 +39,7 @@
                 </tr>
               </thead>
               <tbody >
-                <tr th:each="list:${list}">
+                <tr th:each="list:${keyword}">
                   <td class="text-center"> <a href="" th:text=${list.boardNo}>No부분</a></td>
                   <td class="text-center"> <a class="board-list" th:href="@{/board-detail(boardNo=${list.boardNo},categoryNo=${list.bcvo.categoryNo})}" th:text=${list.boardTitle} >제목부분</a></td>
                   <td class="text-center"> <a href="" th:text=${list.mvo.name}>작성자부분</a></td>

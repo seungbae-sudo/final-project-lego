@@ -12,6 +12,7 @@
 						<h1 class="page-name">커뮤니티 게시판</h1>
 						<ol class="breadcrumb">
 							<li><a th:href="@{/}">Home</a></li>
+							<li class="active">community board</li>
 						</ol>
 					</div>
 				</div>
@@ -23,13 +24,30 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <ul id="cateBtn" class="list-inline dashboard-menu text-center">
+        
+        <div class="searchAllBox">
+			<form class="searchBox1 searchBox" action="get" th:action="@{/searchBoardKeyword}">
+					<i class='fas fa-highlighter' style='font-size:24px'></i>
+					<input type="search" class="form-control"
+						placeholder="'제목'으로 검색해보세요!" name="keyword">
+					<button type="submit"> 검색</button>
+			</form>
+			<form class="searchBox2 searchBox" action="get" th:action="@{/searchBoardKeywordByName}">
+					<i class='fas fa-street-view' style='font-size:24px'></i>
+					<input type="search" class="form-control"
+						placeholder="'작성자'로 검색해보세요!" name="keyword">
+					<button type="submit"> 검색</button>
+			</form>
+		</div>
+		
+		 <ul id="cateBtn" class="list-inline dashboard-menu text-center">
           <li ><a  th:href="@{/goCommunity(categoryNo=1)}" >꿀팁</a></li>
           <li  ><a th:href="@{/goCommunity(categoryNo=2)}">추천</a></li>
           <li  ><a  th:href="@{/goCommunity(categoryNo=3)}" >나눔</a></li>
         </ul>
-        <form th:action="@{/writeForm}" method="get">
-					<button class="communityWriteBtn" type="submit">글쓰기</button>
+		
+        <form class="writeBtnForm" th:action="@{/writeForm}" method="get">
+					<button class="WriteBtn" type="submit">글쓰기</button>
 		</form>
 		
         <div class="communityBoard dashboard-wrapper user-dashboard">
@@ -38,15 +56,17 @@
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
               <thead>
                 <tr>
-                  <th class="col-md-1 text-center">No.</th>
-                  <th class="col-md-5 text-center">제목</th>
-                  <th class="col-md-1 text-center">작성자</th>
-                  <th class="col-md-1 text-center">조회수</th>
+                  <th class="col-md-1 text-center">카테고리</th>
+                  <th class="col-md-0 text-center">No.</th>
+                  <th class="col-md-6 text-center">제목</th>
+                  <th class="col-md-0 text-center">작성자</th>
+                  <th class="col-md-0 text-center">조회수</th>
                   <th class="col-md-1 text-center">좋아요</th>
                 </tr>
               </thead>
               <tbody >
                 <tr th:each="list:${CategoryList}">
+                  <td class="text-center"> <a href="" th:text=${list.bcvo.categoryName}>카테고리종류</a></td>
                   <td class="text-center"> <a href="" th:text=${list.boardNo}>No부분</a></td>
                   <td class="text-center"> <a class="board-list" th:href="@{/board-detail(boardNo=${list.boardNo},categoryNo=${list.bcvo.categoryNo})}" th:text=${list.boardTitle} >제목부분</a></td>
                   <td class="text-center"> <a href="" th:text=${list.mvo.name}>작성자부분</a></td>
@@ -64,11 +84,7 @@
   </section>
 
 <section>
-		<form action="get" th:action="@{/searchBoardKeyword}">
-			<input type="search" class="form-control"
-				placeholder="원하는 제목을 검색해주세요!" name="keyword">
-				<button type="submit"> 검색</button>
-		</form>
+
 </section>
 
 </div>

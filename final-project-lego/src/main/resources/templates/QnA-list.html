@@ -25,15 +25,10 @@
     <div class="row">
       <div class="col-md-12">
     
-        <form th:action="@{/QnAWriteFrom}" method="get" sec:authorize="!hasRole('ROLE_ADMIN')">
-					<button type="submit">글쓰기</button>
+        <form class="qnaBtnForm" th:action="@{/QnAWriteFrom}" method="get" sec:authorize="!hasRole('ROLE_ADMIN')">
+					<button class="WriteBtn" type="submit">글쓰기</button>
 		</form>
 
-		<div >
-		
-		
-		
-		</div>
 		
         <div class="dashboard-wrapper user-dashboard">
           <div class="table-responsive">
