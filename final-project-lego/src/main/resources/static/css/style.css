@@ -678,14 +678,24 @@ line-height: 3.5;
    display: block;
 }
 
-.communityWriteBtn {
-	width:100px;
-	height:40px;
-	float: right;
+.writeBtnBox{
+	display: flex;
+	justify-content: flex-end;
+}
+.communityWriteBtn  {
 	box-sizing: border-box;
-	border-radius: 20px;
-	border-color:#e49a6a;
-	background-color: #e49a6a;
+	background-color: white;
+	border: 1px solid #e49a6a;
+	padding: 6px 17px;
+	border-radius: 12px;
+	
+	margin-top:20px;
+}
+
+.communityWriteBtn:hover{
+    background-color: #e49a6a;
+    border: none;
+    color:white;
 }
 
 .communityBoard{
@@ -701,6 +711,16 @@ line-height: 3.5;
 }
 .checkMaster:hover, .communityWriteBtn:hover{
 	opacity: 0.8;
+}
+
+
+.searchTtitle{
+	width: 300px;
+}
+
+.searchTitleBox {
+	display: flex;
+	justify-content: center;
 }
 
 
