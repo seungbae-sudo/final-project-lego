@@ -87,9 +87,9 @@ xmlns:th="http://www.thymeleaf.org">
             	<input multiple="multiple" type="file" value="파일 선택" name="file"  id="checkFile"/>
             </div>
             <div class="text-center">
-            
-              <button type="button" onclick="check()" class="btn btn-main text-center" name = "member" value="1"> 일반고객 회원가입</button>
-              <button type="button" onclick="check()" class="btn btn-main text-center"  name = "member" value="2"> 고수로 회원가입</button>
+            	<input type="hidden" id="member" name="member">
+              <button type="button" onclick="check()" class="btn btn-main text-center"> 일반고객 회원가입</button>
+              <button type="button" onclick="check()" class="btn btn-main text-center"> 고수로 회원가입</button>
             </div>
             
           </form>
@@ -104,6 +104,16 @@ xmlns:th="http://www.thymeleaf.org">
 			alert("파일을 업로드 해주세요");
 			return;
 		}else {
+			document.getElementById("member").value ==1;
+			document.getElementById("Write").submit();
+		}
+	}
+  function check() {
+		if (document.getElementById("checkFile").value == "") {
+			alert("파일을 업로드 해주세요");
+			return;
+		}else {
+			document.getElementById("member").value ==2;
 			document.getElementById("Write").submit();
 		}
 	}
