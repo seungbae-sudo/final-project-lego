@@ -29,7 +29,6 @@
 					<li style='margin-right: 20px;'>작성자 : <span th:text="${bvo.mvo.name}"></span></li>
 					<li style='margin-right: 20px;'>작성일 : <span th:text="${bvo.boardDate}"></span></li>
 					<li style='margin-right: 20px;'>조회수 : <span th:text="${bvo.hits}"></span></li>
-					<li>좋아요 : <span th:text="${bvo.likes}"></span></li>
 					<!-- <li><a href="ReviewPostListController.do?pageNo=${nowPage}"><i class='fas fa-list'></i>목록</a></li> -->
 				</ul>
 				
@@ -58,30 +57,6 @@
 			<div>
 				<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 				<span class=commentName style='margin-right: 300px; font-size:30px;'>댓글</span>
-				
-						<!--  	<span th:text="${session.LikesUpList}"></span>
-							<span th:if="${#lists.isEmpty(session.LikesUpList)}">
-					
-									<span th:if="${#lists.contains(session.LikesDownList,bvo.boardNo)}">
-										<a th:href="@{/likesUp(boardNo=${bvo.boardNo},categoryNo=${categoryNo})}">
-											<i class="fas fa-cat"></i>
-										</a> 
-									</span>
-									<span th:unless="${#lists.contains(session.LikesDownList,bvo.boardNo)}">
-										<a th:href="@{/likesDown(boardNo=${bvo.boardNo},categoryNo=${categoryNo})}">									
-											<i class='far fa-heart icon'></i>
-										</a> 
-									</span>
-									
-								</span>
-								
-								<span th:unless="${#lists.contains(session.LikesDownList,bvo.boardNo)}">
-										<a th:href="@{/likesUp(boardNo=${bvo.boardNo},categoryNo=${categoryNo})}">
-											<i class="fas fa-cat"></i>
-										</a> 
-									</span>
-					
--->
 						<span style='margin-left: 500px;'  >
 						
 							<th:block th:if="${#lists.contains(session.LikesUpList,bvo.boardNo)}">
