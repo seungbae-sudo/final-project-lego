@@ -153,7 +153,7 @@ and m.id=cm.id
 and cm.id=ma.id
 and a.username='lsj@kosta.com'
 
-   		select * from master where id= 'lsj@kosta.com'
+select * from master where id= 'lsj@kosta.com'
    		
  
 

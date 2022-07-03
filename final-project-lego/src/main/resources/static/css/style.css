@@ -277,6 +277,33 @@ position:absolute;
 .login-logo{
 	width: 130px;
 }
+
+/*회원가입*/
+
+.profileBox{
+	display: flex;
+ flex-direction: column;
+    align-items: center;
+}
+
+.register-profile-logo{
+	width:140px;
+	margin-top:-30px;
+}
+
+#checkFile{
+		height: 40px;
+		font-size: 12px;
+		margin-top:15px;
+		margin-bottom:20px;
+}
+
+#checkFile:hover{
+	background-color: #e49a6a;
+	cursor: pointer;
+}
+
+
 /* 마이페이지 */
 .profile{
     width: 160px;

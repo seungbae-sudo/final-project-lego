@@ -199,5 +199,7 @@ public class CommunityBoardController {
 		
 		return "board-search-list";
 	}
+	
+	
 
 }

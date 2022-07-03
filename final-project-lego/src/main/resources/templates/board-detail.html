@@ -70,14 +70,14 @@
 							</th:block>
 							<th:block th:if="${!#lists.contains(session.LikesDownList,bvo.boardNo)}">
 										<a  th:href="@{/likesDown(boardNo=${bvo.boardNo},categoryNo=${categoryNo})}">									
-											<i class="fa fa-thumbs-up" style="font-size:24px; color:red;"></i>
+											<i class="fa fa-thumbs-up" style="font-size:30px; color:red;"></i>
 										</a>
 										<span th:text="${bvo.likes}"></span>		
 							</th:block>
 							</th:block>
 							<th:block th:if="${!#lists.contains(session.LikesUpList,bvo.boardNo)}">
 								<a th:href="@{/likesUp(boardNo=${bvo.boardNo},categoryNo=${categoryNo})}">
-											<i class="fa fa-thumbs-o-up" style="font-size:24px"></i>
+											<i class="fa fa-thumbs-o-up" style="font-size:30px"></i>
 										</a> <span th:text="${bvo.likes}"></span>		
 							</th:block>
 						</span>
@@ -101,7 +101,7 @@
 		                 	<td class="col-md-7"  th:text="${comList.commentContent}"></td>
 		                 	<td class="col-md-2"  th:text="${comList.commentDate} "></td>
 		                 	<td class="col-md-1"  th:text="${comList.mvo.name} "></td>
-		            		 <td class="col-md-1"><a th:href="@{/surveyFindMasterById?masterId=lsj@kosta.com}" class="checkMaster" th:text="|고수님|" th:if="${#strings.contains(comList.Authority.authority, 'MASTER')}"></a></td>
+		            		 <td class="col-md-1"><a th:href="@{/surveyFindMasterById(masterId='lsj@kosta.com')}"class="checkMaster" th:text="|고수님|" th:if="${#strings.contains(comList.Authority.authority, 'MASTER')}"></a></td>
 		            		<!--/* mvo와 고수체크 -> 한번에 합치기 :  <td class="col-md-2"  th:text="|${comList.mvo.name} 고수| " th:if="${#strings.contains(comList.Authority.authority, 'MASTER')}"></td> */--> 
 		            		
 		                 	<td class="col-md-1" ><form th:action="@{/CommentDelete}" method="post" th:if="${mvo.id}==${comList.mvo.id}">
