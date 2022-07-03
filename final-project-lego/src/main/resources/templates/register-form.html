@@ -57,11 +57,16 @@ xmlns:th="http://www.thymeleaf.org">
     <div class="row">
       <div class="col-md-6 col-md-offset-3">
         <div class="block text-center">
-          <a class="logo" href="index.html">
-            <img src="images/logo.png" alt="">
+          <a class="logo" th:href="@{/}">
+            <img src="images/lego_logo.png" alt="" class="login-logo">
           </a>
           <h2 class="text-center">Create Your Account</h2>
           <form class="text-left clearfix" action="index.html" th:action="@{/register}" method="post" enctype="multipart/form-data" id="Write">
+          <div>
+          		 <img src="images/register_profile.png" alt="프로필사진등록" class="register-profile-logo" id="user_image">
+            	<input multiple="multiple" type="file" value="파일 선택" name="file"  id="checkFile"  onchange="PreviewImage()"/>
+            </div> 
+            
           <div class="form-group">
               <input type="email" name="id" class="form-control"  placeholder="lego@lego.com" required="required">
               <input type="button"  class="form-control" id="idOverlay" onclick="idCheck()" value="중복 체크"/>
@@ -83,9 +88,9 @@ xmlns:th="http://www.thymeleaf.org">
              <div class="form-group">
               <input type="tel" name="tel" class="form-control"  placeholder="전화번호" required="required">
             </div>
-            <div>
+           <!--  <div>
             	<input multiple="multiple" type="file" value="파일 선택" name="file"  id="checkFile"/>
-            </div>
+            </div> -->
             <div class="text-center">
             
               <button type="button" onclick="check()" class="btn btn-main text-center" name = "member" value="1"> 일반고객 회원가입</button>
@@ -107,6 +112,15 @@ xmlns:th="http://www.thymeleaf.org">
 			document.getElementById("Write").submit();
 		}
 	}
+  
+  //이미지 업로드 미리보기
+  function PreviewImage() {
+      var preview = new FileReader();
+      preview.onload = function (e) {
+      document.getElementById("user_image").src = e.target.result;
+  };
+  preview.readAsDataURL(document.getElementById("checkFile").files[0]);
+};
   </script>
 </section>
 

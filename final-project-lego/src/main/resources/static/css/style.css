@@ -171,7 +171,7 @@ position:absolute;
 }
 
 .survey-content{
-    height: 610px;
+    height: 750px;
     background-color: #e49a6a;
     width: 500px;
     margin-left: 250px;
@@ -188,9 +188,13 @@ position:absolute;
     overflow: hidden;
     background-color: whitesmoke;
     margin-left: 48px;
-    margin-top: 10px;
+    margin-top: 30px;
     padding: 10px 20px;
     border-radius: 20px;
+}
+
+.survey-content h2{
+	text-align: center;
 }
 #slider li {
   display: none;
@@ -233,14 +237,14 @@ position:absolute;
 #prev{
 	position: absolute;
 	left: 9px;
-	 top: 290px;
+	 top: 350px;
 	 cursor: pointer;
 }
 
 #next{
 	    position: absolute;
     right: 9px;
-    top: 290px;
+    top: 350px;
     cursor: pointer;
 }
 .lego-box{
@@ -277,6 +281,24 @@ position:absolute;
 .login-logo{
 	width: 130px;
 }
+
+/* 회원가입 */
+.register-profile-logo{
+	width: 140px;
+	margin-left: 150px;
+	margin-top:-30px;
+}
+
+#checkFile{
+	margin-left: 100px;
+	height: 40px;
+	font-size: 10px;
+	margin-top:10px;
+	margin-bottom:40px;
+}
+
+
+
 /* 마이페이지 */
 .profile{
     width: 160px;

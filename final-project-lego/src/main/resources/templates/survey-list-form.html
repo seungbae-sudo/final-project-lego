@@ -9,7 +9,7 @@
 	<div class="container pt-4 survey-wrap">
 		<!--/*   thymeleaf comment    */-->
 		<div class="survey-content">
-			
+		<h2>고수찾기 설문지</h2>
 			<form action="" method="post" th:action="@{/findMasterList}">
 			<ul id="slider">
 				<li class="on">
@@ -52,7 +52,7 @@
 
 
 				<li>
-					<p>3. 어떤 서비스를 제공할 수 있나요?</p>
+					<p>3. 선호하는 시간대는 언제인가요?</p>
 					<div th:each="ti: ${times}">
 						<input type="checkbox" th:name="times" th:text="${ti.times}"
 							th:value="${ti.timesId}" th:if="${ti.timesId>0}">
@@ -60,7 +60,7 @@
 				</li>
 
 				<li>
-					<p>4. 어떤 서비스를 제공할 수 있나요?</p>
+					<p>4. 선호하는 요일은 언제인가요?</p>
 					<div th:each="d: ${day}">
 						<input type="checkbox" th:name="days" th:text="${d.days}"
 							th:value="${d.daysId}" th:if="${d.daysId>0}">
