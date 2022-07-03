@@ -46,13 +46,14 @@ public class CommunityBoardController {
 		return "redirect:board-posting-result";
 	}
 
-	@RequestMapping(value = { "/goCommunity", "/board-posting-result" ,"/boardUpdateResult","/boardDeleteResult"})
+	@RequestMapping(value = { "/goCommunity", "/board-posting-result" ,"/boardUpdateResult","/boardDeleteResult","/returnList"})
 	public String goCommunity(Model model, @RequestParam("categoryNo") int categoryNo,HttpServletRequest request) {
 		List<BoardVO> list =communityBoardMapper.findAllCommunityList(categoryNo);
 		model.addAttribute("CategoryList", list);
 
 		return "community-list";
 	}
+	
 
 	@RequestMapping("/updateForm")
 	public String boardUpdateFrom(@AuthenticationPrincipal MemberVO memberVO, Model model, int boardNo) {
@@ -182,10 +183,20 @@ public class CommunityBoardController {
 	}
 	
 	@RequestMapping("/searchBoardKeyword")
-	public String SearchBoardKeyword(Model model,@AuthenticationPrincipal MemberVO memberVO,String keyword) {
+	public String SearchBoardKeyword(Model model,String keyword) {
 		System.out.println(keyword);
-		List<BoardVO> list =communityBoardMapper.findCommunityListByTitle(keyword);
-		model.addAttribute("list",list);
+		List<BoardVO> list=communityBoardMapper.findCommunityListByTitle(keyword);
+		model.addAttribute("keyword",list);
+		
+		return "board-search-list";
+	}
+	
+	@RequestMapping("/searchBoardKeywordByName")
+	public String SearchBoardKeywordByName(Model model,String keyword) {
+		System.out.println(keyword);
+		List<BoardVO> list=communityBoardMapper.findCommunityListByName(keyword);
+		model.addAttribute("keyword",list);
+		
 		return "board-search-list";
 	}
 
