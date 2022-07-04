@@ -142,12 +142,19 @@
    </insert>
    
    <select id="findMasterByKeyword" parameterType="hashmap" resultType="org.kosta.finalproject.lego.vo.MasterVO" resultMap="masterResult">
-	select distinct nvl(round(avg(r.score)),0) as score, to_char(dbms_lob.substr(ms.specifications, 4000)) as specifications ,m.name,i.image_name,ms.career,m.id,c.category_no
+	select specifications,name,image_name,career,id,category_no ,rnum
+		from(
+		select  specifications,name,image_name,career,id,category_no ,row_number() over(order by id desc) as rnum
+		from(
+		select distinct  to_char(dbms_lob.substr(ms.specifications, 4000)) as specifications ,m.name,i.image_name,ms.career,m.id,c.category_no 
 			from  member m,review r,master ms,images i, skills s, category c , master_detail mds
-			where m.id = ms.id and i.id = ms.id and m.id = i.id and mds.id=ms.id and s.skills_id = mds.skills_id and c.category_no = ms.category_no
+			where m.id = ms.id and i.id = ms.id and m.id = i.id and mds.id=ms.id and s.skills_id = mds.skills_id and m.id=mds.id and c.category_no = ms.category_no
 		
 			group by to_char(dbms_lob.substr(ms.specifications, 4000)),m.name,i.image_name,ms.career,m.id,c.lesson_sort,s.skills,s.skills_id,mds.skills_id,c.category_no
-			having  (c.lesson_sort LIKE '%'||#{KEYWORD}||'%' or s.skills LIKE '%' ||#{KEYWORD}||'%') and s.skills_id > 0
+			having  (c.lesson_sort LIKE '%'||#{keyword}||'%' or s.skills LIKE '%' ||#{keyword}||'%') and s.skills_id > 0)
+			) where rnum between #{p.startRowNumber} and #{p.endRowNumber}
+	
+	
    </select>
    
    <resultMap type="org.kosta.finalproject.lego.vo.ReviewVO" id="reviewResult">
@@ -158,5 +165,19 @@
 		from review
 		where master_id = #{value}
 		group by master_id
+   </select>
+   
+   <select id="getTotalFindList2" resultType="integer">
+   		select count(*)
+		from(
+		select  specifications,name,image_name,career,id,category_no ,row_number() over(order by id desc) as rnum
+		from(
+		select distinct  to_char(dbms_lob.substr(ms.specifications, 4000)) as specifications ,m.name,i.image_name,ms.career,m.id,c.category_no 
+			from  member m,review r,master ms,images i, skills s, category c , master_detail mds
+			where m.id = ms.id and i.id = ms.id and m.id = i.id and mds.id=ms.id and s.skills_id = mds.skills_id and m.id=mds.id and c.category_no = ms.category_no
+		
+			group by to_char(dbms_lob.substr(ms.specifications, 4000)),m.name,i.image_name,ms.career,m.id,c.lesson_sort,s.skills,s.skills_id,mds.skills_id,c.category_no
+			having (c.lesson_sort LIKE '%'||#{keyword}||'%' or s.skills LIKE '%' ||#{keyword}||'%') and s.skills_id > 0)
+			) 
    </select>
 </mapper>

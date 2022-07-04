@@ -31,14 +31,14 @@ public interface SurveyMapper {
 	List<BookingVO> findBookingDayByMasterId(String masterId);
 	
 	void BookingToMaster(BookingVO bookingVO);
-	
-	List<MasterVO> findMasterByKeyword(String keyword, String keyword2);
 
-	List<MasterVO> findMasterByKeyword(Map<String, String> map);
+	List<MasterVO> findMasterByKeyword(String keyword, Pagination p);
 	
 	Integer findcount(int[] skills, int[] days, int[] times,String categoryNo);
 	
 	Integer getTotalFindList(int[] skills, int[] days, int[] times,String categoryNo);
 	
 	List<ReviewVO> getScore(String id);
+	
+	Integer getTotalFindList2(String keyword);
 }

@@ -93,7 +93,7 @@ public class SurveyController {
 		model.addAttribute("categoryNo", categoryNo);		
 		model.addAttribute("masterList", surveyMapper.findMasterList2(id, categoryNo));
 		
-		return "find-master-list";
+		return "redirect:/mypage-cart";
 	}
 	@RequestMapping("/surveyFindMasterById")
 	public String surveyFindMasterById(Model model, String masterId) {
@@ -138,16 +138,28 @@ public class SurveyController {
 	}
 	
 	@RequestMapping("/searchKeyword")
-	public String search(Model model, String keyword) {
-		System.out.println(keyword);
+	public String search(Model model, String keyword,Pagination p,String pageNo) {
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("KEYWORD", keyword);
-		map.put("KEYWORD2", keyword);
-		List<MasterVO> list = surveyMapper.findMasterByKeyword(map);
+		
+		if(pageNo==null) {// 클라이언트가 pageNo를 전달하지 않는 경우에는 첫 페이지를 보여준다.
+			p = new Pagination(surveyMapper.getTotalFindList2(keyword));
+		}else {
+			p = new Pagination(surveyMapper.getTotalFindList2(keyword), Integer.parseInt(pageNo));
+		}
+		System.out.println(p.getStartRowNumber());
+		System.out.println(p.getEndRowNumber());
+		List<MasterVO> list = surveyMapper.findMasterByKeyword(keyword,p);
+		map.put("k", keyword);
+		map.put("k2", keyword);
+		List<ReviewVO> list2 = new ArrayList<ReviewVO>();
+		for(int i =0;i<list.size();i++) {
+			list2.addAll(surveyMapper.getScore(list.get(i).getId()));
+		}
+		model.addAttribute("score", list2);
 		model.addAttribute("masterList", list);
-		
+		System.out.println(list);
 		model.addAttribute("userSearchKeyword", keyword);
-		
+		model.addAttribute("pagination", p);
 		return "search-master-list";
 	}
 }
