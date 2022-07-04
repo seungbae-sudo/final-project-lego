@@ -90,7 +90,7 @@ public class MasterMyPageController {
 		
 		List<ReviewVO> rvo = masterMyPageMapper.MyReview(memberVO.getId());
 		System.out.println(rvo);
-		model.addAttribute("review", rvo); 
+		model.addAttribute("reAGV", rvo); 
 		System.out.println(rvo);
 		
 		ImageVO image = masterMyPageMapper.getImageId(memberVO.getId());

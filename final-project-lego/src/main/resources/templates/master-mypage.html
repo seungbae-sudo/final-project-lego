@@ -38,7 +38,7 @@
 							</span>	
 									
 							<div class="master-info-box">
-								<span class="media-heading" th:text="|평점:${review}"|> </span>
+								<span th:each="re:${reAGV}"class="media-heading" th:text="|평점 : ${re.score}점|"> </span>
 								<span class="media-heading" th:text="|경력 : ${masterDetail.career}년|"></span>
 							</div>
 						</div>
