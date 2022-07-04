@@ -70,7 +70,7 @@ public class CommunityBoardController {
 		map.put("pagination", p);
 		map.put("categoryNo", categoryNo);
 		List<BoardVO> list =communityBoardMapper.findAllCommunityList(map);
-		
+
 		System.out.println(list.get(0));
 		
 		
