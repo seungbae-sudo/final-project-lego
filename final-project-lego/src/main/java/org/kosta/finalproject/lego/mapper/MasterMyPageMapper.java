@@ -1,6 +1,7 @@
 package org.kosta.finalproject.lego.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.kosta.finalproject.lego.vo.BoardVO;
@@ -26,7 +27,7 @@ public interface MasterMyPageMapper {
 	
 	List<BookingVO> findMyBooking(String id);
 
-	List<ReviewVO> findMyReview(String id);
+	List<ReviewVO> findMyReview(Map<String, Object> map);
 
 	List<MessageVO> findMyMessage(String id);
 	
@@ -43,6 +44,8 @@ public interface MasterMyPageMapper {
 	BookingVO findMyBookingDetail(int bookingNo);
 
 	List<ReviewVO> MyReview(String id);
+	
+	int findTotalList(String id);
 	
 	
 }

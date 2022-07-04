@@ -85,13 +85,34 @@
 		and m.id=b.member_id		
 	</select>
 	
-	<select id="findMyReview" resultType="org.kosta.finalproject.lego.vo.ReviewVO" resultMap="ReviewResult">
+<!-- 	<select id="findMyReview" resultType="org.kosta.finalproject.lego.vo.ReviewVO" resultMap="ReviewResult">
 	select r.id, r.score, r.review_content, m.name
 	from review r, member m
 	where r.id = m.id
 	and r.master_id = #{value}
-	</select>
+	</select> -->
 	
+	<select id="findMyReview" parameterType="hashmap"  resultType="org.kosta.finalproject.lego.vo.ReviewVO" resultMap="ReviewResult">
+	select rnum,score,review_content,id,name
+					from 
+						(
+					select row_number() over(order by review_no desc) as rnum, r.score, r.review_content, r.id, m.name
+					from review r, member m
+					where r.id = m.id
+					and r.master_id = #{id} 
+					)
+					where rnum between #{pagination.startPageOfPageGroup} and #{pagination.endPageOfPageGroup}
+	</select>
+	<select id="findTotalList" resultType="int" parameterType="string">
+		select count(*)
+					from 
+						(
+					select row_number() over(order by review_no desc) as rnum, r.score, r.review_content, r.id, m.name,r.master_id
+					from review r, member m
+					where r.id = m.id
+				
+					)where  master_id =  #{value}
+	</select>
 	
 	<select id="findMyMessage" resultType="org.kosta.finalproject.lego.vo.MessageVO" resultMap="MessageResult">
 	select ms.id, ms.receive_id as id,m.name,i.image_name

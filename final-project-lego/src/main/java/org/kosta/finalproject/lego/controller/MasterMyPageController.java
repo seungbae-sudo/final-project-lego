@@ -3,7 +3,9 @@ package org.kosta.finalproject.lego.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.kosta.finalproject.lego.mapper.ImageMapper;
 import org.kosta.finalproject.lego.mapper.MasterMyPageMapper;
@@ -15,6 +17,7 @@ import org.kosta.finalproject.lego.vo.ImageVO;
 import org.kosta.finalproject.lego.vo.MasterVO;
 import org.kosta.finalproject.lego.vo.MemberVO;
 import org.kosta.finalproject.lego.vo.MessageVO;
+import org.kosta.finalproject.lego.vo.Pagination;
 import org.kosta.finalproject.lego.vo.ReviewVO;
 import org.kosta.finalproject.lego.vo.SkillsVO;
 import org.springframework.security.core.Authentication;
@@ -134,10 +137,21 @@ public class MasterMyPageController {
 
 	// 리뷰
 	@RequestMapping("/mastermypage-review")
-	public String mastermypageReview(@AuthenticationPrincipal MemberVO memberVO, Model model) {
+	public String mastermypageReview(@AuthenticationPrincipal MemberVO memberVO, Model model, Pagination p, String pageNo) {
+		
+		if(pageNo==null) {// 클라이언트가 pageNo를 전달하지 않는 경우에는 첫 페이지를 보여준다.
+			p = new Pagination(masterMyPageMapper.findTotalList(memberVO.getId()));
+		}else {
+			p = new Pagination(masterMyPageMapper.findTotalList(memberVO.getId()), Integer.parseInt(pageNo));
+		}
+		
 		model.addAttribute("member", memberVO);
 		model.addAttribute("masterDetail", masterMyPageMapper.findMasterDetailList(memberVO.getId()));
-		List<ReviewVO> rvo = masterMyPageMapper.findMyReview(memberVO.getId());
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("pagination", p);
+		map.put("id", memberVO.getId());
+		
+		List<ReviewVO> rvo = masterMyPageMapper.findMyReview(map);
 		model.addAttribute("review", rvo);
 		
 		ImageVO image = masterMyPageMapper.getImageId(memberVO.getId());

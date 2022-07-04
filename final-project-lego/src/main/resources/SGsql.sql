@@ -327,3 +327,48 @@ select ms.id, ms.receive_id as id,m.name,i.image_name
 
 	select avg(NVL(score,0)) from review where master_id='ksg@kosta.com'
 select * from review
+
+select q.rnum,q.qna_no ,q.ask, q.id, m.name
+			from
+			(select row_number() over(order by qna_no desc) as rnum , qna_no, ask, id 
+			from qna) q , member m
+			where q.id = m.id and q.rnum between 1 and 5
+			
+
+		
+
+select r.id, r.score, r.review_content, m.name
+	from review r, member m
+	where r.id = m.id
+	and r.master_id = 'ksg@kosta.com'			
+	
+select * from review
+
+					select rnum,score,review_content,id,name
+					from 
+						(
+					select row_number() over(order by review_no desc) as rnum, r.score, r.review_content, r.id, m.name
+					from review r, member m
+					where r.id = m.id
+					and r.master_id = 'ksg@kosta.com' 
+					)
+					where rnum between 1 and 5
+
+select count(*)
+					from 
+						(
+					select row_number() over(order by review_no desc) as rnum, r.score, r.review_content, r.id, m.name,r.master_id
+					from review r, member m
+					where r.id = m.id
+					
+					)where  master_id =  'ksg@kosta.com' 
+
+
+
+
+
+	select q.id,q.score,q.review_content,m.name ,row_number() over(order by review_no desc) as rnum
+			from
+			(select  review_no, score, review_content, id, master_id
+			from review) q, member m
+			where q.id = m.id and q.master_id = 'ksg@kosta.com' and row_number() over(order by review_no desc) between 1 and 5
