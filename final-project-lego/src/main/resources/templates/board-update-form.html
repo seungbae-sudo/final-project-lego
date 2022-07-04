@@ -13,6 +13,7 @@
 						<h1 class="page-name">글수정</h1>
 						<ol class="breadcrumb">
 							<li><a th:href="@{/}">Home</a></li>
+							<li class="active">community udpate</li>
 						</ol>
 					</div>
 				</div>
@@ -42,7 +43,7 @@
 					</tr>
 					<tr>
 						<td >
-								<textarea rows="10" name="boardContent" class="col-sm-12"
+								<textarea rows="10" name="boardContent" class="boardTextarea col-sm-12"
 								placeholder="본문내용" required="required" th:text="${bvo.boardContent}" ></textarea>
 						</td>
 					</tr>
@@ -50,8 +51,8 @@
 			
 		
 			<div class="text-center">
-				<button type="button" class="btn btn-success" onclick="check()">확인</button>
-				<button type="reset" class="btn btn-success">취소</button>
+				<button type="button" class=" boardBtn btn btn-success" onclick="check()">확인</button>
+				<button type="reset" class="boardBtn btn btn-success">취소</button>
 			</div>
 			
 			</form>

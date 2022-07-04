@@ -25,15 +25,10 @@
     <div class="row">
       <div class="col-md-12">
     
-        <form th:action="@{/QnAWriteFrom}" method="get" sec:authorize="!hasRole('ROLE_ADMIN')">
-					<button type="submit">글쓰기</button>
+        <form class="qnaBtnForm" th:action="@{/QnAWriteFrom}" method="get" sec:authorize="!hasRole('ROLE_ADMIN')">
+					<button class="WriteBtn" type="submit">글쓰기</button>
 		</form>
 
-		<div >
-		
-		
-		
-		</div>
 		
         <div class="dashboard-wrapper user-dashboard">
           <div class="table-responsive">
@@ -48,12 +43,17 @@
               </thead>
               <tbody >
                 <tr th:each="list:${qnaList}">
-                  <td class="text-center" th:text="${list.qnaNo}"> <a href="" >나오는지?</a></td>
-                 <td class="text-center"> <a th:href="@{/QnADetail(qnaNo=${list.qnaNo})}"><span th:text="${list.ask}"></span> </a><br>
-                 <div th:each="comList:${qnaCommentList}">
-                 	<span th:text="${comList.qnaCommentContent}" th:if="${comList.qnaVO.qnaNo}==${list.qnaNo}"></span>
-                 </div>
+                  <td class="text-center" th:text="${list.qnaNo}"> 
+                 	 <a href="" >나오는지?</a>
+                  </td>
+                
+                 <td  class="qnaBox text-center"> 
+                 	<a th:href="@{/QnADetail(qnaNo=${list.qnaNo})}">
+	                	<span class="qnaList" th:text="${list.ask}"></span>
+	                  	<span class="qnaAnswer"  th:each="comList:${qnaCommentList}" th:text="${comList.qnaCommentContent}" th:if="${comList.qnaVO.qnaNo}==${list.qnaNo}"></span>
+					</a>
                  </td>
+                 
                   <td class="text-center" th:text="${list.memberVO.name}"> <a href="">나오는지?</a></td>             		
                 </tr>
                	<tr >

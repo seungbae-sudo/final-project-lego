@@ -52,6 +52,7 @@
 	
 		<resultMap type="org.kosta.finalproject.lego.vo.CommentVO" id="memberAndBoardResultMap">
 		<result column="board_no" property="bvo.boardNo"/>
+		<result column="board_title" property="bvo.boardTitle"/>
 		<result column="name" property="mvo.name"/>
 		<result column="id" property="mvo.id"/>
 		<result column="authority" property="authority.authority"/>
@@ -93,8 +94,20 @@
 		UPDATE board SET likes = likes -1 WHERE board_no =#{value}
 	</delete>
 	
-	<select id="findCommunityListByTitle" resultType="org.kosta.finalproject.lego.vo.BoardVO">
-		SELECT * FROM BOARD WHERE board_title LIKE '%' || #{KEYWORD} || '%'
+	<select id="findCommunityListByTitle" resultType="org.kosta.finalproject.lego.vo.BoardVO" resultMap="memberResultMap" >
+		select b.* , m.*,c.*
+			from board b, member m, board_category c
+			WHERE board_title LIKE '%' || #{KEYWORD} || '%'
+			and c.category_no = b.category_no
+			and b.id=m.id order by board_no desc
+	</select>
+	
+	<select id="findCommunityListByName"  resultType="org.kosta.finalproject.lego.vo.BoardVO" resultMap="memberResultMap" >
+			select b.* , m.*,c.*
+			from board b, member m, board_category c
+			WHERE name LIKE '%' || #{KEYWORD} || '%'
+			and c.category_no = b.category_no
+			and b.id=m.id order by board_no desc
 	</select>
 	
 	

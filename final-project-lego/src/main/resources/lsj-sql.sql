@@ -153,12 +153,27 @@ and m.id=cm.id
 and cm.id=ma.id
 and a.username='lsj@kosta.com'
 
-   		select * from master where id= 'lsj@kosta.com'
-   		
+select * from master where id= 'lsj@kosta.com'
    		
  
 
 --search	test
 	SELECT * FROM BOARD WHERE board_title LIKE '%' || '꿀팁' || '%' 
-	SELECT * FROM BOARD WHERE board_title LIKE '%' || #{KEYWORD} || '%' 
+	SELECT board_no, board_title,  FROM BOARD WHERE board_title LIKE '%' || #{KEYWORD} || '%' 
+	
+		select b.* , m.*,c.*
+		from board b, member m, board_category c
+		WHERE board_title LIKE '%' || '꿀팁'|| '%'
+		and c.category_no = b.category_no
+		and b.id=m.id order by board_no desc
 
+	
+		select b.* , m.*,c.*
+		from board b, member m, board_category c
+		WHERE name LIKE '%' || '소정' || '%'
+		and c.category_no = b.category_no
+		and b.id=m.id order by board_no desc
+
+
+--pagination
+		

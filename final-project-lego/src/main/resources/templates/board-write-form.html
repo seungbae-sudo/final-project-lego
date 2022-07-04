@@ -13,6 +13,7 @@
 						<h1 class="page-name">글작성</h1>
 						<ol class="breadcrumb">
 							<li><a th:href="@{/}">Home</a></li>
+							<li class="active">community posting</li>
 						</ol>
 					</div>
 				</div>
@@ -42,7 +43,7 @@
 					</tr>
 					<tr>
 						<td >
-							<textarea rows="10" class="form-control" name="boardContent" 
+							<textarea class="boardTextarea" name="boardContent" 
 								placeholder="본문내용" required="required">
 							</textarea>
 						</td>
@@ -50,8 +51,8 @@
 				</table>
 			
 				<div class="text-center">
-					<button type="submit" class="btn btn-success" onclick="check()">확인</button>
-					<button type="reset" class="btn btn-success">취소</button>
+					<button type="submit" class="boardBtn btn btn-success" onclick="check()">확인</button>
+					<button type="reset" class="boardBtn btn btn-success">취소</button>
 			</div>
 			</form>
 		</div>

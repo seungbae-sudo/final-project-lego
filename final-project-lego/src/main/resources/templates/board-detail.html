@@ -13,6 +13,7 @@
 						<h1 class="page-name">글상세보기</h1>
 						<ol class="breadcrumb">
 							<li><a th:href="@{/}">Home</a></li>
+							<li class="active">community detail</li>
 						</ol>
 					</div>
 				</div>
@@ -26,15 +27,14 @@
 			<h3 style='margin-left: 20px;' class="title-detail" th:text="${bvo.boardTitle}" >제목</h3>
 				<hr>
 				<ul class="info" style='display: flex; justify-content: flex-end;'>
-					<li style='margin-right: 20px;'>작성자 : <span th:text="${bvo.mvo.name}"></span></li>
+					<li style='margin-right: 20px;'>작성자 : <span th:text="${bvo.mvo.name}" ></span></li>
 					<li style='margin-right: 20px;'>작성일 : <span th:text="${bvo.boardDate}"></span></li>
 					<li style='margin-right: 20px;'>조회수 : <span th:text="${bvo.hits}"></span></li>
-					<li>좋아요 : <span th:text="${bvo.likes}"></span></li>
-					<!-- <li><a href="ReviewPostListController.do?pageNo=${nowPage}"><i class='fas fa-list'></i>목록</a></li> -->
+					<li><a th:href="@{/returnList(boardNo=${bvo.boardNo},categoryNo=${categoryNo})}"><i class='fas fa-list'></i>목록</a></li><!--  pageNo=${nowPage}" -->
 				</ul>
 				
 				<div class="content">
-					<pre  style='height: 300px; background-color:#fff; border:1px solid lightgray;' th:text="${bvo.boardContent}">본문내용</pre>
+					<pre  class="boardTextarea" style='height: 300px; background-color:#fff; border:1px solid lightgray;' th:text="${bvo.boardContent}">본문내용</pre>
 				</div>
 			
 				<!--/*  수정과 삭제를 위한 부분 */-->
@@ -49,40 +49,17 @@
 				</form>
 				
 				<div class="text-center space-top" th:if="${mvo.id}==${bvo.mvo.id}">
-					<button type="button" class="btn btn-success" onclick="updatePost()">수정</button>
-					<button type="button"  class="btn btn-success" onclick="deletePost()">삭제</button>
+					<button type="button" class="boardBtn btn btn-success" onclick="updatePost()">수정</button>
+					<button type="button"  class="boardBtn btn btn-success" onclick="deletePost()">삭제</button>
 				</div>
 				
 
 			<!-- 댓글과 좋아요 -->
-			<div>
+			<div class="commentAndLikes">
 				<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-				<span class=commentName style='margin-right: 300px; font-size:30px;'>댓글</span>
-				
-						<!--  	<span th:text="${session.LikesUpList}"></span>
-							<span th:if="${#lists.isEmpty(session.LikesUpList)}">
-					
-									<span th:if="${#lists.contains(session.LikesDownList,bvo.boardNo)}">
-										<a th:href="@{/likesUp(boardNo=${bvo.boardNo},categoryNo=${categoryNo})}">
-											<i class="fas fa-cat"></i>
-										</a> 
-									</span>
-									<span th:unless="${#lists.contains(session.LikesDownList,bvo.boardNo)}">
-										<a th:href="@{/likesDown(boardNo=${bvo.boardNo},categoryNo=${categoryNo})}">									
-											<i class='far fa-heart icon'></i>
-										</a> 
-									</span>
-									
-								</span>
-								
-								<span th:unless="${#lists.contains(session.LikesDownList,bvo.boardNo)}">
-										<a th:href="@{/likesUp(boardNo=${bvo.boardNo},categoryNo=${categoryNo})}">
-											<i class="fas fa-cat"></i>
-										</a> 
-									</span>
-					
--->
-						<span style='margin-left: 500px;'  >
+				<span class=commentName>댓글</span>
+						<div class="thumbs">
+						<span >
 						
 							<th:block th:if="${#lists.contains(session.LikesUpList,bvo.boardNo)}">
 							<th:block th:if="${!#lists.contains(session.LikesUpList,bvo.boardNo)}">
@@ -93,17 +70,18 @@
 							</th:block>
 							<th:block th:if="${!#lists.contains(session.LikesDownList,bvo.boardNo)}">
 										<a  th:href="@{/likesDown(boardNo=${bvo.boardNo},categoryNo=${categoryNo})}">									
-											<i class="fa fa-thumbs-up" style="font-size:24px; color:red;"></i>
+											<i class="fa fa-thumbs-up" style="font-size:30px; color:red;"></i>
 										</a>
 										<span th:text="${bvo.likes}"></span>		
 							</th:block>
 							</th:block>
 							<th:block th:if="${!#lists.contains(session.LikesUpList,bvo.boardNo)}">
 								<a th:href="@{/likesUp(boardNo=${bvo.boardNo},categoryNo=${categoryNo})}">
-											<i class="fa fa-thumbs-o-up" style="font-size:24px"></i>
+											<i class="fa fa-thumbs-o-up" style="font-size:30px"></i>
 										</a> <span th:text="${bvo.likes}"></span>		
 							</th:block>
 						</span>
+						</div>
 		</div>
 			
 			
@@ -113,17 +91,17 @@
 				<form id="compostForm" action="" th:action="@{/CommentWrite}" method="post">
 					<input type="hidden" name="categoryNo" th:value="${categoryNo}">
 					<input type="hidden" name="boardNo" th:value="${bvo.boardNo}">
-					<input class="col-md-10" type="text" id="commentContent" name="commentContent" placeholder="댓글을 입력하세요">
-					<button class="col-md-1 btn" type="submit" onclick="compost()">작성</button>
+					<input class="commentWriteForm col-md-10" type="text" id="commentContent" name="commentContent" placeholder="댓글을 입력하세요">
+					<button class="boardBtn commentBtn col-md-1 btn" type="submit" onclick="compost()">작성</button>
 				</form> 
 				
 				<table class="table table-comment">
 					<tbody class="up-space">
 						 <tr th:each="comList:${commentList}">
-		                 	<td class="col-md-6"  th:text="${comList.commentContent}"></td>
+		                 	<td class="col-md-7"  th:text="${comList.commentContent}"></td>
 		                 	<td class="col-md-2"  th:text="${comList.commentDate} "></td>
 		                 	<td class="col-md-1"  th:text="${comList.mvo.name} "></td>
-		            		 <td class="col-md-1"><a th:href="@{/surveyFindMasterById?masterId=lsj@kosta.com}" class="checkMaster" th:text="|고수님|" th:if="${#strings.contains(comList.Authority.authority, 'MASTER')}"></a></td>
+		            		 <td class="col-md-1"><a th:href="@{/surveyFindMasterById(masterId='lsj@kosta.com')}"class="checkMaster" th:text="|고수님|" th:if="${#strings.contains(comList.Authority.authority, 'MASTER')}"></a></td>
 		            		<!--/* mvo와 고수체크 -> 한번에 합치기 :  <td class="col-md-2"  th:text="|${comList.mvo.name} 고수| " th:if="${#strings.contains(comList.Authority.authority, 'MASTER')}"></td> */--> 
 		            		
 		                 	<td class="col-md-1" ><form th:action="@{/CommentDelete}" method="post" th:if="${mvo.id}==${comList.mvo.id}">
