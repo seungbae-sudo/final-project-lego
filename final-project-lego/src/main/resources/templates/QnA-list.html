@@ -88,6 +88,20 @@
      
     </th:block>
      
+<!--     <th:block>
+    	<th:block th:if ="${pageNo==page.nowPage}">
+    		  <li class="page-item active"><a class="page-link" ></a></li>
+    	</th:block>
+    	<th:block th:if ="${pageNo!=page.nowPage}">
+    		  <li class="page-item"><a class="page-link" ></a></li>
+    	</th:block>
+    </th:block>
+    
+  </th:block>
+    </th:each>
+    <th:block th:each="page:${#numbers.sequence(start,end)}">
+    <li class="page-item"><a class="page-link" th:href="${@/QnAList(pageNo=${page.endPageOfPageGroup+1)}}">Next</a></li>
+   </th:block>  -->
   </div>
 </section>
 </div>
