@@ -26,22 +26,22 @@
 							</div>
 						</th:block>
 						<th:block th:case="2">
-							<div th:each="sk: ${skills}">
-								<input type="checkbox" th:name="skills" th:text="${sk.skills}"
+							<div class="survey-skill-list">
+								<input th:each="sk: ${skills}" type="checkbox" th:name="skills" th:text="${sk.skills}"
 									th:value="${sk.skillsId}"
 									th:if="${sk.skillsId>4&&sk.skillsId<9}">
-							</div>
+								</div>
 						</th:block>
 						<th:block th:case="3">
-							<div th:each="sk: ${skills}">
-								<input type="checkbox" th:name="skills" th:text="${sk.skills}"
+							<div class="survey-skill-list">
+								<input th:each="sk: ${skills}" type="checkbox" th:name="skills" th:text="${sk.skills}"
 									th:value="${sk.skillsId}"
 									th:if="${sk.skillsId>8&&sk.skillsId<13}">
 							</div>
 						</th:block>
 						<th:block th:case="4">
-							<div th:each="sk: ${skills}">
-								<input type="checkbox" th:name="skills" th:text="${sk.skills}"
+							<div class="survey-skill-list">
+								<input th:each="sk: ${skills}" type="checkbox" th:name="skills" th:text="${sk.skills}"
 									th:value="${sk.skillsId}"
 									th:if="${sk.skillsId>12&&sk.skillsId<17}">
 							</div>
