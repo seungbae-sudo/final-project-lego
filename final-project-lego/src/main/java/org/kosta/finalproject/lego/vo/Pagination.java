@@ -1,9 +1,13 @@
 package org.kosta.finalproject.lego.vo;
+
+import lombok.NoArgsConstructor;
+
 /**
  * 게시판 페이징 처리 로직을 정의한 객체
  * @author user
  *
  */
+@NoArgsConstructor
 public class Pagination {
 /**
  * 현재 페이지
