@@ -4,10 +4,12 @@
 	<insert id="writeQnA" parameterType="org.kosta.finalproject.lego.vo.QnAVO">
 			insert into qna(qna_no,ask,id) values(qna_no_seq.nextval,#{ask},#{memberVO.id})
 	</insert>
-	<select id="findQnAList" resultType="org.kosta.finalproject.lego.vo.QnAVO" resultMap="QnAResult">
-		select q.qna_no,q.ask,q.id,m.name 
-		from qna q , member m 
-		where q.id = m.id
+	<select id="findQnAList" parameterType="org.kosta.finalproject.lego.vo.Pagination" resultType="org.kosta.finalproject.lego.vo.QnAVO" resultMap="QnAResult">
+		select q.rnum,q.qna_no ,q.ask, q.id, m.name
+			from
+			(select row_number() over(order by qna_no desc) as rnum , qna_no, ask, id 
+			from qna) q , member m
+			where q.id = m.id and q.rnum between #{startRowNumber} and #{endRowNumber}
 	</select>
 	<resultMap type="org.kosta.finalproject.lego.vo.QnAVO" id="QnAResult">
 		<result column="id" property="memberVO.id" />
@@ -37,4 +39,8 @@
 	<update id="updateQnA" parameterType="org.kosta.finalproject.lego.vo.QnAVO">
 		UPDATE qna SET ask=#{ask} where qna_no = #{qnaNo}
 	</update>
+	<select id="getTotalPostCount" resultType="int">
+		SELECT COUNT(*) FROM qna
+	
+	</select>
 </mapper>

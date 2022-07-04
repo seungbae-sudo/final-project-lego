@@ -1,0 +1,62 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+<!--/* layout 선언부 추가 */-->
+
+<div layout:fragment="main">
+
+<section class="user-dashboard page-wrapper">
+
+  <div class="container">
+ 
+     <h2 class="search-keyword" th:text="|' ${userSearchKeyword} ' 에 대한 검색 결과입니다|"></h2>
+    <div class="table-responsive">
+    <form action="" th:action="@{/addCart}">
+                     <table class="table">
+                        <thead>
+                           <tr>
+                              <th class="col-md-2 text-center" >고수 이미지</th>
+								<th class="col-md-7 text-center">고수 정보</th>
+								<th class="col-md-2 text-center">북마크</th>
+                           </tr>
+                        </thead>
+                         
+                        <tbody>
+                       
+                           <tr th:each="list:${masterList}"  class="cart-list">
+                             
+                              <td class="cart-img">
+                              	<img id="find-master-img" th:src="|../images/${list.id}/${list.imageVO.imageName}|">
+                               </td>
+                              <td class="master-info-wrap"> 
+                                 <div class="info-wrap">
+                                 	<a th:href="@{/surveyFindMasterById(masterId=${list.id})}" >
+                                 		<span th:text="${list.name}" class="col-md-3 master-name find-master-name" >고수 이름</span>
+                                 	</a> 
+                                 	<span class="star_1 fa master-star">&#xf005</span>
+                                 	<span class="master-score" th:text="|${list.reviewVO.score} 점|"> 4.5점</span>
+                                 </div>
+                                 <pre class="info-detail" th:text="${list.specifications}">
+                                    
+                                 </pre>
+                              
+                              </td>
+                              <td class="text-center add-cart">                          		
+                              		<input type="hidden" name="id" th:value="${list.id}">
+                              		<!-- <input type="hidden" name="categoryNo" th:value="${categoryNo}"> -->
+                              		<input type="hidden" name="categoryNo" th:value="${list.category.categoryNo}">
+                              		<button id="find-master-add-cart" type="submit" class="bi bi-bookmark " style="background-color: white;border-color: white;" name="masterId" th:value="${list.id}"></button>
+                              	
+                              
+                                    
+                              </td>                             	
+                           </tr>                         
+                        </tbody>                     
+                     </table>
+                      </form>
+                  </div>
+  </div>
+  
+  
+</section>
+</div>

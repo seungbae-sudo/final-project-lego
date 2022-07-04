@@ -43,12 +43,17 @@
               </thead>
               <tbody >
                 <tr th:each="list:${qnaList}">
-                  <td class="text-center" th:text="${list.qnaNo}"> <a href="" >나오는지?</a></td>
-                 <td class="text-center"> <a th:href="@{/QnADetail(qnaNo=${list.qnaNo})}"><span th:text="${list.ask}"></span> </a><br>
-                 <div th:each="comList:${qnaCommentList}">
-                 	<span th:text="${comList.qnaCommentContent}" th:if="${comList.qnaVO.qnaNo}==${list.qnaNo}"></span>
-                 </div>
+                  <td class="text-center" th:text="${list.qnaNo}"> 
+                 	 <a href="" >나오는지?</a>
+                  </td>
+                
+                 <td  class="qnaBox text-center"> 
+                 	<a th:href="@{/QnADetail(qnaNo=${list.qnaNo})}">
+	                	<span class="qnaList" th:text="${list.ask}"></span>
+	                  	<span class="qnaAnswer"  th:each="comList:${qnaCommentList}" th:text="${comList.qnaCommentContent}" th:if="${comList.qnaVO.qnaNo}==${list.qnaNo}"></span>
+					</a>
                  </td>
+                 
                   <td class="text-center" th:text="${list.memberVO.name}"> <a href="">나오는지?</a></td>             		
                 </tr>
                	<tr >
@@ -62,6 +67,41 @@
         
       </div>
     </div>
+      <th:block th:if ="${pagination.previousPageGroup }">
+     <li class="page-item" ><a class="page-link" th:href="@{/QnAList(pageNo=${pagination.startPageOfPageGroup-1})}" th:text="|Previous|">Previous</a></li> 
+     
+    </th:block>
+    
+  <th:block th:each="pageNo:${#numbers.sequence(pagination.startPageOfPageGroup,pagination.endPageOfPageGroup)}">
+ 	
+ 	<th:block th:if="${pageNo==pagination.nowPage}">
+ 
+    		  <li class="page-item active"><a class="page-link" th:href="@{/QnAList(pageNo=${pageNo})}" th:text="${pageNo}"></a></li>
+    	</th:block>
+    	<th:block th:if="${pageNo!=pagination.nowPage}">
+    		  <li class="page-item"><a class="page-link" th:href="@{/QnAList(pageNo=${pageNo})}" th:text="${pageNo}"></a></li>
+    	</th:block>
+    </th:block>
+    
+      <th:block th:if ="${pagination.nextPageGroup}">
+     <li class="page-item" ><a class="page-link" th:href="@{/QnAList(pageNo=${pagination.endPageOfPageGroup+1})}" th:text="|Next|"></a></li> 
+     
+    </th:block>
+     
+<!--     <th:block>
+    	<th:block th:if ="${pageNo==page.nowPage}">
+    		  <li class="page-item active"><a class="page-link" ></a></li>
+    	</th:block>
+    	<th:block th:if ="${pageNo!=page.nowPage}">
+    		  <li class="page-item"><a class="page-link" ></a></li>
+    	</th:block>
+    </th:block>
+    
+  </th:block>
+    </th:each>
+    <th:block th:each="page:${#numbers.sequence(start,end)}">
+    <li class="page-item"><a class="page-link" th:href="${@/QnAList(pageNo=${page.endPageOfPageGroup+1)}}">Next</a></li>
+   </th:block>  -->
   </div>
 </section>
 </div>

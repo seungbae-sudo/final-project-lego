@@ -1,5 +1,84 @@
 
 @import url("https://fonts.googleapis.com/css?family=Poppins:300,400,500");
+/* 고수찾기 */
+
+#slides{
+   width: 1000px;
+   height: 300px;
+   /*height: 350px;*/
+    /*-> 계속 이전다음버튼이 안보여서 헤잇을 걍 줄여버림*/
+   margin: 0 auto;
+   padding: 0;
+}
+
+#slides li{
+   display: none;
+}
+
+#slides li:first-child{
+   display: block;
+}
+
+#btn_slides{
+   text-align: center;
+}
+
+#btn_slides .off{
+   cursor: default;
+   opacity: 0;
+}
+
+#btn_slides .btn_slides_prev:before{
+position: absolute;
+    content: "";
+    width: 4px;
+    height: 25px;
+    background-color: #fff;
+    display: block;
+    transform: rotate(45deg);
+    left: 12px;
+    border-radius: 51px;
+}
+
+#btn_slides .btn_slides_prev:after{
+    position: absolute;
+    content: "";
+    width: 4px;
+    height: 25px;
+    background-color: #fff;
+    display: block;
+    transform: rotate(-45deg);
+    top: 15px;
+    left: 12px;
+        border-radius: 51px;
+}
+
+#btn_slides .btn_slides_next:before{
+position: absolute;
+    content: "";
+    width: 4px;
+    height: 25px;
+    background-color: #fff;
+    display: block;
+    transform: rotate(-45deg);
+    right: 12px;
+    border-radius: 51px;
+}
+
+#btn_slides .btn_slides_next:after{
+    position: absolute;
+    content: "";
+    width: 4px;
+    height: 25px;
+    background-color: #fff;
+    display: block;
+    transform: rotate(45deg);
+    top: 15px;
+    right: 12px;
+        border-radius: 51px;
+}
+
+/*  */
 
 .all_star{
 	width:180px; height:25px; margin:10px;font-family: "Font Awesome 5 Free"; font-weight:900; 
@@ -112,6 +191,12 @@ position:absolute;
     top:100px;
     z-index: -999;
 }
+
+/* 고수 검색 */
+
+.search-keyword{
+	    margin: 0 70px 70px 70px;
+}
 /* 고수 찾기 */
 
 #find-master-img{
@@ -171,14 +256,14 @@ position:absolute;
 }
 
 .survey-content{
-    height: 610px;
+height: 610px;
     background-color: #e49a6a;
     width: 500px;
     margin-left: 250px;
-    padding: 30px 2px;
+    padding: 54px 0px;
     border-radius: 20px;
-    
     position: relative;
+
 }
 
 #slider {
@@ -192,22 +277,26 @@ position:absolute;
     padding: 10px 20px;
     border-radius: 20px;
 }
-#slider li {
-  display: none;
-  position: absolute;
-  left: 0;
-  top: 0;
-  padding: 40px;
+
+
+
+#slides li {
+display: none;
+    width: 400px;
+    background: wheat;
+    padding: 40px 60px;
+    height: 520px;
+    margin-left: 50px;
+    border-radius: 20px;
 }
 
 #slider li:first-child {
   display: block;
 }
 
-#slider li div{
-	padding: 10px;
-    margin-bottom: 10px;
-     text-decoration: underline;
+#slides li div {
+    margin-bottom: -9px;
+    margin-top: 30px;
 }
 
 #slider li p{
@@ -218,26 +307,27 @@ position:absolute;
     border-radius: 20px;
 }
 
-#slider li div input{
-	margin-right: 9px;
+#slides li div input[type="checkbox"] {
+    margin-right: 9px;
 }
+
 #surveyBtn{
-	position: absolute;
-    bottom: 90px;
-    right: 28px;
+    position: absolute;
+    bottom: 56px;
+    right: 68px;
     padding: 10px 20px;
     border-radius: 10px;
     border: 1px solid #888;
 }
 
-#prev{
+.btn_slides_prev{
 	position: absolute;
 	left: 9px;
 	 top: 290px;
 	 cursor: pointer;
 }
 
-#next{
+.btn_slides_next{
 	    position: absolute;
     right: 9px;
     top: 290px;
@@ -272,6 +362,12 @@ position:absolute;
 	text-align: center;
 }
 
+.dashboard-menu li form {
+  padding: 10px 20px;
+  border: 1px solid #dedede;
+  display: inline-block;
+}
+
 /* 로그인 */
 
 .login-logo{
@@ -303,6 +399,12 @@ position:absolute;
 	cursor: pointer;
 }
 
+
+/* 고수 찾기에서 고수 프로필 상세보기 */
+.master-for-member-btn{
+	border: none;
+    background: none;
+}
 
 /* 마이페이지 */
 .profile{
@@ -822,6 +924,11 @@ line-height: 3.5;
 	margin-bottom:10px;
 }
 
+.boardTextarea{
+	width:100%;
+	padding:30px 30px;
+}
+
 /*QnA*/
 
 .qnaBtnForm{
@@ -829,8 +936,82 @@ line-height: 3.5;
 	justify-content: flex-end;
 }
 
-/*이달의 고수*/
+.qnaList	{
+	display: block;
+}
 
+.qnaAnswer{
+	color:#e49a6a;
+}
+
+.qnaBox{
+	display: block;
+	width: auto;
+    height: 70px;
+}
+
+.qnaBox a{
+	display: block;
+}
+
+.qnaBox a span{
+	display: block;
+}
+.qnaList{
+overflow: hidden;
+    /* width: 550px; */
+    /* height: 50px; */
+    white-space: normal;
+    display: inline-block;
+    word-break: break-word;
+    text-overflow: ellipsis;
+}
+
+.qnaAnswer{
+	overflow: hidden;
+    /* width: 550px; */
+    /* height: 50px; */
+    white-space: normal;
+    display: inline-block;
+    word-break: break-word;
+    text-overflow: ellipsis;
+}
+
+/*이달의 고수*/
+.ranking-ul{
+	display: flex;
+}
+.ranking-li{
+    width: 170px;
+    height: 220px;
+    padding: 10px 20px;
+    border: 1px solid blanchedalmond;
+    border-radius: 20px;
+    margin-right: 10px;
+    
+    
+}
+
+.ranking-li img{
+    width: 100%;
+    border-radius: 50%;
+}
+
+.surveyListBox2{
+	margin-top:-25px;
+}
+
+.surveyListBox3{
+	margin-top:-28px;
+}
+
+.surveyListBox2 input{
+	margin-bottom:20px;
+}
+
+.surveyListBox3 input{
+	margin-bottom:20px;
+}
 
 
 /* 부트스트랩 */

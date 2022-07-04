@@ -34,7 +34,7 @@
 				</ul>
 				
 				<div class="content">
-					<pre  style='height: 300px; background-color:#fff; border:1px solid lightgray;' th:text="${bvo.boardContent}">본문내용</pre>
+					<pre  class="boardTextarea" style='height: 300px; background-color:#fff; border:1px solid lightgray;' th:text="${bvo.boardContent}">본문내용</pre>
 				</div>
 			
 				<!--/*  수정과 삭제를 위한 부분 */-->
@@ -101,7 +101,7 @@
 		                 	<td class="col-md-7"  th:text="${comList.commentContent}"></td>
 		                 	<td class="col-md-2"  th:text="${comList.commentDate} "></td>
 		                 	<td class="col-md-1"  th:text="${comList.mvo.name} "></td>
-		            		 <td class="col-md-1"><a th:href="@{/surveyFindMasterById(masterId='lsj@kosta.com')}"class="checkMaster" th:text="|고수님|" th:if="${#strings.contains(comList.Authority.authority, 'MASTER')}"></a></td>
+		            		 <td class="col-md-1"><a th:href="@{/surveyFindMasterById(masterId=${comList.mvo.id})}"class="checkMaster" th:text="|고수님|" th:if="${#strings.contains(comList.Authority.authority, 'MASTER')}"></a></td>
 		            		<!--/* mvo와 고수체크 -> 한번에 합치기 :  <td class="col-md-2"  th:text="|${comList.mvo.name} 고수| " th:if="${#strings.contains(comList.Authority.authority, 'MASTER')}"></td> */--> 
 		            		
 		                 	<td class="col-md-1" ><form th:action="@{/CommentDelete}" method="post" th:if="${mvo.id}==${comList.mvo.id}">
