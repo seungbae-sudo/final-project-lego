@@ -325,5 +325,5 @@ select ms.id, ms.receive_id as id,m.name,i.image_name
 	and ms.id=i.id(+)
 	group by ms.id,ms.receive_id,m.name,i.image_name,i.id
 
-
-
+	select avg(NVL(score,0)) from review where master_id='ksg@kosta.com'
+select * from review
