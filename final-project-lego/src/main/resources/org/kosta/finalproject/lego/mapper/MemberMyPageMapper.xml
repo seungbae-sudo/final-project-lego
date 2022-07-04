@@ -14,54 +14,108 @@
 			update images set image_name=#{imageName} where id=#{memberVO.id}
 		</update>
 		
+		<!-- 내가 쓴 글  -->
+		<select id="getTotalPostCountFromWrote" resultType="int">
+		select count(*)
+		from(
+		select b.board_no, b.board_title, bc.category_name,bc.category_no
+		from  board b, board_category bc
+		where b.category_no=bc.category_no
+		and b.id=#{value}
+		order by b.board_no
+		)		
+		</select>
+		
 			<resultMap type="BoardVO" id="CategoryResultMap">
 				<result column="category_no" property="bcvo.categoryNo"/>
 				<result column="category_name" property="bcvo.categoryName"/>
 			</resultMap>
 		
-		<select id="findWroteList" resultMap="CategoryResultMap" resultType="org.kosta.finalproject.lego.vo.BoardVO">
-			select b.board_no, b.board_title, bc.category_name,bc.category_no
+		
+		<select id="findWroteList" parameterType="hashmap" resultMap="CategoryResultMap" resultType="org.kosta.finalproject.lego.vo.BoardVO">
+			select rnum,board_no,board_title,category_name
+			from(
+			select  row_number() over(order by board_no ) as rnum,b.board_no, b.board_title, bc.category_name
 			from  board b, board_category bc
 			where b.category_no=bc.category_no
-			and b.id=#{value}
+			and b.id=#{id}
 			order by b.board_no
+			)
+			where  rnum between  #{pagination.startRowNumber} and #{pagination.endRowNumber}
+			order by board_no desc
 		</select>
 
+		<!-- 내 상담목록 -->
+		<select id="getTotalPostCountFromBooking" parameterType="string" resultType="int">
+			select count(*)
+			from(
+				select r.name, r.lesson_sort, b.booking_day,b.master_id
+				from(
+						select ms.id, m.name, c.lesson_sort
+						from master ms, category c,member m
+						where ms.category_no=c.category_no
+						and m.id=ms.id) r, booking b
+				where r.id=b.master_id
+				and b.member_id=#{value}
+			)
 		
-		
+		</select>
 		<resultMap type="org.kosta.finalproject.lego.vo.BookingVO" id="skillAndMemberResult">
 				<result column="name" property="mvo.name"/>
 				<result column="master_id" property="mvo.id"/>
 				<result column="lesson_sort" property="cvo.lessonSort"/>
 			</resultMap>
 
-		<select id="findMyBookingList" resultMap="skillAndMemberResult" resultType="org.kosta.finalproject.lego.vo.BookingVO">
-			select r.name, r.lesson_sort, b.booking_day,b.master_id
+		<select id="findMyBookingList" parameterType="hashmap" resultMap="skillAndMemberResult" resultType="org.kosta.finalproject.lego.vo.BookingVO">
+			select rnum,name,lesson_sort,booking_day,master_id
+			from (
+			select row_number() over(order by b.booking_no ) as rnum,r.name, r.lesson_sort, b.booking_day,b.master_id, b.booking_no
 			from(
 					select ms.id, m.name, c.lesson_sort
 					from master ms, category c,member m
 					where ms.category_no=c.category_no
 					and m.id=ms.id) r, booking b
 			where r.id=b.master_id
-			and b.member_id=#{value}
+			and b.member_id=#{id}
+			order by booking_no desc
+			)
+			where  rnum between  #{pagination.startRowNumber} and #{pagination.endRowNumber}
 		</select>
 		
 		<resultMap type="org.kosta.finalproject.lego.vo.ReviewVO" id="MemberAndMasterResult">
 				<result column="name" property="mvo.name"/>
-				<result column="id" property="mvo.id"/>
+				<result column="master_id" property="mvo.id"/>
 				<result column="specifications" property="msvo.specifications"/>
 				<result column="image_name" property="imageVo.imageName"/>
 		</resultMap>
 		
-		<select id="findCartList" resultType="org.kosta.finalproject.lego.vo.ReviewVO" resultMap="MemberAndMasterResult">
-			select nvl(round(avg(r.score)),0) as score, to_char(dbms_lob.substr(ms.specifications, 4000)) as specifications ,m.name,c.master_id as id,i.image_name
+		<select id="getTotalPostCountFromCart" resultType="int">
+				select count(*)
+				from(
+				select nvl(round(avg(r.score)),0) as score, to_char(dbms_lob.substr(ms.specifications, 4000)) as specifications ,m.name,c.master_id,i.image_name
+				from cart c, member m,review r,master ms,images i
+				where c.id=#{value}
+				and c.master_id=m.id
+				and c.master_id=r.master_id(+)
+				and c.master_id=ms.id
+				and c.master_id=i.id(+)
+				group by to_char(dbms_lob.substr(ms.specifications, 4000)),m.name,c.master_id,i.image_name
+				)
+		</select>
+		
+		<select id="findCartList" parameterType="hashmap" resultType="org.kosta.finalproject.lego.vo.ReviewVO" resultMap="MemberAndMasterResult">
+			select score,rnum, specifications,name, master_id,image_name
+			from(
+			select nvl(round(avg(r.score)),0) as score , row_number() over(order by m.name ) as rnum, to_char(dbms_lob.substr(ms.specifications, 4000)) as specifications ,m.name,c.master_id,i.image_name
 			from cart c, member m,review r,master ms,images i
-			where c.id=#{value}
+			where c.id=#{id}
 			and c.master_id=m.id
 			and c.master_id=r.master_id(+)
 			and c.master_id=ms.id
 			and c.master_id=i.id(+)
 			group by to_char(dbms_lob.substr(ms.specifications, 4000)),m.name,c.master_id,i.image_name
+			)
+			where  rnum between  #{pagination.startRowNumber} and #{pagination.endRowNumber}
 		</select>
 		
 		

@@ -1,5 +1,26 @@
 
 @import url("https://fonts.googleapis.com/css?family=Poppins:300,400,500");
+
+/*페이지네이션  */
+.pagination-wrap{
+   	display: flex;
+    padding: 3px 15px;
+    width: 400px;
+}
+
+.pagination-wrap li{
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    margin-right: 20px;
+}
+
+.pagination-wrap li.active{
+    background-color: antiquewhite;
+}
+
 /* 고수찾기 */
 
 #slides{
