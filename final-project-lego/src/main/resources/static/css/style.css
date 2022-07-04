@@ -272,6 +272,12 @@ position:absolute;
 	text-align: center;
 }
 
+.dashboard-menu li form {
+  padding: 10px 20px;
+  border: 1px solid #dedede;
+  display: inline-block;
+}
+
 /* 로그인 */
 
 .login-logo{
@@ -822,6 +828,11 @@ line-height: 3.5;
 	margin-bottom:10px;
 }
 
+.boardTextarea{
+	width:100%;
+	padding:30px 30px;
+}
+
 /*QnA*/
 
 .qnaBtnForm{
@@ -829,8 +840,66 @@ line-height: 3.5;
 	justify-content: flex-end;
 }
 
-/*이달의 고수*/
+.qnaList	{
+	display: block;
+}
 
+.qnaAnswer{
+	color:#e49a6a;
+}
+
+.qnaBox{
+	display: block;
+	width: auto;
+    height: 70px;
+}
+
+.qnaBox a{
+	display: block;
+}
+
+.qnaBox a span{
+	display: block;
+}
+.qnaList{
+overflow: hidden;
+    /* width: 550px; */
+    /* height: 50px; */
+    white-space: normal;
+    display: inline-block;
+    word-break: break-word;
+    text-overflow: ellipsis;
+}
+
+.qnaAnswer{
+	overflow: hidden;
+    /* width: 550px; */
+    /* height: 50px; */
+    white-space: normal;
+    display: inline-block;
+    word-break: break-word;
+    text-overflow: ellipsis;
+}
+
+/*이달의 고수*/
+.table-responsive ul{
+	display: flex;
+}
+.ranking-li{
+    width: 170px;
+    height: 220px;
+    padding: 10px 20px;
+    border: 1px solid blanchedalmond;
+    border-radius: 20px;
+    margin-right: 10px;
+    
+    
+}
+
+.ranking-li img{
+    width: 100%;
+    border-radius: 50%;
+}
 
 
 /* 부트스트랩 */
