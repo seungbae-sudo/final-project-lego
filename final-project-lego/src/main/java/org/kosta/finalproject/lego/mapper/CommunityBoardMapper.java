@@ -1,6 +1,7 @@
 package org.kosta.finalproject.lego.mapper;
 
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -14,7 +15,7 @@ public interface CommunityBoardMapper {
 
 	BoardCategoryVO findBCVO(int categoryNo);
 
-	List<BoardVO> findAllCommunityList(int categoryNo);
+	List<BoardVO> findAllCommunityList(HashMap<String, Object>map);
 
 	BoardVO findBoardDetailByBoardNo(int boardNo);
 
@@ -37,5 +38,7 @@ public interface CommunityBoardMapper {
 	List<BoardVO> findCommunityListByTitle(String boardTitle);
 	
 	List<BoardVO> findCommunityListByName(String name);
+
+	int getTotalPostCount(int categoryNo);
 
 }

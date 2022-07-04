@@ -1,6 +1,7 @@
 package org.kosta.finalproject.lego.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +13,7 @@ import org.kosta.finalproject.lego.vo.BoardCategoryVO;
 import org.kosta.finalproject.lego.vo.BoardVO;
 import org.kosta.finalproject.lego.vo.CommentVO;
 import org.kosta.finalproject.lego.vo.MemberVO;
+import org.kosta.finalproject.lego.vo.Pagination;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +28,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CommunityBoardController {
 	private final CommunityBoardMapper communityBoardMapper;
+	
+
 
 
 	@RequestMapping("/writeForm")
@@ -46,9 +50,33 @@ public class CommunityBoardController {
 		return "redirect:board-posting-result";
 	}
 
+	//위에다 쓰면 categoryNo을 가져오지 못하기 때문에 모든 값을 가져오기 위해서 아래 안에다 써줌
+	/*
+	 * public int getTotalPostCount() { return
+	 * communityBoardMapper.getTotalPostCount(); }
+	 */
+	
 	@RequestMapping(value = { "/goCommunity", "/board-posting-result" ,"/boardUpdateResult","/boardDeleteResult","/returnList"})
-	public String goCommunity(Model model, @RequestParam("categoryNo") int categoryNo,HttpServletRequest request) {
-		List<BoardVO> list =communityBoardMapper.findAllCommunityList(categoryNo);
+	public String goCommunity(Model model, @RequestParam("categoryNo") int categoryNo,HttpServletRequest request, Pagination p, String pageNo ) {
+		
+		
+		if(pageNo==null) {// 클라이언트가 pageNo를 전달하지 않는 경우에는 첫 페이지를 보여준다.
+			p = new Pagination(communityBoardMapper.getTotalPostCount(categoryNo));
+		}else {
+			p = new Pagination(communityBoardMapper.getTotalPostCount(categoryNo), Integer.parseInt(pageNo));
+		}
+		
+		HashMap<String, Object> map=new HashMap<String, Object>();
+		map.put("pagination", p);
+		map.put("categoryNo", categoryNo);
+		List<BoardVO> list =communityBoardMapper.findAllCommunityList(map);
+		
+		System.out.println(list.get(0));
+		
+		
+		model.addAttribute("boardList", list);
+		model.addAttribute("pagination", p);
+		
 		model.addAttribute("CategoryList", list);
 
 		return "community-list";
