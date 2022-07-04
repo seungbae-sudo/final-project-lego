@@ -32,4 +32,8 @@
 		WHERE	username=#{username}
    </select>
    
+   <select id="idcheck" resultType="int">
+		select count(*) from member where id=#{value}
+	</select>
+   
 </mapper>

@@ -2,7 +2,6 @@ package org.kosta.finalproject.lego.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -12,9 +11,11 @@ import org.kosta.finalproject.lego.serivce.MemberService;
 import org.kosta.finalproject.lego.vo.ImageVO;
 import org.kosta.finalproject.lego.vo.MemberVO;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.RequiredArgsConstructor;
@@ -70,5 +71,16 @@ public class MemberController {
 	@RequestMapping("/loginFail")
 	public String loginFail() {
 		return "login_fail";
+	}
+	
+	@RequestMapping("idcheckAjax")
+	@ResponseBody
+	public String idcheckAjax(String id) {
+		return memberService.idcheck(id);
+	}
+	@GetMapping("getMemberTotalCount")	
+	@ResponseBody
+	public int getMemberTotalCount() {
+		return memberService.getMemberCount();
 	}
 }

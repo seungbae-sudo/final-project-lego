@@ -68,16 +68,19 @@ xmlns:th="http://www.thymeleaf.org">
             </div> 
             
           <div class="form-group">
-              <input type="email" name="id" class="form-control"  placeholder="lego@lego.com" required="required">
-              <input type="button"  class="form-control" id="idOverlay" onclick="idCheck()" value="중복 체크"/>
+              <input type="email" name="id" class="form-control"  placeholder="lego@lego.com" required="required" id="id">
+              <!-- <input type="button"  class="form-control" id="idOverlay" onclick="idCheck()" value="중복 체크"/> -->
+              <span id="idCheckView"></span>
             </div>
 
             <div class="form-group">
-              <input type="password" name="password" class="form-control"  placeholder="패스워드 8자이상" required="required">
+              <input type="password" name="pwd" class="form-control"  placeholder="패스워드 8자이상" required="required" id="pw">
             </div>
             <div class="form-group">
-              <input type="password" class="form-control"  placeholder="패스워드 확인" required="required">
-            </div>
+              <input type="password" class="form-control" name="pwd2" id="pw2" placeholder="패스워드 확인" required="required">
+            	<div class="alert alert-success" id="alert-success">비밀번호가 일치합니다.</div>
+				<div class="alert alert-danger" id="alert-danger">비밀번호가 일치하지 않습니다.</div>
+			</div>
             
              <div class="form-group">
               <input type="text" name="name" class="form-control"  placeholder="이름" required="required">
@@ -104,6 +107,54 @@ xmlns:th="http://www.thymeleaf.org">
   </div>
   <script src="https://code.jquery.com/jquery-3.6.0.slim.js"></script>
   <script type="text/javascript">
+		
+  //아이디 체크
+		$("#Write :input[name=id]").keyup(function(){
+			let id=$(this).val().trim();
+			if(id.length<4||id.indexOf('@') == -1||id.indexOf('.') == -1){
+				$("#idCheckView").html("4자이상, 'e-mail' 형식을 입력해주세요").css("background","pink");
+				checkResultId="";
+				return;
+			}$.ajax({
+				type:"get",
+				url:"/idcheckAjax",				
+				data:"id="+id,	
+				success:function(data){						
+					if(data=="fail"){
+					$("#idCheckView").html("중복된 이메일입니다!").css("background","red");
+						checkResultId="";
+					}else{
+					 $("#idCheckView").html("사용 가능한 이메일입니다.").css("background","yellow");		
+						checkResultId=id;
+					}					
+				}//callback			
+			});//ajax
+		});//keyup
+ 
+		 $(function(){
+		        $("#alert-success").hide();
+		        $("#alert-danger").hide();
+		        $("input").keyup(function(){
+		            var pwd1=$("#pw").val();
+		            var pwd2=$("#pw2").val();
+		            if(pwd1 != "" || pwd2 != ""){
+		                if(pwd1 == pwd2){
+		                    $("#alert-success").show();
+		                    $("#alert-danger").hide();
+		                }else{
+		                    $("#alert-success").hide();
+		                    $("#alert-danger").show();
+		                }    
+		            }
+		        });
+		    });
+		출처: https://hongku.tistory.com/249 [IT에 취.하.개.:티스토리]
+		
+		
+		
+		
+		
+  
 	$(function(){
 		$("#check").click(function() {
 			if($("#checkFile").val()==""){

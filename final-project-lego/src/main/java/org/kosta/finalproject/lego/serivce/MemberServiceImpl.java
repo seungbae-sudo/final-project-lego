@@ -66,6 +66,16 @@ public class MemberServiceImpl implements MemberService {
 		// TODO Auto-generated method stub
 		return memberMapper.findAuthorityByUsername(username);
 	}
+	
+	@Override
+	public int getMemberCount() {
+		return memberMapper.getMemberCount();
+	}
 
+	@Override
+	public String idcheck(String id) {
+		int count = memberMapper.idcheck(id);
+		return (count == 0) ? "ok" : "fail";
+	}
 	
 }

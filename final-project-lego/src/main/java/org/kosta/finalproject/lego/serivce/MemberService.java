@@ -25,6 +25,12 @@ public interface MemberService {
 	MemberVO findMemberById(String id);
 
 	List<Authority> findAuthorityByUsername(String username);
+
+
+	String idcheck(String id);
+
+
+	int getMemberCount();
 	
 	
 }

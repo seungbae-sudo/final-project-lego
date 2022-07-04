@@ -28,6 +28,10 @@ public interface MemberMapper {
 	MemberVO findMemberById(String id);
 
 	List<Authority> findAuthorityByUsername(String id);
+
+	int getMemberCount();
+
+	int idcheck(String id);
 	
 	
 }
