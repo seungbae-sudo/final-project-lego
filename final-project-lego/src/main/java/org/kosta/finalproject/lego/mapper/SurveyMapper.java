@@ -1,5 +1,6 @@
 package org.kosta.finalproject.lego.mapper;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -7,6 +8,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.kosta.finalproject.lego.vo.BookingVO;
 import org.kosta.finalproject.lego.vo.DaysVO;
 import org.kosta.finalproject.lego.vo.MasterVO;
+import org.kosta.finalproject.lego.vo.Pagination;
+import org.kosta.finalproject.lego.vo.ReviewVO;
 import org.kosta.finalproject.lego.vo.SkillsVO;
 import org.kosta.finalproject.lego.vo.TimesVO;
 
@@ -19,7 +22,7 @@ public interface SurveyMapper {
 
 	List<TimesVO> getTimes();
 	
-	List<MasterVO> findMasterList(int[] skills, int[] days, int[] times,String categoryNo);
+	List<MasterVO> findMasterList(int[] skills, int[] days, int[] times,String categoryNo,Pagination pagination);
 
 	List<MasterVO> findMasterList2(String [] id,int categoryNo);
 	
@@ -34,4 +37,8 @@ public interface SurveyMapper {
 	List<MasterVO> findMasterByKeyword(Map<String, String> map);
 	
 	Integer findcount(int[] skills, int[] days, int[] times,String categoryNo);
+	
+	Integer getTotalFindList(int[] skills, int[] days, int[] times,String categoryNo);
+	
+	List<ReviewVO> getScore(String id);
 }

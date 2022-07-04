@@ -10,6 +10,7 @@
   <div class="container">
  
       <span th:text="|${count} 명의 검색 결과|"></span>
+      
     <div class="table-responsive">
     <form action="" th:action="@{/addCart}">
                      <table class="table">
@@ -31,29 +32,56 @@
                               <td class="master-info-wrap"> 
                                  <div class="info-wrap">
                                  	<a th:href="@{/surveyFindMasterById(masterId=${list.id})}" >
-                                 		<span th:text="${list.name}" class="col-md-3 master-name find-master-name" >고수 이름</span>
+                                 		<span th:text="${list.name} " class="col-md-3 master-name find-master-name" >고수 이름</span>
                                  	</a> 
-                                 	<span class="star_1 fa master-star">&#xf005</span>
-                                 	<span class="master-score" th:text="|${list.reviewVO.score} 점|"> 4.5점</span>
+                                 	<span class="star_1 fa master-star" >&#xf005</span>
+                                 	<div th:each="s:${score}">
+                                 	<span class="master-score" th:text="${s.score}" th:if="${s.msvo.id}==${list.id}"> 4.5점</span>
+           
+                                 	</div>
+                              
                                  </div>
                                  <pre class="info-detail" th:text="${list.specifications}">
                                     
                                  </pre>
-                              
+                              		
                               </td>
+                              
                               <td class="text-center add-cart">                          		
                               		<input type="hidden" name="id" th:value="${list.id}">
                               		<!-- <input type="hidden" name="categoryNo" th:value="${categoryNo}"> -->
                               		<input type="hidden" name="categoryNo" th:value="${list.category.categoryNo}">
                               		<button id="find-master-add-cart" type="submit" class="bi bi-bookmark " style="background-color: white;border-color: white;" name="masterId" th:value="${list.id}"></button>
                               	
-                              
                                     
                               </td>                             	
                            </tr>                         
                         </tbody>                     
                      </table>
                       </form>
+                      
+                      <ul class="pagination-wrap">
+      <th:block th:if ="${pagination.previousPageGroup }">
+     <li class="page-item" ><a class="page-link" th:href="@{/findMasterList(pageNo=${pagination.startPageOfPageGroup-1},skills=${skills},times=${times},days=${days},categoryNo=${categoryNo})}" th:text="|Previous|">Previous</a></li> 
+     
+    </th:block>
+    
+  <th:block th:each="pageNo:${#numbers.sequence(pagination.startPageOfPageGroup,pagination.endPageOfPageGroup)}">
+ 	
+ 	<th:block th:if="${pageNo==pagination.nowPage}">
+ 
+    		  <li class="page-item active"><a class="page-link" th:href="@{/findMasterList(pageNo=${pageNo},skills=${skills},times=${times},days=${days},categoryNo=${categoryNo})}" th:text="${pageNo}"></a></li>
+    	</th:block>
+    	<th:block th:if="${pageNo!=pagination.nowPage}">
+    		  <li class="page-item"><a class="page-link" th:href="@{/findMasterList(pageNo=${pageNo},skills=${skills},times=${times},days=${days},categoryNo=${categoryNo})}" th:text="${pageNo}"></a></li>
+    	</th:block>
+    </th:block>
+    
+      <th:block th:if ="${pagination.nextPageGroup}">
+     <li class="page-item" ><a class="page-link" th:href="@{/findMasterList(pageNo=${pagination.endPageOfPageGroup+1},skills=${skills},times=${times},days=${days},categoryNo=${categoryNo})}" th:text="|Next|"></a></li> 
+     
+    </th:block>
+     </ul>
                   </div>
   </div>
   

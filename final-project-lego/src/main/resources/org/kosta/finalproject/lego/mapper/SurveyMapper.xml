@@ -17,7 +17,7 @@
    	<result column="category_no" property="category.categoryNo"/>
    </resultMap>
    
-   <select id="findMasterList" resultType="org.kosta.finalproject.lego.vo.MasterVO" resultMap="masterResult">
+ <!--   <select id="findMasterList" resultType="org.kosta.finalproject.lego.vo.MasterVO" resultMap="masterResult">
    		select  m.id,m.name, ms.career, ms.specifications ,msd.score , i.image_name , ms.category_no
 		from(
 		select  distinct m.id ,nvl(round(avg(r.score)),0) as score
@@ -36,7 +36,32 @@
 		  ) msd , member m, master ms, images i 
 		where m.id = ms.id and m.id=msd.id and m.id = i.id and ms.category_no =#{categoryNo}
 		
-   </select> 
+   </select>  -->
+   
+   <select id="findMasterList" resultType="org.kosta.finalproject.lego.vo.MasterVO" resultMap="masterResult">
+ select id,name,career,specifications,image_name,category_no,rnum
+		from(
+		select  msd.id,row_number() over(order by msd.id desc) as rnum ,ms.category_no,i.image_name,ms.specifications,ms.career,m.name
+		from(
+		select  distinct m.id
+		from master_detail m , review r
+		group by m.id, m.days_id, m.skills_id, m.times_id,r.review_no
+		having 
+
+		<foreach collection="skills" item="sk" open=" " close=" " separator=" or ">
+			m.skills_id =#{sk}
+		</foreach>
+		<foreach collection="days" item="d" open=" or " close=" " separator=" or ">
+		 m.days_id = #{d}
+		 </foreach>
+		 <foreach collection="times" item="ti" open=" or " close=" " separator=" or ">
+		  m.times_id = #{ti}
+		  </foreach>
+		  ) msd , member m, master ms, images i 
+		where m.id = ms.id and m.id=msd.id and m.id = i.id and ms.category_no =#{categoryNo}
+		) where rnum between #{pagination.startRowNumber} and #{pagination.endRowNumber}
+				
+  </select>
    <select id="findcount" resultType="integer">
    select count(*)
    from(
@@ -58,6 +83,32 @@
 		  ) msd , member m, master ms, images i 
 		where m.id = ms.id and m.id=msd.id and m.id = i.id and ms.category_no =#{categoryNo}
 		)
+   </select>
+   <select id="getTotalFindList" resultType="integer">
+   	select count(*)
+		from(
+		 select id,name,career,specifications,image_name,category_no,rnum
+		from(
+		select  msd.id,row_number() over(order by msd.id desc) as rnum ,ms.category_no,i.image_name,ms.specifications,ms.career,m.name
+		from(
+		select  distinct m.id
+		from master_detail m , review r
+		group by m.id, m.days_id, m.skills_id, m.times_id,r.review_no
+		having 
+
+		<foreach collection="skills" item="sk" open=" " close=" " separator=" or ">
+			m.skills_id =#{sk}
+		</foreach>
+		<foreach collection="days" item="d" open=" or " close=" " separator=" or ">
+		 m.days_id = #{d}
+		 </foreach>
+		 <foreach collection="times" item="ti" open=" or " close=" " separator=" or ">
+		  m.times_id = #{ti}
+		  </foreach>
+		  ) msd , member m, master ms, images i 
+		where m.id = ms.id and m.id=msd.id and m.id = i.id and ms.category_no =#{categoryNo}
+		) )
+   
    </select>
   
    <select id="findMasterList2" resultType="org.kosta.finalproject.lego.vo.MasterVO" resultMap="masterResult">
@@ -97,5 +148,15 @@
 		
 			group by to_char(dbms_lob.substr(ms.specifications, 4000)),m.name,i.image_name,ms.career,m.id,c.lesson_sort,s.skills,s.skills_id,mds.skills_id,c.category_no
 			having  (c.lesson_sort LIKE '%'||#{KEYWORD}||'%' or s.skills LIKE '%' ||#{KEYWORD}||'%') and s.skills_id > 0
+   </select>
+   
+   <resultMap type="org.kosta.finalproject.lego.vo.ReviewVO" id="reviewResult">
+   	<result column="master_id" property="msvo.id" />
+   </resultMap>
+   <select id="getScore" resultType="org.kosta.finalproject.lego.vo.ReviewVO" resultMap="reviewResult">
+   		select nvl(round(avg(score)),0) as score ,master_id
+		from review
+		where master_id = #{value}
+		group by master_id
    </select>
 </mapper>
