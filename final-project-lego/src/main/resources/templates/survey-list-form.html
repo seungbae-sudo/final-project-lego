@@ -26,22 +26,22 @@
 							</div>
 						</th:block>
 						<th:block th:case="2">
-							<div class="survey-skill-list">
-								<input th:each="sk: ${skills}" type="checkbox" th:name="skills" th:text="${sk.skills}"
+							<div class="surveyListBox2" th:each="sk: ${skills}">
+								<input type="checkbox" th:name="skills" th:text="${sk.skills}"
 									th:value="${sk.skillsId}"
 									th:if="${sk.skillsId>4&&sk.skillsId<9}">
-								</div>
+							</div>
 						</th:block>
 						<th:block th:case="3">
-							<div class="survey-skill-list">
-								<input th:each="sk: ${skills}" type="checkbox" th:name="skills" th:text="${sk.skills}"
+							<div class="surveyListBox2"  th:each="sk: ${skills}" >
+								<input type="checkbox" th:name="skills" th:text="${sk.skills}"
 									th:value="${sk.skillsId}"
 									th:if="${sk.skillsId>8&&sk.skillsId<13}">
 							</div>
 						</th:block>
 						<th:block th:case="4">
-							<div class="survey-skill-list">
-								<input th:each="sk: ${skills}" type="checkbox" th:name="skills" th:text="${sk.skills}"
+							<div class="surveyListBox3"  th:each="sk: ${skills}">
+								<input  type="checkbox" th:name="skills" th:text="${sk.skills}"
 									th:value="${sk.skillsId}"
 									th:if="${sk.skillsId>12&&sk.skillsId<17}">
 							</div>
@@ -51,7 +51,7 @@
 
 
 
-				<li>
+				<li class="third-area">
 					<p>3. 어떤 서비스를 제공할 수 있나요?</p>
 					<div th:each="ti: ${times}">
 						<input type="checkbox" th:name="times" th:text="${ti.times}"
@@ -59,7 +59,7 @@
 					</div>
 				</li>
 
-				<li>
+				<li class="last-area">
 					<p>4. 어떤 서비스를 제공할 수 있나요?</p>
 					<div th:each="d: ${day}">
 						<input type="checkbox" th:name="days" th:text="${d.days}"
@@ -85,6 +85,10 @@
 		slidePrev();	
 	})
 
+	
+	
+	
+	//다음 버튼
 	function slideNext(){
 		
 	  if( $('li').is(':animated') ){
@@ -113,6 +117,7 @@
 	  
 	}
 
+	//이전으로 돌아가기
 	function slidePrev(){
 		
 	  if( $('li').is(':animated') ){
@@ -137,6 +142,8 @@
 	  
 	}
 
+	
+	
 
 	
 	</script>
