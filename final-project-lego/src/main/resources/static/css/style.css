@@ -112,6 +112,12 @@ position:absolute;
     top:100px;
     z-index: -999;
 }
+
+/* 고수 검색 */
+
+.search-keyword{
+	    margin: 0 70px 70px 70px;
+}
 /* 고수 찾기 */
 
 #find-master-img{
@@ -309,6 +315,12 @@ position:absolute;
 	cursor: pointer;
 }
 
+
+/* 고수 찾기에서 고수 프로필 상세보기 */
+.master-for-member-btn{
+	border: none;
+    background: none;
+}
 
 /* 마이페이지 */
 .profile{
@@ -882,7 +894,7 @@ overflow: hidden;
 }
 
 /*이달의 고수*/
-.table-responsive ul{
+.ranking-ul{
 	display: flex;
 }
 .ranking-li{
@@ -899,6 +911,22 @@ overflow: hidden;
 .ranking-li img{
     width: 100%;
     border-radius: 50%;
+}
+
+.surveyListBox2{
+	margin-top:-25px;
+}
+
+.surveyListBox3{
+	margin-top:-28px;
+}
+
+.surveyListBox2 input{
+	margin-bottom:20px;
+}
+
+.surveyListBox3 input{
+	margin-bottom:20px;
 }
 
 

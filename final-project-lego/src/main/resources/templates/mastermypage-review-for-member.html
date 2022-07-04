@@ -39,8 +39,8 @@
 						</div>
 					</div>
 					<ul class="list-inline dashboard-menu text-center ">
-						<li><a class="active" th:href="@{/surveyFindMasterById(masterId=${masterList.id})}">고수정보</a></li>
-						<li><a th:href="@{/reviewForMember(masterId=${masterList.id})}">리뷰</a></li>
+						<li><a th:href="@{/surveyFindMasterById(masterId=${masterList.id})}">고수정보</a></li>
+						<li><a class="active" th:href="@{/reviewForMember(masterId=${masterList.id})}">리뷰</a></li>
 						<li>
 							<form th:action="@{/messageForm}">
 								<input type="hidden" name="receiveId" th:value="${masterList.id}">
@@ -60,23 +60,18 @@
 					
 					
 					<div class="dashboard-wrapper user-dashboard profile-detail">
-						<div class="total-order mt-20">
-							<div class="table-responsive">
-								<div class="media-body">
-									<h2> 고수 소개</h2>
-									<ul class="user-profile-list">
-										<li>
-											<pre th:text="${masterList.specifications}"style="background-color: white; border-color:white;"></pre>
-										</li>
-										
-										
-									</ul>
-									
-									
-
+						<div  class="review-list-wrap">
+							<div th:each="rv:${review}" class="review-list">
+								<div class="rivew-giver-info">
+									<span th:text="${rv.mvo.name}"></span>
+									<span class="star_1 fa master-star">&#xf005</span>
+									<span th:text="|${rv.score} 점|"></span>
 								</div>
+								<div class="rivew-content">
+									<span th:text="${rv.reviewContent}"></span>
 								</div>
-								</div>
+							</div>
+						</div>
 								</div>
 													
 				</div>
