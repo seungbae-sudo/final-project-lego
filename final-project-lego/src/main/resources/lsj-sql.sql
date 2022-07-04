@@ -174,3 +174,6 @@ select * from master where id= 'lsj@kosta.com'
 		and c.category_no = b.category_no
 		and b.id=m.id order by board_no desc
 
+
+--pagination
+		
