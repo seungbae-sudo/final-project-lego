@@ -51,7 +51,8 @@ public class SurveyController {
 		model.addAttribute("times", times);
 		model.addAttribute("categoryNo", categoryNo);
 		model.addAttribute("masterList",surveyMapper.findMasterList(skills, days, times,categoryNo));
-	
+		model.addAttribute("count", surveyMapper.findcount(skills, days, times, categoryNo));
+		System.out.println(surveyMapper.findcount(skills, days, times, categoryNo));
 		return "find-master-list";
 	}
 	
@@ -62,6 +63,7 @@ public class SurveyController {
 		cartMapper.addCart(memberVO.getId(), masterVO.getId());
 		model.addAttribute("categoryNo", categoryNo);		
 		model.addAttribute("masterList", surveyMapper.findMasterList2(id, categoryNo));
+		
 		return "find-master-list";
 	}
 	@RequestMapping("/surveyFindMasterById")

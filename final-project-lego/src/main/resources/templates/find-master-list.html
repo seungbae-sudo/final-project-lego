@@ -9,7 +9,7 @@
 
   <div class="container">
  
-     
+      <span th:text="|${count} 명의 검색 결과|"></span>
     <div class="table-responsive">
     <form action="" th:action="@{/addCart}">
                      <table class="table">
@@ -20,9 +20,9 @@
 								<th class="col-md-2 text-center">북마크</th>
                            </tr>
                         </thead>
-                         
+                        
                         <tbody>
-                       
+                       		
                            <tr th:each="list:${masterList}"  class="cart-list">
                              
                               <td class="cart-img">

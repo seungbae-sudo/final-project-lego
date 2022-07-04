@@ -32,4 +32,6 @@ public interface SurveyMapper {
 	List<MasterVO> findMasterByKeyword(String keyword, String keyword2);
 
 	List<MasterVO> findMasterByKeyword(Map<String, String> map);
+	
+	Integer findcount(int[] skills, int[] days, int[] times,String categoryNo);
 }

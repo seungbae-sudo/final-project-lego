@@ -16,8 +16,9 @@
    	<result column="score" property="reviewVO.score"/>
    	<result column="category_no" property="category.categoryNo"/>
    </resultMap>
+   
    <select id="findMasterList" resultType="org.kosta.finalproject.lego.vo.MasterVO" resultMap="masterResult">
-   		select m.id,m.name, ms.career, ms.specifications ,msd.score , i.image_name , ms.category_no
+   		select  m.id,m.name, ms.career, ms.specifications ,msd.score , i.image_name , ms.category_no
 		from(
 		select  distinct m.id ,nvl(round(avg(r.score)),0) as score
 		from master_detail m , review r
@@ -34,8 +35,31 @@
 		 </foreach> 
 		  ) msd , member m, master ms, images i 
 		where m.id = ms.id and m.id=msd.id and m.id = i.id and ms.category_no =#{categoryNo}
+		
+   </select> 
+   <select id="findcount" resultType="integer">
+   select count(*)
+   from(
+   select  m.id,m.name, ms.career, ms.specifications ,msd.score , i.image_name , ms.category_no
+		from(
+		select  distinct m.id ,nvl(round(avg(r.score)),0) as score
+		from master_detail m , review r
+		group by m.id, m.days_id, m.skills_id, m.times_id
+		having 
+		<foreach collection="skills" item="sk" open=" " close=" " separator=" or ">
+			m.skills_id =#{sk}
+		</foreach>
+		<foreach collection="days" item="d" open=" or " close=" " separator=" or ">
+		 m.days_id = #{d}
+		 </foreach>
+		 <foreach collection="times" item="ti" open=" or " close=" " separator=" or ">
+		  m.times_id = #{ti}
+		 </foreach> 
+		  ) msd , member m, master ms, images i 
+		where m.id = ms.id and m.id=msd.id and m.id = i.id and ms.category_no =#{categoryNo}
+		)
    </select>
-   
+  
    <select id="findMasterList2" resultType="org.kosta.finalproject.lego.vo.MasterVO" resultMap="masterResult">
    		select msd.id, m.name , ms.career, ms.specifications,category_no, msd.score , i.image_name, ms.category_no
 		from(
