@@ -923,6 +923,22 @@ overflow: hidden;
     border-radius: 50%;
 }
 
+.surveyListBox2{
+	margin-top:-25px;
+}
+
+.surveyListBox3{
+	margin-top:-28px;
+}
+
+.surveyListBox2 input{
+	margin-bottom:20px;
+}
+
+.surveyListBox3 input{
+	margin-bottom:20px;
+}
+
 
 /* 부트스트랩 */
 body {
