@@ -56,9 +56,13 @@
    	</resultMap>
    	
    	<resultMap type="org.kosta.finalproject.lego.vo.MessageVO" id="MemberResult">
-				<result column="name" property="reMvo.name"/>
-				<result column="receive_id" property="reMvo.id"/>
-		</resultMap>
+		<result column="name" property="reMvo.name"/>
+		<result column="receive_id" property="reMvo.id"/>
+	</resultMap>
+	<resultMap type="org.kosta.finalproject.lego.vo.ReviewVO" id="score">
+		<result column="name" property="mvo.name"/>
+		<result column="id" property="mvo.id"/>
+	</resultMap>
    	
    <select id ="findMyBoard" resultType="org.kosta.finalproject.lego.vo.BoardVO" resultMap="BoardCategoryResultMap">
    		select b.board_no,b.board_title,c.category_name, c.category_no
@@ -134,6 +138,8 @@
 	select s.skills from master_detail m,skills s where m.id = #{value} and m.skills_id>0 and m.skills_id = s.skills_id
 	</select>
 	
-
+	<select id="MyReview" resultType="org.kosta.finalproject.lego.vo.ReviewVO">
+	select avg(NVL(score,0)) as score from review where master_id=#{value}
+	</select>
 	
 </mapper>

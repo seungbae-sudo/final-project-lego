@@ -84,17 +84,17 @@ public class MasterMyPageController {
 	public String mastermypage(@AuthenticationPrincipal MemberVO memberVO, Model model) {
 		model.addAttribute("member", memberVO);
 		model.addAttribute("masterDetail", masterMyPageMapper.findMasterDetailList(memberVO.getId()));
-		
 		model.addAttribute("Mycategory",masterMyPageMapper.MyCategory(memberVO.getId()));
-		
 		List<SkillsVO> svo = masterMyPageMapper.MySkills(memberVO.getId());
 		model.addAttribute("MySkills",svo);
-		System.out.println(svo);
+		
+		List<ReviewVO> rvo = masterMyPageMapper.MyReview(memberVO.getId());
+		System.out.println(rvo);
+		model.addAttribute("reAGV", rvo); 
+		System.out.println(rvo);
 		
 		ImageVO image = masterMyPageMapper.getImageId(memberVO.getId());
-		System.out.println(image);
 		String src = "./images/"+image.getMemberVO().getId()+"/"+image.getImageName();
-		System.out.println(src);
 		model.addAttribute("src",src);
 		
 		return "master-mypage";
