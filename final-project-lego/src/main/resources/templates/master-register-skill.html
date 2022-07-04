@@ -1,82 +1,113 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-<script
-	src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<title>Insert title here</title>
-</head>
-<body>
-	<div class="container pt-4">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout-non}"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
+
+<div layout:fragment="main">
+	<div class="container pt-4 survey-wrap">
 		<!--/*   thymeleaf comment    */-->
-		<div class="slider-wrap">
+		<div class="survey-content">
 			
 			<form action="" method="post" th:action="@{/masterRegisterSkillGo}">
-				<div class="slider-test">
-				<p>2. 어떤 서비스를 제공할 수 있나요?</p>
+			<ul id="slides">
+				<li >
+					<p>2. 어떤 서비스를 제공할 수 있나요?</p>
+					<input type="hidden" th:name="id" th:value="${id}">
+					<input type="hidden" th:name="categoryNo" th:value="${categoryNo}">
 
-				<input type="hidden" th:name="id" th:value="${id}">
-				
-				<th:block th:switch="${categoryNo}">
-					<th:block th:case="1">
-						<div th:each="sk: ${skills}" >
-									<input type="checkbox" th:name="skills" th:text="${sk.skills}"
-									th:value="${sk.skillsId}" th:if="${sk.skillsId>0&&sk.skillsId<5}">
-						</div>
+					<th:block th:switch="${categoryNo}">
+						<th:block th:case="1">
+							<div th:each="sk: ${skills}">
+								<input type="checkbox" th:name="skills" th:text="${sk.skills}"
+									th:value="${sk.skillsId}"
+									th:if="${sk.skillsId>0&&sk.skillsId<5}">
+							</div>
+						</th:block>
+						<th:block th:case="2">
+							<div class="surveyListBox2" th:each="sk: ${skills}">
+								<input type="checkbox" th:name="skills" th:text="${sk.skills}"
+									th:value="${sk.skillsId}"
+									th:if="${sk.skillsId>4&&sk.skillsId<9}">
+							</div>
+						</th:block>
+						<th:block th:case="3">
+							<div class="surveyListBox2"  th:each="sk: ${skills}" >
+								<input type="checkbox" th:name="skills" th:text="${sk.skills}"
+									th:value="${sk.skillsId}"
+									th:if="${sk.skillsId>8&&sk.skillsId<13}">
+							</div>
+						</th:block>
+						<th:block th:case="4">
+							<div class="surveyListBox3"  th:each="sk: ${skills}">
+								<input  type="checkbox" th:name="skills" th:text="${sk.skills}"
+									th:value="${sk.skillsId}"
+									th:if="${sk.skillsId>12&&sk.skillsId<17}">
+							</div>
+						</th:block>
 					</th:block>
-					
-					<th:block th:case="2">
-						<div th:each="sk: ${skills}" >
-									<input type="checkbox" th:name="skills" th:text="${sk.skills}"
-									th:value="${sk.skillsId}" th:if="${sk.skillsId>4&&sk.skillsId<9}">
-						</div>
-					</th:block>
-					
-					<th:block th:case="3">
-						<div th:each="sk: ${skills}" >
-									<input type="checkbox" th:name="skills" th:text="${sk.skills}"
-									th:value="${sk.skillsId}" th:if="${sk.skillsId>8&&sk.skillsId<13}">
-						</div>
-					</th:block>
-					
-					<th:block th:case="4">
-						<div th:each="sk: ${skills}" >
-									<input type="checkbox" th:name="skills" th:text="${sk.skills}"
-									th:value="${sk.skillsId}" th:if="${sk.skillsId>12&&sk.skillsId<17}">
-						</div>
-					</th:block>
-				</th:block>
-				</div>		
-			
+				</li>
 
-				
-				<div class="slider-test">
+
+
+				<li>
 					<p>3. 어떤 서비스를 제공할 수 있나요?</p>
 					<div th:each="ti: ${times}">
 						<input type="checkbox" th:name="times" th:text="${ti.times}"
 							th:value="${ti.timesId}" th:if="${ti.timesId>0}">
 					</div>
-				</div>	
-				
-				<div class="slider-test">
+				</li>
+
+				<li>
 					<p>4. 어떤 서비스를 제공할 수 있나요?</p>
 					<div th:each="d: ${day}">
 						<input type="checkbox" th:name="days" th:text="${d.days}"
 							th:value="${d.daysId}" th:if="${d.daysId>0}">
 					</div>
-					<button type="submit">다음</button>
-				</div>	
+					<button id="surveyBtn" type="submit">결과보기</button>
+				</li>
+				</ul>
 			</form>
+			
+			<div id="btn_slides">
+				<span class="btn_slides_prev off"></span>
+				<span class="btn_slides_next"></span>
+			</div>
+			
 		</div>
 	</div>
-</body>
+	
+	 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+	<script type="text/javascript">
+
+    $('.btn_slides_next').click(function(){
+        if(!$('#slides li').last().is(':visible')){
+           $('#slides li:visible').hide().next('li').fadeIn('fast');
+           $('.btn_slides_prev').removeClass('off');
+        }
+
+        if($('#slides li').last().is(':visible')){
+           $('.btn_slides_next').addClass('off');
+        }
+     });
+
+
+
+
+
+     $('.btn_slides_prev').click(function(){
+        if(!$('#slides li').first().is(':visible')){
+           $('#slides li:visible').hide().prev('li').fadeIn('fast');
+           $('.btn_slides_next').removeClass('off');
+       }
+       if($('#slides li').first().is(':visible')){
+          $('.btn_slides_prev').addClass('off');
+       }
+     });
+
+	
+	</script>
+
+</div>
 </html>

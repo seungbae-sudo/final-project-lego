@@ -11,8 +11,8 @@
 		<div class="survey-content">
 			
 			<form action="" method="post" th:action="@{/findMasterList}">
-			<ul id="slider">
-				<li class="on">
+			<ul id="slides">
+				<li >
 					<p>2. 어떤 서비스를 제공할 수 있나요?</p>
 
 					<input type="hidden" th:name="categoryNo" th:value="${categoryNo}">
@@ -51,7 +51,7 @@
 
 
 
-				<li class="third-area">
+				<li>
 					<p>3. 어떤 서비스를 제공할 수 있나요?</p>
 					<div th:each="ti: ${times}">
 						<input type="checkbox" th:name="times" th:text="${ti.times}"
@@ -59,7 +59,7 @@
 					</div>
 				</li>
 
-				<li class="last-area">
+				<li>
 					<p>4. 어떤 서비스를 제공할 수 있나요?</p>
 					<div th:each="d: ${day}">
 						<input type="checkbox" th:name="days" th:text="${d.days}"
@@ -69,81 +69,42 @@
 				</li>
 				</ul>
 			</form>
-			<span id="prev">PREV</span>
-			<span id="next">NEXT</span>
+			
+			<div id="btn_slides">
+				<span class="btn_slides_prev off"></span>
+				<span class="btn_slides_next"></span>
+			</div>
+			
 		</div>
 	</div>
 	
 	 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 	<script type="text/javascript">
 
-	$('#next').click(function(){
-		slideNext();	
-	})
+    $('.btn_slides_next').click(function(){
+        if(!$('#slides li').last().is(':visible')){
+           $('#slides li:visible').hide().next('li').fadeIn('fast');
+           $('.btn_slides_prev').removeClass('off');
+        }
 
-	$('#prev').click(function(){
-		slidePrev();	
-	})
+        if($('#slides li').last().is(':visible')){
+           $('.btn_slides_next').addClass('off');
+        }
+     });
 
-	
-	
-	
-	//다음 버튼
-	function slideNext(){
-		
-	  if( $('li').is(':animated') ){
-	  	return false;
-	  }
-	  
-	  let left = $('li.on').width(); 
-	  let currentIdx = $('li.on').index(); 
-	  let nextIdx = currentIdx + 1; 
-	  
-	  if(nextIdx > $('li').length - 1){
-	  	nextIdx = 0;
-	  }
-	  
-	  $('li').removeClass('on')
-	  $('li').eq(currentIdx).css({zIndex : 10})
-	  $('li').eq(nextIdx).addClass('on').css({
-		  	left: left,
-		    zIndex: 20,
-		    display: 'block'
-	  }).animate({
-	  		left: 0
-	  }, 500, function(){
-	  	$('li').eq(currentIdx).css({display:'none'})
-	  })
-	  
-	}
 
-	//이전으로 돌아가기
-	function slidePrev(){
-		
-	  if( $('li').is(':animated') ){
-	  	return false;
-	  }
-	  
-	  let left = $('li.on').width() * -1; 
-	  let currentIdx = $('li.on').index();
-	  let prevIdx = currentIdx - 1; 
-	  
-	  $('li').removeClass('on')
-	  $('li').eq(currentIdx).css({zIndex : 10})
-	  $('li').eq(prevIdx).addClass('on').css({
-		  	left: left,
-		    zIndex: 20,
-		    display: 'block'
-	  }).animate({
-	  	left: 0
-	  }, 500, function(){
-	  	$('li').eq(currentIdx).css({display:'none'})
-	  })
-	  
-	}
 
-	
-	
+
+
+     $('.btn_slides_prev').click(function(){
+        if(!$('#slides li').first().is(':visible')){
+           $('#slides li:visible').hide().prev('li').fadeIn('fast');
+           $('.btn_slides_next').removeClass('off');
+       }
+       if($('#slides li').first().is(':visible')){
+          $('.btn_slides_prev').addClass('off');
+       }
+     });
 
 	
 	</script>
