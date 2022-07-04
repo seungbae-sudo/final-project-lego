@@ -7,11 +7,14 @@ import java.util.Map;
 
 import org.kosta.finalproject.lego.mapper.CartMapper;
 import org.kosta.finalproject.lego.mapper.MasterMapper;
+import org.kosta.finalproject.lego.mapper.MasterMyPageMapper;
 import org.kosta.finalproject.lego.mapper.SurveyMapper;
 import org.kosta.finalproject.lego.vo.BookingVO;
+import org.kosta.finalproject.lego.vo.ImageVO;
 import org.kosta.finalproject.lego.vo.MasterDetailVO;
 import org.kosta.finalproject.lego.vo.MasterVO;
 import org.kosta.finalproject.lego.vo.MemberVO;
+import org.kosta.finalproject.lego.vo.ReviewVO;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -26,6 +29,7 @@ import lombok.RequiredArgsConstructor;
 public class SurveyController {
 	private final SurveyMapper surveyMapper;
 	private final MasterMapper masterMapper;
+	private final MasterMyPageMapper masterMyPageMapper;
 	private final CartMapper cartMapper;
 	
 
@@ -66,6 +70,19 @@ public class SurveyController {
 
 		return "master-detail";
 	}
+	
+	@RequestMapping("/reviewForMember")
+	public String reviewForMember(Model model, String masterId) {
+		model.addAttribute("masterList", surveyMapper.findMasterDetailList(masterId));
+		
+		
+		List<ReviewVO> rvo = masterMyPageMapper.findMyReview(masterId);
+		model.addAttribute("review", rvo);
+
+		return "mastermypage-review-for-member";
+	}
+	
+	
 	@RequestMapping("/bookingForm")
 	public String bookingFrom(String masterId, Model model, String masterName) {
 		List<BookingVO> bvo = surveyMapper.findBookingDayByMasterId(masterId);

@@ -310,6 +310,12 @@ position:absolute;
 }
 
 
+/* 고수 찾기에서 고수 프로필 상세보기 */
+.master-for-member-btn{
+	border: none;
+    background: none;
+}
+
 /* 마이페이지 */
 .profile{
     width: 160px;
@@ -882,7 +888,7 @@ overflow: hidden;
 }
 
 /*이달의 고수*/
-.table-responsive ul{
+.ranking-ul{
 	display: flex;
 }
 .ranking-li{
