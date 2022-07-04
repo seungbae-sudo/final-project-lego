@@ -4,7 +4,7 @@
 	<insert id="writeQnA" parameterType="org.kosta.finalproject.lego.vo.QnAVO">
 			insert into qna(qna_no,ask,id) values(qna_no_seq.nextval,#{ask},#{memberVO.id})
 	</insert>
-	<select id="findQnAList" resultType="org.kosta.finalproject.lego.vo.QnAVO" resultMap="QnAResult">
+	<select id="findQnAList" resultType="list" resultMap="QnAResult">
 		select q.qna_no,q.ask,q.id,m.name 
 		from qna q , member m 
 		where q.id = m.id

@@ -50,9 +50,9 @@
                 <tr th:each="list:${qnaList}">
                   <td class="text-center" th:text="${list.qnaNo}"> <a href="" >나오는지?</a></td>
                  <td class="text-center"> <a th:href="@{/QnADetail(qnaNo=${list.qnaNo})}"><span th:text="${list.ask}"></span> </a><br>
-                 <div th:each="comList:${qnaCommentList}">
+                <!--  <div th:each="comList:${qnaCommentList}">
                  	<span th:text="${comList.qnaCommentContent}" th:if="${comList.qnaVO.qnaNo}==${list.qnaNo}"></span>
-                 </div>
+                 </div> -->
                  </td>
                   <td class="text-center" th:text="${list.memberVO.name}"> <a href="">나오는지?</a></td>             		
                 </tr>
