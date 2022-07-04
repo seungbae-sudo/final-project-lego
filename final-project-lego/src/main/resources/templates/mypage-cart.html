@@ -64,7 +64,15 @@
 										</td>
 										<td class="master-info-wrap"> 
 											<div class="info-wrap" >
-												<span class="master-name" th:text="${list.mvo.name}">고수 이름</span>
+											
+												<a th:href="@{/surveyFindMasterById(masterId=${list.mvo.id})}" >
+	                                 				<span class="master-name" th:text="${list.mvo.name}">고수 이름</span>
+	                                 			</a> 
+                                 				
+                                 		
+											
+											
+												
 												<span class="star_1 fa master-star">&#xf005</span>
 												<span class="master-score" th:text="${list.score}">고수 평점</span>
 											</div>
