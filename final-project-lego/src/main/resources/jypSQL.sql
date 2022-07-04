@@ -42,11 +42,28 @@ select b.board_no, b.board_title,b. hits
 
 
 --내가 쓴 글 리스트
-select b.board_no, b.board_title, bc.category_name
+-- 총 글 갯수 가져오기 
+select count(*)
+from(
+select b.board_no, b.board_title, bc.category_name,bc.category_no
 from  board b, board_category bc
 where b.category_no=bc.category_no
-and b.id='lsj@naver.com'
+and b.id='ssg@kosta.com'
 order by b.board_no
+)		
+
+-- 페이지네이션을 적용한 sql
+select rnum,board_no,board_title,category_name
+from(
+select  row_number() over(order by board_no ) as rnum,b.board_no, b.board_title, bc.category_name
+from  board b, board_category bc
+where b.category_no=bc.category_no
+and b.id='ssg@kosta.com'
+order by b.board_no
+)
+where  rnum between 1and 5
+order by board_no desc
+
 
 
 select*from member where id='java@naver.com'
@@ -116,6 +133,23 @@ from(
 where r.id=b.master_id
 and b.member_id='ssg@kosta.com'
 
+--페이지 네이션 적용
+select rnum,name,lesson_sort,booking_day,master_id
+from (
+select row_number() over(order by b.booking_no ) as rnum,r.name, r.lesson_sort, b.booking_day,b.master_id, b.booking_no
+from(
+		select ms.id, m.name, c.lesson_sort
+		from master ms, category c,member m
+		where ms.category_no=c.category_no
+		and m.id=ms.id) r, booking b
+where r.id=b.master_id
+and b.member_id='ssg@kosta.com'
+order by booking_no desc
+)
+where  rnum between 1and 5
+
+
+select *from booking
 
 
 select name,skills,booking_day
@@ -195,16 +229,41 @@ select *from cart
 -- cart 에 있는 master_id를 통해 master specifications를 가져와야한다 
 -- cart에 있는 master_id를 통해 review에 있는 score를 평균을 내서 가져와야한다 
 
+-- 총 갯수 가져오기
+select count(*)
+from(
 select nvl(round(avg(r.score)),0) as score, to_char(dbms_lob.substr(ms.specifications, 4000)) as specifications ,m.name,c.master_id,i.image_name
 from cart c, member m,review r,master ms,images i
-where c.id='sooyoung@a'
+where c.id='ssg@kosta.com'
 and c.master_id=m.id
 and c.master_id=r.master_id(+)
 and c.master_id=ms.id
 and c.master_id=i.id(+)
 group by to_char(dbms_lob.substr(ms.specifications, 4000)),m.name,c.master_id,i.image_name
+)
 
 
+
+--------------------------------
+select q.rnum,q.qna_no ,q.ask, q.id, m.name
+from
+	(select row_number() over(order by qna_no desc) as rnum , qna_no, ask, id 
+	from qna) q , member m
+where q.id = m.id and q.rnum between 1and 4
+
+-- 페이지네이션을 적용한 sql
+select score,rnum, specifications,name, master_id,image_name
+from(
+select nvl(round(avg(r.score)),0) as score , row_number() over(order by m.name ) as rnum, to_char(dbms_lob.substr(ms.specifications, 4000)) as specifications ,m.name,c.master_id,i.image_name
+from cart c, member m,review r,master ms,images i
+where c.id='ssg@kosta.com'
+and c.master_id=m.id
+and c.master_id=r.master_id(+)
+and c.master_id=ms.id
+and c.master_id=i.id(+)
+group by to_char(dbms_lob.substr(ms.specifications, 4000)),m.name,c.master_id,i.image_name
+)
+where  rnum between 1and 5
 -- 메세지 리스트
 select*from message
 -- id => 보낸사람 : 나
