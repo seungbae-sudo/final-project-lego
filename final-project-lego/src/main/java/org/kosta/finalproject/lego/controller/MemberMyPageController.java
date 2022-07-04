@@ -3,7 +3,9 @@ package org.kosta.finalproject.lego.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -18,6 +20,7 @@ import org.kosta.finalproject.lego.vo.ImageVO;
 import org.kosta.finalproject.lego.vo.MasterVO;
 import org.kosta.finalproject.lego.vo.MemberVO;
 import org.kosta.finalproject.lego.vo.MessageVO;
+import org.kosta.finalproject.lego.vo.Pagination;
 import org.kosta.finalproject.lego.vo.ReviewVO;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -61,12 +64,32 @@ public class MemberMyPageController {
 		return "redirect:mypage-cart";
 	}
 	
+	
+
+	
 	// 내 찜목록
 	@RequestMapping("/mypage-cart")
-	public String mypageCart(@AuthenticationPrincipal MemberVO memberVO, Model model) {
+	public String mypageCart(@AuthenticationPrincipal MemberVO memberVO, Model model,Pagination p, String pageNo) {
 		String id = memberVO.getId();
-		List<ReviewVO> cartList = memberMyPageMapper.findCartList(id);
-		System.out.println(cartList);
+		
+		if(pageNo==null) {// 클라이언트가 pageNo를 전달하지 않는 경우에는 첫 페이지를 보여준다.
+			//memberMyPageMapper.getTotalPostCountFromCart() => 총 리스트의 갯수
+			p = new Pagination(memberMyPageMapper.getTotalPostCountFromCart(id));
+		}else {
+			p = new Pagination(memberMyPageMapper.getTotalPostCountFromCart(id), Integer.parseInt(pageNo));
+		}
+		
+		//파라미터로 페이지 네이션 객체와 아이디를 보내야하므로 map으로 구성해야한다. 
+		
+		HashMap<String, Object> cartMap=new HashMap<String, Object>();
+
+		cartMap.put("pagination", p);
+		cartMap.put("id", id);
+		
+		List<ReviewVO> cartList = memberMyPageMapper.findCartList(cartMap);
+		
+		//페이지네이션 객체 보내기
+		model.addAttribute("pagination", p);
 		
 		
 		//위 리스트에 있는 imageName은 '이미지파일명.jpg ' 이렇게 저장되어있다 
@@ -77,6 +100,10 @@ public class MemberMyPageController {
 			String listSrc = "./images/" +cartList.get(i).getMvo().getId()+ "/" + imageName;
 			cartList.get(i).getImageVo().setImageName(listSrc);
 		}
+		
+		
+		
+		System.out.println(cartList.get(0));
 		
 		model.addAttribute("cartList", cartList);
 		
@@ -92,11 +119,32 @@ public class MemberMyPageController {
 
 	// 내가 쓴 글**************************************************
 	@RequestMapping("mypage-wrote")
-	public String mypageWrote(@AuthenticationPrincipal MemberVO memberVO, Model model) {
+	public String mypageWrote(@AuthenticationPrincipal MemberVO memberVO, Model model,Pagination p, String pageNo) {
 		String id = memberVO.getId();
-		List<BoardVO> wroteList = memberMyPageMapper.findWroteList(id);
+		
+		//페이지네이션 
+		
+		if(pageNo==null) {// 클라이언트가 pageNo를 전달하지 않는 경우에는 첫 페이지를 보여준다.
+			//memberMyPageMapper.getTotalPostCountFromCart() => 총 리스트의 갯수
+			p = new Pagination(memberMyPageMapper.getTotalPostCountFromWrote(id));
+		}else {
+			p = new Pagination(memberMyPageMapper.getTotalPostCountFromWrote(id), Integer.parseInt(pageNo));
+		}
+		
+		//파라미터로 페이지 네이션 객체와 아이디를 보내야하므로 map으로 구성해야한다. 
+		
+		HashMap<String, Object> wroteMap=new HashMap<String, Object>();
+
+		wroteMap.put("pagination", p);
+		wroteMap.put("id", id);
+		
+		//페이지네이션 객체 보내기
+		model.addAttribute("pagination", p);
+		
+		
+		List<BoardVO> wroteList = memberMyPageMapper.findWroteList(wroteMap);
 		model.addAttribute("wroteList", wroteList);
-		System.out.println(wroteList);
+		
 		
 		// 프로필 이미지 경로 
 		ImageVO image = memberMyPageMapper.getImageById(memberVO.getId());
@@ -108,8 +156,32 @@ public class MemberMyPageController {
 
 	// 내 상담 목록
 	@RequestMapping(value={"mypage-booking","mypageReviewWriteResult"})
-	public String mypageBooking(@AuthenticationPrincipal MemberVO memberVO, Model model) {
-		List<BookingVO> CartList = memberMyPageMapper.findMyBookingList(memberVO.getId());
+	public String mypageBooking(@AuthenticationPrincipal MemberVO memberVO, Model model,Pagination p, String pageNo) {
+		
+		String id = memberVO.getId();
+		
+		//페이지네이션 
+		
+		if(pageNo==null) {// 클라이언트가 pageNo를 전달하지 않는 경우에는 첫 페이지를 보여준다.
+			//memberMyPageMapper.getTotalPostCountFromCart() => 총 리스트의 갯수
+			p = new Pagination(memberMyPageMapper.getTotalPostCountFromBooking(id));
+		}else {
+			p = new Pagination(memberMyPageMapper.getTotalPostCountFromBooking(id), Integer.parseInt(pageNo));
+		}
+		
+		//파라미터로 페이지 네이션 객체와 아이디를 보내야하므로 map으로 구성해야한다. 
+		
+		HashMap<String, Object> bookingMap=new HashMap<String, Object>();
+
+		bookingMap.put("pagination", p);
+		bookingMap.put("id", id);
+		
+		//페이지네이션 객체 보내기
+		model.addAttribute("pagination", p);
+		
+		
+		
+		List<BookingVO> CartList = memberMyPageMapper.findMyBookingList(bookingMap);
 		System.out.println(CartList);
 		
 		model.addAttribute("CartList", CartList);
