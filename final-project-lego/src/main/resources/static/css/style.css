@@ -1,6 +1,16 @@
 
 @import url("https://fonts.googleapis.com/css?family=Poppins:300,400,500");
 
+
+.slider-wrap{
+	background-color: red;
+}
+.slider-test{
+	background-color: blue;
+}
+
+
+
 .all_star{
 	width:180px; height:25px; margin:10px;font-family: "Font Awesome 5 Free"; font-weight:900; 
 }
