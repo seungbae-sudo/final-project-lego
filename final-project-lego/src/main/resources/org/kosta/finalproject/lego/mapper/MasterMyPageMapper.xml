@@ -134,6 +134,9 @@
 	select s.skills from master_detail m,skills s where m.id = #{value} and m.skills_id>0 and m.skills_id = s.skills_id
 	</select>
 	
+	<select id="MyReview" resultType="org.kosta.finalproject.lego.vo.ReviewVO">
+	select avg(NVL(score,0)) from review where master_id=#{value}
+	</select>
 
 	
 </mapper>
