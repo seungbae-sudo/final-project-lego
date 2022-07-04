@@ -105,6 +105,7 @@ public class SurveyController {
 		surveyMapper.BookingToMaster(bookingVO);
 	return "redirect:/mypage";
 	}
+	
 	@RequestMapping("/searchKeyword")
 	public String search(Model model, String keyword) {
 		System.out.println(keyword);
@@ -113,6 +114,9 @@ public class SurveyController {
 		map.put("KEYWORD2", keyword);
 		List<MasterVO> list = surveyMapper.findMasterByKeyword(map);
 		model.addAttribute("masterList", list);
-		return "find-master-list";
+		
+		model.addAttribute("userSearchKeyword", keyword);
+		
+		return "search-master-list";
 	}
 }
