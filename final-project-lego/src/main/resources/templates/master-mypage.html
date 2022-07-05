@@ -34,7 +34,7 @@
 							<span class="media-heading skill-box" th:text="|분야 : ${Mycategory.lessonSort}|"></span>
 							<span class="skill-box">
 								<span> 보유기술 : </span>
-								<span th:each="ms:${MySkills}" class="media-heading" th:text=" ${ms.skills}"></span>
+								<span th:each="ms:${MySkills}" class="media-heading" th:text="|${ms.skills}  |"></span>
 							</span>	
 									
 							<div class="master-info-box">

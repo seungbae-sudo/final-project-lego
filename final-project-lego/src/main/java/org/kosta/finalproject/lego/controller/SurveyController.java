@@ -71,17 +71,17 @@ public class SurveyController {
 		return "master-detail";
 	}
 	
-	/*
-	 * @RequestMapping("/reviewForMember") public String reviewForMember(Model
-	 * model, String masterId) { model.addAttribute("masterList",
-	 * surveyMapper.findMasterDetailList(masterId));
-	 * 
-	 * 
-	 * List<ReviewVO> rvo = masterMyPageMapper.findMyReview(masterId);
-	 * model.addAttribute("review", rvo);
-	 * 
-	 * return "mastermypage-review-for-member"; }
-	 */
+	
+	  @RequestMapping("/reviewForMember") public String reviewForMember(Model
+	  model, String masterId) { model.addAttribute("masterList",
+	  surveyMapper.findMasterDetailList(masterId));
+	  
+	  
+	  List<ReviewVO> rvo = masterMyPageMapper.findMyReview1(masterId);
+	  model.addAttribute("review", rvo);
+	  
+	  return "mastermypage-review-for-member"; }
+	 
 	
 	
 	@RequestMapping("/bookingForm")

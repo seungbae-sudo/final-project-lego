@@ -121,13 +121,22 @@ public class MasterMyPageController {
 
 	// 내가 쓴 글
 	@RequestMapping("/mastermypage-cart")
-	public String mastermypageCart(@AuthenticationPrincipal MemberVO memberVO, Model model) {
+	public String mastermypageCart(@AuthenticationPrincipal MemberVO memberVO, Model model, Pagination p, String pageNo) {
 		model.addAttribute("member", memberVO);
 		model.addAttribute("masterDetail", masterMyPageMapper.findMasterDetailList(memberVO.getId()));
 		String id = memberVO.getId();
-		List<BoardVO> list = masterMyPageMapper.findMyBoard(id);
+		if(pageNo==null) {// 클라이언트가 pageNo를 전달하지 않는 경우에는 첫 페이지를 보여준다.
+			p = new Pagination(masterMyPageMapper.findMyBoardTotalList(memberVO.getId()));
+		}else {
+			p = new Pagination(masterMyPageMapper.findMyBoardTotalList(memberVO.getId()), Integer.parseInt(pageNo));
+		}
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("pagination", p);
+		map.put("id", memberVO.getId());
+		List<BoardVO> list = masterMyPageMapper.findMyBoard(map);
 		model.addAttribute("BoardList", list);
-		
+		model.addAttribute("pagination",p);
+		System.out.println(list);
 		ImageVO image = masterMyPageMapper.getImageId(memberVO.getId());
 		String src = "./images/"+image.getMemberVO().getId()+"/"+image.getImageName();
 		model.addAttribute("src",src);
@@ -138,22 +147,28 @@ public class MasterMyPageController {
 	// 리뷰
 	@RequestMapping("/mastermypage-review")
 	public String mastermypageReview(@AuthenticationPrincipal MemberVO memberVO, Model model, Pagination p, String pageNo) {
-		
+		String id = memberVO.getId();
+		//pagenation
 		if(pageNo==null) {// 클라이언트가 pageNo를 전달하지 않는 경우에는 첫 페이지를 보여준다.
 			p = new Pagination(masterMyPageMapper.findTotalList(memberVO.getId()));
 		}else {
 			p = new Pagination(masterMyPageMapper.findTotalList(memberVO.getId()), Integer.parseInt(pageNo));
 		}
-		
 		model.addAttribute("member", memberVO);
 		model.addAttribute("masterDetail", masterMyPageMapper.findMasterDetailList(memberVO.getId()));
-		Map<String, Object> map = new HashMap<String, Object>();
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
 		map.put("pagination", p);
 		map.put("id", memberVO.getId());
 		
 		List<ReviewVO> rvo = masterMyPageMapper.findMyReview(map);
-		model.addAttribute("review", rvo);
 		
+		model.addAttribute("pagination",p);
+		model.addAttribute("review", rvo);
+		System.out.println(rvo);
+		
+		//image
 		ImageVO image = masterMyPageMapper.getImageId(memberVO.getId());
 		String src = "./images/"+image.getMemberVO().getId()+"/"+image.getImageName();
 		model.addAttribute("src",src);
@@ -163,11 +178,21 @@ public class MasterMyPageController {
 
 	// 상담목록
 	@RequestMapping("/mastermypage-consult")
-	public String mastermypageConsult(@AuthenticationPrincipal MemberVO memberVO, Model model, BookingVO bookingVO) {
+	public String mastermypageConsult(@AuthenticationPrincipal MemberVO memberVO, Model model, BookingVO bookingVO, Pagination p, String pageNo) {
 		model.addAttribute("member", memberVO);
-		List<BookingVO> bkvo = masterMyPageMapper.findMyBooking(memberVO.getId());
 		model.addAttribute("masterDetail", masterMyPageMapper.findMasterDetailList(memberVO.getId()));
+		
+		if(pageNo==null) {// 클라이언트가 pageNo를 전달하지 않는 경우에는 첫 페이지를 보여준다.
+			p = new Pagination(masterMyPageMapper.findBookingTotalList(memberVO.getId()));
+		}else {
+			p = new Pagination(masterMyPageMapper.findBookingTotalList(memberVO.getId()), Integer.parseInt(pageNo));
+		}
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("pagination", p);
+		map.put("id", memberVO.getId());
+		List<BookingVO> bkvo = masterMyPageMapper.findMyBooking(map);
 		model.addAttribute("Booking", bkvo);
+		model.addAttribute("pagination",p);
 		
 		ImageVO image = masterMyPageMapper.getImageId(memberVO.getId());
 		String src = "./images/"+image.getMemberVO().getId()+"/"+image.getImageName();

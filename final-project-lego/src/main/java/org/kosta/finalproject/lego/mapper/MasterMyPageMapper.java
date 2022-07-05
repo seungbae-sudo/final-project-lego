@@ -1,5 +1,6 @@
 package org.kosta.finalproject.lego.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,6 +12,7 @@ import org.kosta.finalproject.lego.vo.ImageVO;
 import org.kosta.finalproject.lego.vo.MasterVO;
 import org.kosta.finalproject.lego.vo.MemberVO;
 import org.kosta.finalproject.lego.vo.MessageVO;
+import org.kosta.finalproject.lego.vo.Pagination;
 import org.kosta.finalproject.lego.vo.ReviewVO;
 import org.kosta.finalproject.lego.vo.SkillsVO;
 
@@ -23,12 +25,14 @@ public interface MasterMyPageMapper {
 
 	void updateMaster(MasterVO mvo);
 
-	List<BoardVO> findMyBoard(String id);
+	List<BoardVO> findMyBoard(HashMap<String, Object> map);
 	
-	List<BookingVO> findMyBooking(String id);
+	List<BookingVO> findMyBooking(HashMap<String, Object> map);
 
-	List<ReviewVO> findMyReview(Map<String, Object> map);
+	List<ReviewVO> findMyReview(HashMap<String, Object> map);
 
+	List<ReviewVO> findMyReview1(String id);
+	
 	List<MessageVO> findMyMessage(String id);
 	
 	List<MessageVO> findMyMessageDetail(MessageVO messageVO);
@@ -47,5 +51,8 @@ public interface MasterMyPageMapper {
 	
 	int findTotalList(String id);
 	
+	int findMyBoardTotalList(String id);
+	
+	int findBookingTotalList(String id);
 	
 }

@@ -1,130 +1,93 @@
-select * from MEMBER
-select * from MEMBER where id = 'gosugosu@gosu'
-update member set name='1',address='1',password='1',tel='1' where id='ksg@ksg'
+-- 일반 회원 update
+update member set password=1,name=1,address=#{address},tel=#{tel} where id=#{id}
 
-select * from category
-update member set password=#{password},name=#{name},address=#{address},tel=#{tel} where id=#{id}
-
+-- 고수 update
 update master set specifications=#{specifications},career=#{career} where id=#{id}
 
-update master set specifications = '1' , career='1' where id='asdf@asd'
-select * from master where id = 'asdf@asd'
+-- 고수 정보 list
+select id,career,category_no,specifications from master where id =#{value}
 
-회원member, 게시판board, 카테고리board_category, 
-보드넘버,제목(보드테이블),카테고리(카테고	리테이블)
+-- 고수 category list select
+select distinct s.skills,d.days,t.times,m.id
+from(
+select *
+from master_detail m,skills s
+where m.id = #{value}
+and m.skills_id>0
+and m.skills_id = s.skills_id
+)s, (select *
+from master_detail m,times t 
+where m.id = #{value}
+and m.times_id>0 
+and m.times_id = t.times_id
+)t, (select * 
+from master_detail m,days d 
+where m.id = #{value}
+and m.days_id>0 
+and m.days_id = d.days_id
+)d, master_detail m
+where m.id = #{value}
 
-select board_title from board where id = 'lsj@naver.com'
-select * from board_category
-select * from category_no
-select category_no from board
-
-select board_no,board_title,category_no from board where id = 'lsj@naver.com'
-
-select 
-
-보드아이디 로그인한사람 아이디 같아야됨 <조건
-
-select b.board_no,b.board_title,c.category_name from board b, category c where 
-
-select b.board_no,b.board_title,c.category_name
-from board b 
-inner join board_category c on b.id = 'lsj@naver.com'
-
-select b.board_no,b.board_title,c.category_name
+-- 고수 my board select
+select b.board_no,b.board_title,c.category_name, c.category_no
 from board b, board_category c
-where b.id = 'lsj@naver.com'
+where b.id = #{value}
 and c.category_no = b.category_no
 
-select * from booking
-distinct(중복 제거)
-
-select m.name, b.booking_day
-from booking b, master ms, member m
-where ms.id = '33@33' and m.id = b.member_id
-
-
-부킹id = 로그인한 고수 아이디
-
-고객 이름 상담 날짜 
-
-멤버 아이디에 따른 멤버 이름 상담(부킹) 시간
-
-select name, id
-from member
-where id = 'lsj@naver.com'
-
-
+-- 고수 booking list select 
 select m.*, b.*
-	from member m, booking b
-	where m.id = b.member_id
-	and b.master_id = 'as@as'
-
-	select * from skills
-	
-	select * from booking
-	
-	
-	
-select b.booking_content
 from member m, booking b
 where m.id = b.member_id
-and b.master_id = 'as@as'
+and b.master_id = #{value}
 
-insert into review(review_no,score,review_content,id,master_id)
-values(review_seq.nextval,1,'평균값','ssg@kosta.com','ksg@kosta.com'); 
+-- 고수 booking detail select
+select b.booking_no,b.booking_day,b.booking_content,b.master_id,b.member_id,m.name 
+from booking b,member m 
+where booking_no=#{value}
+and m.id=b.member_id	
 
-select * from review
+-- 고수 review select
+select r.id, r.score, r.review_content, m.name
+from review r, member m
+where r.id = m.id
+and r.master_id = #{value}
 
-select * from member where id = '33@33'
+-- 고수 pagenation,review select
+select rnum,score,review_content,id,name
+from 
+(
+select row_number() over(order by review_no desc) as rnum, r.score, r.review_content, r.id, m.name
+from review r, member m
+where r.id = m.id
+and r.master_id = #{id} 
+)
+where rnum between #{pagination.startRowNumber} and #{pagination.endRowNumber}
 
-create sequence review_seq
-select * from review
+-- 고수 review pagenation total list
+select count(*)
+from 
+(
+select r.id, r.score, r.review_content, m.name
+from review r, member m
+where r.id = m.id
+and r.master_id = #{value}
+)
 
-   		select b.*,bc.*
-		from board b, board_category bc
-		where b.id = 'as@as'
-		and b.category_no = bc.category_no
+-- 고수가 받은 message select
+select ms.id, ms.receive_id as id,m.name,i.image_name
+from message ms, member m , images i
+where ms.receive_id = #{value}
+and ms.id=m.id
+and ms.id=i.id(+)
+group by ms.id,ms.receive_id,m.name,i.image_name
 
-select * from message
-
-select ms.message_content
-from message ms, member m, master ma
-where m.id=ms.id and ma.id='as@as' and ms.receive_id = ma.id
-
-insert into message(message_no,message_content,receive_id,id,receive_date)
-values(message_seq.nextval,'바보야!','sg@sg','as@as',sysdate)
-
-create sequence message_seq
-
-select ms.id, m.name
-from message ms, member m, master ma
-where m.id=ms.id and ma.id='as@as' and ms.receive_id = ma.id
-group by ms.id, m.name
-
-select ms.id, m.name, ms.message_content, ms.receive_date
-from message ms, member m
-where m.id = ms.receive_id and m.id = 'as@as'
-
-select m.name, ms.*
-from member m, message ms
-where ms.id = 'as@as' and ms.receive_id = m.id and ms.receive_id = 'lsj@naver.com'
-
-select * from message where id = 'as@as'
-
-receive_id = 받는사람
-id = 보내는 사람
-member id
-
-select ms.id, ms.receive_id, ms.message_content
-from member m, message ms
-where m.id = ms.id and ms.id = 'as@as'
-
+-- message detail select
 select ms.message_no,ms.message_content, ms.receive_id, ms.receive_date,m.name
 from message ms, member m 
 where ms.id=#{sendMvo.id}
 and ms.receive_id=#{reMvo.id}
 and ms.receive_id=m.id
-
+         
 union all
          
 select ms.message_no,ms.message_content, ms.receive_id, ms.receive_date,m.name
@@ -132,243 +95,133 @@ from message ms, member m
 where ms.id=#{reMvo.id}
 and ms.receive_id=#{sendMvo.id}
 and ms.receive_id=m.id
-         
 order by receive_date asc
 
-select * from message where id = 'as@as'
+-- 고수 message 전송
+insert into message(message_no, message_content, id,receive_id,receive_date) values(message_no_seq.nextval, #{messageContent},#{sendMvo.id},#{reMvo.id},sysdate)
 
-delete from message where receive_id = 'as@as'
+-- 고수 image 
+select * from images where id=#{value}
 
-select i.*,m.id from images i, member m where i.id = m.id
+-- 고수 category select
+select c.lesson_sort from master m,category c where id = #{value} and m.category_no = c.category_no
 
-update images set image_name = '김승배님.jpg' where id = '534534@423423'
+-- 고수 skill select
+select s.skills from master_detail m,skills s where m.id = #{value} and m.skills_id>0 and m.skills_id = s.skills_id
 
-select * from images
+-- 고수 review 평균값
+select round(avg(r.score),1) as score from review r where master_id=#{value}
 
-select * from master where id = 'ksg@1'
+-- 고수 pagenation + my board 
+select rnum,board_no,board_title,category_name,category_no
+from 
+(
+select row_number() over(order by b.board_no desc) as rnum, b.board_no, b.board_title, c.category_name, c.category_no
+from board b, board_category c
+where b.id = #{id}
+and c.category_no = b.category_no
+) where rnum between #{pagination.startRowNumber} and #{pagination.endRowNumber}
 
-select * from category
+-- 고수 pagenation + my board list count
+select count(*)
+from
+(
+select b.board_no, b.board_title, c.category_name, c.category_no
+from board b, board_category c
+where b.id = #{value}
+and c.category_no = b.category_no
+)
 
-select * from master_detail where id = 'ksg@1'
+-- 고수 pagenation + booking list select 
+select rnum,name,booking_no,booking_day,booking_content,member_id
+from 
+(
+select row_number() over(order by b.booking_no desc) as rnum, m.name, b.booking_no, b.booking_day,b.booking_content, b.member_id
+from member m, booking b
+where m.id = b.member_id
+and b.master_id = #{id}
+)where rnum between #{pagination.startRowNumber} and #{pagination.endRowNumber}
 
-select * from skills
+-- 고수 pagenation + booking list count
+select count(*)
+from
+(
+select m.name, b.booking_no, b.booking_day,b.booking_content, b.member_id
+from member m, booking b
+where m.id = b.member_id
+and b.master_id = #{value}
+)
 
-select * from category
+-----------------------------------------------------------------------------------------------------------------------------------------
+--연습--
 
-select * from skills
+-- 고수 pagenation,review select
+select rnum,score,review_content,id,name
+from 
+(
+select row_number() over(order by review_no desc) as rnum, r.score, r.review_content, r.id, m.name
+from review r, member m
+where r.id = m.id
+and r.master_id = 'ksg@kosta.com' 
+)
+where rnum between #{pagination.startRowNumber} and #{pagination.endRowNumber}
 
-select * from times
-
-select * from days
-select * from master_detail
-
-select * from master_detail where id = 'ksg@1' skils_id=16(중국어) times_id=1(이른오전 9시이전) days_id=1 월요일
-
-select distinct m.* from skills s,times t,days d,master_detail m where m.id = 'ksg@1'
-
-select * from master_detail m,skills s where m.id = '2022@2' and m.skills_id>0 and m.skills_id = s.skills_id
-select * from master_detail m,times t where m.id = '2022@2' and m.times_id>0 and m.times_id = t.times_id
-select * from master_detail m,days d where m.id = '2022@2' and m.days_id>0 and m.days_id = d.days_id
-
-select r.board_no, r.board_title,r.hits, m.name
-from(
-	select b.board_no, b.board_title,b. hits, b.id
-	from  board b, board_category bc
-	where b.category_no=1
-	and b.category_no=bc.category_no
-) r, member m
-where  r.id=m.id
-
-select distinct s.skills,d.days,t.times,m.id
-from(
-	select *
-	from master_detail m,skills s
-	where m.id = '2022@2'
-	and m.skills_id>0
-	and m.skills_id = s.skills_id
-)s, (select *
-	from master_detail m,times t 
-	where m.id = '2022@2'
-	and m.times_id>0 
-	and m.times_id = t.times_id
-)t, (select * 
-	from master_detail m,days d 
-	where m.id = '2022@2' 
-	and m.days_id>0 
-	and m.days_id = d.days_id
-)d, master_detail m
-where m.id = '2022@2'
-select * from images
-select * from category
-
-
-
-
-
-union all
-select t.times from master_detail m,times t where m.id = '2022@2' and m.times_id>0 and m.times_id = t.times_id
-union all
-select d.days
-from master_detail m,days d where m.id =  '2022@2' and m.days_id>0 and m.days_id = d.days_id
-
-select c.lesson_sort from master m,category c where id = '2022@2' and m.category_no = c.category_no
-union all
-select s.skills from master_detail m,skills s where m.id =  '2022@2'and m.skills_id>0 and m.skills_id = s.skills_id
-
-select m.name, i.image_name
-from message ms, member m, images i
-where m.id = ms.receive_id 
-and ms.id = 'ksg@1'
-and i.id(+) = ms.receive_id
-group by m.name, i.image_name
-
-select b.*,m.name 
-from booking b,member m 
-where booking_no=10
-and m.id=b.member_id
-
-select * from message
-
-select * from booking
-
-booking_no
-booking_day
-booking_content
-master_id
-
-member_id
-
-
-
-select * from member
-
-select * from message 
-message receive_id, id
-select * from images
-images id
-select * from member
-id
-    
-select m.name, i.image_name ,m.id, ms.receive_id
-from message ms, member m, images i
-where ms.id = m.id
-and ms.id = 'ksg@kosta.com'
-and i.id(+) = ms.receive_id
-group by m.name, i.image_name ,m.id, ms.receive_id
-
-	union all
-
-select m.name, i.image_name, m.id, ms.receive_id
-from message ms, member m, images i
-where ms.receive_id = 'ksg@kosta.com'
-and m.id = ms.id
-and i.id(+) = ms.id
-group by m.name, i.image_name,m.id, ms.receive_id
-	
-	select ms.*,m.*,i.* from message ms, member m, images i
-	
-	
-	select ms.receive_id as id,m.name,i.image_name
-	from message ms, member m , images i
-	where ms.id= 'jyp@kosta.com'
-	and ms.receive_id=m.id
-	and ms.receive_id=i.id(+)
-	group by ms.receive_id,m.name,i.image_name
-
-select * from message
-
-select * from 
-//
-	select m.name, i.image_name ,m.id, ms.receive_id
-	from message ms, member m, images i
-	where ms.id = m.id
-	and ms.receive_id = 'ksg@kosta.com'
-	and i.id(+) = ms.receive_id
-	
-	and ms.receive_id = 'ksg@kosta.com'
-	group by m.name, i.image_name ,m.id, ms.receive_id
-	
-		union all
-	
-	select m.name, i.image_name, m.id, ms.receive_id
-	from message ms, member m, images i
-	where ms.receive_id = 'ksg@kosta.com'
-	and m.id = ms.id
-	and i.id(+) = ms.id
-	group by m.name, i.image_name,m.id, ms.receive_id
-//
-
-select ms.id, ms.receive_id as id,m.name,i.image_name
-from message ms, member m , images i
-where ms.id= 'ksg@kosta.com'
-and ms.receive_id=m.id
-and ms.receive_id=i.id(+)
-group by ms.id,ms.receive_id,m.name,i.image_name
-
-select * from message member
-
-select 
-
-select ms.id, ms.receive_id as id,m.name,i.image_name
-	from message ms, member m , images i
-	where ms.receive_id = 'ksg@kosta.com'
-	and ms.receive_id=m.id
-	and ms.receive_id=i.id(+)
-	group by ms.id,ms.receive_id,m.name,i.image_name
-
-	select * from images, message
-	
-	select ms.id, ms.receive_id as id,m.name,i.image_name,i.id
-	from message ms, member m , images i
-	where ms.receive_id = 'ksg@kosta.com'
-	and ms.id=m.id
-	and ms.id=i.id(+)
-	group by ms.id,ms.receive_id,m.name,i.image_name,i.id
-
-	select avg(NVL(score,0)) from review where master_id='ksg@kosta.com'
-select * from review
-
-select q.rnum,q.qna_no ,q.ask, q.id, m.name
-			from
-			(select row_number() over(order by qna_no desc) as rnum , qna_no, ask, id 
-			from qna) q , member m
-			where q.id = m.id and q.rnum between 1 and 5
-			
-
-		
-
+-- 고수 pagenation total list
+select count(*)
+from 
+(
 select r.id, r.score, r.review_content, m.name
-	from review r, member m
-	where r.id = m.id
-	and r.master_id = 'ksg@kosta.com'			
-	
-select * from review
+from review r, member m
+where r.id = m.id
+and r.master_id = 'ksg@kosta.com'
+)
 
-					select rnum,score,review_content,id,name
-					from 
-						(
-					select row_number() over(order by review_no desc) as rnum, r.score, r.review_content, r.id, m.name
-					from review r, member m
-					where r.id = m.id
-					and r.master_id = 'ksg@kosta.com' 
-					)
-					where rnum between 1 and 5
+-- 고수 my board select
+select b.board_no,b.board_title,c.category_name, c.category_no
+from board b, board_category c
+where b.id = #{value}
+and c.category_no = b.category_no
+
+-- 고수 pagenation
+select rnum,board_no,board_title,category_name,category_no
+from 
+(
+select row_number() over(order by b.board_no desc) as rnum, b.board_no, b.board_title, c.category_name, c.category_no
+from board b, board_category c
+where b.id = #{id}
+and c.category_no = b.category_no
+) where rnum between #{pagination.startRowNumber} and #{pagination.endRowNumber}
+
+-- 고수 카운트
+select count(*)
+from
+(
+select row_number() over(order by b.board_no desc) as rnum, b.board_no, b.board_title, c.category_name, c.category_no
+from board b, board_category c
+where b.id = #{value}
+and c.category_no = b.category_no
+)
+
+-- 고수 booking list select 
+select rnum,name,booking_no,booking_day,booking_content,member_id
+from 
+(
+select row_number() over(order by b.booking_no desc) as rnum, m.name, b.booking_no, b.booking_day,b.booking_content, b.member_id
+from member m, booking b
+where m.id = b.member_id
+and b.master_id = #{id}
+)where rnum between #{pagination.startRowNumber} and #{pagination.endRowNumber}
+
+
+
+
+
 
 select count(*)
-					from 
-						(
-					select row_number() over(order by review_no desc) as rnum, r.score, r.review_content, r.id, m.name,r.master_id
-					from review r, member m
-					where r.id = m.id
-					
-					)where  master_id =  'ksg@kosta.com' 
-
-
-
-
-
-	select q.id,q.score,q.review_content,m.name ,row_number() over(order by review_no desc) as rnum
-			from
-			(select  review_no, score, review_content, id, master_id
-			from review) q, member m
-			where q.id = m.id and q.master_id = 'ksg@kosta.com' and row_number() over(order by review_no desc) between 1 and 5
+from 
+(
+select r.id, r.score, r.review_content, m.name
+from review r, member m
+where r.id = m.id
+and r.master_id = 'ksg@kosta.com'
+)
