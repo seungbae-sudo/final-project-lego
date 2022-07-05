@@ -67,6 +67,7 @@
         
       </div>
     </div>
+    <div class="pagination-box">
     <ul class="pagination-wrap" th:if="${total>0}">
       <th:block th:if ="${pagination.previousPageGroup }">
      <li class="page-item" ><a class="page-link" th:href="@{/QnAList(pageNo=${pagination.startPageOfPageGroup-1})}" th:text="|이전|">Previous</a></li> 
@@ -89,7 +90,7 @@
      
     </th:block>
      </ul>
-
+</div>
   </div>
 </section>
 </div>
