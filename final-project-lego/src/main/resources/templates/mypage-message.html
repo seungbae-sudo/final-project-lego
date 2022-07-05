@@ -46,6 +46,10 @@
 						<li><a class="active" th:href="@{/mypage-message}">메세지함</a></li>
 					</ul>
 					<div class="messge-list">
+					<h2 class="no-result no-message" th:if="${messageList.size()}==0">보낸 메세지가 없습니다
+						<br> 고수님을 찾아 메세지를 보내보세요!
+						<span><i class='far fa-sad-cry' style='font-size:24px'></i></span>
+					</h2>
 						<div th:each="message:${messageList}">
 							<div>
 								<a th:href="@{/message-detail(receiveId=${message.reMvo.id},receiveName=${message.reMvo.name})}">

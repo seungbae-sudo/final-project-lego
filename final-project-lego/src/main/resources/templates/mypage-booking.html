@@ -63,7 +63,7 @@
 								</tbody>
 							</table>
 							
-							<h2 th:unless="${TotalBooking}>0">예약하신 상담 내역이 없습니다!</h2>
+							<h2  class="no-result" th:unless="${TotalBooking}>0">예약하신 상담 내역이 없습니다! <span><i class='far fa-sad-cry' style='font-size:24px'></i></span></h2>
 							<div class="pagination-box">
 							<ul class="pagination-wrap" th:if="${TotalBooking}>0">
 							<th:block th:if ="${pagination.previousPageGroup }">
