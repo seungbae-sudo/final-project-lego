@@ -271,3 +271,4 @@ select score,specifications,id,name,image_name
 		) 
 		where 6> rownum 
 
+select * from member
