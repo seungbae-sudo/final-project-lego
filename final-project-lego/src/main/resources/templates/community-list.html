@@ -68,7 +68,7 @@
                 <tr th:each="list:${CategoryList}">
                   <td class="text-center"> <a href="" th:text=${list.bcvo.categoryName}>카테고리종류</a></td>
                   <td class="text-center"> <a href="" th:text=${list.boardNo}>No부분</a></td>
-                  <td class="text-center"> <a class="board-list" th:href="@{/board-detail(boardNo=${list.boardNo},categoryNo=${list.bcvo.categoryNo})}" th:text=${list.boardTitle} >제목부분</a></td>
+                  <td class="text-center"> <a class="board-list" th:href="@{/board-detail(boardNo=${list.boardNo},categoryNo=${list.bcvo.categoryNo},nowPage=${pagination.nowPage})}" th:text=${list.boardTitle} >제목부분</a></td>
                   <td class="text-center"> <a href="" th:text=${list.mvo.name}>작성자부분</a></td>
                   <td class="text-center"> <a href="" th:text=${list.hits}>조회수부분</a></td>
                   <td class="text-center"> <i class="fa fa-thumbs-o-up"></i> <a href="" th:text=${list.likes}>좋아요부분</a></td>
@@ -83,7 +83,7 @@
     	<ul class="pagination-wrap">
           <th:block th:if ="${pagination.previousPageGroup }">
     		 <li class="page-item" >
-    		 		<a class="page-link" th:href="@{/returnList(pageNo=${pagination.startPageOfPageGroup-1},categoryNo=${CategoryList.get(0).bcvo.categoryNo})}" th:text="|Previous|">Previous</a>
+    		 		<a class="page-link" th:href="@{/returnList(pageNo=${pagination.startPageOfPageGroup-1},categoryNo=${CategoryList.get(0).bcvo.categoryNo})}" th:text="|이전|">Previous</a>
     		 </li> 
      	 </th:block>
     
@@ -103,9 +103,10 @@
     
      	 <th:block th:if ="${pagination.nextPageGroup}">
     			 <li class="page-item" >
-    			 		<a class="page-link" th:href="@{/returnList(pageNo=${pageNo},categoryNo=${CategoryList.get(0).bcvo.categoryNo})}" th:text="|Next|"></a>
+    			 		<a class="page-link" th:href="@{/returnList(pageNo=${pagination.endPageOfPageGroup+1},categoryNo=${CategoryList.get(0).bcvo.categoryNo})}" th:text="|다음|"></a>
     			 </li> 
       	</th:block>
+      	
     
     </ul>
   </div>
