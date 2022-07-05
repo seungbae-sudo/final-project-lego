@@ -67,9 +67,10 @@
         
       </div>
     </div>
-    <ul class="pagination-wrap">
+    <div class="pagination-box">
+    <ul class="pagination-wrap" th:if="${total>0}">
       <th:block th:if ="${pagination.previousPageGroup }">
-     <li class="page-item" ><a class="page-link" th:href="@{/QnAList(pageNo=${pagination.startPageOfPageGroup-1})}" th:text="|Previous|">Previous</a></li> 
+     <li class="page-item" ><a class="page-link" th:href="@{/QnAList(pageNo=${pagination.startPageOfPageGroup-1})}" th:text="|이전|">Previous</a></li> 
      
     </th:block>
     
@@ -85,11 +86,11 @@
     </th:block>
     
       <th:block th:if ="${pagination.nextPageGroup}">
-     <li class="page-item" ><a class="page-link" th:href="@{/QnAList(pageNo=${pagination.endPageOfPageGroup+1})}" th:text="|Next|"></a></li> 
+     <li class="page-item" ><a class="page-link" th:href="@{/QnAList(pageNo=${pagination.endPageOfPageGroup+1})}" th:text="|다음|"></a></li> 
      
     </th:block>
      </ul>
-
+</div>
   </div>
 </section>
 </div>

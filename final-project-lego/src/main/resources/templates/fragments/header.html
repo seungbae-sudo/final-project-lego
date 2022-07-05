@@ -40,6 +40,10 @@
 					</form>
 					<form action="" th:action="@{/logout}" method="post" sec:authorize="isAuthenticated()">
 					<button type="submit">로그아웃</button>
+					<br><br>
+					<div >
+					<span class="myName" sec:authentication="principal.name"></span><span>님, 반갑습니다!</span>
+					</div>
 					</form>
 					<!-- / .nav .navbar-nav .navbar-right -->
 				</div>

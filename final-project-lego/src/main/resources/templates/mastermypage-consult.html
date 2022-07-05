@@ -62,7 +62,8 @@
 								</tbody>
 							</table>
 						</div>
-						<ul class="pagination-wrap">
+						<div class="pagination-box">
+						<ul th:if="${total>0}" class="pagination-wrap">
 							 <th:block th:if ="${pagination.previousPageGroup }">
 							     <li class="page-item" >
 							     	<a class="page-link" th:href="@{/mastermypage-consult(pageNo=${pagination.startPageOfPageGroup-1})}" th:text="|이전|">Previous</a>
@@ -89,6 +90,7 @@
 							     </li> 
 							 </th:block>
     						</ul>
+    					</div>
 					</div>
 				</div>
 			</div>

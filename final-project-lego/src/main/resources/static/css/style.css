@@ -28,6 +28,12 @@
     background-color: antiquewhite;
 }
 
+/* ~님 반갑습니다 */
+.myName{
+	font-weight: bold;
+	font-size: 15px;
+}
+
 /* 고수찾기 */
 
 #slides{

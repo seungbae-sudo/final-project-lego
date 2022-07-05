@@ -17,7 +17,8 @@
                         <thead>
                            <tr>
                               <th class="col-md-2 text-center" >고수 이미지</th>
-								<th class="col-md-7 text-center">고수 정보</th>
+								<th class="col-md-2 text-center"></th>
+								<th class="col-md-5 text-center">고수 정보</th>
 								<th class="col-md-2 text-center">북마크</th>
                            </tr>
                         </thead>
@@ -40,11 +41,13 @@
                                  	</div>
                               
                                  </div>
+                                 </td>
+                                 <td class="col-md-5 text-center">
                                  <pre class="info-detail" th:text="${list.specifications}">
                                     
                                  </pre>
-                              		
-                              </td>
+                              		</td>
+                              
                               
                               <td class="text-center add-cart">                          		
                               		<input type="hidden" name="id" th:value="${list.id}">
@@ -58,10 +61,10 @@
                         </tbody>                     
                      </table>
                       </form>
-                      
-                      <ul class="pagination-wrap">
+                      <div class="pagination-box">
+                      <ul class="pagination-wrap" th:if="${total>0}">
       <th:block th:if ="${pagination.previousPageGroup }">
-     <li class="page-item" ><a class="page-link" th:href="@{/findMasterList(pageNo=${pagination.startPageOfPageGroup-1},skills=${skills},times=${times},days=${days},categoryNo=${categoryNo})}" th:text="|Previous|">Previous</a></li> 
+     <li class="page-item" ><a class="page-link" th:href="@{/findMasterList(pageNo=${pagination.startPageOfPageGroup-1},skills=${skills},times=${times},days=${days},categoryNo=${categoryNo})}" th:text="|이전|">Previous</a></li> 
      
     </th:block>
     
@@ -77,10 +80,11 @@
     </th:block>
     
       <th:block th:if ="${pagination.nextPageGroup}">
-     <li class="page-item" ><a class="page-link" th:href="@{/findMasterList(pageNo=${pagination.endPageOfPageGroup+1},skills=${skills},times=${times},days=${days},categoryNo=${categoryNo})}" th:text="|Next|"></a></li> 
+     <li class="page-item" ><a class="page-link" th:href="@{/findMasterList(pageNo=${pagination.endPageOfPageGroup+1},skills=${skills},times=${times},days=${days},categoryNo=${categoryNo})}" th:text="|다음|"></a></li> 
      
     </th:block>
      </ul>
+     </div>
                   </div>
   </div>
   
