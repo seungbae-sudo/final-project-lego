@@ -59,9 +59,21 @@ select  row_number() over(order by board_no ) as rnum,b.board_no, b.board_title,
 from  board b, board_category bc
 where b.category_no=bc.category_no
 and b.id='ssg@kosta.com'
-order by b.board_no
+order by b.board_no desc
 )
-where  rnum between 1and 5
+where  board_no between 1and 5
+order by board_no desc
+
+
+select rnum,board_no,board_title,category_name
+from(
+select  row_number() over(order by board_no ) as rnum,b.board_no, b.board_title, bc.category_name
+from  board b, board_category bc
+where b.category_no=bc.category_no
+and b.id='ssg@kosta.com'
+order by rnum desc
+)
+where  rnum  between  1 and 5
 order by board_no desc
 
 
