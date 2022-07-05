@@ -34,7 +34,10 @@
                                  		<span th:text="${list.name}" class="col-md-3 master-name find-master-name" >고수 이름</span>
                                  	</a> 
                                  	<span class="star_1 fa master-star">&#xf005</span>
-                                 	<span class="master-score" th:text="|${list.reviewVO.score} 점|"> 4.5점</span>
+                                 	<div th:each="s:${score}">
+                                 	<span class="master-score" th:text="${s.score}" th:if="${s.msvo.id}==${list.id}"> 4.5점</span>                        	        
+                                 	</div>
+                                 	
                                  </div>
                                  <pre class="info-detail" th:text="${list.specifications}">
                                     
@@ -50,11 +53,35 @@
                               
                                     
                               </td>                             	
-                           </tr>                         
-                        </tbody>                     
+                           </tr>       
+                                          
+                        </tbody>     
+                                          
                      </table>
                       </form>
                   </div>
+                  <ul class="pagination-wrap">
+      <th:block th:if ="${pagination.previousPageGroup }">
+     <li class="page-item" ><a class="page-link" th:href="@{/searchKeyword(pageNo=${pagination.startPageOfPageGroup-1},keyword=${userSearchKeyword})}" th:text="|Previous|">Previous</a></li> 
+     
+    </th:block>
+    
+  <th:block th:each="pageNo:${#numbers.sequence(pagination.startPageOfPageGroup,pagination.endPageOfPageGroup)}">
+ 	
+ 	<th:block th:if="${pageNo==pagination.nowPage}">
+ 
+    		  <li class="page-item active"><a class="page-link" th:href="@{/searchKeyword(pageNo=${pageNo},keyword=${userSearchKeyword})}" th:text="${pageNo}"></a></li>
+    	</th:block>
+    	<th:block th:if="${pageNo!=pagination.nowPage}">
+    		  <li class="page-item"><a class="page-link" th:href="@{/searchKeyword(pageNo=${pageNo},keyword=${userSearchKeyword})}" th:text="${pageNo}"></a></li>
+    	</th:block>
+    </th:block>
+    
+      <th:block th:if ="${pagination.nextPageGroup}">
+     <li class="page-item" ><a class="page-link" th:href="@{/searchKeyword(pageNo=${pagination.endPageOfPageGroup+1},keyword=${userSearchKeyword})}" th:text="|Next|"></a></li> 
+     
+    </th:block>
+     </ul>  
   </div>
   
   

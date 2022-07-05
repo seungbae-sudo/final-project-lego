@@ -18,8 +18,8 @@
 		<div class="slider-item th-fullpage hero-area slider-height"
 			style="background-image: url(./images/1.jpg);">
 			<div class="container">
-				<div class="row">
-					<div class="col-lg-8 text-center">
+				<div class="row" sec:authorize="hasRole('ROLE_MEMBER')">
+					<div class="col-lg-8 text-center" >
 						<p data-duration-in=".3" data-animation-in="fadeInUp"
 							data-delay-in=".1">레슨 고수</p>
 						<h1 data-duration-in=".3" data-animation-in="fadeInUp"
@@ -29,11 +29,25 @@
 						<a data-duration-in=".3" data-animation-in="fadeInUp"
 							data-delay-in=".8" class="btn" th:href="@{/find-master-raking}">고수 프로필 보러가기</a>
 					</div>
+	
+				</div>
+				<div class="row" sec:authorize="isAnonymous()||hasRole('ROLE_MASTER')">
+					<div class="col-lg-8 text-center" >
+						<p data-duration-in=".3" data-animation-in="fadeInUp"
+							data-delay-in=".1">레슨 고수</p>
+						<h1 data-duration-in=".3" data-animation-in="fadeInUp"
+							data-delay-in=".5">
+							이달의 최고의 고수는 <br> 궁금하다면 여기 클릭해주세요!
+						</h1>
+						<a data-duration-in=".3" data-animation-in="fadeInUp"
+							data-delay-in=".8" class="btn">고수 프로필 보러가기</a>
+					</div>
+	
 				</div>
 			</div>
 		</div>
 		<div class="slider-item th-fullpage hero-area slider-height"
-			style="background-image: url(./images/3-1.jpg);">
+			style="background-image: url(./images/3-1.jpg);" sec:authorize="hasRole('ROLE_MEMBER')">
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-8 text-left">
@@ -50,7 +64,24 @@
 			</div>
 		</div>
 		<div class="slider-item th-fullpage hero-area slider-height"
-			style="background-image: url(./images/2-1.PNG);">
+			style="background-image: url(./images/3-1.jpg);"  sec:authorize="isAnonymous()||hasRole('ROLE_MASTER')">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-8 text-left">
+						<p data-duration-in=".3" data-animation-in="fadeInUp"
+							data-delay-in=".1">커뮤니티</p>
+						<h1 data-duration-in=".3" data-animation-in="fadeInUp"
+							data-delay-in=".5">
+							필요없는 악기 있음? 너두? 나두! <br>그럼 우리 나누어볼까?
+						</h1>
+						<a data-duration-in=".3" data-animation-in="fadeInUp"
+							data-delay-in=".8" class="btn" >커뮤니티 나눔 바로가기</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="slider-item th-fullpage hero-area slider-height"
+			style="background-image: url(./images/2-1.PNG);" sec:authorize="hasRole('ROLE_MEMBER')">
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-8 text-right">
@@ -66,31 +97,74 @@
 				</div>
 			</div>
 		</div>
+		<div class="slider-item th-fullpage hero-area slider-height"
+			style="background-image: url(./images/2-1.PNG);" sec:authorize="isAnonymous()||hasRole('ROLE_MASTER')">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-8 text-right">
+						<p data-duration-in=".3" data-animation-in="fadeInUp"
+							data-delay-in=".1">커뮤니티</p>
+						<h1 data-duration-in=".3" data-animation-in="fadeInUp"
+							data-delay-in=".5">
+							너 이거 할 줄 알아? 모르지? <br> 내가 알려줄게! 나만 따라와!
+						</h1>
+						<a data-duration-in=".3" data-animation-in="fadeInUp"
+							data-delay-in=".8" class="btn" >커뮤니티 꿀팁 바로가기</a>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 
 	<section class="product-category">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-6 ">
-					<div class="category-box">
-						<a th:href="@{/findMasterForm}"> 
+					<div class="category-box" sec:authorize="hasRole('ROLE_MEMBER')">
+							
+						<a th:href="@{/findMasterForm}" > 						
 						<img src="./images/find-master.jpg" alt="" />
 							<div class="content find-community">
 								<span>레슨 바로가기</span>
 								<p>당신의 고수를 찾아보세요</p>
 							</div>
 						</a>
+						
 					</div>
+					<div class="category-box" sec:authorize="hasRole('ROLE_MASTER')">											
+						<img src="./images/find-master.jpg" alt="" />
+							<div class="content find-community">
+								<span>레슨 바로가기</span>
+								<p>당신의 고수를 찾아보세요</p>
+							</div>						
+					</div>
+					<div class="category-box" sec:authorize="isAnonymous()">											
+						<img src="./images/find-master.jpg" alt="" />
+							<div class="content find-community">
+								<span>레슨 바로가기</span>
+								<p>당신의 고수를 찾아보세요</p>
+							</div>						
+					</div>
+					
 				</div>
 				<div class="col-md-6">
-					<div class="category-box">
-						<a th:href="@{/goCommunity(categoryNo=1)}">  
+					<div class="category-box" sec:authorize="hasAnyRole('ROLE_MASTER','ROLE_MEMBER')">
+						<a th:href="@{/goCommunity(categoryNo=1)}" >  
 							<img src="./images/community.jpg" alt="" class="index-image"/>
 							<div class="content find-community">
 								<span>커뮤니티 바로가기</span>
 								<p>꿀팁/추천/나눔</p>
 							</div>
 						</a>
+					</div>
+					<div class="category-box"  sec:authorize="isAnonymous()">
+					
+							<img src="./images/community.jpg" alt="" class="index-image"/>
+							<div class="content find-community">
+								<span>커뮤니티 바로가기</span>
+								<p>꿀팁/추천/나눔</p>
+							</div>
+					
 					</div>
 				</div>
 			</div>
