@@ -36,13 +36,13 @@
 				<p>1. 어떤 서비스를 제공할 수 있나요?</p>
 				<input type="hidden" th:name="id" th:value="${id}">
 				 <div th:each="cate: ${category}" th:if="${cate.categoryNo>0}">				
-					<input  type="checkbox"  th:name="categoryNo" th:text="${cate.lessonSort}" th:value="${cate.categoryNo}"> 
+					<input  type="radio"  th:name="categoryNo" th:text="${cate.lessonSort}" th:value="${cate.categoryNo}"> 
 				</div> 
 				 <div >				
-					<input  type="number"  th:name="career" placeholder="경력"> 
+					<input  type="number"  th:name="career" placeholder="경력" required="required"> 
 				</div> 
 				 <div >	
-					 <textarea th:name="specifications" rows="10" cols="50" >
+					 <textarea th:name="specifications" rows="10" cols="50" required="required">
 						
 					</textarea>					
 				</div> 
