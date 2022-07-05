@@ -28,7 +28,7 @@ public class HomeController {
 				log.info("Home: 인증받지 않은 사용자");
 			}
 			model.addAttribute("message", "SpringBoot Security Thymeleaf");
-			System.out.println(authentication);
+			
 		return "index";
 	}
 	

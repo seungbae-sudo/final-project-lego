@@ -30,7 +30,7 @@ public class MemberController {
 	@PostMapping("/register")
 	public String register(MemberVO memberVO, String member, HttpServletRequest request,
 			@RequestBody MultipartFile file) {
-		System.out.println(member);
+		
 		File folder = new File("C:\\finalproject\\final-project-lego\\final-project-lego\\src\\main\\resources\\static\\images\\"+memberVO.getId());
 		ImageVO imageVO = new ImageVO();
 		imageVO.setImageName(file.getOriginalFilename());
@@ -48,7 +48,7 @@ public class MemberController {
 				e.printStackTrace();
 			}
 			
-			System.out.println(file.getOriginalFilename());
+			
 			return "redirect:/";
 		} else {
 			masterService.registerMember(memberVO);
