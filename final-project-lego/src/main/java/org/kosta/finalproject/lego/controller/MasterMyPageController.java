@@ -46,10 +46,7 @@ public class MasterMyPageController {
 	// 첫번째 매개변수 Authentication : Spring Security 인증 정보 , 두번째 매개변수 memberVO : 수정폼에서
 	// 전달받는 데이터
 	public String updateMemberAction(Authentication authentication, String specifications, String career,
-			MemberVO memberVO, String deleteFile, @RequestBody MultipartFile file) {
-		// System.out.println(specifications+career);
-		// System.out.println(memberVO);
-		
+		MemberVO memberVO, String deleteFile, @RequestBody MultipartFile file) {
 		MemberVO vo = (MemberVO) authentication.getPrincipal();
 		MasterVO mvo = new MasterVO();
 		mvo.setId(vo.getId());
@@ -69,13 +66,11 @@ public class MasterMyPageController {
 		File folder = new File("C:\\finalproject\\final-project-lego\\final-project-lego\\src\\main\\resources\\static\\images\\"+memberVO.getId()+"\\"+deleteFile);
 		imageVO.setImageName(file.getOriginalFilename());
 		imageMapper.updateImage(imageVO);
-		System.out.println(imageVO);
 		try {
 			folder.delete();
 			file.transferTo(new File(
 					"C:\\finalproject\\final-project-lego\\final-project-lego\\src\\main\\resources\\static\\images\\"+memberVO.getId()+"\\"
 							+ file.getOriginalFilename()));
-
 		} catch (IllegalStateException | IOException e) {
 			e.printStackTrace();
 		}
@@ -90,17 +85,11 @@ public class MasterMyPageController {
 		model.addAttribute("Mycategory",masterMyPageMapper.MyCategory(memberVO.getId()));
 		List<SkillsVO> svo = masterMyPageMapper.MySkills(memberVO.getId());
 		model.addAttribute("MySkills",svo);
-		
 		List<ReviewVO> rvo = masterMyPageMapper.MyReview(memberVO.getId());
-		model.addAttribute("reAGV", rvo); 
-		System.out.println(rvo);
-		
-		System.out.println(rvo);
-		
+		model.addAttribute("reAGV", rvo);
 		ImageVO image = masterMyPageMapper.getImageId(memberVO.getId());
 		String src = "./images/"+image.getMemberVO().getId()+"/"+image.getImageName();
 		model.addAttribute("src",src);
-		
 		return "master-mypage";
 	}
 
@@ -110,13 +99,10 @@ public class MasterMyPageController {
 	public String updateForm(@AuthenticationPrincipal MemberVO memberVO, Model model) {
 		model.addAttribute("member", memberVO);
 		model.addAttribute("masterDetail", masterMyPageMapper.findMasterDetailList(memberVO.getId()));
-		
 		ImageVO image = masterMyPageMapper.getImageId(memberVO.getId());
-		System.out.println(image);
 		String src = "./images/"+image.getMemberVO().getId()+"/"+image.getImageName();
 		model.addAttribute("ImageVO",image);
 		model.addAttribute("src",src);
-		System.out.println(image);
 		return "masterUpdateForm";
 	}
 
@@ -158,21 +144,15 @@ public class MasterMyPageController {
 		model.addAttribute("masterDetail", masterMyPageMapper.findMasterDetailList(memberVO.getId()));
 		model.addAttribute("total",masterMyPageMapper.findTotalList(memberVO.getId()));
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		
 		map.put("pagination", p);
 		map.put("id", memberVO.getId());
-		
 		List<ReviewVO> rvo = masterMyPageMapper.findMyReview(map);
-		
 		model.addAttribute("pagination",p);
 		model.addAttribute("review", rvo);
-		System.out.println(rvo);
-		
 		//image
 		ImageVO image = masterMyPageMapper.getImageId(memberVO.getId());
 		String src = "./images/"+image.getMemberVO().getId()+"/"+image.getImageName();
 		model.addAttribute("src",src);
-		
 		return "mastermypage-review";
 	}
 
@@ -181,7 +161,6 @@ public class MasterMyPageController {
 	public String mastermypageConsult(@AuthenticationPrincipal MemberVO memberVO, Model model, BookingVO bookingVO, Pagination p, String pageNo) {
 		model.addAttribute("member", memberVO);
 		model.addAttribute("masterDetail", masterMyPageMapper.findMasterDetailList(memberVO.getId()));
-		
 		if(pageNo==null) {// 클라이언트가 pageNo를 전달하지 않는 경우에는 첫 페이지를 보여준다.
 			p = new Pagination(masterMyPageMapper.findBookingTotalList(memberVO.getId()));
 		}else {
@@ -194,28 +173,23 @@ public class MasterMyPageController {
 		List<BookingVO> bkvo = masterMyPageMapper.findMyBooking(map);
 		model.addAttribute("Booking", bkvo);
 		model.addAttribute("pagination",p);
-		
 		ImageVO image = masterMyPageMapper.getImageId(memberVO.getId());
 		String src = "./images/"+image.getMemberVO().getId()+"/"+image.getImageName();
 		model.addAttribute("src",src);
-		
 		return "mastermypage-consult";
 	}
 
 	// 상담목록 디테일
 	@RequestMapping("/mastermypage-consult-detail")
 	public String mastermypageConsultDetail(@AuthenticationPrincipal MemberVO memberVO, Model model,
-			BookingVO bookingVO, int BookingNo) {
+		BookingVO bookingVO, int BookingNo) {
 		model.addAttribute("member", memberVO);
 		BookingVO bkvo = masterMyPageMapper.findMyBookingDetail(BookingNo);
 		model.addAttribute("masterDetail", masterMyPageMapper.findMasterDetailList(memberVO.getId()));
 		model.addAttribute("Booking", bkvo);
-		
-		
 		ImageVO image = masterMyPageMapper.getImageId(memberVO.getId());
 		String src = "./images/"+image.getMemberVO().getId()+"/"+image.getImageName();
 		model.addAttribute("src",src);
-		
 		return "mastermypage-consult-detail";
 	}
 
@@ -225,30 +199,16 @@ public class MasterMyPageController {
 		model.addAttribute("member", memberVO);
 		model.addAttribute("masterDetail", masterMyPageMapper.findMasterDetailList(memberVO.getId()));
 		List<MessageVO> list = masterMyPageMapper.findMyMessage(memberVO.getId());
-		
-		System.out.println(list);
-		
-		
 		  ArrayList<String> imageSrcList=new ArrayList(); 
 		  for(int i=0;i<list.size();i++) { 
 			  String imageName=list.get(i).getImageVo().getImageName(); 
 			  String listSrc ="./images/" +list.get(i).getSendMvo().getId()+ "/" + imageName;
 			  list.get(i).getImageVo().setImageName(listSrc); 
 		  }
-		 
-		 
-		
 		model.addAttribute("messageList", list);
-		System.out.println(list);
-		
 		ImageVO image = masterMyPageMapper.getImageId(memberVO.getId());
 		String src = "./images/"+image.getMemberVO().getId()+"/"+image.getImageName();
 		model.addAttribute("src",src);
-		
-		System.out.println(list);
-		
-		
-		
 		return "mastermypage-Message";
 	}
 
@@ -256,46 +216,30 @@ public class MasterMyPageController {
 	@RequestMapping("/mastermypage-message-detail")
 	public String mastermypageMessageDetail(@AuthenticationPrincipal MemberVO memberVO, Model model,
 			@RequestParam("receiveID") String receiveID, @RequestParam("receiveName") String receiveName) {
-		
 		model.addAttribute("member", memberVO);
 		model.addAttribute("masterDetail", masterMyPageMapper.findMasterDetailList(memberVO.getId()));
-		
-		System.out.println(receiveID+" "+receiveName);
-		
-		
 		MessageVO messageVO = new MessageVO();
 		MemberVO reMvo = new MemberVO();
 		reMvo.setId(receiveID);
-		
-		//System.out.println(reMvo+"왜 안되는지? ");
 		MemberVO sendMvo = new MemberVO();
 		sendMvo.setId(memberVO.getId());
 		messageVO.setReMvo(reMvo);
 		messageVO.setSendMvo(sendMvo);
-		
-		System.out.println(messageVO+"왜 안되는지? ");
 		List<MessageVO> message = masterMyPageMapper.findMyMessageDetail(messageVO);
-		//System.out.println(message);
-		
-		
 		model.addAttribute("receiveID", receiveID);
 		model.addAttribute("receiveName", receiveName);
-		
 		model.addAttribute("messageDetail", message);
 		model.addAttribute("sendId", memberVO.getId());
-		
-		
 		ImageVO image = masterMyPageMapper.getImageId(memberVO.getId());
 		String src = "./images/"+image.getMemberVO().getId()+"/"+image.getImageName();
 		model.addAttribute("src",src);
-		
 		return "mastermypage-message-detail";
 	}
 
 	// 메세지 전송
 	@PostMapping("/masterSendMessage")
 	public String masterSendMessage(Model model, MessageVO messageVO, String receiveId, String sendId,
-			String receiveName, RedirectAttributes redirect, @AuthenticationPrincipal MemberVO memberVO) {
+		String receiveName, RedirectAttributes redirect, @AuthenticationPrincipal MemberVO memberVO) {
 		MemberVO reVO = new MemberVO();
 		MemberVO seVO = new MemberVO();
 		reVO.setId(receiveId);
@@ -305,13 +249,9 @@ public class MasterMyPageController {
 		messageMapper.message(messageVO);
 		redirect.addAttribute("receiveID", receiveId);
 		redirect.addAttribute("receiveName", receiveName);
-		System.out.println();
-		
 		ImageVO image = masterMyPageMapper.getImageId(memberVO.getId());
 		String src = "./images/"+image.getMemberVO().getId()+"/"+image.getImageName();
 		model.addAttribute("src",src);
-		
 		return "redirect:/mastermypage-message-detail";
 	}
-
 }
