@@ -32,7 +32,7 @@
 							<h2 class="media-heading" th:text="${masterList.name}">고수</h2>
 									
 							<div class="master-info-box">
-								<span>평점</span>
+								<span class="media-heading" th:each="re:${reAGV1}" th:text="|평점 : ${re.score}점|">평점</span>
 								<span class="media-heading" th:text="|경력 : ${masterList.career} 년|"></span>
 							</div>
 							

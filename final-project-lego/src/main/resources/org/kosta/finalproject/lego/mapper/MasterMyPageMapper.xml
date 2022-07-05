@@ -119,12 +119,7 @@
 		and m.id=b.member_id		
 	</select>
 	
-	<select id="findMyReview1" resultType="org.kosta.finalproject.lego.vo.ReviewVO" resultMap="ReviewResult">
-	select r.id, r.score, r.review_content, m.name
-	from review r, member m
-	where r.id = m.id
-	and r.master_id = #{value}
-	</select>
+	
 	
 	<select id="findMyReview" parameterType="hashmap"  resultType="org.kosta.finalproject.lego.vo.ReviewVO" resultMap="ReviewResult">
 	select rnum,score,review_content,id,name
@@ -139,6 +134,30 @@
 	</select>
 	
 	<select id="findTotalList" resultType="int" parameterType="string">
+	select count(*)
+	from 
+	(
+	select r.id, r.score, r.review_content, m.name
+	from review r, member m
+	where r.id = m.id
+	and r.master_id = #{value}
+	)
+	</select>
+	
+	<select id="findMyReview1" parameterType="hashmap" resultType="org.kosta.finalproject.lego.vo.ReviewVO" resultMap="ReviewResult">
+	select rnum,id,score,review_content,name
+	from 
+	(
+	select row_number() over(order by r.review_no desc) as rnum, r.id, r.score, r.review_content, m.name
+	from review r, member m
+	where r.id = m.id
+	and r.master_id = #{id}
+	)
+	where rnum between #{pagination.startRowNumber} and #{pagination.endRowNumber}
+
+	</select>
+	
+	<select id="findTotalList1" resultType="int" parameterType="string">
 	select count(*)
 	from 
 	(
@@ -195,6 +214,10 @@
 	</select>
 	
 	<select id="MyReview" resultType="org.kosta.finalproject.lego.vo.ReviewVO">
+	select nvl(round(avg(r.score),1),0) as score from review r where master_id=#{value}
+	</select>
+	
+	<select id="MyReview1" resultType="org.kosta.finalproject.lego.vo.ReviewVO">
 	select nvl(round(avg(r.score),1),0) as score from review r where master_id=#{value}
 	</select>
 	
