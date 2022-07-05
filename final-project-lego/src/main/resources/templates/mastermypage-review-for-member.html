@@ -32,7 +32,7 @@
 							<h2 class="media-heading" th:text="${masterList.name}">고수</h2>
 									
 							<div class="master-info-box">
-								<span>평점</span>
+								<span class="media-heading" th:each="re:${reAGV1}" th:text="|평점 : ${re.score}점|">평점</span>
 								<span class="media-heading" th:text="|경력 : ${masterList.career} 년|"></span>
 							</div>
 							
@@ -61,7 +61,7 @@
 					
 					<div class="dashboard-wrapper user-dashboard profile-detail">
 						<div  class="review-list-wrap">
-							<div th:each="rv:${review}" class="review-list">
+							<div th:each="rv:${review1}" class="review-list">
 								<div class="rivew-giver-info">
 									<span th:text="${rv.mvo.name}"></span>
 									<span class="star_1 fa master-star">&#xf005</span>
@@ -71,8 +71,35 @@
 									<span th:text="${rv.reviewContent}"></span>
 								</div>
 							</div>
+							<ul class="pagination-wrap">
+							 <th:block th:if ="${pagination.previousPageGroup }">
+							     <li class="page-item" >
+							     	<a class="page-link" th:href="@{/reviewForMember(pageNo=${pagination.startPageOfPageGroup-1},masterId=${masterId})}" th:text="|이전|">Previous</a>
+							     </li>   
+							 </th:block>
+							    
+							  <th:block th:each="pageNo:${#numbers.sequence(pagination.startPageOfPageGroup,pagination.endPageOfPageGroup)}">
+							 	<th:block th:if="${pageNo==pagination.nowPage}">
+							 		<li class="page-item active">
+							 			<a class="page-link" th:href="@{/reviewForMember(pageNo=${pageNo},masterId=${masterId})}" th:text="${pageNo}"></a>
+							 		</li>
+						    	</th:block>
+						    	
+						    	<th:block th:if="${pageNo!=pagination.nowPage}">
+						    		  <li class="page-item">
+						    		  	<a class="page-link" th:href="@{/reviewForMember(pageNo=${pageNo},masterId=${masterId})}" th:text="${pageNo}"></a>
+					    		  	</li>
+						    	</th:block>
+						    </th:block>
+							    
+					      <th:block th:if ="${pagination.nextPageGroup}">
+							     <li class="page-item" >
+							     	<a class="page-link" th:href="@{/reviewForMember(pageNo=${pagination.endPageOfPageGroup+1},masterId=${masterId})}" th:text="|다음|"></a>
+							     </li> 
+							 </th:block>
+    						</ul>
 						</div>
-								</div>
+					</div>
 													
 				</div>
 			</div>

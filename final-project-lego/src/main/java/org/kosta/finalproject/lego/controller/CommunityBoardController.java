@@ -59,7 +59,9 @@ public class CommunityBoardController {
 	@RequestMapping(value = { "/goCommunity", "/board-posting-result" ,"/boardUpdateResult","/boardDeleteResult","/returnList"})
 	public String goCommunity(Model model, @RequestParam("categoryNo") int categoryNo,HttpServletRequest request, Pagination p, String pageNo ) {
 		
+		
 		System.out.println(categoryNo);
+		System.out.println(pageNo);
 		if(pageNo==null) {// 클라이언트가 pageNo를 전달하지 않는 경우에는 첫 페이지를 보여준다.
 			p = new Pagination(communityBoardMapper.getTotalPostCount(categoryNo));
 		}else {
@@ -71,7 +73,6 @@ public class CommunityBoardController {
 		map.put("categoryNo", categoryNo);
 		List<BoardVO> list =communityBoardMapper.findAllCommunityList(map);
 
-		System.out.println(list.get(0));
 		
 		
 		model.addAttribute("boardList", list);
@@ -118,7 +119,7 @@ public class CommunityBoardController {
 	//findBoardDetailByBoardNo //findCommentList	//updateHits
 	@RequestMapping("/board-detail")
 	@SuppressWarnings({ "unchecked"})
-	public String boradDetail(int boardNo, Model model, int categoryNo,@AuthenticationPrincipal MemberVO memberVO,Authority authority, HttpServletRequest request) {
+	public String boradDetail(int boardNo, Model model, int categoryNo,@AuthenticationPrincipal MemberVO memberVO,Authority authority, HttpServletRequest request,int nowPage) {
 		HttpSession session = request.getSession(false);
 		BoardCategoryVO bcvo = new BoardCategoryVO();
 		bcvo.setCategoryNo(categoryNo);
@@ -130,6 +131,10 @@ public class CommunityBoardController {
 		model.addAttribute("commentList", list);
 		model.addAttribute("mvo", memberVO);
 		model.addAttribute("authority", authority);
+		
+		//nowpage 보내기
+		model.addAttribute("nowPage", nowPage);
+		
 		
 		//조회수 (권한주기, 재증가방지) 
 		

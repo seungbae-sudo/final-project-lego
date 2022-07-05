@@ -25,12 +25,29 @@
 	<section class="user-dashboard page-wrapper">
 	  <div class="container">
 			<h3 style='margin-left: 20px;' class="title-detail" th:text="${bvo.boardTitle}" >제목</h3>
+				<span  sec:authorize="hasRole('ROLE_MASTER')" th:if="${mvo.id}==${bvo.mvo.id}">
+						<a th:href="@{/mastermypage-cart}">
+							<i class='fas fa-edit' style='font-size:18px'></i> 내가 쓴 글목록 
+						</a>
+					</span>
+					<span sec:authorize="hasRole('ROLE_MEMBER')" th:if="${mvo.id}==${bvo.mvo.id}">
+						<a th:href="@{/mypage-wrote}">
+							<i class='fas fa-edit' style='font-size:18px'></i> 내가 쓴 글목록 
+						</a>
+					</span>
 				<hr>
 				<ul class="info" style='display: flex; justify-content: flex-end;'>
 					<li style='margin-right: 20px;'>작성자 : <span th:text="${bvo.mvo.name}" ></span></li>
 					<li style='margin-right: 20px;'>작성일 : <span th:text="${bvo.boardDate}"></span></li>
 					<li style='margin-right: 20px;'>조회수 : <span th:text="${bvo.hits}"></span></li>
-					<li><a th:href="@{/returnList(boardNo=${bvo.boardNo},categoryNo=${categoryNo})}"><i class='fas fa-list'></i>목록</a></li><!--  pageNo=${nowPage}" -->
+					<li>
+						<a th:href="@{/returnList(boardNo=${bvo.boardNo},categoryNo=${categoryNo},pageNo=${nowPage})}">
+							<i class='fas fa-list'></i> 목록 
+						</a>
+					</li>
+						
+					
+					
 				</ul>
 				
 				<div class="content">
@@ -51,6 +68,7 @@
 				<div class="text-center space-top" th:if="${mvo.id}==${bvo.mvo.id}">
 					<button type="button" class="boardBtn btn btn-success" onclick="updatePost()">수정</button>
 					<button type="button"  class="boardBtn btn btn-success" onclick="deletePost()">삭제</button>
+					
 				</div>
 				
 
@@ -108,7 +126,6 @@
 			                 			<input type="hidden" name="commentNo" th:value="${comList.commentNo}">
 										<input type="hidden" name="categoryNo" th:value="${categoryNo}"> 
 										<input type="hidden" name="boardNo" th:value="${bvo.boardNo}">
-									<!--<input type="hidden" name="pageNo" value="${pageNo}"> -->
 										 <button type="submit" onclick="comdeletepost()">삭제</button>
 		                 		</form>
 		                 	</td>
@@ -117,7 +134,7 @@
 				</table>
 			</div>
 		
-		
+		</div>
 		</section>
 		
 		<script type="text/javascript">
@@ -146,5 +163,5 @@
 		}
 	
 		</script>
-	
+	</div>
 </html>

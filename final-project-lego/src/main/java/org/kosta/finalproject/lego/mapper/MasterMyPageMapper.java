@@ -31,7 +31,7 @@ public interface MasterMyPageMapper {
 
 	List<ReviewVO> findMyReview(HashMap<String, Object> map);
 
-	List<ReviewVO> findMyReview1(String id);
+	List<ReviewVO> findMyReview1(HashMap<String, Object> map);
 	
 	List<MessageVO> findMyMessage(String id);
 	
@@ -50,6 +50,8 @@ public interface MasterMyPageMapper {
 	List<ReviewVO> MyReview(String id);
 	
 	int findTotalList(String id);
+	
+	int findTotalList1(String id);
 	
 	int findMyBoardTotalList(String id);
 	

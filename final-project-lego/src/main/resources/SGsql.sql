@@ -110,7 +110,7 @@ select c.lesson_sort from master m,category c where id = #{value} and m.category
 select s.skills from master_detail m,skills s where m.id = #{value} and m.skills_id>0 and m.skills_id = s.skills_id
 
 -- 고수 review 평균값
-select nvl(round(avg(r.score),1),0) as score from review r where master_id= '123@123.com'
+select nvl(round(avg(r.score),1),0) as score from review r where master_id= 'ksg@kosta.com'
 
 -- 고수 pagenation + my board 
 select rnum,board_no,board_title,category_name,category_no
@@ -225,3 +225,49 @@ from review r, member m
 where r.id = m.id
 and r.master_id = 'ksg@kosta.com'
 )
+
+
+select rnum,id,score,review_content,name
+from 
+	(
+	select row_number() over(order by r.review_no desc) as rnum, r.id, r.score, r.review_content, m.name
+	from review r, member m
+	where r.id = m.id
+	and r.master_id = #{id}
+	)
+	where rnum between #{pagination.startRowNumber} and #{pagination.endRowNumber}
+
+select * from review
+
+select count(*)
+	from 
+	(
+	select r.id, r.score, r.review_content, m.name
+	from review r, member m
+	where r.id = m.id
+	and r.master_id = 'ksg@kosta.com'
+	)
+
+select rnum,id,score,review_content,name
+	from 
+	(
+	select row_number() over(order by r.review_no desc) as rnum, r.id, r.score, r.review_content, m.name
+	from review r, member m
+	where r.id = m.id
+	and r.master_id = 'ksg@kosta.com'
+	)
+	where rnum between 1 and 6
+
+
+select score,specifications,id,name,image_name
+		from (
+			select nvl(round(avg(r.score),1),0) as score, to_char(dbms_lob.substr(ms.specifications, 4000)) as specifications, m.id,m.name,i.image_name
+			from member m, master ms, review r, images i
+			where m.id=ms.id
+			and m.id=r.master_id
+			and m.id=i.id
+			group by to_char(dbms_lob.substr(ms.specifications, 4000)), m.id,m.name,i.image_name
+			order by score desc
+		) 
+		where 6> rownum 
+

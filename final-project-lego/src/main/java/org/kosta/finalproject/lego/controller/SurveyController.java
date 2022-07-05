@@ -98,20 +98,38 @@ public class SurveyController {
 	@RequestMapping("/surveyFindMasterById")
 	public String surveyFindMasterById(Model model, String masterId) {
 		model.addAttribute("masterList", surveyMapper.findMasterDetailList(masterId));
-
+		List<ReviewVO> mrvo = masterMyPageMapper.MyReview(masterId);
+		model.addAttribute("reAGV1", mrvo);
 		return "master-detail";
 	}
 	
-	
+		
 	  @RequestMapping("/reviewForMember") public String reviewForMember(Model
-	  model, String masterId) { model.addAttribute("masterList",
-	  surveyMapper.findMasterDetailList(masterId));
+	  model, String masterId, Pagination p, String pageNo) { 
+		  model.addAttribute("masterList",surveyMapper.findMasterDetailList(masterId));
+	  if(pageNo==null) {// 클라이언트가 pageNo를 전달하지 않는 경우에는 첫 페이지를 보여준다.
+			p = new Pagination(masterMyPageMapper.findTotalList1(masterId));
+		}else {
+			p = new Pagination(masterMyPageMapper.findTotalList1(masterId), Integer.parseInt(pageNo));
+		}
 	  
-	  
-	  List<ReviewVO> rvo = masterMyPageMapper.findMyReview1(masterId);
-	  model.addAttribute("review", rvo);
-	  
-	  return "mastermypage-review-for-member"; }
+	  HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("pagination", p);
+		map.put("id", masterId);
+		
+		List<ReviewVO> rvo = masterMyPageMapper.findMyReview1(map);
+		
+		List<ReviewVO> mrvo = masterMyPageMapper.MyReview(masterId);
+		model.addAttribute("reAGV1", mrvo);
+		
+		model.addAttribute("masterId", masterId);
+		model.addAttribute("pagination",p);
+		model.addAttribute("review1", rvo);
+		
+		System.out.println(rvo);
+	  return "mastermypage-review-for-member";
+	  }
 	 
 	
 	
