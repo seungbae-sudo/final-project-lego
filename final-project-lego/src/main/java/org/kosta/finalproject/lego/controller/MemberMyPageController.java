@@ -43,7 +43,6 @@ public class MemberMyPageController {
 	private final MessageMapper messageMapper;
 	private final CartMapper cartMapper;
 
-	// mypage로 가는 건 homeController에서 ! 옮김!
 	@RequestMapping(value={"/mypage","updateResult"})
 	public String mypage(@AuthenticationPrincipal MemberVO memberVO, Model model) {
 		// 프로필 이미지 경로 
@@ -169,7 +168,6 @@ public class MemberMyPageController {
 			p = new Pagination(memberMyPageMapper.getTotalPostCountFromBooking(id), Integer.parseInt(pageNo));
 		}
 		model.addAttribute("TotalBooking",memberMyPageMapper.getTotalPostCountFromBooking(id));
-		//파라미터로 페이지 네이션 객체와 아이디를 보내야하므로 map으로 구성해야한다. 
 		
 		HashMap<String, Object> bookingMap=new HashMap<String, Object>();
 
@@ -178,12 +176,8 @@ public class MemberMyPageController {
 		
 		//페이지네이션 객체 보내기
 		model.addAttribute("pagination", p);
-		
-		
-		
-		List<BookingVO> CartList = memberMyPageMapper.findMyBookingList(bookingMap);
 
-		
+		List<BookingVO> CartList = memberMyPageMapper.findMyBookingList(bookingMap);
 		model.addAttribute("CartList", CartList);
 		
 		// 프로필 이미지 경로 
@@ -248,37 +242,27 @@ public class MemberMyPageController {
 		vo.setAddress(memberVO.getAddress());	
 		vo.setTel(memberVO.getTel());
 		
-		
 		// 회원 프로필 사진 변경
-
 		ImageVO findImageVO = new ImageVO();
 		findImageVO.setMemberVO(memberVO);
-		
 		findImageVO =memberMyPageMapper.getImageById(memberVO.getId());
 		File folder = new File("C:\\finalproject\\final-project-lego\\final-project-lego\\src\\main\\resources\\static\\images\\"+memberVO.getId()+"\\"+findImageVO.getImageName());
-		
-		
-		
+
 		//이제 findImageVO에 image_name을 파라미터값으로 받은 image name으로 설정
 		findImageVO.setImageName(file.getOriginalFilename());
 		
 		//image name 이 바뀐 vo로 sql update 실행
 		 memberMyPageMapper.updateImage(findImageVO);
-
+		 
 			  try { 
 				  //이전에 존재한 파일을 삭제
 				  folder.delete(); 
-				  
 				  //update된 vo에서 imageName을 가져와 파일을 생성
 				  file.transferTo(
-						  new File( "C:\\finalproject\\final-project-lego\\final-project-lego\\src\\main\\resources\\static\\images\\"+memberVO.getId()+"\\" +file.getOriginalFilename()));
-			  
+						  new File( "C:\\finalproject\\final-project-lego\\final-project-lego\\src\\main\\resources\\static\\images\\"+memberVO.getId()+"\\" +file.getOriginalFilename()));  
 			  } catch (IllegalStateException | IOException e) { 
 				  e.printStackTrace(); 
 				  }
-			 
-		  
-		
 		return"redirect:updateResult";
 	}
 
