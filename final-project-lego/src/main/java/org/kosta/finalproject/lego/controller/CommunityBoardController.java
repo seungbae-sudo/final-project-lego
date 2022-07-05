@@ -24,13 +24,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import lombok.RequiredArgsConstructor;
 
-@Controller
-@RequiredArgsConstructor
-public class CommunityBoardController {
-	private final CommunityBoardMapper communityBoardMapper;
+	@Controller
+	@RequiredArgsConstructor
+	public class CommunityBoardController {
+		private final CommunityBoardMapper communityBoardMapper;
 	
-
-
 
 	@RequestMapping("/writeForm")
 	public String boardWrite() {
@@ -39,8 +37,8 @@ public class CommunityBoardController {
 
 	@PostMapping("/posting")
 	public String boardPosting(@AuthenticationPrincipal MemberVO memberVO, BoardVO boardVO, int categoryNo, Model model,
-			RedirectAttributes redirect) {
-
+		RedirectAttributes redirect) {
+	
 		BoardCategoryVO bcvo = communityBoardMapper.findBCVO(categoryNo);
 		boardVO.setBcvo(bcvo);
 		boardVO.setMvo(memberVO);
@@ -50,7 +48,7 @@ public class CommunityBoardController {
 		return "redirect:board-posting-result";
 	}
 
-	//위에다 쓰면 categoryNo을 가져오지 못하기 때문에 모든 값을 가져오기 위해서 아래 안에다 써줌
+	//위에다 쓰면 categoryNo을 가져오지 못하기 때문에 모든 값을 가져오기 위해서 아래 안에다 써주었다.
 	/*
 	 * public int getTotalPostCount() { return
 	 * communityBoardMapper.getTotalPostCount(); }
@@ -59,9 +57,6 @@ public class CommunityBoardController {
 	@RequestMapping(value = { "/goCommunity", "/board-posting-result" ,"/boardUpdateResult","/boardDeleteResult","/returnList"})
 	public String goCommunity(Model model, @RequestParam("categoryNo") int categoryNo,HttpServletRequest request, Pagination p, String pageNo ) {
 		
-		
-		System.out.println(categoryNo);
-		System.out.println(pageNo);
 		if(pageNo==null) {// 클라이언트가 pageNo를 전달하지 않는 경우에는 첫 페이지를 보여준다.
 			p = new Pagination(communityBoardMapper.getTotalPostCount(categoryNo));
 		}else {
@@ -73,13 +68,9 @@ public class CommunityBoardController {
 		map.put("categoryNo", categoryNo);
 		List<BoardVO> list =communityBoardMapper.findAllCommunityList(map);
 
-		
-		
 		model.addAttribute("boardList", list);
 		model.addAttribute("pagination", p);
-		
 		model.addAttribute("CategoryList", list);
-
 		return "community-list";
 	}
 	
@@ -97,7 +88,7 @@ public class CommunityBoardController {
 	public String boardUpdate(@AuthenticationPrincipal MemberVO memberVO,BoardVO bvo,int categoryNo,RedirectAttributes redirect) {
 		BoardCategoryVO bcvo= communityBoardMapper.findBCVO(categoryNo);
 		bvo.setBcvo(bcvo);
-		
+
 		communityBoardMapper.updateByBoardVO(bvo);
 		redirect.addAttribute("categoryNo", categoryNo);
 		
@@ -111,7 +102,6 @@ public class CommunityBoardController {
 		
 		communityBoardMapper.deleteByBoardVO(bvo);
 		redirect.addAttribute("categoryNo", categoryNo);
-		
 		return "redirect:boardDeleteResult";
 	}
 
@@ -119,9 +109,8 @@ public class CommunityBoardController {
 	//findBoardDetailByBoardNo //findCommentList	//updateHits
 	@RequestMapping("/board-detail")
 	@SuppressWarnings({ "unchecked"})
-	public String boradDetail(int boardNo, Model model, int categoryNo,@AuthenticationPrincipal MemberVO memberVO,Authority authority, HttpServletRequest request,@RequestParam(value="nowPage",defaultValue = "1") int nowPage) {
+		public String boradDetail(int boardNo, Model model, int categoryNo,@AuthenticationPrincipal MemberVO memberVO,Authority authority, HttpServletRequest request,@RequestParam(value="nowPage",defaultValue = "1") int nowPage) {
 
-		
 		HttpSession session = request.getSession(false);
 		BoardCategoryVO bcvo = new BoardCategoryVO();
 		bcvo.setCategoryNo(categoryNo);
@@ -139,14 +128,11 @@ public class CommunityBoardController {
 		
 		
 		//조회수 (권한주기, 재증가방지) 
-		
 		ArrayList<Integer> list1 = (ArrayList<Integer>) session.getAttribute("CommunityBoardNoList");
 		if(!list1.contains(boardNo)) {
-		communityBoardMapper.updateHits(boardNo);
-		  
-		list1.add(boardNo);		
+			communityBoardMapper.updateHits(boardNo);
+			list1.add(boardNo);		
 		}
-
 		return "board-detail";
 	}
 	
@@ -172,7 +158,6 @@ public class CommunityBoardController {
 	public String LikesUp(Model model,@AuthenticationPrincipal MemberVO memberVO, HttpServletRequest request,int boardNo, int categoryNo) {
 		HttpSession session = request.getSession();
 		//좋아요 권한(중복방지)
-
 		ArrayList<Integer> list_up = (ArrayList<Integer>) session.getAttribute("LikesUpList");
 		ArrayList<Integer> list_down = (ArrayList<Integer>) session.getAttribute("LikesDownList");
 		  if(!list_up.contains(boardNo)) {
@@ -182,14 +167,13 @@ public class CommunityBoardController {
 		  }
 		  BoardVO bvo = communityBoardMapper.findBoardDetailByBoardNo(boardNo);
 		  List<CommentVO> list=communityBoardMapper.findCommentList(boardNo);
-			model.addAttribute("commentList", list);
+		  model.addAttribute("commentList", list);
 		  model.addAttribute("LikesUpList", list_up);
 		  model.addAttribute("LikesDownList", list_down);
 		  model.addAttribute("bvo",bvo);
 		  model.addAttribute("categoryNo",categoryNo);
 		  model.addAttribute("mvo", memberVO);
 		 
-		 System.out.println(list_up+"up");
 		return "board-detail";
 	}
 	
@@ -197,6 +181,7 @@ public class CommunityBoardController {
 	@RequestMapping("/likesDown")
 	public String LikesDown(Model model,@AuthenticationPrincipal MemberVO memberVO, HttpServletRequest request,int boardNo, int categoryNo) {
 		HttpSession session = request.getSession();
+		
 		//좋아요 권한(중복방지)
 		ArrayList<Integer> list_up = (ArrayList<Integer>) session.getAttribute("LikesUpList");
 		ArrayList<Integer> list_down = (ArrayList<Integer>) session.getAttribute("LikesDownList");
@@ -205,10 +190,9 @@ public class CommunityBoardController {
 			  list_down.add(boardNo);
 			  list_up.remove(Integer.valueOf(boardNo));
 		  }
-		  System.out.println(list_up+"down");
 		  BoardVO bvo = communityBoardMapper.findBoardDetailByBoardNo(boardNo);
 		  List<CommentVO> list=communityBoardMapper.findCommentList(boardNo);
-			model.addAttribute("commentList", list);
+		  model.addAttribute("commentList", list);
 		  model.addAttribute("bvo",bvo);
 		  model.addAttribute("categoryNo",categoryNo);
 		  model.addAttribute("mvo", memberVO);
@@ -229,14 +213,10 @@ public class CommunityBoardController {
 	
 	@RequestMapping("/searchBoardKeywordByName")
 	public String SearchBoardKeywordByName(Model model,String keyword) {
-		System.out.println(keyword);
 		List<BoardVO> list=communityBoardMapper.findCommunityListByName(keyword);
 		model.addAttribute("keyword",list);
 		model.addAttribute("searchKeyword", keyword);
 		
 		return "board-search-list";
 	}
-	
-	
-
 }
