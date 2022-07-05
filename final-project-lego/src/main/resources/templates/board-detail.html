@@ -131,8 +131,8 @@
 									<input type="hidden" name="categoryNo" th:value="${bvo.bcvo.categoryNo}">
 								</form>
 			            	 
-				            	<a class="checkMaster" th:href="@{/surveyFindMasterById(masterId=${comList.mvo.id})}" sec:authorize="hasRole('ROLE_MEMBER')" >
-				            		<span th:text="|고수님|" th:if="${#strings.contains(comList.authority.authority, 'ROLE_MASTER')}"></span>
+				            	<a  th:href="@{/surveyFindMasterById(masterId=${comList.mvo.id})}" sec:authorize="hasRole('ROLE_MEMBER')" >
+				            		<span class="checkMaster" th:text="|고수님|" th:if="${#strings.contains(comList.authority.authority, 'ROLE_MASTER')}"></span>
 				            	</a>  
 				            	<a type="submit" onclick="javascript:btn()">
 			            		<span class="checkMaster" th:text="|고수님|" sec:authorize="hasRole('ROLE_MASTER')" th:if="${#strings.contains(comList.Authority.authority, 'MASTER')}"> </span>
