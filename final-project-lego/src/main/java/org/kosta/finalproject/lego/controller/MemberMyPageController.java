@@ -78,7 +78,7 @@ public class MemberMyPageController {
 		}else {
 			p = new Pagination(memberMyPageMapper.getTotalPostCountFromCart(id), Integer.parseInt(pageNo));
 		}
-		
+		model.addAttribute("totalCart",memberMyPageMapper.getTotalPostCountFromCart(id));
 		//파라미터로 페이지 네이션 객체와 아이디를 보내야하므로 map으로 구성해야한다. 
 		
 		HashMap<String, Object> cartMap=new HashMap<String, Object>();
@@ -131,7 +131,7 @@ public class MemberMyPageController {
 		}else {
 			p = new Pagination(memberMyPageMapper.getTotalPostCountFromWrote(id), Integer.parseInt(pageNo));
 		}
-		
+		model.addAttribute("totalWrote", memberMyPageMapper.getTotalPostCountFromWrote(id));
 		//파라미터로 페이지 네이션 객체와 아이디를 보내야하므로 map으로 구성해야한다. 
 		
 		HashMap<String, Object> wroteMap=new HashMap<String, Object>();
@@ -169,7 +169,7 @@ public class MemberMyPageController {
 		}else {
 			p = new Pagination(memberMyPageMapper.getTotalPostCountFromBooking(id), Integer.parseInt(pageNo));
 		}
-		
+		model.addAttribute("TotalBooking",memberMyPageMapper.getTotalPostCountFromBooking(id));
 		//파라미터로 페이지 네이션 객체와 아이디를 보내야하므로 map으로 구성해야한다. 
 		
 		HashMap<String, Object> bookingMap=new HashMap<String, Object>();

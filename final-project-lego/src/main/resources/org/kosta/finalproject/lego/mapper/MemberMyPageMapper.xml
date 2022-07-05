@@ -34,9 +34,9 @@
 		
 		<select id="findWroteList" parameterType="hashmap" resultMap="CategoryResultMap" resultType="org.kosta.finalproject.lego.vo.BoardVO">
 			
-			select rnum,board_no,board_title,category_name
+			select rnum,board_no,board_title,category_name,category_no
 			from(
-			select  row_number() over(order by board_no ) as rnum,b.board_no, b.board_title, bc.category_name
+			select  row_number() over(order by board_no ) as rnum,b.board_no, b.board_title, bc.category_name,bc.category_no
 			from  board b, board_category bc
 			where b.category_no=bc.category_no
 			and b.id=#{id}

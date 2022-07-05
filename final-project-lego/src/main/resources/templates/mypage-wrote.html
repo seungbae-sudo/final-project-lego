@@ -60,13 +60,14 @@
 										<td class="text-center" th:text="${list.boardNo}">Nokia</td>
 										<td class="text-center"  ><a th:href="@{/board-detail(boardNo=${list.boardNo},categoryNo=${list.bcvo.categoryNo})}" th:text="${list.boardTitle}">Adam Smith</a></td>
 										<td class="text-center" th:text="${list.bcvo.categoryName}">9/4 C Babor Road, Mohammad Pur, Dhaka</td>
-					
 									</tr>
 									
 								</tbody>
 							</table>
 							
-							<ul class="pagination-wrap">
+							<h2 th:unless="${totalWrote}>0">아직 작성하신 글이 없네요! <br> 커뮤니티에 여러분의 지식을 나눠주세요!</h2>
+							<div class="pagination-box">
+							<ul class="pagination-wrap" th:if="${totalWrote}>0">
 							 <th:block th:if ="${pagination.previousPageGroup }">
 							     <li class="page-item" >
 							     	<a class="page-link" th:href="@{/mypage-wrote(pageNo=${pagination.startPageOfPageGroup-1})}" th:text="|Previous|">Previous</a>
@@ -93,7 +94,7 @@
 							     </li> 
 							 </th:block>
 							</ul>
-							
+							</div>
 							
 							
 						</div>

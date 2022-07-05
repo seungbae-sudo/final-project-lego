@@ -84,8 +84,9 @@
 								</tbody>
 							</table>
 							
-							
-							<ul class="pagination-wrap">
+							<h2 th:unless="${totalCart}>0">아직 찜한 고수님이 없네요! <br>원하는 고수를 '찜' 해보세요!</h2>
+							<div class="pagination-box">
+							<ul class="pagination-wrap" th:if="${totalCart}>0">
 							 <th:block th:if ="${pagination.previousPageGroup }">
 							     <li class="page-item" >
 							     	<a class="page-link" th:href="@{/mypage-cart(pageNo=${pagination.startPageOfPageGroup-1})}" th:text="|Previous|">Previous</a>
@@ -112,12 +113,7 @@
 							     </li> 
 							 </th:block>
     						</ul>
-    
-						</div>
-					
-						<div class="table-responsive" th:unless="${cartList}">
-							<h2> 찜한 고수가 없습니다 </h2>
-							<div></div>
+    					</div>
 						</div>
 					
 					
