@@ -82,11 +82,13 @@ public class MasterMyPageController {
 	public String mastermypage(@AuthenticationPrincipal MemberVO memberVO, Model model) {
 		model.addAttribute("member", memberVO);
 		model.addAttribute("masterDetail", masterMyPageMapper.findMasterDetailList(memberVO.getId()));
+		
 		model.addAttribute("Mycategory",masterMyPageMapper.MyCategory(memberVO.getId()));
 		List<SkillsVO> svo = masterMyPageMapper.MySkills(memberVO.getId());
 		model.addAttribute("MySkills",svo);
 		List<ReviewVO> rvo = masterMyPageMapper.MyReview(memberVO.getId());
 		model.addAttribute("reAGV", rvo);
+		
 		ImageVO image = masterMyPageMapper.getImageId(memberVO.getId());
 		String src = "./images/"+image.getMemberVO().getId()+"/"+image.getImageName();
 		model.addAttribute("src",src);
@@ -103,6 +105,11 @@ public class MasterMyPageController {
 		String src = "./images/"+image.getMemberVO().getId()+"/"+image.getImageName();
 		model.addAttribute("ImageVO",image);
 		model.addAttribute("src",src);
+		model.addAttribute("Mycategory",masterMyPageMapper.MyCategory(memberVO.getId()));
+		List<SkillsVO> svo = masterMyPageMapper.MySkills(memberVO.getId());
+		model.addAttribute("MySkills",svo);
+		List<ReviewVO> rvo = masterMyPageMapper.MyReview(memberVO.getId());
+		model.addAttribute("reAGV", rvo);
 		return "masterUpdateForm";
 	}
 
@@ -127,6 +134,11 @@ public class MasterMyPageController {
 		String src = "./images/"+image.getMemberVO().getId()+"/"+image.getImageName();
 		model.addAttribute("src",src);
 		model.addAttribute("total",masterMyPageMapper.findMyBoardTotalList(memberVO.getId()));
+		model.addAttribute("Mycategory",masterMyPageMapper.MyCategory(memberVO.getId()));
+		List<SkillsVO> svo = masterMyPageMapper.MySkills(memberVO.getId());
+		model.addAttribute("MySkills",svo);
+		List<ReviewVO> rvo = masterMyPageMapper.MyReview(memberVO.getId());
+		model.addAttribute("reAGV", rvo);
 		return "mastermypage-cart";
 	}
 
@@ -153,6 +165,11 @@ public class MasterMyPageController {
 		ImageVO image = masterMyPageMapper.getImageId(memberVO.getId());
 		String src = "./images/"+image.getMemberVO().getId()+"/"+image.getImageName();
 		model.addAttribute("src",src);
+		model.addAttribute("Mycategory",masterMyPageMapper.MyCategory(memberVO.getId()));
+		List<SkillsVO> svo = masterMyPageMapper.MySkills(memberVO.getId());
+		model.addAttribute("MySkills",svo);
+		List<ReviewVO> rrvo = masterMyPageMapper.MyReview(memberVO.getId());
+		model.addAttribute("reAGV", rrvo);
 		return "mastermypage-review";
 	}
 
@@ -176,6 +193,11 @@ public class MasterMyPageController {
 		ImageVO image = masterMyPageMapper.getImageId(memberVO.getId());
 		String src = "./images/"+image.getMemberVO().getId()+"/"+image.getImageName();
 		model.addAttribute("src",src);
+		model.addAttribute("Mycategory",masterMyPageMapper.MyCategory(memberVO.getId()));
+		List<SkillsVO> svo = masterMyPageMapper.MySkills(memberVO.getId());
+		model.addAttribute("MySkills",svo);
+		List<ReviewVO> rvo = masterMyPageMapper.MyReview(memberVO.getId());
+		model.addAttribute("reAGV", rvo);
 		return "mastermypage-consult";
 	}
 
@@ -190,6 +212,11 @@ public class MasterMyPageController {
 		ImageVO image = masterMyPageMapper.getImageId(memberVO.getId());
 		String src = "./images/"+image.getMemberVO().getId()+"/"+image.getImageName();
 		model.addAttribute("src",src);
+		model.addAttribute("Mycategory",masterMyPageMapper.MyCategory(memberVO.getId()));
+		List<SkillsVO> svo = masterMyPageMapper.MySkills(memberVO.getId());
+		model.addAttribute("MySkills",svo);
+		List<ReviewVO> rvo = masterMyPageMapper.MyReview(memberVO.getId());
+		model.addAttribute("reAGV", rvo);
 		return "mastermypage-consult-detail";
 	}
 
@@ -209,6 +236,11 @@ public class MasterMyPageController {
 		ImageVO image = masterMyPageMapper.getImageId(memberVO.getId());
 		String src = "./images/"+image.getMemberVO().getId()+"/"+image.getImageName();
 		model.addAttribute("src",src);
+		model.addAttribute("Mycategory",masterMyPageMapper.MyCategory(memberVO.getId()));
+		List<SkillsVO> svo = masterMyPageMapper.MySkills(memberVO.getId());
+		model.addAttribute("MySkills",svo);
+		List<ReviewVO> rvo = masterMyPageMapper.MyReview(memberVO.getId());
+		model.addAttribute("reAGV", rvo);
 		return "mastermypage-Message";
 	}
 
@@ -233,6 +265,11 @@ public class MasterMyPageController {
 		ImageVO image = masterMyPageMapper.getImageId(memberVO.getId());
 		String src = "./images/"+image.getMemberVO().getId()+"/"+image.getImageName();
 		model.addAttribute("src",src);
+		model.addAttribute("Mycategory",masterMyPageMapper.MyCategory(memberVO.getId()));
+		List<SkillsVO> svo = masterMyPageMapper.MySkills(memberVO.getId());
+		model.addAttribute("MySkills",svo);
+		List<ReviewVO> rvo = masterMyPageMapper.MyReview(memberVO.getId());
+		model.addAttribute("reAGV", rvo);
 		return "mastermypage-message-detail";
 	}
 
@@ -252,6 +289,11 @@ public class MasterMyPageController {
 		ImageVO image = masterMyPageMapper.getImageId(memberVO.getId());
 		String src = "./images/"+image.getMemberVO().getId()+"/"+image.getImageName();
 		model.addAttribute("src",src);
+		model.addAttribute("Mycategory",masterMyPageMapper.MyCategory(memberVO.getId()));
+		List<SkillsVO> svo = masterMyPageMapper.MySkills(memberVO.getId());
+		model.addAttribute("MySkills",svo);
+		List<ReviewVO> rvo = masterMyPageMapper.MyReview(memberVO.getId());
+		model.addAttribute("reAGV", rvo);
 		return "redirect:/mastermypage-message-detail";
 	}
 }

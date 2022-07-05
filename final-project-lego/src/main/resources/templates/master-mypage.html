@@ -1,48 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{layouts/layout}">
+	layout:decorate="~{layouts/master-layout}">
 <!--/* layout 선언부 추가 */-->
 
 <div layout:fragment="main">
-	<section class="page-header">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="content">
-						<h1 class="page-name">고수 마이페이지</h1>
-						<ol class="breadcrumb">
-							<li><a th:href="@{/}">Home</a></li>
-							<li class="active">my account</li>
-						</ol>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<section class="user-dashboard page-wrapper">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="media">
-						<div class="pull-left profile">
-							<img class="media-object user-img" th:src="${src}" alt="Image">
-						</div>
-						<div class="media-body master-info-intro">
-							<h2 class="media-heading" th:text="${member.name}">고수</h2>
-							<span class="media-heading skill-box" th:text="|분야 : ${Mycategory.lessonSort}|"></span>
-							<span class="skill-box">
-								<span> 보유기술 : </span>
-								<span th:each="ms:${MySkills}" class="media-heading" th:text="|${ms.skills}  |"></span>
-							</span>	
-									
-							<div class="master-info-box">
-								<span th:each="re:${reAGV}"class="media-heading" th:text="|평점 : ${re.score}점|"> </span>
-								<span class="media-heading" th:text="|경력 : ${masterDetail.career}년|"></span>
-							</div>
-						</div>
-					</div>
+	
+	
+					
+					<!-- ---------------------- -->
 					<ul class="list-inline dashboard-menu text-center">
 						<li><a class="active" th:href="@{/mastermypage}">고수정보</a></li>
 						<li><a th:href="@{/mastermypage-review}">리뷰</a></li>
@@ -51,7 +17,7 @@
 						<li><a th:href="@{/mastermypage-message}">메세지함</a></li>
 					</ul>
 					
-				<!-- ---------------------- -->
+				
 					<div class="dashboard-wrapper user-dashboard profile-detail">
 						<div class="total-order mt-20">
 							<div class="table-responsive">
@@ -73,13 +39,12 @@
 								</div>
 								</div>
 								</div>
-									
+								
+								<!-- ---------------------- -->	
                            			
 							
 						
 				
-				</div>
-			</div>
-		</div>
-	</section>
+
+	
 </div>
