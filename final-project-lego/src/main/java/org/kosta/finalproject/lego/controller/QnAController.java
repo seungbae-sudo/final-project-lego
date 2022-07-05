@@ -24,15 +24,15 @@ public class QnAController {
 	}
 	@RequestMapping("/QnAList")
 	public String QnAList(Model model, Pagination p, String pageNo) {
-		System.out.println(getTotalPostCount());
+		
 		
 		if(pageNo==null) {// 클라이언트가 pageNo를 전달하지 않는 경우에는 첫 페이지를 보여준다.
 			p = new Pagination(getTotalPostCount());
 		}else {
 			p = new Pagination(getTotalPostCount(), Integer.parseInt(pageNo));
 		}
-		System.out.println(p.getStartPageOfPageGroup());
-		System.out.println(p.getEndPageOfPageGroup());
+		
+		
 		model.addAttribute("start", p.getStartPageOfPageGroup());
 		model.addAttribute("end", p.getEndPageOfPageGroup());
 		model.addAttribute("qnaList", qnaMapper.findQnAList(p));
