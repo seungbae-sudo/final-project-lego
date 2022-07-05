@@ -62,11 +62,11 @@
                         </ul>
                      </div>
                         <div class="sendWrap">
-                           <form th:action="@{/masterSendMessage}" method="post">
+                           <form th:action="@{/masterSendMessage}" method="post" id="message-form">
                            	  <input type="hidden" name="receiveId" th:value="${receiveID}">
                            	  <input type="hidden" name="receiveName" th:value="${receiveName}">
-                              <textarea class="message-textarea" name="messageContent" placeholder="메세지를 입력하세요"></textarea>
-                              <input type="submit" value="전송" class="SendBtn">
+                              <textarea id="message-textarea-area" class="message-textarea" name="messageContent" placeholder="메세지를 입력하세요"></textarea>
+                              <input type="button" value="전송" class="SendBtn" onclick="check()">
                            </form>
                         </div>
                   </div>
@@ -85,6 +85,15 @@
 					
 				});
 			});
+			
+			function check() {
+				if (document.getElementById("message-textarea-area").value == "") {
+					alert("메세지를 입력해주세요");
+					return;
+				}else {
+					document.getElementById("message-form").submit();
+				}
+			} 
 			</script>
 	</section>
 
