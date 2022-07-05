@@ -52,11 +52,11 @@ public class LsjTest {
 		communityBoardMapper.posting(bvo); // Assertions.assertNotEquals(1, result);
 	}
 
-	@Test
-	void list() {
-		List<BoardVO> list = communityBoardMapper.findAllCommunityList(1);
-		Assertions.assertEquals(11, list.size());
-	}
+	/*
+	 * @Test void list() { List<BoardVO> list =
+	 * communityBoardMapper.findAllCommunityList(1); Assertions.assertEquals(11,
+	 * list.size()); }
+	 */
 
 	@Test
 	void findDetail() {

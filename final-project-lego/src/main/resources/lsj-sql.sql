@@ -28,6 +28,17 @@ and b.id=m.id(+);
 select*from board where board_no=3;
 
 --findAllCommunityList [내림차순 정렬]
+select rnum,board_title,name
+from (
+select ROW_NUMBER() OVER(ORDER BY b.board_no DESC) as rnum , b.board_title,b.hits, m.name
+from board b, member m 
+where b.category_no=1
+and b.id=m.id order by board_no desc
+)
+WHERE rnum BETWEEN 1 AND 5 
+
+
+--
 select b.board_no, b.board_title,b.hits, m.name
 from board b, member m 
 where b.category_no=1
@@ -175,5 +186,36 @@ select * from master where id= 'lsj@kosta.com'
 		and b.id=m.id order by board_no desc
 
 
---pagination
+		select count(*)from board;
 		
+--pagination
+
+			SELECT b.rnum,b.board_no,b.board_title,b.board_date,b.hits,b.likes
+			FROM(
+			SELECT ROW_NUMBER() OVER(ORDER BY board_no DESC) as rnum ,board_no, category_no,board_title,board_date,likes,hits,id
+			FROM BOARD
+			where category_no = 1) b, member m
+			WHERE b.id=m.id AND rnum BETWEEN 1 AND 5 
+			
+			SELECT b.rnum,b.board_no,b.board_title,b.board_date,b.hits,b.likes
+			FROM(
+			SELECT ROW_NUMBER() OVER(ORDER BY board_no DESC) as rnum ,board_no, category_no,board_title,board_date,likes,hits,id
+			FROM BOARD
+			where category_no ={bcvo.categoryNo}) b, member m
+			WHERE b.id=m.id AND rnum between #{startRowNumber} and #{endRowNumber} AND b.category_no = {bcvo.categoryNo}
+		
+			
+	-- category name추가된 부분
+			
+	select count(*)from board where category_no=2;
+	
+	select rnum,category_name,board_title,name,hits,board_date,likes
+	from (
+	select ROW_NUMBER() OVER(ORDER BY b.board_no DESC) as rnum , b.board_title,b.hits, m.name,b.board_date,b.likes,c.category_name
+		from board b, member m, board_category c
+		where b.category_no=2
+		and b.id=m.id 
+		and c.category_no = b.category_no
+		order by board_no desc
+	)
+	WHERE rnum BETWEEN #{pagination.startRowNumber} and #{pagination.endRowNumber}

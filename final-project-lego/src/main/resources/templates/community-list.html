@@ -80,11 +80,37 @@
         
       </div>
     </div>
+    	<ul class="pagination-wrap">
+          <th:block th:if ="${pagination.previousPageGroup }">
+    		 <li class="page-item" >
+    		 		<a class="page-link" th:href="@{/returnList(pageNo=${pagination.startPageOfPageGroup-1},categoryNo=${CategoryList.get(0).bcvo.categoryNo})}" th:text="|Previous|">Previous</a>
+    		 </li> 
+     	 </th:block>
+    
+ 		 <th:block th:each="pageNo:${#numbers.sequence(pagination.startPageOfPageGroup,pagination.endPageOfPageGroup)}">
+		 		<th:block th:if="${pageNo==pagination.nowPage}">
+		 			<li class="page-item active">
+		 				<a class="page-link" th:href="@{/returnList(pageNo=${pageNo},categoryNo=${CategoryList.get(0).bcvo.categoryNo})}" th:text="${pageNo}"></a>
+		 			</li>
+		    	</th:block>
+		    	
+		    	<th:block th:if="${pageNo!=pagination.nowPage}">
+		    		 <li class="page-item">
+		    		 	<a class="page-link" th:href="@{/returnList(pageNo=${pageNo},categoryNo=${CategoryList.get(0).bcvo.categoryNo})}" th:text="${pageNo}"></a>
+		    		 </li>
+		    	</th:block>
+   		</th:block>
+    
+     	 <th:block th:if ="${pagination.nextPageGroup}">
+    			 <li class="page-item" >
+    			 		<a class="page-link" th:href="@{/returnList(pageNo=${pageNo},categoryNo=${CategoryList.get(0).bcvo.categoryNo})}" th:text="|Next|"></a>
+    			 </li> 
+      	</th:block>
+    
+    </ul>
   </div>
+ 
   </section>
 
-<section>
-
-</section>
-
 </div>
+</html>
