@@ -60,9 +60,9 @@
                      </table>
                       </form>
                   </div>
-                  <ul class="pagination-wrap">
+                  <ul class="pagination-wrap" th:if="${total>0}">
       <th:block th:if ="${pagination.previousPageGroup }">
-     <li class="page-item" ><a class="page-link" th:href="@{/searchKeyword(pageNo=${pagination.startPageOfPageGroup-1},keyword=${userSearchKeyword})}" th:text="|Previous|">Previous</a></li> 
+     <li class="page-item" ><a class="page-link" th:href="@{/searchKeyword(pageNo=${pagination.startPageOfPageGroup-1},keyword=${userSearchKeyword})}" th:text="|이전|">Previous</a></li> 
      
     </th:block>
     
@@ -78,7 +78,7 @@
     </th:block>
     
       <th:block th:if ="${pagination.nextPageGroup}">
-     <li class="page-item" ><a class="page-link" th:href="@{/searchKeyword(pageNo=${pagination.endPageOfPageGroup+1},keyword=${userSearchKeyword})}" th:text="|Next|"></a></li> 
+     <li class="page-item" ><a class="page-link" th:href="@{/searchKeyword(pageNo=${pagination.endPageOfPageGroup+1},keyword=${userSearchKeyword})}" th:text="|다음|"></a></li> 
      
     </th:block>
      </ul>  

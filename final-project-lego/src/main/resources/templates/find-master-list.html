@@ -59,9 +59,9 @@
                      </table>
                       </form>
                       
-                      <ul class="pagination-wrap">
+                      <ul class="pagination-wrap" th:if="${total>0}">
       <th:block th:if ="${pagination.previousPageGroup }">
-     <li class="page-item" ><a class="page-link" th:href="@{/findMasterList(pageNo=${pagination.startPageOfPageGroup-1},skills=${skills},times=${times},days=${days},categoryNo=${categoryNo})}" th:text="|Previous|">Previous</a></li> 
+     <li class="page-item" ><a class="page-link" th:href="@{/findMasterList(pageNo=${pagination.startPageOfPageGroup-1},skills=${skills},times=${times},days=${days},categoryNo=${categoryNo})}" th:text="|이전|">Previous</a></li> 
      
     </th:block>
     
@@ -77,7 +77,7 @@
     </th:block>
     
       <th:block th:if ="${pagination.nextPageGroup}">
-     <li class="page-item" ><a class="page-link" th:href="@{/findMasterList(pageNo=${pagination.endPageOfPageGroup+1},skills=${skills},times=${times},days=${days},categoryNo=${categoryNo})}" th:text="|Next|"></a></li> 
+     <li class="page-item" ><a class="page-link" th:href="@{/findMasterList(pageNo=${pagination.endPageOfPageGroup+1},skills=${skills},times=${times},days=${days},categoryNo=${categoryNo})}" th:text="|다음|"></a></li> 
      
     </th:block>
      </ul>
