@@ -66,7 +66,7 @@
 						<ul class="pagination-wrap">
 							 <th:block th:if ="${pagination.previousPageGroup }">
 							     <li class="page-item" >
-							     	<a class="page-link" th:href="@{/mastermypage-cart(pageNo=${pagination.startPageOfPageGroup-1})}" th:text="|Previous|">Previous</a>
+							     	<a class="page-link" th:href="@{/mastermypage-cart(pageNo=${pagination.startPageOfPageGroup-1})}" th:text="|이전|">Previous</a>
 							     </li>   
 							 </th:block>
 							    
@@ -86,7 +86,7 @@
 							    
 					      <th:block th:if ="${pagination.nextPageGroup}">
 							     <li class="page-item" >
-							     	<a class="page-link" th:href="@{/mastermypage-cart(pageNo=${pagination.endPageOfPageGroup+1})}" th:text="|Next|"></a>
+							     	<a class="page-link" th:href="@{/mastermypage-cart(pageNo=${pagination.endPageOfPageGroup+1})}" th:text="|다음|"></a>
 							     </li> 
 							 </th:block>
     						</ul>
