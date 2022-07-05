@@ -34,7 +34,7 @@
 					<tr>
 						<td >
 							<textarea rows="10" class="form-control" name="bookingContent" 
-								placeholder="본문내용" required="required">
+								placeholder="본문내용" required="required" id="bookingContent">
 							</textarea>
 						</td>
 					</tr>
@@ -47,12 +47,10 @@
 					</tr>
 				</table>
 							<div class="text-center">
-				<button type="submit" >확인</button>
+				<button type="button" onclick="asdf()" >확인</button>
 				<button type="reset" class="btn btn-success">취소</button>
 			</div>
 			</form>
-
-			<span th:text="${Day}"></span>
 
 		</div>
 <script src="https://code.jquery.com/jquery-3.6.0.slim.js"></script>
@@ -111,6 +109,17 @@
       return [true];
   }
   
+  function asdf(){
+	  if (document.getElementById("datepicker").value=="") {
+			alert("날짜를 선택해주세여");
+			return;
+		} else if(document.getElementById("bookingContent").value==""){
+			alert("상담 본문을 작성해주세요");
+			return;
+		} else{
+			document.getElementById("Write").submit();
+		}
+  }
 
   </script>
 

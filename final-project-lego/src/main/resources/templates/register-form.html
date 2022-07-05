@@ -83,13 +83,13 @@ xmlns:th="http://www.thymeleaf.org">
 			</div>
             
              <div class="form-group">
-              <input type="text" name="name" class="form-control"  placeholder="이름" required="required">
+              <input type="text" name="name" class="form-control"  placeholder="이름" required="required" id="name">
             </div>
             <div class="form-group">
-              <input type="text" name="address" class="form-control"  placeholder="주소" required="required">
+              <input type="text" name="address" class="form-control"  placeholder="주소" required="required" id="address">
             </div>
              <div class="form-group">
-              <input type="tel" name="tel" class="form-control"  placeholder="전화번호" required="required">
+              <input type="tel" name="tel" class="form-control"  placeholder="전화번호" required="required" id="tel">
             </div>
       <!--       <div>
             	<input multiple="multiple" type="file" value="파일 선택" name="file"  id="checkFile"/>
@@ -159,6 +159,21 @@ xmlns:th="http://www.thymeleaf.org">
 			if($("#checkFile").val()==""){
 				alert("파일을 선택하세요");
 				return;
+			}else if($("#pw").val()==""){
+				alert("비밀번호를 입력하세요");
+				return;
+			}else if($("#id").val()==""){
+				alert("아이디를 입력하세요");
+				return;
+			}else if($("#name").val()==""){
+				alert("이름을 입력하세요");
+				return;
+			}else if($("#address").val()==""){
+				alert("주소를 입력하세요");
+				return;
+			}else if($("#tel").val()==""){
+				alert("전회번호를 입력하세요");
+				return;
 			}else{
 				$('input[name=member]').attr('value',1);
 				$("#Write").submit();
@@ -167,6 +182,21 @@ xmlns:th="http://www.thymeleaf.org">
 		$("#check2").click(function() {
 			if($("#checkFile").val()==""){
 				alert("파일을 선택하세요");
+				return;
+			}else if($("#id").val()==""){
+				alert("아이디를 입력하세요");
+				return;
+			}else if($("#pw").val()==""){
+				alert("비밀번호를 입력하세요");
+				return;
+			}else if($("#name").val()==""){
+				alert("이름을 입력하세요");
+				return;
+			}else if($("#address").val()==""){
+				alert("주소를 입력하세요");
+				return;
+			}else if($("#tel").val()==""){
+				alert("전회번호를 입력하세요");
 				return;
 			}else{
 				$('input[name=member]').attr('value',2);
