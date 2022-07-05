@@ -222,6 +222,7 @@ public class CommunityBoardController {
 		System.out.println(keyword);
 		List<BoardVO> list=communityBoardMapper.findCommunityListByTitle(keyword);
 		model.addAttribute("keyword",list);
+		model.addAttribute("searchKeyword", keyword);
 		
 		return "board-search-list";
 	}
@@ -231,6 +232,7 @@ public class CommunityBoardController {
 		System.out.println(keyword);
 		List<BoardVO> list=communityBoardMapper.findCommunityListByName(keyword);
 		model.addAttribute("keyword",list);
+		model.addAttribute("searchKeyword", keyword);
 		
 		return "board-search-list";
 	}
