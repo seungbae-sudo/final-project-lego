@@ -110,7 +110,7 @@ select c.lesson_sort from master m,category c where id = #{value} and m.category
 select s.skills from master_detail m,skills s where m.id = #{value} and m.skills_id>0 and m.skills_id = s.skills_id
 
 -- 고수 review 평균값
-select round(avg(r.score),1) as score from review r where master_id=#{value}
+select nvl(round(avg(r.score),1),0) as score from review r where master_id= '123@123.com'
 
 -- 고수 pagenation + my board 
 select rnum,board_no,board_title,category_name,category_no

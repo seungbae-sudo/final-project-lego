@@ -195,7 +195,7 @@
 	</select>
 	
 	<select id="MyReview" resultType="org.kosta.finalproject.lego.vo.ReviewVO">
-	select round(avg(r.score),1) as score from review r where master_id=#{value}
+	select nvl(round(avg(r.score),1),0) as score from review r where master_id=#{value}
 	</select>
 	
 </mapper>
