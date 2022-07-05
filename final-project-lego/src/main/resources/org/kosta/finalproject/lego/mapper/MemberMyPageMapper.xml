@@ -92,7 +92,7 @@
 		<select id="getTotalPostCountFromCart" resultType="int">
 				select count(*)
 				from(
-				select nvl(round(avg(r.score)),0) as score, to_char(dbms_lob.substr(ms.specifications, 4000)) as specifications ,m.name,c.master_id,i.image_name
+				select nvl(round(avg(r.score),1),0) as score, to_char(dbms_lob.substr(ms.specifications, 4000)) as specifications ,m.name,c.master_id,i.image_name
 				from cart c, member m,review r,master ms,images i
 				where c.id=#{value}
 				and c.master_id=m.id

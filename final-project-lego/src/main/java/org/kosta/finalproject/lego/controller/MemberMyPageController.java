@@ -91,6 +91,7 @@ public class MemberMyPageController {
 		//페이지네이션 객체 보내기
 		model.addAttribute("pagination", p);
 		
+		System.out.println(cartList);
 		
 		//위 리스트에 있는 imageName은 '이미지파일명.jpg ' 이렇게 저장되어있다 
 		//해당 이미지 파일명을 리스트 갯수 만큼 반복 문을 돌려 모든 imageName 명을 경로명으로 변경해주었다.
@@ -103,7 +104,7 @@ public class MemberMyPageController {
 		
 		
 		
-		System.out.println(cartList.get(0));
+		System.out.println(cartList);
 		
 		model.addAttribute("cartList", cartList);
 		

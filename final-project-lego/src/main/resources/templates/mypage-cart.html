@@ -45,8 +45,9 @@
 						<li><a th:href="@{/mypage-message}">메세지함</a></li>
 					</ul>
 					<div class="dashboard-wrapper user-dashboard profile-detail">
-
-						<div class="table-responsive">
+					
+					
+						<div class="table-responsive" th:if="${cartList}">
 							<table class="table">
 								<thead>
 									<tr>
@@ -56,7 +57,7 @@
 									</tr>
 								</thead>
 								
-								<tbody>
+								<tbody >
 									<tr th:each="list:${cartList}" class="cart-list">
 										
 										<td class="cart-img" >
@@ -113,6 +114,13 @@
     						</ul>
     
 						</div>
+					
+						<div class="table-responsive" th:unless="${cartList}">
+							<h2> 찜한 고수가 없습니다 </h2>
+							<div></div>
+						</div>
+					
+					
 					</div>
 				</div>
 			</div>

@@ -50,7 +50,7 @@
    <select id="findMasterRanking" resultType="org.kosta.finalproject.lego.vo.ReviewVO" resultMap="MemberAndMasterForRankingResult">
    		select score,specifications,id,name,image_name
 		from (
-			select nvl(round(avg(r.score)),0) as score, to_char(dbms_lob.substr(ms.specifications, 4000)) as specifications, m.id,m.name,i.image_name
+			select nvl(round(avg(r.score),1),0) as score, to_char(dbms_lob.substr(ms.specifications, 4000)) as specifications, m.id,m.name,i.image_name
 			from member m, master ms, review r, images i
 			where m.id=ms.id
 			and m.id=r.master_id
