@@ -137,11 +137,10 @@ public class MasterMyPageController {
 		List<BoardVO> list = masterMyPageMapper.findMyBoard(map);
 		model.addAttribute("BoardList", list);
 		model.addAttribute("pagination",p);
-		System.out.println(list);
 		ImageVO image = masterMyPageMapper.getImageId(memberVO.getId());
 		String src = "./images/"+image.getMemberVO().getId()+"/"+image.getImageName();
 		model.addAttribute("src",src);
-		
+		model.addAttribute("total",masterMyPageMapper.findMyBoardTotalList(memberVO.getId()));
 		return "mastermypage-cart";
 	}
 
@@ -157,7 +156,7 @@ public class MasterMyPageController {
 		}
 		model.addAttribute("member", memberVO);
 		model.addAttribute("masterDetail", masterMyPageMapper.findMasterDetailList(memberVO.getId()));
-		
+		model.addAttribute("total",masterMyPageMapper.findTotalList(memberVO.getId()));
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		
 		map.put("pagination", p);
@@ -188,6 +187,7 @@ public class MasterMyPageController {
 		}else {
 			p = new Pagination(masterMyPageMapper.findBookingTotalList(memberVO.getId()), Integer.parseInt(pageNo));
 		}
+		model.addAttribute("total",masterMyPageMapper.findBookingTotalList(memberVO.getId()));
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("pagination", p);
 		map.put("id", memberVO.getId());
