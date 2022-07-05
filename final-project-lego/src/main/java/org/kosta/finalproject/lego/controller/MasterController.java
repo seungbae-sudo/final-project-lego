@@ -20,7 +20,7 @@ public class MasterController {
 	private final MasterService masterService;
 
 	
-	@RequestMapping("/masterRegister")
+	@RequestMapping("/master/masterRegister")
 	public String masterRegister(Model model, String id) {
 		model.addAttribute("id", id);	
 		model.addAttribute("category", masterService.getCategory());
