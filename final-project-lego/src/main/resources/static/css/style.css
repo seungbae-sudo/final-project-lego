@@ -427,8 +427,52 @@ display: none;
 
 /*회원가입*/
 
-.serviceForm{
+#slides2{
+	   width: 1000px;
+   height: 300px;
+   /*height: 350px;*/
+    /*-> 계속 이전다음버튼이 안보여서 헤잇을 걍 줄여버림*/
+   margin: 0 auto;
+   padding: 0;
+}
+#slides2 li{
+    width: 400px;
+    background: wheat;
+    padding: 40px 60px;
+    height: 520px;
+    margin-left: 50px;
+    border-radius: 20px;
+}
+
+.slides2Career{
+	margin-top:10px;
+	margin-bottom:10px;
+	border-radius: 12px;
+	padding-left: 10px;
 	
+}
+
+.slidesTextarea{
+	width: 300px;
+	height:250px;
+	padding: 20px;
+	border-radius: 12px;
+}
+.slides2Btn{
+	border:1px solid #ddd;
+	padding:3px;
+	width: 80px;
+	background-color: #fff;
+}
+
+.slides2BtnBox{
+	display: flex;
+	justify-content: space-around;
+}
+
+.slides2Btn:hover{
+	background-color: #e49a6a;
+	color:#fff;
 }
 
 .profileBox{
@@ -492,7 +536,7 @@ display: none;
     border: 1px solid #e49a6a;
     padding: 6px 17px;
     border-radius: 12px;
-    right: 100px;
+    right: 130px;
     bottom: 200px;
 }
 .mypage-btn:hover{
@@ -883,6 +927,13 @@ button.ui-datepicker-trigger {
 
 
 /* community */
+#cateBtn li:hover{
+	background-color: #000;
+}
+
+#cateBtn li a:hover{
+	color:#fff;
+}
 .board-list{
    display: block;
 }
@@ -894,14 +945,15 @@ button.ui-datepicker-trigger {
 
 .WriteBtn{
 	box-sizing:border-box;
-	background-color: white;
+	background-color: #fff;
     border: 1px solid #e49a6a;
     padding: 6px 17px;
     border-radius: 12px;
     margin-top:20px;
 }
+
 .WriteBtn:hover{
-    background-color: #e49a6a;
+	background-color: #e49a6a;
     border: 1px solid #e49a6a;
     color:white;
 }
@@ -1012,6 +1064,7 @@ button.ui-datepicker-trigger {
 
 .boardTextarea{
 	width:100%;
+	height:300px;
 	padding:30px 30px;
 }
 
@@ -1038,6 +1091,9 @@ button.ui-datepicker-trigger {
 
 .boardBtnDelete{
 	border-radius: 12px;
+	    border: none;
+    padding: 5px 13px;
+    margin-top: -5px;
 }
 
 .boardBtnDelete:hover{
