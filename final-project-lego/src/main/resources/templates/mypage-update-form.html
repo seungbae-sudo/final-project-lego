@@ -2,42 +2,16 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-	layout:decorate="~{layouts/layout}">
+	layout:decorate="~{layouts/member-layout}">
 <!--/* layout 선언부 추가 */-->
 
 
 
 <div layout:fragment="main">
-	<section class="page-header">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="content">
-						<h1 class="page-name">마이페이지</h1>
-						<ol class="breadcrumb">
-							<li><a href="index.html">Home</a></li>
-							<li class="active">my account</li>
-						</ol>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+	
 
 
-	<section class="user-dashboard page-wrapper">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="media">
-						<div class="pull-left profile">
-							<img class="media-object user-img" th:src="${src}" alt="Image">
-						</div>
-						<div class="media-body">
-							<h2 class="media-heading " sec:authentication="principal.name">손석구</h2>
-							
-						</div>
-					</div>
+
 					<ul class="list-inline dashboard-menu text-center">
 						<li><a class="active" th:href="@{/mypage}">회원정보</a></li>
 						<li><a th:href="@{/mypage-cart}">찜목록</a></li>
@@ -64,9 +38,9 @@
 							</div>
 						</div>
 					</div>
-				</div>
-			</div>
-		</div>
+					
+
+		
 		<!-- <script src="https://code.jquery.com/jquery-3.4.1.js"></script> -->
 		<script type="text/javascript">
 		function check() {
@@ -78,8 +52,7 @@
 			}
 		}
 		</script>
-		
-	</section>
+
 
 </div>
 </html>

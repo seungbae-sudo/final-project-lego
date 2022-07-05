@@ -2,72 +2,42 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-	layout:decorate="~{layouts/layout}">
+	layout:decorate="~{layouts/member-layout}">
 <!--/* layout 선언부 추가 */-->
 
 
 
 <div layout:fragment="main">
-	<section class="page-header">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="content">
-						<h1 class="page-name">마이페이지</h1>
-						<ol class="breadcrumb">
-							<li><a href="index.html">Home</a></li>
-							<li class="active">my account</li>
-						</ol>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
 
-
-	<section class="user-dashboard page-wrapper">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="media">
-						<div class="pull-left profile">
-							<img class="media-object user-img" th:src="${src}" alt="Image">
-						</div>
-						<div class="media-body">
-							<h2 class="media-heading" sec:authentication="principal.name">손석구</h2>
-							
-						</div>
-					</div>
-					<ul class="list-inline dashboard-menu text-center">
+	<ul class="list-inline dashboard-menu text-center">
 						<li><a class="active" th:href="@{/mypage}">회원정보</a></li>
 						<li><a th:href="@{/mypage-cart}">찜목록</a></li>
 						<li><a th:href="@{/mypage-wrote}">내가 쓴 글</a></li>
 						<li><a th:href="@{/mypage-booking}">내 상담목록</a></li>
 						<li><a th:href="@{/mypage-message}">메세지함</a></li>
 					</ul>
-					<div class="dashboard-wrapper user-dashboard profile-detail">
+	<div class="dashboard-wrapper user-dashboard profile-detail">
 
-						<div class="total-order mt-20">
-							<h3>내 정보</h3>
-							<div class="table-responsive">
-								<div class="media-body">
-									<ul class="user-profile-list">
-										<li ><span class="mypage-info">아이디 :</span><span sec:authentication="principal.id"></span></li>
-										<li><span class="mypage-info">비밀번호  :</span><span>*************</span></li>
-										<li><span class="mypage-info">이름 :</span><span sec:authentication="principal.name"></span></li>
-										<li><span class="mypage-info">주소 :</span> <span sec:authentication="principal.address"></span></li>
-										<li><span class="mypage-info">핸드폰 번호:</span><span sec:authentication="principal.tel"></span></li>
-									</ul>
-									<form method="get" th:action="@{/memberUpdateForm}">
-										<input class="mypage-btn" type="submit"value="회원정보 수정하기" >
-									</form>
-								</div>
-							</div>
-						</div>
-					</div>
+		<div class="total-order mt-20">
+			<h3>내 정보</h3>
+			<div class="table-responsive">
+				<div class="media-body">
+					<ul class="user-profile-list">
+						<li ><span class="mypage-info">아이디 :</span><span sec:authentication="principal.id"></span></li>
+						<li><span class="mypage-info">비밀번호  :</span><span>*************</span></li>
+						<li><span class="mypage-info">이름 :</span><span sec:authentication="principal.name"></span></li>
+						<li><span class="mypage-info">주소 :</span> <span sec:authentication="principal.address"></span></li>
+						<li><span class="mypage-info">핸드폰 번호:</span><span sec:authentication="principal.tel"></span></li>
+					</ul>
+					<form method="get" th:action="@{/memberUpdateForm}">
+						<input class="mypage-btn" type="submit"value="회원정보 수정하기" >
+					</form>
 				</div>
 			</div>
 		</div>
-	</section>
+	</div>
+					
+					
+					
 
 </div>
