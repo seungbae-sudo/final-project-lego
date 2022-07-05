@@ -24,21 +24,6 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        
-        <div class="searchAllBox">
-			<form class="searchBox1 searchBox" action="get" th:action="@{/searchBoardKeyword}">
-					<i class='fas fa-highlighter' style='font-size:24px'></i>
-					<input type="search" class="form-control"
-						placeholder="'제목'으로 검색해보세요!" name="keyword">
-					<button type="submit"> 검색</button>
-			</form>
-			<form class="searchBox2 searchBox" action="get" th:action="@{/searchBoardKeywordByName}">
-					<i class='fas fa-street-view' style='font-size:24px'></i>
-					<input type="search" class="form-control"
-						placeholder="'작성자'로 검색해보세요!" name="keyword">
-					<button type="submit"> 검색</button>
-			</form>
-		</div>
 		
 		 <ul id="cateBtn" class="list-inline dashboard-menu text-center">
           <li ><a  th:href="@{/goCommunity(categoryNo=1)}" >꿀팁</a></li>
@@ -80,35 +65,50 @@
         
       </div>
     </div>
-    	<ul class="pagination-wrap">
-          <th:block th:if ="${pagination.previousPageGroup }">
-    		 <li class="page-item" >
-    		 		<a class="page-link" th:href="@{/returnList(pageNo=${pagination.startPageOfPageGroup-1},categoryNo=${CategoryList.get(0).bcvo.categoryNo})}" th:text="|이전|">Previous</a>
-    		 </li> 
-     	 </th:block>
-    
- 		 <th:block th:each="pageNo:${#numbers.sequence(pagination.startPageOfPageGroup,pagination.endPageOfPageGroup)}">
-		 		<th:block th:if="${pageNo==pagination.nowPage}">
-		 			<li class="page-item active">
-		 				<a class="page-link" th:href="@{/returnList(pageNo=${pageNo},categoryNo=${CategoryList.get(0).bcvo.categoryNo})}" th:text="${pageNo}"></a>
-		 			</li>
-		    	</th:block>
-		    	
-		    	<th:block th:if="${pageNo!=pagination.nowPage}">
-		    		 <li class="page-item">
-		    		 	<a class="page-link" th:href="@{/returnList(pageNo=${pageNo},categoryNo=${CategoryList.get(0).bcvo.categoryNo})}" th:text="${pageNo}"></a>
-		    		 </li>
-		    	</th:block>
-   		</th:block>
-    
-     	 <th:block th:if ="${pagination.nextPageGroup}">
-    			 <li class="page-item" >
-    			 		<a class="page-link" th:href="@{/returnList(pageNo=${pagination.endPageOfPageGroup+1},categoryNo=${CategoryList.get(0).bcvo.categoryNo})}" th:text="|다음|"></a>
-    			 </li> 
-      	</th:block>
-      	
-    
-    </ul>
+    	 <div class="searchAllBox">
+			<form class="searchBox1 searchBox" action="get" th:action="@{/searchBoardKeyword}">
+					<i class='fas fa-highlighter' style='font-size:24px'></i>
+					<input type="search" class="form-control"
+						placeholder="'제목'으로 검색해보세요!" name="keyword">
+					<button type="submit"> 검색</button>
+			</form>
+			<form class="searchBox2 searchBox" action="get" th:action="@{/searchBoardKeywordByName}">
+					<i class='fas fa-street-view' style='font-size:24px'></i>
+					<input type="search" class="form-control"
+						placeholder="'작성자'로 검색해보세요!" name="keyword">
+					<button type="submit"> 검색</button>
+			</form>
+		</div>
+		
+		<div class="pagination-box">
+	    	<ul class="pagination-wrap">
+	          <th:block th:if ="${pagination.previousPageGroup }">
+	    		 <li class="page-item" >
+	    		 		<a class="page-link" th:href="@{/returnList(pageNo=${pagination.startPageOfPageGroup-1},categoryNo=${CategoryList.get(0).bcvo.categoryNo})}" th:text="|이전|">Previous</a>
+	    		 </li> 
+	     	 </th:block>
+	    
+	 		 <th:block th:each="pageNo:${#numbers.sequence(pagination.startPageOfPageGroup,pagination.endPageOfPageGroup)}">
+			 		<th:block th:if="${pageNo==pagination.nowPage}">
+			 			<li class="page-item active">
+			 				<a class="page-link" th:href="@{/returnList(pageNo=${pageNo},categoryNo=${CategoryList.get(0).bcvo.categoryNo})}" th:text="${pageNo}"></a>
+			 			</li>
+			    	</th:block>
+			    	
+			    	<th:block th:if="${pageNo!=pagination.nowPage}">
+			    		 <li class="page-item">
+			    		 	<a class="page-link" th:href="@{/returnList(pageNo=${pageNo},categoryNo=${CategoryList.get(0).bcvo.categoryNo})}" th:text="${pageNo}"></a>
+			    		 </li>
+			    	</th:block>
+	   		</th:block>
+	    
+	     	 <th:block th:if ="${pagination.nextPageGroup}">
+	    			 <li class="page-item" >
+	    			 		<a class="page-link" th:href="@{/returnList(pageNo=${pagination.endPageOfPageGroup+1},categoryNo=${CategoryList.get(0).bcvo.categoryNo})}" th:text="|다음|"></a>
+	    			 </li> 
+	      	</th:block>
+	    </ul>
+    </div>
   </div>
  
   </section>
