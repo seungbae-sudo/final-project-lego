@@ -124,11 +124,19 @@
 		                 	<td class="col-md-2"  th:text="${comList.commentDate} "></td>
 		                 	<td class="col-md-1"  th:text="${comList.mvo.name} "></td>
 		            		 <td class="col-md-1">
+		            		 
+		            		 	<!--/* 고수가 로그인했을때 alert 띄우고 일반으로 로그인하게하기*/-->
+			            		 <form id="loginForm" th:action="@{/loginForm}" method="post">			
+									<input type="hidden" name="boardNo" th:value="${bvo.boardNo}">
+									<input type="hidden" name="categoryNo" th:value="${bvo.bcvo.categoryNo}">
+								</form>
 			            	 
 				            	<a class="checkMaster" th:href="@{/surveyFindMasterById(masterId=${comList.mvo.id})}" sec:authorize="hasRole('ROLE_MEMBER')" >
 				            		<span th:text="|고수님|" th:if="${#strings.contains(comList.authority.authority, 'ROLE_MASTER')}"></span>
-				            	</a>    
+				            	</a>  
+				            	<a type="submit" onclick="javascript:btn()">
 			            		<span class="checkMaster" th:text="|고수님|" sec:authorize="hasRole('ROLE_MASTER')" th:if="${#strings.contains(comList.Authority.authority, 'MASTER')}"> </span>
+			            		</a>
 		            		 </td> 
 
 		            		<!--/* mvo와 고수체크 -> 한번에 합치기 :  <td class="col-md-2"  th:text="|${comList.mvo.name} 고수| " th:if="${#strings.contains(comList.Authority.authority, 'MASTER')}"></td> */--> 
@@ -171,6 +179,12 @@
 				return;
 			} else {
 				document.getElementById("compostForm").submit();
+			}
+		}
+		
+		function btn(){
+			if(confirm("고수정보는 일반회원으로만 확인이 가능합니다. \n 일반회원으로 로그인하시겠습니까?")){
+				document.getElementById("loginForm").submit();
 			}
 		}
 
