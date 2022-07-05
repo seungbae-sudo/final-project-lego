@@ -165,20 +165,16 @@ public class SurveyController {
 			p = new Pagination(surveyMapper.getTotalFindList2(keyword));
 		}else {
 			p = new Pagination(surveyMapper.getTotalFindList2(keyword), Integer.parseInt(pageNo));
-		}
-		
-		
+		}		
 		List<MasterVO> list = surveyMapper.findMasterByKeyword(keyword,p);
 		map.put("k", keyword);
 		map.put("k2", keyword);
 		List<ReviewVO> list2 = new ArrayList<ReviewVO>();
 		for(int i =0;i<list.size();i++) {
 			list2.add(surveyMapper.getScore(list.get(i).getId()));
-		}
-		
+		}		
 		model.addAttribute("score", list2);
-		model.addAttribute("masterList", list);
-		
+		model.addAttribute("masterList", list);		
 		model.addAttribute("userSearchKeyword", keyword);
 		model.addAttribute("pagination", p);
 		model.addAttribute("total", surveyMapper.getTotalFindList2(keyword));

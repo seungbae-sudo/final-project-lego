@@ -31,10 +31,6 @@ public class QnAController {
 		}else {
 			p = new Pagination(getTotalPostCount(), Integer.parseInt(pageNo));
 		}
-		
-		
-		model.addAttribute("start", p.getStartPageOfPageGroup());
-		model.addAttribute("end", p.getEndPageOfPageGroup());
 		model.addAttribute("qnaList", qnaMapper.findQnAList(p));
 		model.addAttribute("pagination", p);
 		model.addAttribute("total", getTotalPostCount());
