@@ -70,7 +70,7 @@ public class SurveyController {
 		System.out.println(list.size());
 		List<ReviewVO> list2 = new ArrayList<ReviewVO>();
 		for(int i =0;i<list.size();i++) {
-			list2.addAll(surveyMapper.getScore(list.get(i).getId()));
+			list2.add(surveyMapper.getScore(list.get(i).getId()));
 		}
 	
 		//System.out.println(skill);
@@ -153,8 +153,9 @@ public class SurveyController {
 		map.put("k2", keyword);
 		List<ReviewVO> list2 = new ArrayList<ReviewVO>();
 		for(int i =0;i<list.size();i++) {
-			list2.addAll(surveyMapper.getScore(list.get(i).getId()));
+			list2.add(surveyMapper.getScore(list.get(i).getId()));
 		}
+		System.out.println(list2);
 		model.addAttribute("score", list2);
 		model.addAttribute("masterList", list);
 		System.out.println(list);

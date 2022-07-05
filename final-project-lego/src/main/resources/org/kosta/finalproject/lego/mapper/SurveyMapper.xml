@@ -161,9 +161,9 @@
    	<result column="master_id" property="msvo.id" />
    </resultMap>
    <select id="getScore" resultType="org.kosta.finalproject.lego.vo.ReviewVO" resultMap="reviewResult">
-   		select nvl(round(avg(score)),0) as score ,master_id
-		from review
-		where master_id = #{value}
+		select nvl(round(avg(score)),0) as score ,nvl(master_id,#{id}) as master_id
+		from review right outer join dual
+		on master_id = #{id}
 		group by master_id
    </select>
    

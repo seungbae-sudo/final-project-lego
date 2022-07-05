@@ -35,9 +35,9 @@
                                  	</a> 
                                  	<span class="star_1 fa master-star">&#xf005</span>
                                  	<div th:each="s:${score}">
-                                 	<span class="master-score" th:text="${s.score}" th:if="${s.msvo.id}==${list.id}"> 4.5점</span>
-           
+                                 	<span class="master-score" th:text="${s.score}" th:if="${s.msvo.id}==${list.id}"> 4.5점</span>                        	        
                                  	</div>
+                                 	
                                  </div>
                                  <pre class="info-detail" th:text="${list.specifications}">
                                     

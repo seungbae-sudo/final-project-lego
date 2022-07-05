@@ -38,7 +38,7 @@ public interface SurveyMapper {
 	
 	Integer getTotalFindList(int[] skills, int[] days, int[] times,String categoryNo);
 	
-	List<ReviewVO> getScore(String id);
+	ReviewVO getScore(String id);
 	
 	Integer getTotalFindList2(String keyword);
 }
