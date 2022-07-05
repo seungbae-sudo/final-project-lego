@@ -2,8 +2,15 @@
 @import url("https://fonts.googleapis.com/css?family=Poppins:300,400,500");
 
 /*페이지네이션  */
+
+.pagination-box{
+	 display: flex;
+    justify-content: center;
+}
+
 .pagination-wrap{
    	display: flex;
+   	justify-content: center;
     padding: 3px 15px;
     width: 400px;
 }
@@ -856,8 +863,10 @@ line-height: 3.5;
 }
 
 .searchAllBox{
-	display:flex;
-	flex-direction: column;
+	display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: flex-end;
 }
 
 .searchBox{
@@ -940,6 +949,7 @@ line-height: 3.5;
 	margin-left: 10px;
 }
 
+
 .info{
 	margin-top:-10px;
 	margin-bottom:10px;
@@ -948,6 +958,35 @@ line-height: 3.5;
 .boardTextarea{
 	width:100%;
 	padding:30px 30px;
+}
+
+.detail-header{
+	display: flex;
+    justify-content: space-between;
+    align-items: center;
+   
+}
+
+.myWriteIcon{
+	cursor: pointer;
+	border: 1px solid #e49a6a; 
+	border-radius: 12px;
+	padding: 10px;
+
+}
+
+.myWriteIcon:hover{
+	cursor: pointer;
+	color:#fff;
+	background-color: #e49a6a;
+}
+
+.boardBtnDelete{
+	border-radius: 12px;
+}
+
+.boardBtnDelete:hover{
+
 }
 
 /*QnA*/

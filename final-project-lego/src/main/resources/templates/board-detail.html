@@ -24,14 +24,16 @@
 
 	<section class="user-dashboard page-wrapper">
 	  <div class="container">
-			<h3 style='margin-left: 20px;' class="title-detail" th:text="${bvo.boardTitle}" >제목</h3>
+	  		<div class="detail-header">
+				<h3 style='margin-left: 20px;' class="title-detail" th:text="${bvo.boardTitle}" >제목</h3>
 				<span  sec:authorize="hasRole('ROLE_MASTER')" th:if="${mvo.id}==${bvo.mvo.id}">
-						<a th:href="@{/mastermypage-cart}">
-							<i class='fas fa-edit' style='font-size:18px'></i> 내가 쓴 글목록 
-						</a>
-					</span>
+					<a class="myWriteIcon" th:href="@{/mastermypage-cart}">
+						<i class='fas fa-edit' style='font-size:18px'></i> 내가 쓴 글목록 
+					</a>
+				</span>
+			</div>
 					<span sec:authorize="hasRole('ROLE_MEMBER')" th:if="${mvo.id}==${bvo.mvo.id}">
-						<a th:href="@{/mypage-wrote}">
+						<a class="myWriteIcon"  th:href="@{/mypage-wrote}">
 							<i class='fas fa-edit' style='font-size:18px'></i> 내가 쓴 글목록 
 						</a>
 					</span>
@@ -116,7 +118,7 @@
 				<table class="table table-comment">
 					<tbody class="up-space">
 						 <tr th:each="comList:${commentList}">
-		                 	<td class="col-md-7"  th:text="${comList.commentContent}"></td>
+		                 	<td class="col-md-6"  th:text="${comList.commentContent}"></td>
 		                 	<td class="col-md-2"  th:text="${comList.commentDate} "></td>
 		                 	<td class="col-md-1"  th:text="${comList.mvo.name} "></td>
 		            		 <td class="col-md-1"><a th:href="@{/surveyFindMasterById(masterId=${comList.mvo.id})}"class="checkMaster" th:text="|고수님|" th:if="${#strings.contains(comList.Authority.authority, 'MASTER')}"></a></td>
@@ -126,7 +128,7 @@
 			                 			<input type="hidden" name="commentNo" th:value="${comList.commentNo}">
 										<input type="hidden" name="categoryNo" th:value="${categoryNo}"> 
 										<input type="hidden" name="boardNo" th:value="${bvo.boardNo}">
-										 <button type="submit" onclick="comdeletepost()">삭제</button>
+										 <button class="boardBtnDelete" type="submit" onclick="comdeletepost()">삭제</button>
 		                 		</form>
 		                 	</td>
 			            </tr>
