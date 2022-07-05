@@ -82,6 +82,7 @@ public class SurveyController {
 		model.addAttribute("count", surveyMapper.findcount(skills, days, times, categoryNo));
 		model.addAttribute("pagination", p);
 		model.addAttribute("score", list2);
+		model.addAttribute("total", surveyMapper.getTotalFindList(skills, days, times, categoryNo));
 		return "find-master-list";
 	}
 	
@@ -180,6 +181,7 @@ public class SurveyController {
 		System.out.println(list);
 		model.addAttribute("userSearchKeyword", keyword);
 		model.addAttribute("pagination", p);
+		model.addAttribute("total", surveyMapper.getTotalFindList2(keyword));
 		return "search-master-list";
 	}
 }

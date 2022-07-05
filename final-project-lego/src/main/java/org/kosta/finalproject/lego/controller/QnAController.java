@@ -37,7 +37,7 @@ public class QnAController {
 		model.addAttribute("end", p.getEndPageOfPageGroup());
 		model.addAttribute("qnaList", qnaMapper.findQnAList(p));
 		model.addAttribute("pagination", p);
-		
+		model.addAttribute("total", getTotalPostCount());
 		model.addAttribute("qnaCommentList", qnaMapper.findQnACommentList());
 		return "QnA-list";
 	}

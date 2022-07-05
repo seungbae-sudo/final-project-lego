@@ -31,12 +31,13 @@
 						<i class='fas fa-edit' style='font-size:18px'></i> 내가 쓴 글목록 
 					</a>
 				</span>
-			</div>
+			
 					<span sec:authorize="hasRole('ROLE_MEMBER')" th:if="${mvo.id}==${bvo.mvo.id}">
 						<a class="myWriteIcon"  th:href="@{/mypage-wrote}">
 							<i class='fas fa-edit' style='font-size:18px'></i> 내가 쓴 글목록 
 						</a>
 					</span>
+				</div>
 				<hr>
 				<ul class="info" style='display: flex; justify-content: flex-end;'>
 					<li style='margin-right: 20px;'>작성자 : <span th:text="${bvo.mvo.name}" ></span></li>
