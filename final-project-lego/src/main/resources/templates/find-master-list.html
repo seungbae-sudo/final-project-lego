@@ -13,7 +13,7 @@
       
     <div class="table-responsive">
     <form action="" th:action="@{/addCart}">
-                     <table class="table">
+                     <table class="table" th:if="${total>0}">
                         <thead>
                            <tr>
                               <th class="col-md-2 text-center" >고수 이미지</th>
@@ -25,7 +25,7 @@
                         
                         <tbody>
                        		
-                           <tr th:each="list:${masterList}"  class="cart-list">
+                           <tr th:each="list:${masterList}"  class="cart-list" >
                              
                               <td class="cart-img">
                               	<img id="find-master-img" th:src="|../images/${list.id}/${list.imageVO.imageName}|">
@@ -61,6 +61,7 @@
                         </tbody>                     
                      </table>
                       </form>
+                      <h2 th:if="${total==0}">조건에 맞는 고수의 정보가 없습니다.</h2>
                       <div class="pagination-box">
                       <ul class="pagination-wrap" th:if="${total>0}">
       <th:block th:if ="${pagination.previousPageGroup }">

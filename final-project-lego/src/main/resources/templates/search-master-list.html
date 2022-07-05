@@ -10,10 +10,11 @@
 
   <div class="container">
  
-     <h2 class="search-keyword" th:text="|' ${userSearchKeyword} ' 에 대한 검색 결과입니다|"></h2>
+     <h2 class="search-keyword" th:if="${total>0}" th:text="|' ${userSearchKeyword} ' 에 대한 검색 결과입니다|"></h2>
+     <h2 class="search-keyword" th:if="${total==0}" th:text="|' ${userSearchKeyword} ' 에 대한 검색 결과가 없습니다|"></h2>
     <div class="table-responsive">
     <form action="" th:action="@{/addCart}">
-                     <table class="table">
+                     <table class="table" th:if="${total>0}">
                         <thead>
                            <tr>
                               <th class="col-md-2 text-center" >고수 이미지</th>
@@ -64,7 +65,9 @@
                                           
                      </table>
                       </form>
+
                   </div>
+                  
                   <div class="pagination-box">
                   <ul class="pagination-wrap" th:if="${total>0}">
       <th:block th:if ="${pagination.previousPageGroup }">
