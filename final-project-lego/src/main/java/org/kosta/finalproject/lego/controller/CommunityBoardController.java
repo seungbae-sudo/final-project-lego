@@ -119,7 +119,14 @@ public class CommunityBoardController {
 	//findBoardDetailByBoardNo //findCommentList	//updateHits
 	@RequestMapping("/board-detail")
 	@SuppressWarnings({ "unchecked"})
-	public String boradDetail(int boardNo, Model model, int categoryNo,@AuthenticationPrincipal MemberVO memberVO,Authority authority, HttpServletRequest request,int nowPage) {
+	public String boradDetail(int boardNo, Model model, int categoryNo,@AuthenticationPrincipal MemberVO memberVO,Authority authority, HttpServletRequest request,@RequestParam(value="nowPage",defaultValue = "1") int nowPage) {
+		
+		System.out.println(nowPage+"안나오는 값인지?");
+		if(nowPage==0) {// nowPage가 없을 때 
+			nowPage = 1;
+		}
+		
+		
 		HttpSession session = request.getSession(false);
 		BoardCategoryVO bcvo = new BoardCategoryVO();
 		bcvo.setCategoryNo(categoryNo);
