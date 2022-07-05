@@ -49,7 +49,7 @@ public class WebSecurityConfig  {
 			그 외의 요청에는 anyRequest().authenticated()  로그인 인증된 사용자만 접근할 수 있다 
 		 */
 	
-		http.authorizeRequests().antMatchers("/","/**").permitAll()
+		http.authorizeRequests().antMatchers("/","/home","/css/**","/images/**","/js/**","/plugins/**","/loginForm","/QnAList","/accessDeniedView","/registerForm","/idcheckAjax","/masterRegister").permitAll()
 		.anyRequest().authenticated();
 		
 		// 인증(authentication): 로그인을 위한 설정

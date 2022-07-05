@@ -63,7 +63,7 @@ public class MemberController {
 				e.printStackTrace();
 			}
 			
-			return "redirect:masterRegister?id=" + memberVO.getId();
+			return "redirect:/masterRegister?id=" + memberVO.getId();
 		}
 
 	}

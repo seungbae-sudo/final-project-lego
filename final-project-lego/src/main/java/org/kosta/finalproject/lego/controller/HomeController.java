@@ -17,7 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @Slf4j
 public class HomeController {
-	@RequestMapping("/")
+	@RequestMapping(value = {"/home","/"})
 	
 	public String home(Authentication authentication,Model model) {
 		if(authentication!=null) {
@@ -52,5 +52,9 @@ public class HomeController {
 	@RequestMapping("/findMasterForm")
 	public String findMaster() {
 		return "find-master-form";
+	}
+	@RequestMapping("/accessDeniedView")
+	public String accessDeniedView() {
+		return "accessDeniedView";
 	}
 }
