@@ -1,6 +1,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{layouts/layout}">
+	layout:decorate="~{layouts/layout}"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <!--/* layout 선언부 추가 */-->
 
 <div layout:fragment="main">
@@ -122,7 +123,14 @@
 		                 	<td class="col-md-6"  th:text="${comList.commentContent}"></td>
 		                 	<td class="col-md-2"  th:text="${comList.commentDate} "></td>
 		                 	<td class="col-md-1"  th:text="${comList.mvo.name} "></td>
-		            		 <td class="col-md-1"><a th:href="@{/surveyFindMasterById(masterId=${comList.mvo.id})}"class="checkMaster" th:text="|고수님|" th:if="${#strings.contains(comList.Authority.authority, 'MASTER')}"></a></td>
+		            		 <td class="col-md-1">
+			            	 
+				            	<a class="checkMaster" th:href="@{/surveyFindMasterById(masterId=${comList.mvo.id})}" sec:authorize="hasRole('ROLE_MEMBER')" >
+				            		<span th:text="|고수님|" th:if="${#strings.contains(comList.authority.authority, 'ROLE_MASTER')}"></span>
+				            	</a>    
+			            		<span class="checkMaster" th:text="|고수님|" sec:authorize="hasRole('ROLE_MASTER')" th:if="${#strings.contains(comList.Authority.authority, 'MASTER')}"> </span>
+		            		 </td> 
+
 		            		<!--/* mvo와 고수체크 -> 한번에 합치기 :  <td class="col-md-2"  th:text="|${comList.mvo.name} 고수| " th:if="${#strings.contains(comList.Authority.authority, 'MASTER')}"></td> */--> 
 		            		
 		                 	<td class="col-md-1" >
@@ -165,6 +173,7 @@
 				document.getElementById("compostForm").submit();
 			}
 		}
+
 	
 		</script>
 	</div>

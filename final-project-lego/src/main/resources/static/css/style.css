@@ -948,6 +948,7 @@ line-height: 3.5;
 	font-size: 12px;
 	 padding: 5px;
 	 opacity: 0.8;
+	 cursor: pointer;
 }
 
 .checkMaster:hover, .WriteBtn:hover{

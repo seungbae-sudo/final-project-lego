@@ -43,13 +43,13 @@
 					</tr>
 					<tr>
 						<td >
-							<textarea name="boardContent" class="boardTextarea"  id="reviewContent" placeholder="본문내용" required="required"></textarea>
+							<textarea name="boardContent" class="boardTextarea"  id="boardContent" placeholder="본문내용" required="required"></textarea>
 						</td>
 					</tr>
 				</table>
 			
 				<div class="text-center">
-					<button type="submit" class="boardBtn btn btn-success" onclick="check()">확인</button>
+					<button type="button" class="boardBtn btn btn-success" onclick="check()">확인</button>
 					<button type="reset" class="boardBtn btn btn-success">취소</button>
 			</div>
 			</form>
@@ -58,16 +58,16 @@
 	
 	<script type="text/javascript">
 	function check() {
-		if (document.getElementById("categoryNo").value=="") {
+		if (document.getElementById("categoryNo").value == "") {
 			alert("카테고리를 선택해 주세요");
 			return;
-		} else if(document.getElementById("boardTitle").value=="") {
-			alert("제목및 내용을 입력해 주세요");
-			return; 
+		}  else if(document.getElementById("boardTitle").value=="") {
+			alert("제목을 입력해 주세요");
+			return;
 		} else if(document.getElementById("boardContent").value=="") {
-			alert("본문내용을 입력해 주세요");
-			return; 
-		}else{
+			alert("내용을 입력해 주세요");
+			return;
+		}else {
 			document.getElementById("Write").submit();
 		}
 	}
