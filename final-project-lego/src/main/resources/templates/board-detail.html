@@ -108,10 +108,10 @@
 			
 			<hr>
 			<div class="content">
-				<form id="compostForm" action="" th:action="@{/CommentWrite}" method="post">
+				<form class="commentPost" id="compostForm" action="" th:action="@{/CommentWrite}" method="post">
 					<input type="hidden" name="categoryNo" th:value="${categoryNo}">
 					<input type="hidden" name="boardNo" th:value="${bvo.boardNo}">
-					<input class="commentWriteForm col-md-10" type="text" id="commentContent" name="commentContent" placeholder="댓글을 입력하세요">
+					<input class="comment-wrtie-form commentWriteForm col-md-10" type="text" id="commentContent" name="commentContent" placeholder="댓글을 입력하세요">
 					<button class="boardBtn commentBtn col-md-1 btn" type="submit" onclick="compost()">작성</button>
 				</form> 
 				
@@ -124,7 +124,8 @@
 		            		 <td class="col-md-1"><a th:href="@{/surveyFindMasterById(masterId=${comList.mvo.id})}"class="checkMaster" th:text="|고수님|" th:if="${#strings.contains(comList.Authority.authority, 'MASTER')}"></a></td>
 		            		<!--/* mvo와 고수체크 -> 한번에 합치기 :  <td class="col-md-2"  th:text="|${comList.mvo.name} 고수| " th:if="${#strings.contains(comList.Authority.authority, 'MASTER')}"></td> */--> 
 		            		
-		                 	<td class="col-md-1" ><form th:action="@{/CommentDelete}" method="post" th:if="${mvo.id}==${comList.mvo.id}">
+		                 	<td class="col-md-1" >
+		                 		<form th:action="@{/CommentDelete}" method="post" th:if="${mvo.id}==${comList.mvo.id}">
 			                 			<input type="hidden" name="commentNo" th:value="${comList.commentNo}">
 										<input type="hidden" name="categoryNo" th:value="${categoryNo}"> 
 										<input type="hidden" name="boardNo" th:value="${bvo.boardNo}">
