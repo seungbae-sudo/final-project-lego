@@ -65,18 +65,52 @@
 	</resultMap>
    	
    <select id ="findMyBoard" resultType="org.kosta.finalproject.lego.vo.BoardVO" resultMap="BoardCategoryResultMap">
-   		select b.board_no,b.board_title,c.category_name, c.category_no
+   		select rnum,board_no,board_title,category_name,category_no
+		from 
+		(
+		select row_number() over(order by b.board_no desc) as rnum, b.board_no, b.board_title, c.category_name, c.category_no
 		from board b, board_category c
-		where b.id =#{value}
+		where b.id = #{id}
 		and c.category_no = b.category_no
+		)
+		where rnum between #{pagination.startRowNumber} and #{pagination.endRowNumber}
    	</select>
    	
+   	<select id="findMyBoardTotalList" resultType="int" parameterType="string">
+   	select count(*)
+	from
+	(
+	select b.board_no, b.board_title, c.category_name, c.category_no
+	from board b, board_category c
+	where b.id = #{value}
+	and c.category_no = b.category_no
+	)
+   	</select>
+   	
+   	
+   	
    	<select id="findMyBooking" resultType="org.kosta.finalproject.lego.vo.BookingVO" resultMap="BookingResult">
-	select m.*, b.*
+	select rnum,name,booking_no,booking_day,booking_content,member_id
+	from 
+	(
+	select row_number() over(order by b.booking_no desc) as rnum, m.name, b.booking_no, b.booking_day,b.booking_content, b.member_id
+	from member m, booking b
+	where m.id = b.member_id
+	and b.master_id = #{id}
+	)where rnum between #{pagination.startRowNumber} and #{pagination.endRowNumber}
+	
+	</select>
+	<select id="findBookingTotalList" resultType="int" parameterType="string">
+	select count(*)
+	from
+	(
+	select m.name, b.booking_no, b.booking_day,b.booking_content, b.member_id
 	from member m, booking b
 	where m.id = b.member_id
 	and b.master_id = #{value}
-	</select>
+	)
+</select>
+
 	
    	<select id="findMyBookingDetail" resultType="org.kosta.finalproject.lego.vo.BookingVO" resultMap="BookingResult">
 		select b.booking_no,b.booking_day,b.booking_content,b.master_id,b.member_id,m.name 
@@ -85,13 +119,35 @@
 		and m.id=b.member_id		
 	</select>
 	
-	<select id="findMyReview" resultType="org.kosta.finalproject.lego.vo.ReviewVO" resultMap="ReviewResult">
+	<select id="findMyReview1" resultType="org.kosta.finalproject.lego.vo.ReviewVO" resultMap="ReviewResult">
 	select r.id, r.score, r.review_content, m.name
 	from review r, member m
 	where r.id = m.id
 	and r.master_id = #{value}
 	</select>
 	
+	<select id="findMyReview" parameterType="hashmap"  resultType="org.kosta.finalproject.lego.vo.ReviewVO" resultMap="ReviewResult">
+	select rnum,score,review_content,id,name
+	from 
+	(
+	select row_number() over(order by review_no desc) as rnum, r.score, r.review_content, r.id, m.name
+	from review r, member m
+	where r.id = m.id
+	and r.master_id = #{id} 
+	)
+	where rnum between #{pagination.startRowNumber} and #{pagination.endRowNumber}
+	</select>
+	
+	<select id="findTotalList" resultType="int" parameterType="string">
+	select count(*)
+	from 
+	(
+	select r.id, r.score, r.review_content, m.name
+	from review r, member m
+	where r.id = m.id
+	and r.master_id = #{value}
+	)
+	</select>
 	
 	<select id="findMyMessage" resultType="org.kosta.finalproject.lego.vo.MessageVO" resultMap="MessageResult">
 	select ms.id, ms.receive_id as id,m.name,i.image_name
@@ -139,7 +195,7 @@
 	</select>
 	
 	<select id="MyReview" resultType="org.kosta.finalproject.lego.vo.ReviewVO">
-	select avg(NVL(score,0)) as score from review where master_id=#{value}
+	select nvl(round(avg(r.score),1),0) as score from review r where master_id=#{value}
 	</select>
 	
 </mapper>
