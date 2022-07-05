@@ -148,7 +148,7 @@ background-color: white;
 }
 .header-search form button:hover{
     background-color: #e49a6a;
-    border: none;
+    border: 1px solid #e49a6a;
     color:white;
 }
 
@@ -166,7 +166,7 @@ background-color: white;
 
 .header-button form button:hover{
     background-color: #e49a6a;
-    border: none;
+    border: 1px solid #e49a6a;
     color:white;
 }
 
@@ -463,7 +463,7 @@ display: none;
 }
 .mypage-btn:hover{
 	background-color: #e49a6a;
-    border: none;
+    border: 1px solid #e49a6a;
     color:white;
 }
 .user-profile-list{
@@ -517,7 +517,7 @@ display: none;
 }
 #Write div input.mypage-update-btn:hover{
 		background-color: #e49a6a;
-    border: none;
+    border: 1px solid #e49a6a;
     color:white;
 }
 /* 마이페이지 찜목록 */
@@ -628,7 +628,7 @@ font-weight: bold;
 
 .review-form-btn:hover{
  	background-color: #e49a6a;
-    border: none;
+    border: 1px solid #e49a6a;
     color:white;
 }
 /*마이페이지 메세지 리스트*/
@@ -689,7 +689,7 @@ font-weight: bold;
     border-radius: 20px;
 }
 .message-content a:hover{
-    border:none;
+    border: 1px solid #e49a6a;
     box-sizing:border-box;
     background-color:lightgrey; 
 }
@@ -787,7 +787,7 @@ line-height: 3.5;
 }
 .master-update-btn:hover{
 		background-color: #e49a6a;
-    border: none;
+    border: 1px solid #e49a6a;
     color:white;
 }
 .review-list{
@@ -843,7 +843,7 @@ line-height: 3.5;
 }
 .WriteBtn:hover{
     background-color: #e49a6a;
-    border: none;
+    border: 1px solid #e49a6a;
     color:white;
 }
 
@@ -899,13 +899,13 @@ line-height: 3.5;
 
 .boardBtn:hover{
 	background-color: #e49a6a;
-    border: none;
+    border: 1px solid #e49a6a;
     color:white;
 }
 
 .searchBox button:hover{
     background-color: #e49a6a;
-    border: none;
+    border: 1px solid #e49a6a;
     color:white;
 }
 
@@ -999,25 +999,67 @@ overflow: hidden;
 }
 
 /*이달의 고수*/
-.ranking-ul{
-	display: flex;
+
+.ranking-title{
+	text-align: center;
+    background: radial-gradient(blanchedalmond, transparent);
+    padding: 30px;
 }
+.ranking-ul{
+    display: flex;
+    padding: 50px 10px;
+    margin: 0 40px;
+}
+
 .ranking-li{
     width: 170px;
     height: 220px;
     padding: 10px 20px;
     border: 1px solid blanchedalmond;
     border-radius: 20px;
-    margin-right: 10px;
-    
-    
+    margin-right: 20px;
+    box-shadow: 1px 1px 5px antiquewhite;
+    text-align: center;
 }
 
+
+.ranking-li:nth-child(1){
+    width: 250px;
+    height: 320px;
+    box-shadow: 1px 2px 5px 1px bisque;
+}
+
+ranking-li a{
+	width: 100%;
+	height: 100%;
+}
 .ranking-li img{
-    width: 100%;
+    width: 80%;
     border-radius: 50%;
+    display: block;
+    margin-left: 11px;
+    height: 50%;
+    margin-bottom: 10px;
+}
+.ranking-li:nth-child(1) img{
+    width: 90%;
+    height: 60%;
+    margin-left: 14px;
+    margin-top: 10px;
 }
 
+.ranking-li span:nth-child(2){
+	margin-right: 10px;
+}
+.ranking-li span:nth-child(2),
+.ranking-li span:nth-child(3){
+	font-size: 18px;
+}
+
+.ranking-li span:nth-child(4),
+.ranking-li span:nth-child(5){
+	display: block;
+}
 .surveyListBox2{
 	margin-top:-25px;
 }

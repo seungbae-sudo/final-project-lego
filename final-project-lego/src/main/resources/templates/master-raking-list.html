@@ -9,13 +9,15 @@
 
   <div class="container">
     <div class="table-responsive">
+    	<h2 class="ranking-title"> 이달의 고수들을 만나보세요! </h2>
                      <ul  class="ranking-ul">
 						<li class="ranking-li" th:each="list:${rankingList}">
-							<img th:src="|../images/${list.mvo.id}/${list.imageVo.imageName}|">
-							<span class="star_1 fa">&#xf005</span><span th:text="${list.score}"></span>
-							<span th:text="${list.mvo.name}"></span>
-							<span th:text="${list.msvo.specifications}"></span>
-							
+							<a th:href="@{/surveyFindMasterById(masterId=${list.mvo.id})}">
+								<img th:src="|../images/${list.mvo.id}/${list.imageVo.imageName}|">
+								<span class="star_1 fa">&#xf005</span><span th:text="${list.score}"></span>
+								<span th:text="${list.mvo.name}"></span>
+								<span th:text="${list.msvo.specifications}"></span>
+							</a>
 						</li>
                      </ul>
             </div>
