@@ -91,7 +91,7 @@ public class MemberMyPageController {
 		//페이지네이션 객체 보내기
 		model.addAttribute("pagination", p);
 		
-		System.out.println(cartList);
+		
 		
 		//위 리스트에 있는 imageName은 '이미지파일명.jpg ' 이렇게 저장되어있다 
 		//해당 이미지 파일명을 리스트 갯수 만큼 반복 문을 돌려 모든 imageName 명을 경로명으로 변경해주었다.
@@ -103,8 +103,7 @@ public class MemberMyPageController {
 		}
 		
 		
-		
-		System.out.println(cartList);
+
 		
 		model.addAttribute("cartList", cartList);
 		
@@ -183,7 +182,7 @@ public class MemberMyPageController {
 		
 		
 		List<BookingVO> CartList = memberMyPageMapper.findMyBookingList(bookingMap);
-		System.out.println(CartList);
+
 		
 		model.addAttribute("CartList", CartList);
 		
@@ -258,8 +257,7 @@ public class MemberMyPageController {
 		findImageVO =memberMyPageMapper.getImageById(memberVO.getId());
 		File folder = new File("C:\\finalproject\\final-project-lego\\final-project-lego\\src\\main\\resources\\static\\images\\"+memberVO.getId()+"\\"+findImageVO.getImageName());
 		
-		//수정전 
-		System.out.println(findImageVO);
+		
 		
 		//이제 findImageVO에 image_name을 파라미터값으로 받은 image name으로 설정
 		findImageVO.setImageName(file.getOriginalFilename());
@@ -329,7 +327,7 @@ public class MemberMyPageController {
 		messageVO.setSendMvo(sendMvo); // 보내는 사람
 
 		List<MessageVO> message = memberMyPageMapper.findMyMessageDetailByMessageVO(messageVO);
-		System.out.println(message);
+
 		model.addAttribute("receiveName", receiveName);
 		model.addAttribute("messageDetail", message);
 
