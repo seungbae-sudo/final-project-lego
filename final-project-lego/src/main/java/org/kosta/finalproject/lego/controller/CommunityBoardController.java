@@ -59,7 +59,7 @@ public class CommunityBoardController {
 	@RequestMapping(value = { "/goCommunity", "/board-posting-result" ,"/boardUpdateResult","/boardDeleteResult","/returnList"})
 	public String goCommunity(Model model, @RequestParam("categoryNo") int categoryNo,HttpServletRequest request, Pagination p, String pageNo ) {
 		
-		
+		System.out.println(categoryNo);
 		if(pageNo==null) {// 클라이언트가 pageNo를 전달하지 않는 경우에는 첫 페이지를 보여준다.
 			p = new Pagination(communityBoardMapper.getTotalPostCount(categoryNo));
 		}else {

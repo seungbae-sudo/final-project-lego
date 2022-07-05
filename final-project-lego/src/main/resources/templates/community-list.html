@@ -81,36 +81,35 @@
       </div>
     </div>
     	<ul class="pagination-wrap">
-     <!--      <th:block th:if ="${pagination.previousPageGroup }">
+          <th:block th:if ="${pagination.previousPageGroup }">
     		 <li class="page-item" >
-    		 		<a class="page-link" th:href="@{/returnList(pageNo=${pagination.startPageOfPageGroup-1}),(categoryNo=${CategoryList.bcvo.categoryNo)}" th:text="|Previous|">Previous</a>
+    		 		<a class="page-link" th:href="@{/returnList(pageNo=${pagination.startPageOfPageGroup-1},categoryNo=${CategoryList.get(0).bcvo.categoryNo})}" th:text="|Previous|">Previous</a>
     		 </li> 
      	 </th:block>
     
  		 <th:block th:each="pageNo:${#numbers.sequence(pagination.startPageOfPageGroup,pagination.endPageOfPageGroup)}">
 		 		<th:block th:if="${pageNo==pagination.nowPage}">
 		 			<li class="page-item active">
-		 				<a class="page-link" th:href="@{/returnList(pageNo=${pageNo}),(categoryNo=${CategoryList.bcvo.categoryNo})}" th:text="${pageNo}"></a>
+		 				<a class="page-link" th:href="@{/returnList(pageNo=${pageNo},categoryNo=${CategoryList.get(0).bcvo.categoryNo})}" th:text="${pageNo}"></a>
 		 			</li>
 		    	</th:block>
 		    	
 		    	<th:block th:if="${pageNo!=pagination.nowPage}">
 		    		 <li class="page-item">
-		    		 	<a class="page-link" th:href="@{/returnList(pageNo=${pageNo}),(categoryNo=${CategoryList.bcvo.categoryNo})}" th:text="${pageNo}"></a>
+		    		 	<a class="page-link" th:href="@{/returnList(pageNo=${pageNo},categoryNo=${CategoryList.get(0).bcvo.categoryNo})}" th:text="${pageNo}"></a>
 		    		 </li>
 		    	</th:block>
    		</th:block>
     
      	 <th:block th:if ="${pagination.nextPageGroup}">
     			 <li class="page-item" >
-    			 		<a class="page-link" th:href="@{/returnList(pageNo=${pageNo}),(categoryNo=${CategoryList.bcvo.categoryNo})}" th:text="|Next|"></a>
+    			 		<a class="page-link" th:href="@{/returnList(pageNo=${pageNo},categoryNo=${CategoryList.get(0).bcvo.categoryNo})}" th:text="|Next|"></a>
     			 </li> 
-      	</th:block> -->
+      	</th:block>
     
-    
-    <span th:text="${CategoryList.get(index).bcvo.categoryNo}"></span>
     </ul>
   </div>
+ 
   </section>
 
 </div>
