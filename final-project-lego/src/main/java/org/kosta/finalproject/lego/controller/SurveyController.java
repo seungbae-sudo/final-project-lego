@@ -53,7 +53,7 @@ public class SurveyController {
 		}else {
 			p = new Pagination(surveyMapper.getTotalFindList(skills, days, times, categoryNo), Integer.parseInt(pageNo));
 		}
-		System.out.println(categoryNo);
+		
 		ArrayList<Object> skill = new ArrayList<Object>();
 		ArrayList<Object> day = new ArrayList<Object>();
 		ArrayList<Object> time = new ArrayList<Object>();
@@ -67,13 +67,13 @@ public class SurveyController {
 			time.add(times[i]);
 		}
 		List<MasterVO> list = surveyMapper.findMasterList(skills, days, times,categoryNo,p);
-		System.out.println(list.size());
+		
 		List<ReviewVO> list2 = new ArrayList<ReviewVO>();
 		for(int i =0;i<list.size();i++) {
 			list2.add(surveyMapper.getScore(list.get(i).getId()));
 		}
 	
-		//System.out.println(skill);
+		
 		model.addAttribute("skills", skill);
 		model.addAttribute("days", day);
 		model.addAttribute("times", time);
@@ -128,7 +128,7 @@ public class SurveyController {
 		model.addAttribute("pagination",p);
 		model.addAttribute("review1", rvo);
 		
-		System.out.println(rvo);
+		
 	  return "mastermypage-review-for-member";
 	  }
 	 
@@ -141,7 +141,7 @@ public class SurveyController {
 		for(int i = 0;i<bvo.size();i++) {
 			list.add(bvo.get(i).getBookingDay());
 		}
-		System.out.println(list);
+
 		model.addAttribute("Day", list);
 		model.addAttribute("masterId",masterId);
 		model.addAttribute("masterName",masterName);
@@ -166,8 +166,8 @@ public class SurveyController {
 		}else {
 			p = new Pagination(surveyMapper.getTotalFindList2(keyword), Integer.parseInt(pageNo));
 		}
-		System.out.println(p.getStartRowNumber());
-		System.out.println(p.getEndRowNumber());
+		
+		
 		List<MasterVO> list = surveyMapper.findMasterByKeyword(keyword,p);
 		map.put("k", keyword);
 		map.put("k2", keyword);
@@ -175,10 +175,10 @@ public class SurveyController {
 		for(int i =0;i<list.size();i++) {
 			list2.add(surveyMapper.getScore(list.get(i).getId()));
 		}
-		System.out.println(list2);
+		
 		model.addAttribute("score", list2);
 		model.addAttribute("masterList", list);
-		System.out.println(list);
+		
 		model.addAttribute("userSearchKeyword", keyword);
 		model.addAttribute("pagination", p);
 		model.addAttribute("total", surveyMapper.getTotalFindList2(keyword));

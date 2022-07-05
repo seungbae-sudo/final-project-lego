@@ -1,6 +1,23 @@
 
 @import url("https://fonts.googleapis.com/css?family=Poppins:300,400,500");
 
+.no-result{
+    font-size: 25px!important;
+    text-align: center;
+    margin-top: 80px;
+    margin-bottom: 80px;
+}
+.no-result span{
+    margin-left: 6px;
+}
+.no-result span i{
+font-size: 30px!important;
+    color: chocolate;
+}
+
+.no-message {
+    margin-left: 20%;
+}
 /*페이지네이션  */
 
 .pagination-box{

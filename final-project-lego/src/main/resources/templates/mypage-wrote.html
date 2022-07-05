@@ -65,7 +65,7 @@
 								</tbody>
 							</table>
 							
-							<h2 th:unless="${totalWrote}>0">아직 작성하신 글이 없네요! <br> 커뮤니티에 여러분의 지식을 나눠주세요!</h2>
+							<h2 class="no-result" th:unless="${totalWrote}>0">아직 작성하신 글이 없네요! <br> 커뮤니티에 여러분의 지식을 나눠주세요! <span><i class='far fa-sad-cry' style='font-size:24px'></i></span></h2>
 							<div class="pagination-box">
 							<ul class="pagination-wrap" th:if="${totalWrote}>0">
 							 <th:block th:if ="${pagination.previousPageGroup }">
