@@ -35,6 +35,7 @@ public class QnAController {
 		model.addAttribute("pagination", p);
 		model.addAttribute("total", getTotalPostCount());
 		model.addAttribute("qnaCommentList", qnaMapper.findQnACommentList());
+		
 		return "/QnA/QnA-list";
 	}
 
@@ -54,9 +55,10 @@ public class QnAController {
 	}
 
 	@RequestMapping("/QnADetail")
-	public String QnADetail(int qnaNo, Model model) {
+	public String QnADetail(int qnaNo, Model model,@AuthenticationPrincipal MemberVO memberVO) {
 		model.addAttribute("qnaNo", qnaNo);
 		model.addAttribute("qnaDetail", qnaMapper.qnaDetail(qnaNo));
+		model.addAttribute("mvo", memberVO);
 		return "/QnA/QnA-detail";
 	}
 
