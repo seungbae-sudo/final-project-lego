@@ -32,7 +32,7 @@ import lombok.RequiredArgsConstructor;
 
 	@RequestMapping("/writeForm")
 	public String boardWrite() {
-		return "board-write-form";
+		return "/board/board-write-form";
 	}
 
 	@PostMapping("/posting")
@@ -71,7 +71,7 @@ import lombok.RequiredArgsConstructor;
 		model.addAttribute("boardList", list);
 		model.addAttribute("pagination", p);
 		model.addAttribute("CategoryList", list);
-		return "community-list";
+		return "/board/community-list";
 	}
 	
 
@@ -81,7 +81,7 @@ import lombok.RequiredArgsConstructor;
 		
 		model.addAttribute("boardNo", boardNo);
 		model.addAttribute("bvo", bvo);
-		return "board-update-form";
+		return "/board/board-update-form";
 	}
 	
 	@PostMapping("/board-update")
@@ -133,7 +133,7 @@ import lombok.RequiredArgsConstructor;
 			communityBoardMapper.updateHits(boardNo);
 			list1.add(boardNo);		
 		}
-		return "board-detail";
+		return "/board/board-detail";
 	}
 	
 	//comment  관련 controller
@@ -174,7 +174,7 @@ import lombok.RequiredArgsConstructor;
 		  model.addAttribute("categoryNo",categoryNo);
 		  model.addAttribute("mvo", memberVO);
 		 
-		return "board-detail";
+		return "/board/board-detail";
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -198,7 +198,7 @@ import lombok.RequiredArgsConstructor;
 		  model.addAttribute("mvo", memberVO);
 		  model.addAttribute("LikesUpList", list_up);
 		  model.addAttribute("LikesDownList", list_down);
-		return "board-detail";
+		return "/board/board-detail";
 	}
 	
 	@RequestMapping("/searchBoardKeyword")
@@ -208,7 +208,7 @@ import lombok.RequiredArgsConstructor;
 		model.addAttribute("keyword",list);
 		model.addAttribute("searchKeyword", keyword);
 		
-		return "board-search-list";
+		return "/board/board-search-list";
 	}
 	
 	@RequestMapping("/searchBoardKeywordByName")
@@ -217,6 +217,6 @@ import lombok.RequiredArgsConstructor;
 		model.addAttribute("keyword",list);
 		model.addAttribute("searchKeyword", keyword);
 		
-		return "board-search-list";
+		return "/board/board-search-list";
 	}
 }

@@ -51,6 +51,6 @@ public class HomeController {
 	
 	@RequestMapping("/findMasterForm")
 	public String findMaster() {
-		return "find-master-form";
+		return "/master/find-master-form";
 	}
 }

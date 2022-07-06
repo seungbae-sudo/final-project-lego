@@ -88,7 +88,7 @@ public class SurveyController {
 		model.addAttribute("score", list2);
 		model.addAttribute("cartList", cart);
 		model.addAttribute("total", surveyMapper.findcount(skills, days, times, categoryNo));
-		return "find-master-list";
+		return "/master/find-master-list";
 	}
 	
 	@RequestMapping("/addCart")
@@ -106,7 +106,7 @@ public class SurveyController {
 		model.addAttribute("masterList", surveyMapper.findMasterDetailList(masterId));
 		List<ReviewVO> mrvo = masterMyPageMapper.MyReview(masterId);
 		model.addAttribute("reAGV1", mrvo);
-		return "master-detail";
+		return "/master/master-detail";
 	}
 	
 		
@@ -134,7 +134,7 @@ public class SurveyController {
 		model.addAttribute("review1", rvo);
 		
 		
-	  return "mastermypage-review-for-member";
+	  return "/master/mastermypage-review-for-member";
 	  }
 	 
 	
@@ -150,7 +150,7 @@ public class SurveyController {
 		model.addAttribute("Day", list);
 		model.addAttribute("masterId",masterId);
 		model.addAttribute("masterName",masterName);
-		return "booking-form";
+		return "/master/booking-form";
 	}
 	@PostMapping("/bookingGo")
 	public String booking(Model model,@AuthenticationPrincipal MemberVO memberVO,BookingVO bookingVO,String masterId) {
@@ -190,6 +190,6 @@ public class SurveyController {
 		model.addAttribute("pagination", p);
 		model.addAttribute("cartList", cart);
 		model.addAttribute("total", surveyMapper.getTotalFindList2(keyword));
-		return "search-master-list";
+		return "/master/search-master-list";
 	}
 }

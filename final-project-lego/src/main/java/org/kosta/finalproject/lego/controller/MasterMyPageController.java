@@ -91,7 +91,7 @@ public class MasterMyPageController {
 		ImageVO image = masterMyPageMapper.getImageId(memberVO.getId());
 		String src = "./images/"+image.getMemberVO().getId()+"/"+image.getImageName();
 		model.addAttribute("src",src);
-		return "master-mypage";
+		return "/master/master-mypage";
 	}
 
 	// 회원정보 수정폼 이동
@@ -109,7 +109,7 @@ public class MasterMyPageController {
 		model.addAttribute("MySkills",svo);
 		List<ReviewVO> rvo = masterMyPageMapper.MyReview(memberVO.getId());
 		model.addAttribute("reAGV", rvo);
-		return "masterUpdateForm";
+		return "/master/masterUpdateForm";
 	}
 
 	// 내가 쓴 글
@@ -138,7 +138,7 @@ public class MasterMyPageController {
 		model.addAttribute("MySkills",svo);
 		List<ReviewVO> rvo = masterMyPageMapper.MyReview(memberVO.getId());
 		model.addAttribute("reAGV", rvo);
-		return "mastermypage-cart";
+		return "/master/mastermypage-cart";
 	}
 
 	// 리뷰
@@ -169,7 +169,7 @@ public class MasterMyPageController {
 		model.addAttribute("MySkills",svo);
 		List<ReviewVO> rrvo = masterMyPageMapper.MyReview(memberVO.getId());
 		model.addAttribute("reAGV", rrvo);
-		return "mastermypage-review";
+		return "/master/mastermypage-review";
 	}
 
 	// 상담목록
@@ -197,7 +197,7 @@ public class MasterMyPageController {
 		model.addAttribute("MySkills",svo);
 		List<ReviewVO> rvo = masterMyPageMapper.MyReview(memberVO.getId());
 		model.addAttribute("reAGV", rvo);
-		return "mastermypage-consult";
+		return "/master/mastermypage-consult";
 	}
 
 	// 상담목록 디테일
@@ -216,7 +216,7 @@ public class MasterMyPageController {
 		model.addAttribute("MySkills",svo);
 		List<ReviewVO> rvo = masterMyPageMapper.MyReview(memberVO.getId());
 		model.addAttribute("reAGV", rvo);
-		return "mastermypage-consult-detail";
+		return "/master/mastermypage-consult-detail";
 	}
 
 	// 메세지
@@ -240,7 +240,7 @@ public class MasterMyPageController {
 		model.addAttribute("MySkills",svo);
 		List<ReviewVO> rvo = masterMyPageMapper.MyReview(memberVO.getId());
 		model.addAttribute("reAGV", rvo);
-		return "mastermypage-Message";
+		return "/master/mastermypage-Message";
 	}
 
 	// 메세지 디테일
@@ -269,7 +269,7 @@ public class MasterMyPageController {
 		model.addAttribute("MySkills",svo);
 		List<ReviewVO> rvo = masterMyPageMapper.MyReview(memberVO.getId());
 		model.addAttribute("reAGV", rvo);
-		return "mastermypage-message-detail";
+		return "/master/mastermypage-message-detail";
 	}
 
 	// 메세지 전송
