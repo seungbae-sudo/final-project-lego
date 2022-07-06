@@ -180,4 +180,14 @@
 			having (c.lesson_sort LIKE '%'||#{keyword}||'%' or s.skills LIKE '%' ||#{keyword}||'%') and s.skills_id > 0)
 			) 
    </select>
+   <resultMap type="org.kosta.finalproject.lego.vo.CartVO" id="cartResult">
+   	<result column="master_id"  property="masterVO.id"/>
+   </resultMap>
+   <select id="findCartList" resultType="org.kosta.finalproject.lego.vo.CartVO" resultMap="cartResult">
+   	select c.master_id
+		from member m , cart c 
+		where m.id = c.id 
+		and m.id =#{value}
+   
+   </select>
 </mapper>

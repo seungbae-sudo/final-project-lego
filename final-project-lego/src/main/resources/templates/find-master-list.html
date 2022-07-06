@@ -37,7 +37,9 @@
                                  	</a> 
                                  	<span class="star_1 fa master-star" >&#xf005</span>
                                  	<div th:each="s:${score}">
+                                 	
                                  	<span class="master-score" th:text="${s.score}" th:if="${s.msvo.id}==${list.id}"> 4.5점</span>           
+                                 	
                                  	</div>
                               
                                  </div>
@@ -49,12 +51,14 @@
                               		</td>
                               
                               
-                              <td class="text-center add-cart">                          		
+                              <td class="text-center add-cart">      
                               		<input type="hidden" name="id" th:value="${list.id}">
                               		<!-- <input type="hidden" name="categoryNo" th:value="${categoryNo}"> -->
                               		<input type="hidden" name="categoryNo" th:value="${list.category.categoryNo}">
-                              		<button id="find-master-add-cart" type="submit" class="bi bi-bookmark " style="background-color: white;border-color: white;" name="masterId" th:value="${list.id}"></button>
-                              	
+                              		<button id="find-master-add-cart" type="submit" class="bi bi-bookmark " style="background-color: white;border-color: white;" name="masterId" 
+                              		th:value="${list.id}" th:if="${!#lists.contains(cartList,list.id)}"></button>   
+                              		<button id="find-master-add-cart" class=" bi bi-bookmark-fill" disabled="disabled" style="background-color: white;border-color: white;" name="masterId" 
+                              		th:value="${list.id}" th:if="${#lists.contains(cartList,list.id)}"></button>                  
                                     
                               </td>                             	
                            </tr>                         

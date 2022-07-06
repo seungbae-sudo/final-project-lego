@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.kosta.finalproject.lego.vo.BookingVO;
+import org.kosta.finalproject.lego.vo.CartVO;
 import org.kosta.finalproject.lego.vo.DaysVO;
 import org.kosta.finalproject.lego.vo.MasterVO;
 import org.kosta.finalproject.lego.vo.Pagination;
@@ -41,4 +42,6 @@ public interface SurveyMapper {
 	ReviewVO getScore(String id);
 	
 	Integer getTotalFindList2(String keyword);
+	
+	List<CartVO> findCartList(String id);
 }

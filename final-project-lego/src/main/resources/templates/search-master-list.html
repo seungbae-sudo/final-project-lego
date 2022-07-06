@@ -54,7 +54,10 @@
                               		<input type="hidden" name="id" th:value="${list.id}">
                               		<!-- <input type="hidden" name="categoryNo" th:value="${categoryNo}"> -->
                               		<input type="hidden" name="categoryNo" th:value="${list.category.categoryNo}">
-                              		<button id="find-master-add-cart" type="submit" class="bi bi-bookmark " style="background-color: white;border-color: white;" name="masterId" th:value="${list.id}" sec:authorize="hasRole('ROLE_MEMBER')"></button>
+                              		<button id="find-master-add-cart" type="submit" class="bi bi-bookmark " style="background-color: white;border-color: white;" name="masterId" 
+                              		th:value="${list.id}" th:if="${!#lists.contains(cartList,list.id)}"></button>   
+                              		<button id="find-master-add-cart" class=" bi bi-bookmark-fill" disabled="disabled" style="background-color: white;border-color: white;" name="masterId" 
+                              		th:value="${list.id}" th:if="${#lists.contains(cartList,list.id)}"></button>   
                               	
                               
                                     

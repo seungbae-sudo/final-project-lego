@@ -11,6 +11,7 @@ import org.kosta.finalproject.lego.mapper.MasterMapper;
 import org.kosta.finalproject.lego.mapper.MasterMyPageMapper;
 import org.kosta.finalproject.lego.mapper.SurveyMapper;
 import org.kosta.finalproject.lego.vo.BookingVO;
+import org.kosta.finalproject.lego.vo.CartVO;
 import org.kosta.finalproject.lego.vo.ImageVO;
 import org.kosta.finalproject.lego.vo.MasterDetailVO;
 import org.kosta.finalproject.lego.vo.MasterVO;
@@ -46,7 +47,7 @@ public class SurveyController {
 	}
 
 	@RequestMapping("/findMasterList")
-	public String findMasterList(int[] skills, int[] days, int[] times, Model model, String categoryNo,Pagination p,String pageNo) {
+	public String findMasterList(int[] skills, int[] days, int[] times, Model model, String categoryNo,Pagination p,String pageNo,@AuthenticationPrincipal MemberVO memberVO) {
 		
 		if(pageNo==null) {// 클라이언트가 pageNo를 전달하지 않는 경우에는 첫 페이지를 보여준다.
 			p = new Pagination(surveyMapper.getTotalFindList(skills, days, times, categoryNo));
@@ -72,8 +73,11 @@ public class SurveyController {
 		for(int i =0;i<list.size();i++) {
 			list2.add(surveyMapper.getScore(list.get(i).getId()));
 		}
-	
-		
+		ArrayList<String> cart = new ArrayList<String>();
+		List<CartVO> cvo = surveyMapper.findCartList(memberVO.getId());
+		for(int i = 0; i<cvo.size();i++) {
+			cart.add(cvo.get(i).getMasterVO().getId());
+		}
 		model.addAttribute("skills", skill);
 		model.addAttribute("days", day);
 		model.addAttribute("times", time);
@@ -82,6 +86,7 @@ public class SurveyController {
 		model.addAttribute("count", surveyMapper.findcount(skills, days, times, categoryNo));
 		model.addAttribute("pagination", p);
 		model.addAttribute("score", list2);
+		model.addAttribute("cartList", cart);
 		model.addAttribute("total", surveyMapper.getTotalFindList(skills, days, times, categoryNo));
 		return "find-master-list";
 	}
@@ -158,7 +163,7 @@ public class SurveyController {
 	}
 	
 	@RequestMapping("/searchKeyword")
-	public String search(Model model, String keyword,Pagination p,String pageNo) {
+	public String search(Model model, String keyword,Pagination p,String pageNo,@AuthenticationPrincipal MemberVO memberVO) {
 		Map<String, String> map = new HashMap<String, String>();
 		
 		if(pageNo==null) {// 클라이언트가 pageNo를 전달하지 않는 경우에는 첫 페이지를 보여준다.
@@ -173,10 +178,17 @@ public class SurveyController {
 		for(int i =0;i<list.size();i++) {
 			list2.add(surveyMapper.getScore(list.get(i).getId()));
 		}		
+		
+		ArrayList<String> cart = new ArrayList<String>();
+		List<CartVO> cvo = surveyMapper.findCartList(memberVO.getId());
+		for(int i = 0; i<cvo.size();i++) {
+			cart.add(cvo.get(i).getMasterVO().getId());
+		}
 		model.addAttribute("score", list2);
 		model.addAttribute("masterList", list);		
 		model.addAttribute("userSearchKeyword", keyword);
 		model.addAttribute("pagination", p);
+		model.addAttribute("cartList", cart);
 		model.addAttribute("total", surveyMapper.getTotalFindList2(keyword));
 		return "search-master-list";
 	}
