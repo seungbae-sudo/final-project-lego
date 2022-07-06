@@ -5,7 +5,6 @@ import org.kosta.finalproject.lego.vo.MemberVO;
 import org.kosta.finalproject.lego.vo.Pagination;
 import org.kosta.finalproject.lego.vo.QnACommentVO;
 import org.kosta.finalproject.lego.vo.QnAVO;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

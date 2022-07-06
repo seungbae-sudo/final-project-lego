@@ -20,7 +20,7 @@
 											placeholder="원하는 레슨의 분야를 검색해주세요!" name="keyword">
 											<button type="submit"> 검색</button>
 									</form>
-									<form action="get" th:action="@{/searchKeyword}"  sec:authorize="isAnonymous()||hasRole('ROLE_MASTER')">
+									<form action="get" th:action="@{/searchKeyword}"  sec:authorize="isAnonymous()||hasRole('ROLE_MASTER')||hasRole('ROLE_ADMIN')">
 										<input type="search" class="form-control"
 											placeholder="원하는 레슨의 분야를 검색해주세요!" name="keyword" readonly="readonly">
 											<button type="button"  disabled="disabled">검색</button>

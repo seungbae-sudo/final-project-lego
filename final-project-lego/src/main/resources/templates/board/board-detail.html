@@ -69,9 +69,13 @@
 					<input type="hidden" name="categoryNo" th:value="${bvo.bcvo.categoryNo}">
 				</form>
 				
-				<div class="text-center space-top" th:if="${mvo.id}==${bvo.mvo.id}">
+				<div class="text-center space-top" th:if="${mvo.id}==${bvo.mvo.id}" >
 					<button type="button" class="boardBtn btn btn-success" onclick="updatePost()">수정</button>
-					<button type="button"  class="boardBtn btn btn-success" onclick="deletePost()">삭제</button>
+					<button type="button"  class="boardBtn btn btn-success" onclick="deletePost()" >삭제</button>
+					
+				</div>
+				<div class="text-center space-top" sec:authorize="hasRole('ROLE_ADMIN')" >
+					<button type="button"  class="boardBtn btn btn-success" onclick="deletePost()" >삭제</button>
 					
 				</div>
 				

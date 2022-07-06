@@ -2,7 +2,6 @@ package org.kosta.finalproject.lego.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -117,7 +116,7 @@ public class MasterMyPageController {
 	public String mastermypageCart(@AuthenticationPrincipal MemberVO memberVO, Model model, Pagination p, String pageNo) {
 		model.addAttribute("member", memberVO);
 		model.addAttribute("masterDetail", masterMyPageMapper.findMasterDetailList(memberVO.getId()));
-		String id = memberVO.getId();
+		
 		if(pageNo==null) {// 클라이언트가 pageNo를 전달하지 않는 경우에는 첫 페이지를 보여준다.
 			p = new Pagination(masterMyPageMapper.findMyBoardTotalList(memberVO.getId()));
 		}else {
@@ -144,7 +143,7 @@ public class MasterMyPageController {
 	// 리뷰
 	@RequestMapping("/mastermypage-review")
 	public String mastermypageReview(@AuthenticationPrincipal MemberVO memberVO, Model model, Pagination p, String pageNo) {
-		String id = memberVO.getId();
+		
 		//pagenation
 		if(pageNo==null) {// 클라이언트가 pageNo를 전달하지 않는 경우에는 첫 페이지를 보여준다.
 			p = new Pagination(masterMyPageMapper.findTotalList(memberVO.getId()));
@@ -225,7 +224,7 @@ public class MasterMyPageController {
 		model.addAttribute("member", memberVO);
 		model.addAttribute("masterDetail", masterMyPageMapper.findMasterDetailList(memberVO.getId()));
 		List<MessageVO> list = masterMyPageMapper.findMyMessage(memberVO.getId());
-		  ArrayList<String> imageSrcList=new ArrayList(); 
+		
 		  for(int i=0;i<list.size();i++) { 
 			  String imageName=list.get(i).getImageVo().getImageName(); 
 			  String listSrc ="./images/" +list.get(i).getSendMvo().getId()+ "/" + imageName;

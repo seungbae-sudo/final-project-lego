@@ -122,7 +122,6 @@ import lombok.RequiredArgsConstructor;
 		model.addAttribute("commentList", list);
 		model.addAttribute("mvo", memberVO);
 		model.addAttribute("authority", authority);
-		
 		//nowpage 보내기
 		model.addAttribute("nowPage", nowPage);
 		
