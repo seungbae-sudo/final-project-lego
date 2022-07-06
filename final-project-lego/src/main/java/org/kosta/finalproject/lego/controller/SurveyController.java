@@ -50,11 +50,11 @@ public class SurveyController {
 	public String findMasterList(int[] skills, int[] days, int[] times, Model model, String categoryNo,Pagination p,String pageNo,@AuthenticationPrincipal MemberVO memberVO) {
 		
 		if(pageNo==null) {// 클라이언트가 pageNo를 전달하지 않는 경우에는 첫 페이지를 보여준다.
-			p = new Pagination(surveyMapper.getTotalFindList(skills, days, times, categoryNo));
+			p = new Pagination(surveyMapper.findcount(skills, days, times, categoryNo));
 		}else {
-			p = new Pagination(surveyMapper.getTotalFindList(skills, days, times, categoryNo), Integer.parseInt(pageNo));
+			p = new Pagination(surveyMapper.findcount(skills, days, times, categoryNo), Integer.parseInt(pageNo));
 		}
-		
+		System.out.println(skills[0]);
 		ArrayList<Object> skill = new ArrayList<Object>();
 		ArrayList<Object> day = new ArrayList<Object>();
 		ArrayList<Object> time = new ArrayList<Object>();
@@ -87,7 +87,7 @@ public class SurveyController {
 		model.addAttribute("pagination", p);
 		model.addAttribute("score", list2);
 		model.addAttribute("cartList", cart);
-		model.addAttribute("total", surveyMapper.getTotalFindList(skills, days, times, categoryNo));
+		model.addAttribute("total", surveyMapper.findcount(skills, days, times, categoryNo));
 		return "find-master-list";
 	}
 	

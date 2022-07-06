@@ -20,28 +20,28 @@
 					<th:block th:switch="${categoryNo}">
 						<th:block th:case="1">
 							<div th:each="sk: ${skills}">
-								<input type="checkbox" th:name="skills" th:text="${sk.skills}"
+								<input type="checkbox" name="skills" th:text="${sk.skills}"
 									th:value="${sk.skillsId}"
 									th:if="${sk.skillsId>0&&sk.skillsId<5}">
 							</div>
 						</th:block>
 						<th:block th:case="2">
 							<div class="surveyListBox2" th:each="sk: ${skills}">
-								<input type="checkbox" th:name="skills" th:text="${sk.skills}"
+								<input type="checkbox" name="skills" th:text="${sk.skills}"
 									th:value="${sk.skillsId}"
 									th:if="${sk.skillsId>4&&sk.skillsId<9}">
 							</div>
 						</th:block>
 						<th:block th:case="3">
 							<div class="surveyListBox2"  th:each="sk: ${skills}" >
-								<input type="checkbox" th:name="skills" th:text="${sk.skills}"
+								<input type="checkbox" name="skills" th:text="${sk.skills}"
 									th:value="${sk.skillsId}"
 									th:if="${sk.skillsId>8&&sk.skillsId<13}">
 							</div>
 						</th:block>
 						<th:block th:case="4">
 							<div class="surveyListBox3"  th:each="sk: ${skills}">
-								<input  type="checkbox" th:name="skills" th:text="${sk.skills}"
+								<input  type="checkbox" name="skills" th:text="${sk.skills}"
 									th:value="${sk.skillsId}"
 									th:if="${sk.skillsId>12&&sk.skillsId<17}">
 							</div>
@@ -54,7 +54,7 @@
 				<li>
 					<p>2. 원하는 시간대를 선택하세요</p>
 					<div th:each="ti: ${times}">
-						<input type="checkbox" th:name="times" th:text="${ti.times}"
+						<input type="checkbox" name="times" th:text="${ti.times}"
 							th:value="${ti.timesId}" th:if="${ti.timesId>0}">
 					</div>
 				</li>
@@ -62,7 +62,7 @@
 				<li>
 					<p>3.원하는 요일을 선택하세요</p>
 					<div th:each="d: ${day}">
-						<input type="checkbox" th:name="days" th:text="${d.days}"
+						<input type="checkbox" name="days" th:text="${d.days}"
 							th:value="${d.daysId}" th:if="${d.daysId>0}">
 					</div>
 					<button id="surveyBtn" type="submit">결과보기</button>
