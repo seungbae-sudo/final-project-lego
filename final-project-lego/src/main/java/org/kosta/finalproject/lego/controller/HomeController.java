@@ -53,4 +53,9 @@ public class HomeController {
 	public String findMaster() {
 		return "/master/find-master-form";
 	}
+	
+	@RequestMapping("/accessDeniedView")
+	public String accessDeniedView() {
+		return "accessDeniedView";
+	}
 }

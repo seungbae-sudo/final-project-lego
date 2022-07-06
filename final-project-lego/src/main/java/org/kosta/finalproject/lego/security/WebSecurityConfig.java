@@ -1,10 +1,5 @@
 package org.kosta.finalproject.lego.security;
 
-import java.util.ArrayList;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -49,7 +44,8 @@ public class WebSecurityConfig  {
 			그 외의 요청에는 anyRequest().authenticated()  로그인 인증된 사용자만 접근할 수 있다 
 		 */
 	
-		http.authorizeRequests().antMatchers("/","/**").permitAll()
+		http.authorizeRequests().antMatchers("/","/css/**","/images/**","/js/**","/plugins/**","/masterRegister**","/register**","/idcheckAjax","QnA**","/getMemberTotalCount","/login**","/accessDeniedView").permitAll()
+		
 		.anyRequest().authenticated();
 		
 		// 인증(authentication): 로그인을 위한 설정
