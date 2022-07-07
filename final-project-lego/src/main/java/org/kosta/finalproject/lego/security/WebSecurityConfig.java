@@ -44,7 +44,7 @@ public class WebSecurityConfig  {
 			그 외의 요청에는 anyRequest().authenticated()  로그인 인증된 사용자만 접근할 수 있다 
 		 */
 	
-		http.authorizeRequests().antMatchers("/","/css/**","/images/**","/js/**","/plugins/**","/masterRegister**","/register**","/idcheckAjax","QnA**","/getMemberTotalCount","/login**","/accessDeniedView").permitAll()
+		http.authorizeRequests().antMatchers("/","/css/**","/images/**","/js/**","/plugins/**","/masterRegister**","/register**","/idcheckAjax","/QnA**","/getMemberTotalCount","/login**","/accessDeniedView").permitAll()
 		
 		.anyRequest().authenticated();
 		
