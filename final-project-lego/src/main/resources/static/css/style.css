@@ -1222,9 +1222,14 @@ ranking-li a{
 	font-size: 18px;
 }
 
+
 .ranking-li span:nth-child(4),
 .ranking-li span:nth-child(5){
 	display: block;
+	overflow: hidden;
+    white-space: pre;
+    word-break: break-word;
+    text-overflow: ellipsis;
 }
 .surveyListBox2{
 	margin-top:-25px;
