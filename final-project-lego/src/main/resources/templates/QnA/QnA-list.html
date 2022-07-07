@@ -25,7 +25,7 @@
     <div class="row">
       <div class="col-md-12">
     
-        <form class="qnaBtnForm" th:action="@{/QnAWriteFrom}" method="get" sec:authorize="!hasRole('ROLE_ADMIN')">
+        <form class="qnaBtnForm" th:action="@{/QnAWriteFrom}" method="get" sec:authorize="!hasRole('ROLE_ADMIN')&&!isAnonymous()">
 					<button class="WriteBtn" type="submit">글쓰기</button>
 		</form>
 
