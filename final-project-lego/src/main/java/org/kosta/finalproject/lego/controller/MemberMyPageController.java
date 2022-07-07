@@ -26,6 +26,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -278,6 +279,7 @@ public class MemberMyPageController {
 		
 		//위 리스트에 있는 imageName은 '이미지파일명.jpg ' 이렇게 저장되어있다 
 		//해당 이미지 파일명을 리스트 갯수 만큼 반복 문을 돌려 모든 imageName 명을 경로명으로 변경해주었다.
+		ArrayList<String> imageSrcList=new ArrayList();
 		for(int i=0;i<list.size();i++) {
 			String imageName=list.get(i).getImageVo().getImageName();
 			String listSrc = "./images/" +list.get(i).getReMvo().getId()+ "/" + imageName;
