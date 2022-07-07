@@ -50,7 +50,7 @@ public class MemberMyPageController {
 		String src = "./images/" + image.getMemberVO().getId() + "/" + image.getImageName();
 		model.addAttribute("src", src);
 		
-		return "mypage";
+		return "/member/mypage";
 	}
 
 	// 탭 이동 컨트롤러***************
@@ -111,7 +111,7 @@ public class MemberMyPageController {
 		String src = "./images/" + image.getMemberVO().getId() + "/" + image.getImageName();
 		model.addAttribute("src", src);
 		
-		return "mypage-cart";
+		return "/member/mypage-cart";
 	}
 	
 	
@@ -150,7 +150,7 @@ public class MemberMyPageController {
 		String src = "./images/" + image.getMemberVO().getId() + "/" + image.getImageName();
 		model.addAttribute("src", src);
 		
-		return "mypage-wrote";
+		return "/member/mypage-wrote";
 	}
 
 	// 내 상담 목록
@@ -185,7 +185,7 @@ public class MemberMyPageController {
 		String src = "./images/" + image.getMemberVO().getId() + "/" + image.getImageName();
 		model.addAttribute("src", src);		
 		
-		return "mypage-booking";
+		return "/member/mypage-booking";
 	}
 	
 
@@ -197,7 +197,7 @@ public class MemberMyPageController {
 	            String src = "./images/" + image.getMemberVO().getId() + "/" + image.getImageName();
 	            model.addAttribute("src", src);      
 	            model.addAttribute("masterId", masterId);
-	      return "mypage-reviewWriteForm";
+	      return "/member/mypage-reviewWriteForm";
 	   }
 	   
 	   @PostMapping("mypage-reviewWrite")
@@ -230,7 +230,7 @@ public class MemberMyPageController {
 		String src = "./images/" + image.getMemberVO().getId() + "/" + image.getImageName();
 		model.addAttribute("src", src);
 		
-		return "mypage-update-form";
+		return "/member/mypage-update-form";
 	}
 
 	@PostMapping("UpdateMember")
@@ -296,7 +296,7 @@ public class MemberMyPageController {
 		
 		
 		
-		return "mypage-message";
+		return "/member/mypage-message";
 	}
 
 	@RequestMapping(value = { "message-detail", "sendMessageResult" })
@@ -323,7 +323,7 @@ public class MemberMyPageController {
 		String src = "./images/" + image.getMemberVO().getId() + "/" + image.getImageName();
 		model.addAttribute("src", src);
 		
-		return "mypage-message-detail";
+		return "/member/mypage-message-detail";
 	}
 
 	@PostMapping("sendMessage")
