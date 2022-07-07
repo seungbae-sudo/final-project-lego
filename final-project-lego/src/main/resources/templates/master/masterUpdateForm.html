@@ -26,7 +26,7 @@
 											<textarea name="specifications" id="specifications" required="required" th:value="${masterDetail.specifications}" th:text="${masterDetail.specifications}"></textarea><br>
 										</div>
 										<div><span class="mypage-info">아이디 :</span><input type="email" name="id" placeholder="이메일" th:value="${member.id}" readonly></div>
-										<div><span class="mypage-info">비밀번호  :</span><input type="text" name="password" placeholder="패스워드" required="required"></div>
+										<div><span class="mypage-info">비밀번호  :</span><input type="password" name="password" placeholder="패스워드" required="required"></div>
 										<div><span class="mypage-info">이름 :</span><input type="text" name="name" 	th:value="${member.name}" placeholder="이름" required="required"> </div>
 										<div><span class="mypage-info">주소 :</span> <input type="text" 	name="address" 	th:value="${member.address}" placeholder="주소" required="required"></div>
 										<div><span class="mypage-info">핸드폰 번호 :</span><input type="text"  name="tel"  th:value="${member.tel}" placeholder="핸드폰 번호" required="required"></div>
