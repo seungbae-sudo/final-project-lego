@@ -55,7 +55,7 @@ import lombok.RequiredArgsConstructor;
 	 */
 	
 	@RequestMapping(value = { "/goCommunity", "/board-posting-result" ,"/boardUpdateResult","/boardDeleteResult","/returnList"})
-	public String goCommunity(Model model, @RequestParam("categoryNo") int categoryNo,HttpServletRequest request, Pagination p, String pageNo ) {
+	public String goCommunity(Model model, @RequestParam("categoryNo") int categoryNo,HttpServletRequest request, Pagination p,@RequestParam(value="pageNo", defaultValue="1") String pageNo ) {
 		
 		if(pageNo==null) {// 클라이언트가 pageNo를 전달하지 않는 경우에는 첫 페이지를 보여준다.
 			p = new Pagination(communityBoardMapper.getTotalPostCount(categoryNo));
@@ -111,6 +111,9 @@ import lombok.RequiredArgsConstructor;
 	@SuppressWarnings({ "unchecked"})
 		public String boradDetail(int boardNo, Model model, int categoryNo,@AuthenticationPrincipal MemberVO memberVO,Authority authority, HttpServletRequest request,@RequestParam(value="nowPage",defaultValue = "1") int nowPage) {
 
+		System.out.println(boardNo+" "+categoryNo+" "+nowPage);
+		
+		
 		HttpSession session = request.getSession(false);
 		BoardCategoryVO bcvo = new BoardCategoryVO();
 		bcvo.setCategoryNo(categoryNo);
@@ -132,6 +135,8 @@ import lombok.RequiredArgsConstructor;
 			communityBoardMapper.updateHits(boardNo);
 			list1.add(boardNo);		
 		}
+		
+		System.out.println("나오나요?");
 		return "/board/board-detail";
 	}
 	
