@@ -31,7 +31,7 @@
           <li  ><a  th:href="@{/goCommunity(categoryNo=3)}" >나눔</a></li>
         </ul>
 		
-        <form class="writeBtnForm" th:action="@{/writeForm}" method="get">
+        <form class="writeBtnForm" th:action="@{/writeForm}" method="get" sec:authorize="!hasRole('ROLE_ADMIN')">
 					<button class="WriteBtn" type="submit">글쓰기</button>
 		</form>
 		
