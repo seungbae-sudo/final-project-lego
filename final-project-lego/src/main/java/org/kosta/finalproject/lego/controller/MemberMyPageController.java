@@ -2,18 +2,13 @@ package org.kosta.finalproject.lego.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.kosta.finalproject.lego.mapper.CartMapper;
 import org.kosta.finalproject.lego.mapper.MemberMyPageMapper;
 import org.kosta.finalproject.lego.mapper.MessageMapper;
 import org.kosta.finalproject.lego.serivce.MemberMypageService;
-import org.kosta.finalproject.lego.serivce.MemberService;
 import org.kosta.finalproject.lego.vo.BoardVO;
 import org.kosta.finalproject.lego.vo.BookingVO;
 import org.kosta.finalproject.lego.vo.ImageVO;
@@ -26,7 +21,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,7 +44,7 @@ public class MemberMyPageController {
 		String src = "./images/" + image.getMemberVO().getId() + "/" + image.getImageName();
 		model.addAttribute("src", src);
 		
-		return "mypage";
+		return "/member/mypage";
 	}
 
 	// 탭 이동 컨트롤러***************
@@ -94,7 +88,6 @@ public class MemberMyPageController {
 		
 		//위 리스트에 있는 imageName은 '이미지파일명.jpg ' 이렇게 저장되어있다 
 		//해당 이미지 파일명을 리스트 갯수 만큼 반복 문을 돌려 모든 imageName 명을 경로명으로 변경해주었다.
-		ArrayList<String> imageSrcList=new ArrayList();
 		for(int i=0;i<cartList.size();i++) {
 			String imageName=cartList.get(i).getImageVo().getImageName();
 			String listSrc = "./images/" +cartList.get(i).getMvo().getId()+ "/" + imageName;
@@ -111,7 +104,7 @@ public class MemberMyPageController {
 		String src = "./images/" + image.getMemberVO().getId() + "/" + image.getImageName();
 		model.addAttribute("src", src);
 		
-		return "mypage-cart";
+		return "/member/mypage-cart";
 	}
 	
 	
@@ -150,7 +143,7 @@ public class MemberMyPageController {
 		String src = "./images/" + image.getMemberVO().getId() + "/" + image.getImageName();
 		model.addAttribute("src", src);
 		
-		return "mypage-wrote";
+		return "/member/mypage-wrote";
 	}
 
 	// 내 상담 목록
@@ -185,7 +178,7 @@ public class MemberMyPageController {
 		String src = "./images/" + image.getMemberVO().getId() + "/" + image.getImageName();
 		model.addAttribute("src", src);		
 		
-		return "mypage-booking";
+		return "/member/mypage-booking";
 	}
 	
 
@@ -197,7 +190,7 @@ public class MemberMyPageController {
 	            String src = "./images/" + image.getMemberVO().getId() + "/" + image.getImageName();
 	            model.addAttribute("src", src);      
 	            model.addAttribute("masterId", masterId);
-	      return "mypage-reviewWriteForm";
+	      return "/member/mypage-reviewWriteForm";
 	   }
 	   
 	   @PostMapping("mypage-reviewWrite")
@@ -230,7 +223,7 @@ public class MemberMyPageController {
 		String src = "./images/" + image.getMemberVO().getId() + "/" + image.getImageName();
 		model.addAttribute("src", src);
 		
-		return "mypage-update-form";
+		return "/member/mypage-update-form";
 	}
 
 	@PostMapping("UpdateMember")
@@ -279,7 +272,6 @@ public class MemberMyPageController {
 		
 		//위 리스트에 있는 imageName은 '이미지파일명.jpg ' 이렇게 저장되어있다 
 		//해당 이미지 파일명을 리스트 갯수 만큼 반복 문을 돌려 모든 imageName 명을 경로명으로 변경해주었다.
-		ArrayList<String> imageSrcList=new ArrayList();
 		for(int i=0;i<list.size();i++) {
 			String imageName=list.get(i).getImageVo().getImageName();
 			String listSrc = "./images/" +list.get(i).getReMvo().getId()+ "/" + imageName;
@@ -296,7 +288,7 @@ public class MemberMyPageController {
 		
 		
 		
-		return "mypage-message";
+		return "/member/mypage-message";
 	}
 
 	@RequestMapping(value = { "message-detail", "sendMessageResult" })
@@ -323,7 +315,7 @@ public class MemberMyPageController {
 		String src = "./images/" + image.getMemberVO().getId() + "/" + image.getImageName();
 		model.addAttribute("src", src);
 		
-		return "mypage-message-detail";
+		return "/member/mypage-message-detail";
 	}
 
 	@PostMapping("sendMessage")

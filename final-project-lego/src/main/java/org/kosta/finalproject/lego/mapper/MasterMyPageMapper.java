@@ -2,7 +2,6 @@ package org.kosta.finalproject.lego.mapper;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.kosta.finalproject.lego.vo.BoardVO;
@@ -12,7 +11,6 @@ import org.kosta.finalproject.lego.vo.ImageVO;
 import org.kosta.finalproject.lego.vo.MasterVO;
 import org.kosta.finalproject.lego.vo.MemberVO;
 import org.kosta.finalproject.lego.vo.MessageVO;
-import org.kosta.finalproject.lego.vo.Pagination;
 import org.kosta.finalproject.lego.vo.ReviewVO;
 import org.kosta.finalproject.lego.vo.SkillsVO;
 

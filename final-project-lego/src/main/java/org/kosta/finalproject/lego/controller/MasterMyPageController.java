@@ -2,10 +2,8 @@ package org.kosta.finalproject.lego.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.kosta.finalproject.lego.mapper.ImageMapper;
 import org.kosta.finalproject.lego.mapper.MasterMyPageMapper;
@@ -92,7 +90,7 @@ public class MasterMyPageController {
 		ImageVO image = masterMyPageMapper.getImageId(memberVO.getId());
 		String src = "./images/"+image.getMemberVO().getId()+"/"+image.getImageName();
 		model.addAttribute("src",src);
-		return "master-mypage";
+		return "/master/master-mypage";
 	}
 
 	// 회원정보 수정폼 이동
@@ -110,7 +108,7 @@ public class MasterMyPageController {
 		model.addAttribute("MySkills",svo);
 		List<ReviewVO> rvo = masterMyPageMapper.MyReview(memberVO.getId());
 		model.addAttribute("reAGV", rvo);
-		return "masterUpdateForm";
+		return "/master/masterUpdateForm";
 	}
 
 	// 내가 쓴 글
@@ -118,7 +116,7 @@ public class MasterMyPageController {
 	public String mastermypageCart(@AuthenticationPrincipal MemberVO memberVO, Model model, Pagination p, String pageNo) {
 		model.addAttribute("member", memberVO);
 		model.addAttribute("masterDetail", masterMyPageMapper.findMasterDetailList(memberVO.getId()));
-		String id = memberVO.getId();
+		
 		if(pageNo==null) {// 클라이언트가 pageNo를 전달하지 않는 경우에는 첫 페이지를 보여준다.
 			p = new Pagination(masterMyPageMapper.findMyBoardTotalList(memberVO.getId()));
 		}else {
@@ -139,13 +137,13 @@ public class MasterMyPageController {
 		model.addAttribute("MySkills",svo);
 		List<ReviewVO> rvo = masterMyPageMapper.MyReview(memberVO.getId());
 		model.addAttribute("reAGV", rvo);
-		return "mastermypage-cart";
+		return "/master/mastermypage-cart";
 	}
 
 	// 리뷰
 	@RequestMapping("/mastermypage-review")
 	public String mastermypageReview(@AuthenticationPrincipal MemberVO memberVO, Model model, Pagination p, String pageNo) {
-		String id = memberVO.getId();
+		
 		//pagenation
 		if(pageNo==null) {// 클라이언트가 pageNo를 전달하지 않는 경우에는 첫 페이지를 보여준다.
 			p = new Pagination(masterMyPageMapper.findTotalList(memberVO.getId()));
@@ -170,7 +168,7 @@ public class MasterMyPageController {
 		model.addAttribute("MySkills",svo);
 		List<ReviewVO> rrvo = masterMyPageMapper.MyReview(memberVO.getId());
 		model.addAttribute("reAGV", rrvo);
-		return "mastermypage-review";
+		return "/master/mastermypage-review";
 	}
 
 	// 상담목록
@@ -198,7 +196,7 @@ public class MasterMyPageController {
 		model.addAttribute("MySkills",svo);
 		List<ReviewVO> rvo = masterMyPageMapper.MyReview(memberVO.getId());
 		model.addAttribute("reAGV", rvo);
-		return "mastermypage-consult";
+		return "/master/mastermypage-consult";
 	}
 
 	// 상담목록 디테일
@@ -217,7 +215,7 @@ public class MasterMyPageController {
 		model.addAttribute("MySkills",svo);
 		List<ReviewVO> rvo = masterMyPageMapper.MyReview(memberVO.getId());
 		model.addAttribute("reAGV", rvo);
-		return "mastermypage-consult-detail";
+		return "/master/mastermypage-consult-detail";
 	}
 
 	// 메세지
@@ -226,7 +224,7 @@ public class MasterMyPageController {
 		model.addAttribute("member", memberVO);
 		model.addAttribute("masterDetail", masterMyPageMapper.findMasterDetailList(memberVO.getId()));
 		List<MessageVO> list = masterMyPageMapper.findMyMessage(memberVO.getId());
-		  ArrayList<String> imageSrcList=new ArrayList(); 
+		
 		  for(int i=0;i<list.size();i++) { 
 			  String imageName=list.get(i).getImageVo().getImageName(); 
 			  String listSrc ="./images/" +list.get(i).getSendMvo().getId()+ "/" + imageName;
@@ -241,7 +239,7 @@ public class MasterMyPageController {
 		model.addAttribute("MySkills",svo);
 		List<ReviewVO> rvo = masterMyPageMapper.MyReview(memberVO.getId());
 		model.addAttribute("reAGV", rvo);
-		return "mastermypage-Message";
+		return "/master/mastermypage-Message";
 	}
 
 	// 메세지 디테일
@@ -270,7 +268,7 @@ public class MasterMyPageController {
 		model.addAttribute("MySkills",svo);
 		List<ReviewVO> rvo = masterMyPageMapper.MyReview(memberVO.getId());
 		model.addAttribute("reAGV", rvo);
-		return "mastermypage-message-detail";
+		return "/master/mastermypage-message-detail";
 	}
 
 	// 메세지 전송

@@ -35,13 +35,14 @@ public class QnAController {
 		model.addAttribute("pagination", p);
 		model.addAttribute("total", getTotalPostCount());
 		model.addAttribute("qnaCommentList", qnaMapper.findQnACommentList());
-		return "QnA-list";
+		
+		return "/QnA/QnA-list";
 	}
 
 	@RequestMapping("/QnAWriteFrom")
 	public String QnAWriteFrom() {
 
-		return "QnA-write-form";
+		return "/QnA/QnA-write-form";
 	}
 
 	@PostMapping("/QnAWrite")
@@ -54,10 +55,11 @@ public class QnAController {
 	}
 
 	@RequestMapping("/QnADetail")
-	public String QnADetail(int qnaNo, Model model) {
+	public String QnADetail(int qnaNo, Model model,@AuthenticationPrincipal MemberVO memberVO) {
 		model.addAttribute("qnaNo", qnaNo);
 		model.addAttribute("qnaDetail", qnaMapper.qnaDetail(qnaNo));
-		return "QnA-detail";
+		model.addAttribute("mvo", memberVO);
+		return "/QnA/QnA-detail";
 	}
 
 	@PostMapping("/QnACommentWrite")
@@ -80,7 +82,7 @@ public class QnAController {
 	public String QnAupdate(int qnaNo, Model model) {
 		model.addAttribute("qnaNo", qnaNo);
 		model.addAttribute("qnaDetail", qnaMapper.qnaDetail(qnaNo));
-		return "QnA-update-form";
+		return "/QnA/QnA-update-form";
 	}
 	@PostMapping("/QnAUpdate")
 	public String QnAUpdate(String ask, int qnaNo) {

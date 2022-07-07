@@ -1,7 +1,5 @@
 package org.kosta.finalproject.lego.serivce;
 
-import java.util.List;
-
 import org.kosta.finalproject.lego.mapper.MemberMyPageMapper;
 import org.kosta.finalproject.lego.vo.MemberVO;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

@@ -24,7 +24,7 @@ public class MasterController {
 	public String masterRegister(Model model, String id) {
 		model.addAttribute("id", id);	
 		model.addAttribute("category", masterService.getCategory());
-		return "master_register_form";
+		return "/master/master_register_form";
 	}
 	
 	@PostMapping("masterRegisterGo")
@@ -43,7 +43,7 @@ public class MasterController {
 		model.addAttribute("skills", masterService.getSkills());
 		model.addAttribute("day", masterService.getDays());
 		model.addAttribute("times", masterService.getTimes());
-		return "master-register-skill";	
+		return "/master/master-register-skill";	
 	}
 	
 	@PostMapping("masterRegisterSkillGo")
@@ -70,7 +70,7 @@ public class MasterController {
 	}
 	@RequestMapping("/findMasterByKeyword")
 	public String findMasterByKeyword() {
-		return "find-master-list";
+		return "/master/find-master-list";
 	}
 	
 	
@@ -83,7 +83,7 @@ public class MasterController {
 
 		
 		model.addAttribute("rankingList", list);
-		return "master-raking-list";
+		return "/master/master-raking-list";
 	}
 	
 	

@@ -31,7 +31,7 @@
 					</div>
 	
 				</div>
-				<div class="row" sec:authorize="isAnonymous()||hasRole('ROLE_MASTER')">
+				<div class="row" sec:authorize="isAnonymous()||hasRole('ROLE_MASTER')||hasRole('ROLE_ADMIN')">
 					<div class="col-lg-8 text-center" >
 						<p data-duration-in=".3" data-animation-in="fadeInUp"
 							data-delay-in=".1">레슨 고수</p>
@@ -64,7 +64,7 @@
 			</div>
 		</div>
 		<div class="slider-item th-fullpage hero-area slider-height"
-			style="background-image: url(./images/3-1.jpg);"  sec:authorize="isAnonymous()||hasRole('ROLE_MASTER')">
+			style="background-image: url(./images/3-1.jpg);"  sec:authorize="isAnonymous()||hasRole('ROLE_MASTER')||hasRole('ROLE_ADMIN')">
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-8 text-left">
@@ -98,7 +98,7 @@
 			</div>
 		</div>
 		<div class="slider-item th-fullpage hero-area slider-height"
-			style="background-image: url(./images/2-1.PNG);" sec:authorize="isAnonymous()||hasRole('ROLE_MASTER')">
+			style="background-image: url(./images/2-1.PNG);" sec:authorize="isAnonymous()||hasRole('ROLE_MASTER')||hasRole('ROLE_ADMIN')">
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-8 text-right">
@@ -131,7 +131,7 @@
 						</a>
 						
 					</div>
-					<div class="category-box" sec:authorize="hasRole('ROLE_MASTER')">											
+					<div class="category-box" sec:authorize="hasRole('ROLE_MASTER')||hasRole('ROLE_ADMIN')">											
 						<img src="./images/find-master.jpg" alt="" />
 							<div class="content find-community">
 								<span>레슨 바로가기</span>
@@ -148,7 +148,7 @@
 					
 				</div>
 				<div class="col-md-6">
-					<div class="category-box" sec:authorize="hasAnyRole('ROLE_MASTER','ROLE_MEMBER')">
+					<div class="category-box" sec:authorize="hasAnyRole('ROLE_MASTER','ROLE_MEMBER','ROLE_ADMIN')">
 						<a th:href="@{/goCommunity(categoryNo=1)}" >  
 							<img src="./images/community.jpg" alt="" class="index-image"/>
 							<div class="content find-community">

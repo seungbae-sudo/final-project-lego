@@ -38,8 +38,11 @@
 				<input type="hidden" name="qnaNo" th:value="${qnaNo}">
 			</form>
 
-			<div class="text-center space-top">
+			<div class="text-center space-top" th:if="${qnaDetail.memberVO.id}==${mvo.id}">
 				<button type="button" class="boardBtn btn btn-success" onclick="updatePost()">수정</button>
+				<button type="button" class="boardBtn btn btn-success" onclick="deletePost()">삭제</button>
+			</div>
+			<div class="text-center space-top" sec:authorize="hasRole('ROLE_ADMIN')">
 				<button type="button" class="boardBtn btn btn-success" onclick="deletePost()">삭제</button>
 			</div>
 		

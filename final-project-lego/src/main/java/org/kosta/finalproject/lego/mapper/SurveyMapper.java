@@ -1,8 +1,6 @@
 package org.kosta.finalproject.lego.mapper;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.kosta.finalproject.lego.vo.BookingVO;

@@ -9,7 +9,6 @@ import org.kosta.finalproject.lego.vo.BookingVO;
 import org.kosta.finalproject.lego.vo.ImageVO;
 import org.kosta.finalproject.lego.vo.MemberVO;
 import org.kosta.finalproject.lego.vo.MessageVO;
-import org.kosta.finalproject.lego.vo.Pagination;
 import org.kosta.finalproject.lego.vo.ReviewVO;
 
 @Mapper
