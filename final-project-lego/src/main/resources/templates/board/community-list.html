@@ -81,7 +81,7 @@
 		</div>
 		
 		<div class="pagination-box">
-	    	<ul class="pagination-wrap">
+	    	<ul class="pagination-wrap" th:if="${CategoryList.size()}>0">
 	          <th:block th:if ="${pagination.previousPageGroup }">
 	    		 <li class="page-item" >
 	    		 		<a class="page-link" th:href="@{/returnList(pageNo=${pagination.startPageOfPageGroup-1},categoryNo=${CategoryList.get(0).bcvo.categoryNo})}" th:text="|이전|">Previous</a>

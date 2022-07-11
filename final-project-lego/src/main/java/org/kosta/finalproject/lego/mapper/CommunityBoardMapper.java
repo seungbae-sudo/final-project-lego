@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.kosta.finalproject.lego.vo.BoardCategoryVO;
 import org.kosta.finalproject.lego.vo.BoardVO;
 import org.kosta.finalproject.lego.vo.CommentVO;
+import org.kosta.finalproject.lego.vo.Pagination;
 
 @Mapper
 public interface CommunityBoardMapper {
@@ -35,10 +36,14 @@ public interface CommunityBoardMapper {
 
 	void likesDown(int boardNo);
 
-	List<BoardVO> findCommunityListByTitle(String boardTitle);
+	List<BoardVO> findCommunityListByTitle(HashMap<String, Object> map);
 	
-	List<BoardVO> findCommunityListByName(String name);
+	List<BoardVO> findCommunityListByName(HashMap<String, Object> map);
 
 	int getTotalPostCount(int categoryNo);
+
+	int getTotalSearchList(String keyword);
+
+	int getTotalSearchList2(String keyword);
 
 }

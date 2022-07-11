@@ -206,20 +206,41 @@ import lombok.RequiredArgsConstructor;
 	}
 	
 	@RequestMapping("/searchBoardKeyword")
-	public String SearchBoardKeyword(Model model,String keyword) {
-		System.out.println(keyword);
-		List<BoardVO> list=communityBoardMapper.findCommunityListByTitle(keyword);
+	public String SearchBoardKeyword(Model model,String keyword, Pagination p,String pageNo) {
+		if(pageNo==null) {// 클라이언트가 pageNo를 전달하지 않는 경우에는 첫 페이지를 보여준다.
+			p = new Pagination(communityBoardMapper.getTotalSearchList(keyword));
+		}else {
+			p = new Pagination(communityBoardMapper.getTotalSearchList(keyword), Integer.parseInt(pageNo));
+		}
+		
+		HashMap<String, Object> map=new HashMap<String, Object>();
+		map.put("pagination", p);
+		map.put("keyword", keyword);
+		
+		
+		List<BoardVO> list=communityBoardMapper.findCommunityListByTitle(map);
 		model.addAttribute("keyword",list);
 		model.addAttribute("searchKeyword", keyword);
-		
+		model.addAttribute("pagination", p);
 		return "/board/board-search-list";
 	}
 	
 	@RequestMapping("/searchBoardKeywordByName")
-	public String SearchBoardKeywordByName(Model model,String keyword) {
-		List<BoardVO> list=communityBoardMapper.findCommunityListByName(keyword);
+	public String SearchBoardKeywordByName(Model model,String keyword, Pagination p,String pageNo) {
+		if(pageNo==null) {// 클라이언트가 pageNo를 전달하지 않는 경우에는 첫 페이지를 보여준다.
+			p = new Pagination(communityBoardMapper.getTotalSearchList2(keyword));
+		}else {
+			p = new Pagination(communityBoardMapper.getTotalSearchList2(keyword), Integer.parseInt(pageNo));
+		}
+		
+		HashMap<String, Object> map=new HashMap<String, Object>();
+		map.put("pagination", p);
+		map.put("keyword", keyword);
+		
+		List<BoardVO> list=communityBoardMapper.findCommunityListByName(map);
 		model.addAttribute("keyword",list);
 		model.addAttribute("searchKeyword", keyword);
+		model.addAttribute("pagination", p);
 		
 		return "/board/board-search-list";
 	}

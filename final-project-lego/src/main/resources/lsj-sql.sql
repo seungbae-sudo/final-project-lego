@@ -219,3 +219,41 @@ select * from master where id= 'lsj@kosta.com'
 		order by board_no desc
 	)
 	WHERE rnum BETWEEN #{pagination.startRowNumber} and #{pagination.endRowNumber}
+	
+	
+--커뮤니티 검색창 페이지네이션 test
+
+	    --1. 
+		select count(*)
+		from(
+			select b.* , m.*,c.*
+			from board b, member m, board_category c
+			WHERE board_title LIKE '%' || '아' || '%'
+			and c.category_no = b.category_no
+			and b.id=m.id order by board_no desc
+			)
+			
+			--2. 
+			select rnum , board_no,category_no,category_name,board_title,name,hits,board_date,likes
+			from (
+			select ROW_NUMBER() OVER(ORDER BY b.board_no DESC) as rnum , b.board_no,c.category_no,c.category_name,b.board_title,m.name,hits,b.board_date,likes
+			from board b, member m, board_category c
+			WHERE board_title LIKE '%' || #{KEYWORD} || '%'
+			and c.category_no = b.category_no
+			and b.id=m.id order by board_no desc
+			)
+			WHERE rnum BETWEEN #{pagination.startRowNumber} and #{pagination.endRowNumber}
+			
+			
+			--keyword test 
+			
+			select rnum , board_no,category_no,category_name,board_title,name,hits,board_date,likes
+			from (
+			select ROW_NUMBER() OVER(ORDER BY b.board_no DESC) as rnum , b.board_no,c.category_no,c.category_name,b.board_title,m.name,hits,b.board_date,likes
+			from board b, member m, board_category c
+			WHERE name LIKE '%' || '손석' || '%'
+			and c.category_no = b.category_no
+			and b.id=m.id order by board_no desc
+			)
+			WHERE rnum BETWEEN 1 and 5
+			

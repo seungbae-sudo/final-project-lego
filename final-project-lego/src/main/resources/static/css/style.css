@@ -1005,6 +1005,25 @@ button.ui-datepicker-trigger {
 	margin-top:-30px;
 }
 
+.searchTable{
+	margin-bottom: 20px;
+}
+
+.searchTop{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.returnPage{
+	font-size: inherit;
+    cursor: pointer;
+}
+
+.returnPage:hover{
+	color:#e49a6a;
+}
+
 .boardBtn{
 	box-sizing:border-box;
 	background-color: white;

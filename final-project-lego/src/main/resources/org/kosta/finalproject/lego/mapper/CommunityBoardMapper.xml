@@ -108,24 +108,54 @@
 		UPDATE board SET likes = likes -1 WHERE board_no =#{value}
 	</delete>
 	
-	<select id="findCommunityListByTitle" resultType="org.kosta.finalproject.lego.vo.BoardVO" resultMap="memberResultMap" >
-		select b.* , m.*,c.*
+	<select id="findCommunityListByTitle" parameterType="hashmap" resultType="org.kosta.finalproject.lego.vo.BoardVO" resultMap="memberResultMap" >
+		select rnum , board_no,category_no,category_name,board_title,name,hits,board_date,likes
+			from (
+			select ROW_NUMBER() OVER(ORDER BY b.board_no DESC) as rnum , b.board_no,c.category_no,c.category_name,b.board_title,m.name,hits,b.board_date,likes
 			from board b, member m, board_category c
-			WHERE board_title LIKE '%' || #{KEYWORD} || '%'
+			WHERE board_title LIKE '%' || #{keyword} || '%'
 			and c.category_no = b.category_no
 			and b.id=m.id order by board_no desc
+			)
+			WHERE rnum BETWEEN #{pagination.startRowNumber} and #{pagination.endRowNumber}
 	</select>
 	
-	<select id="findCommunityListByName"  resultType="org.kosta.finalproject.lego.vo.BoardVO" resultMap="memberResultMap" >
-			select b.* , m.*,c.*
+	<select id="findCommunityListByName" parameterType="hashmap"  resultType="org.kosta.finalproject.lego.vo.BoardVO" resultMap="memberResultMap" >
+			select rnum , board_no,category_no,category_name,board_title,name,hits,board_date,likes
+			from (
+			select ROW_NUMBER() OVER(ORDER BY b.board_no DESC) as rnum , b.board_no,c.category_no,c.category_name,b.board_title,m.name,hits,b.board_date,likes
 			from board b, member m, board_category c
-			WHERE name LIKE '%' || #{KEYWORD} || '%'
+			WHERE name LIKE '%' || #{keyword} || '%'
 			and c.category_no = b.category_no
 			and b.id=m.id order by board_no desc
+			)
+			WHERE rnum BETWEEN #{pagination.startRowNumber} and #{pagination.endRowNumber}
 	</select>
 	
 	<select id="getTotalPostCount" resultType="int">
 		select count(*)from board where category_no=#{value}
+	</select>
+	
+	<select id="getTotalSearchList" resultType="int">
+		select count(*)
+		from(
+			select b.* , m.*,c.*
+			from board b, member m, board_category c
+			WHERE board_title LIKE '%' || #{keyword} || '%'
+			and c.category_no = b.category_no
+			and b.id=m.id order by board_no desc
+			)
+	</select>
+	
+	<select id="getTotalSearchList2" resultType="int">
+			select count(*)
+		from(
+			select b.* , m.*,c.*
+			from board b, member m, board_category c
+			WHERE name LIKE '%' || #{keyword} || '%'
+			and c.category_no = b.category_no
+			and b.id=m.id order by board_no desc
+			)
 	</select>
 	
 </mapper>
